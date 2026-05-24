@@ -42,6 +42,11 @@ const EnvSchema = z.object({
   // a remote chromium session behind a UK residential proxy.
   // Optional, scrapers needing it short-circuit when absent.
   BROWSER_USE_API_KEY: z.string().regex(/^bu_/).optional(),
+  // Ed25519 keypair used to register the agent on Self Agent ID.
+  // Generated once locally and stored in ~/.secrets, NEVER committed.
+  // Only needed when running scripts/register-self.ts.
+  SELF_AGENT_ED25519_PUBLIC: z.string().regex(/^[0-9a-f]{64}$/i).optional(),
+  SELF_AGENT_ED25519_PRIVATE: z.string().regex(/^[0-9a-f]{64}$/i).optional(),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
