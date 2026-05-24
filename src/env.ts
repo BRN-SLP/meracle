@@ -47,6 +47,13 @@ const EnvSchema = z.object({
   // Only needed when running scripts/register-self.ts.
   SELF_AGENT_ED25519_PUBLIC: z.string().regex(/^[0-9a-f]{64}$/i).optional(),
   SELF_AGENT_ED25519_PRIVATE: z.string().regex(/^[0-9a-f]{64}$/i).optional(),
+  // Personal EVM wallet that owns the Self Agent ID NFT once minted.
+  // Self ties this address to the operator's passport ZK proof, so it
+  // becomes a permanent "verified human" record on the Self Agent ID
+  // Registry. Distinct from AGENT_PRIVATE_KEY: that one is the hot
+  // wallet which submits prices on chain, this one is the human owner.
+  // Required only by scripts/register-self.ts in ed25519-linked mode.
+  SELF_HUMAN_ADDRESS: hexAddress.optional(),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
