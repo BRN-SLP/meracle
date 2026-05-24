@@ -43,7 +43,7 @@ interface UkPicker {
   sizeRange: { min: number; max: number };
 }
 
-const PICKERS: Record<ProductTarget["slug"], UkPicker> = {
+const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   bread_500g: {
     query: "white loaf",
     include: /\bwhite\b.*\b(loaf|bread)\b|\b(loaf|bread)\b.*\bwhite\b/i,

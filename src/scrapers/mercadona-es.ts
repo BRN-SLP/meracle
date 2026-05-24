@@ -67,7 +67,7 @@ interface MercadonaPicker {
   sizeRange: { min: number; max: number };
 }
 
-const PICKERS: Record<ProductTarget["slug"], MercadonaPicker> = {
+const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
   bread_500g: {
     parentCategoryId: 60,
     subcategoryMatch: /pan de molde/i,
