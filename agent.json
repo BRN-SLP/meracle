@@ -10,9 +10,25 @@
     {
       "type": "target",
       "url": "https://celoscan.io/address/0x18DD82604a9439b3Cdb7E1078c355E460ED217Ed"
+    },
+    {
+      "type": "wallet",
+      "address": "0x1B94d56f723d8939661D94eD1f899C5c27136b2c",
+      "chainId": 42220,
+      "role": "operational",
+      "description": "Hot wallet that signs submitPrice() and owns the ERC-8004 Identity NFT."
+    },
+    {
+      "type": "self-agent-id",
+      "agentId": 119,
+      "owner": "0xE91Fd18BB043338D81e3C4c75100a4799DFfF299",
+      "registry": "0xaC3DF9ABf80d0F5c020C06B04Cced27763355944",
+      "chainId": 42220,
+      "txHash": "0x7e6cf552e6514fbd75cc3fa11fb8d2b3c771d5a326d47c49166b4817311e25eb",
+      "description": "Passport ZK proof minted through Self in wallet-free mode."
     }
   ],
-  "supportedTrust": ["reputation"],
+  "supportedTrust": ["reputation", "self-agent-id"],
   "version": "0.1.0",
   "license": "MIT"
 }
