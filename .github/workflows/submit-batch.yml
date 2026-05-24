@@ -1,0 +1,63 @@
+name: submit-batch
+
+# Daily scrape + submit batch. Pulls live prices from Novus UA and
+# Mercadona ES, normalizes, and submits each observation to Mercato
+# PriceOracle via cUSD-paid CIP-64 tx.
+#
+# 06:00 UTC = 09:00 Kyiv / 08:00 Madrid: retailer APIs already have
+# overnight catalog refresh, agent submits before the median window
+# tightens for the day.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  # Manual button on the Actions tab for ad-hoc reruns.
+  workflow_dispatch:
+
+# At most one batch at a time. If yesterday's run is still going,
+# skip today's, no point queuing duplicate submissions.
+concurrency:
+  group: submit-batch
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # cUSD-paid gas. Non-secret config, hardcoded here so the workflow
+      # is self-describing and a single secret rotation suffices.
+      CELO_RPC_URL: https://forno.celo.org
+      MERCATO_ADDRESS: "0x18DD82604a9439b3Cdb7E1078c355E460ED217Ed"
+      IDENTITY_REGISTRY: "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+      REPUTATION_REGISTRY: "0x8004BAa17C55a88189AE136b182e5fdA19dE9b63"
+      SELF_AGENT_REGISTRY: "0xaC3DF9ABf80d0F5c020C06B04Cced27763355944"
+      CUSD_ADDRESS: "0x765DE816845861e75A25fCA122bb6898B8B1282a"
+      AGENT_METADATA_URI: "https://raw.githubusercontent.com/BRN-SLP/meracle/main/agent.json"
+      # The only real secret. Set via:
+      #   gh secret set AGENT_PRIVATE_KEY -b "$(cat ~/.secrets/meracle-agent.env | grep AGENT_PRIVATE_KEY | cut -d= -f2)"
+      AGENT_PRIVATE_KEY: ${{ secrets.AGENT_PRIVATE_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
+
+      - run: pnpm test
+
+      - name: submit batch (live)
+        run: pnpm submit:batch --live
