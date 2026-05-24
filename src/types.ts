@@ -1,0 +1,73 @@
+/**
+ * Shared scraper types.
+ *
+ * The pipeline shape is:
+ *
+ *   retailer API/HTML
+ *      |  (scraper module)
+ *      v
+ *   RawListing[]            <-- whatever the retailer returns, narrowed
+ *      |                        by a Zod schema at the boundary
+ *      v
+ *   ScrapedProduct          <-- one row per ProductTarget the scraper
+ *      |                        actually managed to fetch
+ *      v
+ *   PriceObservation        <-- normalized to local-currency cents at
+ *      |                        canonical size, ready for submitPrice()
+ *      v
+ *   submitPrice(...) on Mercato PriceOracle
+ *
+ * Keeping each stage as its own type prevents the "soup of optional
+ * fields" anti-pattern, every stage is concrete and individually
+ * testable.
+ */
+import type { ProductTarget } from "./products.js";
+
+export interface ScrapedProduct {
+  /** Target this row was scraped for. */
+  target: ProductTarget;
+  /** Retailer's product identifier (URL, SKU, EAN), for traceability. */
+  retailerSku: string;
+  /** Retailer's product title as displayed (debugging + audit). */
+  retailerTitle: string;
+  /**
+   * Retail price as the retailer lists it, in MAJOR currency units
+   * (e.g. UAH 32.90, GBP 1.20, EUR 1.05). Use a number, the precision
+   * caps at 2 decimals for every supported currency.
+   */
+  priceMajor: number;
+  /**
+   * Pack size as the retailer lists it, in `target.unit` units. The
+   * scraper is responsible for converting "1.5 L" to 1500 mL etc.
+   */
+  packSize: number;
+  /** ISO 8601 timestamp the scrape ran at. */
+  scrapedAt: string;
+  /** URL the data came from, hashed into receiptHash later. */
+  sourceUrl: string;
+}
+
+export interface PriceObservation {
+  /** Mercato canonical product slug. */
+  slug: ProductTarget["slug"];
+  /** ISO-3166-1 alpha-2 country code. */
+  country: ProductTarget["country"];
+  /** Local-currency cents at canonical size, ready for submitPrice. */
+  priceCents: number;
+  /**
+   * Identifier the scraper used (URL/SKU). Hashed to bytes32 receiptHash
+   * by the submit pipeline, gives every on-chain submission a verifiable
+   * source.
+   */
+  sourceUrl: string;
+  /** ISO 8601 timestamp the observation was produced at. */
+  observedAt: string;
+}
+
+export interface ScraperResult {
+  retailer: ProductTarget["retailer"];
+  /** Successful observations ready for normalization + submit. */
+  scraped: ScrapedProduct[];
+  /** Targets the scraper could not fulfil this run, with reason. */
+  misses: Array<{ target: ProductTarget; reason: string }>;
+}
