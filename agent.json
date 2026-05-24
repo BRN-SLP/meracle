@@ -1,0 +1,18 @@
+{
+  "type": "Agent",
+  "name": "meRacle",
+  "description": "Reference Price Oracle for Mercato. Scrapes live retailer prices from major grocery and transit operators in supported markets and submits them on-chain to the Mercato consumer-price index on Celo as trust-weighted reference observations. Solves Mercato's cold-start problem by seeding each country and product with deterministic, auditable observations until community submissions take over.",
+  "endpoints": [
+    {
+      "type": "source",
+      "url": "https://github.com/BRN-SLP/meracle"
+    },
+    {
+      "type": "target",
+      "url": "https://celoscan.io/address/0x18DD82604a9439b3Cdb7E1078c355E460ED217Ed"
+    }
+  ],
+  "supportedTrust": ["reputation"],
+  "version": "0.1.0",
+  "license": "MIT"
+}
