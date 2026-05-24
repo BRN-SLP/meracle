@@ -16,6 +16,7 @@
     "scrape:novus": "tsx scripts/scrape-novus-ua.ts",
     "scrape:mercadona": "tsx scripts/scrape-mercadona-es.ts",
     "scrape:sainsburys": "tsx scripts/scrape-sainsburys-uk.ts",
+    "browseruse:usage": "tsx scripts/browseruse-usage.ts",
     "submit:batch": "tsx scripts/submit-batch.ts",
     "feedback:read": "tsx scripts/read-feedback.ts",
     "scrape": "tsx src/scrape.ts",
