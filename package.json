@@ -13,6 +13,7 @@
     "test": "node --import tsx --test 'src/**/*.test.ts'",
     "build": "tsc",
     "register:identity": "tsx scripts/register-identity.ts",
+    "scrape:novus": "tsx scripts/scrape-novus-ua.ts",
     "feedback:read": "tsx scripts/read-feedback.ts",
     "scrape": "tsx src/scrape.ts",
     "submit": "tsx src/submit.ts"
