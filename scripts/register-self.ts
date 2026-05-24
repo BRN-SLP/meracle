@@ -1,19 +1,27 @@
 /**
  * One-shot Self Agent ID registration via the public API.
  *
+ * Mode: ed25519-linked. Binds the soulbound Self Agent ID NFT to an
+ * existing EVM address (humanAddress) instead of an Ed25519-derived
+ * placeholder address. The Ed25519 keypair remains the agent's
+ * identity signer, humanAddress is the human owner who attests
+ * through the passport ZK proof.
+ *
  * Flow (all on Celo Mainnet):
- *   1. Read Ed25519 keypair from env
+ *   1. Read Ed25519 keypair + SELF_HUMAN_ADDRESS from env
  *   2. POST /api/agent/register/ed25519-challenge  -> challengeHash
  *   3. Sign challengeHash with Ed25519 private key
- *   4. POST /api/agent/register {mode: ed25519, signature}
- *        -> session token + scanUrl + deepLink
+ *   4. POST /api/agent/register {mode: ed25519-linked, signature,
+ *        humanAddress}  -> sessionToken + scanUrl + deepLink
  *   5. Print the scanUrl + deepLink, human scans with Self app and
  *      taps passport (NFC) to satisfy the proof-of-human step
- *   6. Poll /api/agent/register/status?token=...  every 3s until
- *      stage === "registered", then print the on-chain agent id
+ *   6. Poll /api/agent/register/status with Bearer auth every 3s
+ *      until stage === "registered", then print the on-chain agent id
  *
  * No wallet connect, no MetaMask, no browser. The Self mobile app
- * handles the passport ZK proof, this script handles the rest.
+ * handles the passport ZK proof, this script handles the rest. The
+ * NFT lands on humanAddress, permanently flagged as verified human
+ * on the Self Agent ID Registry.
  *
  * Run:
  *   pnpm register:self
@@ -52,7 +60,11 @@ interface StatusResponse {
   // ...
 }
 
-function requireKeys(): { pubHex: string; privHex: string } {
+function requireKeys(): {
+  pubHex: string;
+  privHex: string;
+  humanAddress: string;
+} {
   if (!env.SELF_AGENT_ED25519_PUBLIC || !env.SELF_AGENT_ED25519_PRIVATE) {
     throw new Error(
       "SELF_AGENT_ED25519_PUBLIC and SELF_AGENT_ED25519_PRIVATE must be set " +
@@ -60,9 +72,18 @@ function requireKeys(): { pubHex: string; privHex: string } {
         "scripts/gen-self-ed25519.ts.",
     );
   }
+  if (!env.SELF_HUMAN_ADDRESS) {
+    throw new Error(
+      "SELF_HUMAN_ADDRESS must be set in .env. This is the personal " +
+        "EVM wallet that will own the Self Agent ID NFT (NOT the agent " +
+        "hot wallet). The passport ZK proof from the Self mobile app " +
+        "will bind to this address. See .env.example for guidance.",
+    );
+  }
   return {
     pubHex: env.SELF_AGENT_ED25519_PUBLIC,
     privHex: env.SELF_AGENT_ED25519_PRIVATE,
+    humanAddress: env.SELF_HUMAN_ADDRESS,
   };
 }
 
@@ -123,14 +144,21 @@ function signChallenge(privHex: string, challengeHash: string): string {
 async function startSession(
   pubHex: string,
   signatureHex: string,
+  humanAddress: string,
 ): Promise<RegisterResponse> {
   return api<RegisterResponse>("/register", {
     method: "POST",
     body: JSON.stringify({
-      mode: "ed25519",
+      // ed25519-linked binds the soulbound Self Agent ID NFT to an
+      // existing EVM address (humanAddress) instead of an Ed25519-
+      // derived address. The Ed25519 keypair remains the agent's
+      // identity signer, humanAddress is the human owner who attests
+      // through the passport ZK proof.
+      mode: "ed25519-linked",
       network: "mainnet",
       ed25519Pubkey: pubHex,
       ed25519Signature: signatureHex,
+      humanAddress,
       disclosures: {
         // Privacy-first defaults. The proof attests "owner is a real
         // human with a valid passport"; no other personal data hits
@@ -166,9 +194,10 @@ async function pollStatus(sessionToken: string): Promise<StatusResponse> {
 }
 
 async function main(): Promise<void> {
-  const { pubHex, privHex } = requireKeys();
+  const { pubHex, privHex, humanAddress } = requireKeys();
   console.log("meRacle, Self Agent ID register");
   console.log(`  ed25519 pubkey: ${pubHex}`);
+  console.log(`  humanAddress  : ${humanAddress}`);
   console.log("");
 
   console.log("Requesting challenge ...");
@@ -180,8 +209,8 @@ async function main(): Promise<void> {
   const signatureHex = signChallenge(privHex, challengeHash);
   console.log(`  signature: ${signatureHex.slice(0, 16)}... (${signatureHex.length} hex chars)`);
 
-  console.log("Opening Self session ...");
-  const session = await startSession(pubHex, signatureHex);
+  console.log("Opening Self session (mode: ed25519-linked) ...");
+  const session = await startSession(pubHex, signatureHex, humanAddress);
   console.log(`  sessionToken : ${session.sessionToken.slice(0, 24)}...`);
   console.log(`  stage        : ${session.stage}`);
   if (session.agentAddress) {
