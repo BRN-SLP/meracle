@@ -37,9 +37,12 @@ jobs:
       SELF_AGENT_REGISTRY: "0xaC3DF9ABf80d0F5c020C06B04Cced27763355944"
       CUSD_ADDRESS: "0x765DE816845861e75A25fCA122bb6898B8B1282a"
       AGENT_METADATA_URI: "https://raw.githubusercontent.com/BRN-SLP/meracle/main/agent.json"
-      # The only real secret. Set via:
-      #   gh secret set AGENT_PRIVATE_KEY -b "$(cat ~/.secrets/meracle-agent.env | grep AGENT_PRIVATE_KEY | cut -d= -f2)"
+      # Required: ERC-8004 agent hot wallet. Set via:
+      #   gh secret set AGENT_PRIVATE_KEY -b "$(grep AGENT_PRIVATE_KEY .env | cut -d= -f2)"
       AGENT_PRIVATE_KEY: ${{ secrets.AGENT_PRIVATE_KEY }}
+      # Optional: enables the Sainsbury's UK scraper. Without it, the
+      # batch runs Novus UA + Mercadona ES only.
+      BROWSER_USE_API_KEY: ${{ secrets.BROWSER_USE_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4

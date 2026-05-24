@@ -38,6 +38,10 @@ const EnvSchema = z.object({
     .default(
       "https://raw.githubusercontent.com/BRN-SLP/meracle/main/agent.json",
     ),
+  // Browser Use Cloud API key, used by the UK scraper to spin up
+  // a remote chromium session behind a UK residential proxy.
+  // Optional, scrapers needing it short-circuit when absent.
+  BROWSER_USE_API_KEY: z.string().regex(/^bu_/).optional(),
 });
 
 export type Env = z.infer<typeof EnvSchema>;

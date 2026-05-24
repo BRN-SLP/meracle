@@ -1,7 +1,8 @@
 /**
  * Daily submit batch.
  *
- *   1. Run every scraper Phase 1 ships (Novus UA, Mercadona ES)
+ *   1. Run every scraper Phase 1 ships (Novus UA, Mercadona ES,
+ *      optionally Sainsbury's UK when BROWSER_USE_API_KEY is set)
  *   2. Normalize each scraped row to a PriceObservation
  *   3. Print a dry-run preview by default
  *   4. With --live, submit each observation on-chain one at a time
@@ -13,11 +14,13 @@
  *   pnpm submit:batch              # dry-run preview, no tx
  *   pnpm submit:batch --live       # real submitPrice() txs
  */
+import { env } from "../src/env.js";
 import { normalize, NormalizationError } from "../src/normalize.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
+import { scrapeSainsburysUk } from "../src/scrapers/sainsburys-uk.js";
 import { agentAddress, readNextId, submitObservation } from "../src/submit.js";
-import type { PriceObservation, ScrapedProduct } from "../src/types.js";
+import type { PriceObservation, ScraperResult, ScrapedProduct } from "../src/types.js";
 
 const LIVE = process.argv.includes("--live");
 
@@ -125,15 +128,37 @@ async function main(): Promise<void> {
   printHeader();
 
   console.log("Scraping retailers ...");
-  const [novus, mercadona] = await Promise.all([
+  // Novus UA + Mercadona ES are free public APIs, always run.
+  // Sainsbury's UK requires Browser Use Cloud (BROWSER_USE_API_KEY).
+  // Skip it silently if the key isn't set so the batch still works
+  // with the two free retailers.
+  const sainsburysPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
+    ? scrapeSainsburysUk().catch((e: unknown) => {
+        const msg = e instanceof Error ? e.message : String(e);
+        console.warn(`  sainsburys-uk: scrape threw, skipping ($${msg})`);
+        return null;
+      })
+    : Promise.resolve(null);
+
+  const [novus, mercadona, sainsburys] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
+    sainsburysPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
+  if (sainsburys) {
+    console.log(`  sainsburys-uk: ${sainsburys.scraped.length} scraped, ${sainsburys.misses.length} miss`);
+  } else {
+    console.log("  sainsburys-uk: SKIPPED (BROWSER_USE_API_KEY not set)");
+  }
   console.log("");
 
-  const allScrapes = [...novus.scraped, ...mercadona.scraped];
+  const allScrapes = [
+    ...novus.scraped,
+    ...mercadona.scraped,
+    ...(sainsburys?.scraped ?? []),
+  ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
 

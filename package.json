@@ -15,6 +15,7 @@
     "register:identity": "tsx scripts/register-identity.ts",
     "scrape:novus": "tsx scripts/scrape-novus-ua.ts",
     "scrape:mercadona": "tsx scripts/scrape-mercadona-es.ts",
+    "scrape:sainsburys": "tsx scripts/scrape-sainsburys-uk.ts",
     "submit:batch": "tsx scripts/submit-batch.ts",
     "feedback:read": "tsx scripts/read-feedback.ts",
     "scrape": "tsx src/scrape.ts",
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "playwright-core": "^1.60.0",
     "viem": "^2.21.0",
     "zod": "^3.23.8"
   },
