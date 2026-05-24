@@ -14,6 +14,7 @@
     "build": "tsc",
     "register:identity": "tsx scripts/register-identity.ts",
     "scrape:novus": "tsx scripts/scrape-novus-ua.ts",
+    "scrape:mercadona": "tsx scripts/scrape-mercadona-es.ts",
     "feedback:read": "tsx scripts/read-feedback.ts",
     "scrape": "tsx src/scrape.ts",
     "submit": "tsx src/submit.ts"
