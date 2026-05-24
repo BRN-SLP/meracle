@@ -13,6 +13,7 @@
     "test": "node --import tsx --test src/*.test.ts src/scrapers/*.test.ts",
     "build": "tsc",
     "register:identity": "tsx scripts/register-identity.ts",
+    "register:self": "tsx scripts/register-self.ts",
     "scrape:novus": "tsx scripts/scrape-novus-ua.ts",
     "scrape:mercadona": "tsx scripts/scrape-mercadona-es.ts",
     "scrape:sainsburys": "tsx scripts/scrape-sainsburys-uk.ts",
