@@ -43,7 +43,15 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
     throw new NormalizationError(target, `packSize invalid: ${packSize}`);
   }
 
-  const normalisedMajor = priceMajor * (target.canonicalSize / packSize);
+  // Convert the retailer's float major-units to integer cents EARLY,
+  // so the floating-point error in e.g. 2.55 * 100 = 254.99999... is
+  // contained in a single rounding step. After this, all arithmetic is
+  // safe-integer math (canonicalSize and packSize are integers in unit
+  // ProductTarget.unit), so the final cent value is exact.
+  const priceCentsRaw = roundHalfAwayFromZero(priceMajor * 100);
+  const normalisedCentsExact =
+    (priceCentsRaw * target.canonicalSize) / packSize;
+  const normalisedMajor = normalisedCentsExact / 100;
 
   const { minMajor, maxMajor } = target.sanityRange;
   if (normalisedMajor < minMajor || normalisedMajor > maxMajor) {
@@ -53,7 +61,7 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
     );
   }
 
-  const priceCents = roundHalfAwayFromZero(normalisedMajor * 100);
+  const priceCents = roundHalfAwayFromZero(normalisedCentsExact);
   if (priceCents <= 0) {
     throw new NormalizationError(target, `priceCents non-positive: ${priceCents}`);
   }
