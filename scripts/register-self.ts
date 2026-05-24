@@ -123,10 +123,22 @@ async function api<T>(
   return text.length > 0 ? (JSON.parse(text) as T) : ({} as T);
 }
 
-async function fetchChallenge(pubHex: string): Promise<ChallengeResponse> {
+async function fetchChallenge(
+  pubHex: string,
+  humanAddress: string,
+): Promise<ChallengeResponse> {
+  // ed25519-linked mode requires humanAddress in the challenge body
+  // so the signed hash binds to the specific (pubkey, humanAddress)
+  // pair. Without it Self issues a challenge for plain ed25519 mode
+  // and /register later rejects the signature as "verification failed".
   return api<ChallengeResponse>("/register/ed25519-challenge", {
     method: "POST",
-    body: JSON.stringify({ pubkey: pubHex, network: "mainnet" }),
+    body: JSON.stringify({
+      pubkey: pubHex,
+      network: "mainnet",
+      mode: "ed25519-linked",
+      humanAddress,
+    }),
   });
 }
 
@@ -201,7 +213,7 @@ async function main(): Promise<void> {
   console.log("");
 
   console.log("Requesting challenge ...");
-  const { challengeHash, nonce } = await fetchChallenge(pubHex);
+  const { challengeHash, nonce } = await fetchChallenge(pubHex, humanAddress);
   console.log(`  challengeHash: ${challengeHash}`);
   console.log(`  nonce        : ${nonce}`);
 
