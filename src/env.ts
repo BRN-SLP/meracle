@@ -33,7 +33,11 @@ const EnvSchema = z.object({
   CUSD_ADDRESS: hexAddress.default(
     "0x765DE816845861e75A25fCA122bb6898B8B1282a",
   ),
-  AGENT_METADATA_URI: z.string().default(""),
+  AGENT_METADATA_URI: z
+    .string()
+    .default(
+      "https://raw.githubusercontent.com/BRN-SLP/meracle/main/agent.json",
+    ),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
