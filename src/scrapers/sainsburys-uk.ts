@@ -60,6 +60,40 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1300 },
   },
+  // UK eggs ship in 6 / 10 / 12 packs, catalog target is 10. Allow the
+  // wider band, normalize.ts rescales the price per packSize.
+  eggs_10pcs: {
+    query: "free range eggs",
+    include: /\beggs?\b/i,
+    exclude: [
+      /\b(quail|chocolate|easter|hatching|painted|scotch|nesting|substitute)\b/i,
+    ],
+    sizeRange: { min: 6, max: 12 },
+  },
+  butter_200g: {
+    query: "butter unsalted",
+    include: /\bbutter\b/i,
+    exclude: [
+      /\b(spread|margarine|peanut|cashew|almond|cocoa|chocolate|garlic|herb|whipped|salted-caramel|toffee|brandy|biscuit)\b/i,
+    ],
+    sizeRange: { min: 180, max: 300 },
+  },
+  sugar_1kg: {
+    query: "white sugar 1kg",
+    include: /\b(white|granulated)\s+sugar\b|\bsugar\b/i,
+    exclude: [
+      /\b(icing|caster|brown|demerara|muscovado|golden|cane|cube|cinnamon|vanilla|stevia|sweetener|coconut)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  rice_1kg: {
+    query: "long grain rice 1kg",
+    include: /\brice\b/i,
+    exclude: [
+      /\b(noodle|cake|crispies|pudding|milk|drink|wine|vinegar|paper|flour|popped|porridge|microwave|ready)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
@@ -77,8 +111,18 @@ interface ParsedProduct {
  *   "Whole Milk 1 Litre" -> 1000
  */
 export function parseSize(text: string): number | null {
+  // Piece counts first (UK egg packs: "12 Eggs", "Free Range Eggs x 10",
+  // "10 pack"). Tried before weight/volume so a "10 Large Eggs" label
+  // doesn't accidentally grab the "10" via the grams regex.
+  let m = text.match(/(\d+)\s*(?:large |medium |mixed |free range |organic )*eggs?\b/i);
+  if (m) return Number.parseInt(m[1], 10);
+  m = text.match(/\bx\s*(\d+)\b/i);
+  if (m && /eggs?/i.test(text)) return Number.parseInt(m[1], 10);
+  m = text.match(/(\d+)\s*pack\b/i);
+  if (m && /eggs?/i.test(text)) return Number.parseInt(m[1], 10);
+
   // ml first (more specific than g)
-  let m = text.match(/(\d+(?:[.,]\d+)?)\s*ml\b/i);
+  m = text.match(/(\d+(?:[.,]\d+)?)\s*ml\b/i);
   if (m) return Number.parseFloat(m[1].replace(",", "."));
 
   // litres / L
