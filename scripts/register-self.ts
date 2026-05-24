@@ -172,11 +172,15 @@ async function startSession(
       ed25519Signature: signatureHex,
       humanAddress,
       disclosures: {
-        // Privacy-first defaults. The proof attests "owner is a real
-        // human with a valid passport"; no other personal data hits
-        // the chain.
-        minimumAge: 0,
-        ofac: false,
+        // Minimum disclosure set Self needs to produce a meaningful
+        // proof. ofac:true and minimumAge:18 are the two standard
+        // active checks: "not on OFAC sanctions list, at least 18".
+        // All identity fields (name, DOB, nationality, gender,
+        // issuing_state) stay false so they never hit the chain.
+        // An all-false body produces an empty disclosures object on
+        // the Self side and proof generation aborts.
+        minimumAge: 18,
+        ofac: true,
         nationality: false,
         name: false,
         date_of_birth: false,
