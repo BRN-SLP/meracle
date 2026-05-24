@@ -21,8 +21,12 @@ const API_BASE = "https://api.browser-use.com/api/v3";
  * ISO-3166-1 alpha-2 country code, LOWERCASE, matching the Browser
  * Use enum (`gb`, `de`, `fr`, ...).
  */
+/**
+ * Browser Use uses the non-ISO `uk` (not `gb`) for the United Kingdom
+ * proxy. The rest match ISO-3166-1 alpha-2 lowercase.
+ */
 export type ProxyCountryCode =
-  | "gb"
+  | "uk"
   | "us"
   | "de"
   | "fr"
