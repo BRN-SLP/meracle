@@ -26,7 +26,11 @@ import { targetsForRetailer } from "../products.js";
 import type { ScrapedProduct, ScraperResult } from "../types.js";
 
 const BASE = "https://www.sainsburys.co.uk";
-const SESSION_TIMEOUT_MIN = 5;
+// One scrape (homepage warm + 2 searches + DOM extract) finishes in
+// well under a minute. Browser Use Cloud bills only for the time the
+// session is actually alive, but a tight timeout is a safety belt:
+// if our code hangs, the session auto-kills before draining credits.
+const SESSION_TIMEOUT_MIN = 2;
 
 interface UkPicker {
   /** Search keyword. */
