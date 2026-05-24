@@ -24,7 +24,7 @@
  * pipeline is product-agnostic.
  */
 
-export type Retailer = "atb-ua" | "sainsburys-uk" | "mercadona-es";
+export type Retailer = "novus-ua" | "sainsburys-uk" | "mercadona-es";
 
 export type Unit = "g" | "ml";
 
@@ -50,14 +50,14 @@ export interface ProductTarget {
 }
 
 export const PHASE_1_TARGETS: readonly ProductTarget[] = [
-  // UKRAINE, ATB (zakaz.ua)
+  // UKRAINE, Novus Kyiv via zakaz.ua API
   {
     slug: "bread_500g",
     canonicalSize: 500,
     unit: "g",
     country: "UA",
     currency: "UAH",
-    retailer: "atb-ua",
+    retailer: "novus-ua",
     sanityRange: { minMajor: 15, maxMajor: 90 },
   },
   {
@@ -66,7 +66,7 @@ export const PHASE_1_TARGETS: readonly ProductTarget[] = [
     unit: "ml",
     country: "UA",
     currency: "UAH",
-    retailer: "atb-ua",
+    retailer: "novus-ua",
     sanityRange: { minMajor: 30, maxMajor: 90 },
   },
 

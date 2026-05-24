@@ -21,7 +21,7 @@ const milkUA: ProductTarget = {
   unit: "ml",
   country: "UA",
   currency: "UAH",
-  retailer: "atb-ua",
+  retailer: "novus-ua",
   sanityRange: { minMajor: 30, maxMajor: 90 },
 };
 
