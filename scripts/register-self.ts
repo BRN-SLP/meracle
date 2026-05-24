@@ -32,11 +32,16 @@ interface ChallengeResponse {
 }
 
 interface RegisterResponse {
-  token: string;
+  sessionToken: string;
+  stage: string;
   scanUrl?: string;
   deepLink?: string;
-  qrData?: string;
-  // ... portal may add more fields
+  qrImageBase64?: string;
+  agentAddress?: string;
+  network?: string;
+  expiresAt?: string;
+  timeRemainingMs?: number;
+  humanInstructions?: string[];
 }
 
 interface StatusResponse {
@@ -142,12 +147,14 @@ async function startSession(
   });
 }
 
-async function pollStatus(token: string): Promise<StatusResponse> {
-  const url = `/register/status?token=${encodeURIComponent(token)}`;
+async function pollStatus(sessionToken: string): Promise<StatusResponse> {
   const start = Date.now();
   let lastStage = "";
   while (Date.now() - start < POLL_TIMEOUT_MS) {
-    const status = await api<StatusResponse>(url, { method: "GET" });
+    const status = await api<StatusResponse>("/register/status", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${sessionToken}` },
+    });
     if (status.stage !== lastStage) {
       console.log(`  stage: ${status.stage}`);
       lastStage = status.stage;
@@ -175,20 +182,39 @@ async function main(): Promise<void> {
 
   console.log("Opening Self session ...");
   const session = await startSession(pubHex, signatureHex);
-  console.log(`  session token: ${session.token.slice(0, 16)}...`);
-  if (session.scanUrl) console.log(`  scan URL     : ${session.scanUrl}`);
-  if (session.deepLink) console.log(`  deep link    : ${session.deepLink}`);
-
+  console.log(`  sessionToken : ${session.sessionToken.slice(0, 24)}...`);
+  console.log(`  stage        : ${session.stage}`);
+  if (session.agentAddress) {
+    console.log(`  agent address: ${session.agentAddress}`);
+  }
+  if (session.timeRemainingMs !== undefined) {
+    console.log(
+      `  time window  : ${Math.round(session.timeRemainingMs / 60000)} minutes`,
+    );
+  }
   console.log("");
   console.log("==============================================================");
-  console.log("ACTION REQUIRED: open the Self app on your phone, scan the QR");
-  console.log("or open the deep link above, then tap your passport (NFC) to");
-  console.log("generate the proof-of-human ZK proof. This script will poll");
-  console.log("the Self backend until the on-chain registration finishes.");
+  console.log("ACTION REQUIRED, do this on your phone:");
+  console.log("==============================================================");
+  if (session.humanInstructions) {
+    for (const line of session.humanInstructions) {
+      console.log(`  - ${line}`);
+    }
+  }
+  if (session.scanUrl) {
+    console.log("");
+    console.log("Scan URL (open on the desktop, point Self app camera at it):");
+    console.log(`  ${session.scanUrl}`);
+  }
+  if (session.deepLink) {
+    console.log("");
+    console.log("Deep link (open ON the phone where Self app is installed):");
+    console.log(`  ${session.deepLink}`);
+  }
   console.log("==============================================================");
   console.log("");
 
-  const final = await pollStatus(session.token);
+  const final = await pollStatus(session.sessionToken);
   console.log("");
   console.log("REGISTERED on Self Agent ID Registry (Celo Mainnet).");
   console.log(`  Self Agent ID : ${final.agentId ?? "(not returned)"}`);
