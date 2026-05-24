@@ -43,7 +43,7 @@ interface UkPicker {
   sizeRange: { min: number; max: number };
 }
 
-const PICKERS: Record<ProductTarget["slug"], UkPicker> = {
+const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   bread_500g: {
     query: "white loaf",
     include: /\bwhite\b.*\b(loaf|bread)\b|\b(loaf|bread)\b.*\bwhite\b/i,
@@ -309,6 +309,10 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
     try {
       for (const target of targets) {
         const picker = PICKERS[target.slug];
+        if (!picker) {
+          misses.push({ target, reason: "no picker configured for this slug" });
+          continue;
+        }
         let parsed: ParsedProduct[];
         try {
           parsed = await scrapeOneSearch(browser, picker.query);

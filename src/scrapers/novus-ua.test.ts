@@ -34,7 +34,13 @@ describe("Novus UA scraper, fixture path", async () => {
   });
 
   it("scrapes both bread_500g and milk_1l", () => {
-    assert.equal(result.misses.length, 0, JSON.stringify(result.misses));
+    // Catalog covers more slugs than this scraper currently supports.
+    // Slugs without a picker land as "no picker configured" misses and
+    // do not break the scrape, the assertion below checks for that.
+    const realMisses = result.misses.filter(
+      (m) => m.reason !== "no picker configured for this slug",
+    );
+    assert.equal(realMisses.length, 0, JSON.stringify(realMisses));
     assert.equal(result.scraped.length, 2);
     const slugs = result.scraped.map((s) => s.target.slug).sort();
     assert.deepEqual(slugs, ["bread_500g", "milk_1l"]);
