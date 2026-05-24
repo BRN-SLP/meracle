@@ -71,6 +71,40 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1100 },
   },
+  eggs_10pcs: {
+    categoryId: "dairy-and-eggs",
+    // "Chicken Eggs C0 10pcs", excludes quail / 15pcs / 20pcs via sizeRange.
+    include: /\bchicken eggs\b/i,
+    exclude: [/\bquail\b/i],
+    sizeRange: { min: 9, max: 12 },
+  },
+  butter_200g: {
+    categoryId: "dairy-and-eggs",
+    // "Sweet Cream Butter 82% 200g", excludes spread/margarine/whey.
+    include: /\bbutter\b/i,
+    exclude: [
+      /\b(spread|margarine|peanut|sunflower|whey|chocolate|cake|biscuit)\b/i,
+    ],
+    sizeRange: { min: 170, max: 250 },
+  },
+  sugar_1kg: {
+    categoryId: "packets-cereals",
+    // "White Crystalline Sugar 1kg", excludes vanilla/brown/icing variants.
+    include: /\bsugar\b/i,
+    exclude: [
+      /\b(vanilla|brown|cane|coconut|icing|powdered|stevia|substitute)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  rice_1kg: {
+    categoryId: "packets-cereals",
+    // "Long Grain Rice 1kg" / "Basmati Rice 1kg" / "Round Rice 1kg".
+    include: /\brice\b/i,
+    exclude: [
+      /\b(noodle|paper|wafer|cake|cracker|porridge|flour|milk|drink|wine|vinegar)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
@@ -78,6 +112,17 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
  * "... 1.5 L". Returns null when no size is present.
  */
 function parseSizeFromTitle(title: string): number | null {
+  // Piece-counted goods first (eggs "10pcs"). Matches integer counts
+  // so the regex does not collide with the "g" / "ml" / "l" branches.
+  const pcs = title.match(/(\d+)\s*pcs\b/i);
+  if (pcs) {
+    return Number.parseInt(pcs[1], 10);
+  }
+  // kilograms before grams (kg suffix is more specific).
+  const kg = title.match(/(\d+(?:[.,]\d+)?)\s*kg\b/i);
+  if (kg) {
+    return Number.parseFloat(kg[1].replace(",", ".")) * 1000;
+  }
   // Try grams / mL first (no conversion), then litres -> mL.
   const gm = title.match(/(\d+(?:[.,]\d+)?)\s*(g|ml)\b/i);
   if (gm) {
@@ -118,7 +163,7 @@ async function fetchCategory(
   categoryId: string,
   fetchImpl: typeof fetch = fetch,
 ): Promise<ZakazProduct[]> {
-  const url = `${API_BASE}/stores/${NOVUS_KYIV_STORE_ID}/categories/${categoryId}/products/?page=1&per_page=80`;
+  const url = `${API_BASE}/stores/${NOVUS_KYIV_STORE_ID}/categories/${categoryId}/products/?page=1&per_page=100`;
   const res = await fetchImpl(url, {
     headers: { "User-Agent": "meRacle/0.1 (+https://github.com/BRN-SLP/meracle)" },
   });

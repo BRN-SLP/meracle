@@ -27,7 +27,7 @@ const WAREHOUSE = "mad1";
 
 const MercadonaPriceSchema = z.object({
   unit_size: z.number().positive(),
-  size_format: z.enum(["kg", "l"]),
+  size_format: z.enum(["kg", "l", "ud"]),
   total_units: z.number().int().nullable(),
   unit_price: z.string(), // "0.96"
   bulk_price: z.string(), // "0.96" — per kg/L
@@ -82,18 +82,51 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     exclude: [/sin lactosa/i, /infantil/i, /condensada/i, /chocolate/i],
     sizeRange: { min: 800, max: 1100 },
   },
+  // Eggs ship in Spain as 12-packs (the standard "Huevos grandes L" /
+  // "Huevos super grandes XL"). Catalog canonical is 10, normalize.ts
+  // rescales price to per-10 via packSize, so the band keeps 10-12.
+  eggs_10pcs: {
+    parentCategoryId: 77,
+    subcategoryMatch: /^huevos$/i,
+    include: /huevos/i,
+    exclude: [/codorniz/i, /infantil/i],
+    sizeRange: { min: 10, max: 12 },
+  },
+  butter_200g: {
+    parentCategoryId: 75,
+    subcategoryMatch: /^mantequilla$/i,
+    include: /mantequilla/i,
+    exclude: [/margarina/i, /untable/i, /spread/i, /vegetal/i],
+    sizeRange: { min: 180, max: 300 },
+  },
+  sugar_1kg: {
+    parentCategoryId: 89,
+    subcategoryMatch: /^az[uú]car$/i,
+    include: /az[uú]car blanco/i,
+    exclude: [/moreno/i, /panela/i, /glas|glas[eé]/i, /ca[nñ]a/i, /edulcorante/i],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  rice_1kg: {
+    parentCategoryId: 118,
+    subcategoryMatch: /^arroz$/i,
+    include: /arroz/i,
+    exclude: [/leche/i, /bebida/i, /vinagre/i, /tortita/i, /harina/i],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
- * Mercadona returns unit_size in kg / L. Convert to g / mL to match
- * ProductTarget.unit (always "g" or "ml" in our schema).
+ * Mercadona returns unit_size in kg / L / ud. Convert kg+L to g / mL
+ * (matches ProductTarget.unit "g" or "ml"). For "ud" (unidades / pieces,
+ * used by eggs etc.) return the count as-is, the catalog stores the
+ * piece-counted unit ("pcs") so no conversion is needed.
  */
 function sizeToTargetUnit(p: MercadonaProduct): number {
   const { unit_size, size_format } = p.price_instructions;
   if (size_format === "kg" || size_format === "l") {
     return unit_size * 1000;
   }
-  // Schema rejects anything else, this branch is defensive only.
+  // "ud" passes through unchanged.
   return unit_size;
 }
 

@@ -29,16 +29,21 @@ describe("Mercadona ES scraper, fixture path", async () => {
   });
 
   it("scrapes both bread_500g and milk_1l", () => {
-    // Catalog covers more slugs than this scraper currently supports.
-    // Slugs without a picker land as "no picker configured" misses and
-    // do not break the scrape, the assertion below checks for that.
-    const realMisses = result.misses.filter(
-      (m) => m.reason !== "no picker configured for this slug",
+    // Fixture only carries Phase 1 categories (60 + 72). Pickers for
+    // eggs (77), butter (75), sugar (89), and rice (118) live in the
+    // scraper but their categories aren't preloaded here, so they
+    // surface as "category not loaded" misses. Test scope is just the
+    // Phase 1 staples, live runs validate the rest until richer
+    // fixtures land.
+    const phase1Misses = result.misses.filter(
+      (m) => m.target.slug === "bread_500g" || m.target.slug === "milk_1l",
     );
-    assert.equal(realMisses.length, 0, JSON.stringify(realMisses));
-    assert.equal(result.scraped.length, 2);
-    const slugs = result.scraped.map((s) => s.target.slug).sort();
-    assert.deepEqual(slugs, ["bread_500g", "milk_1l"]);
+    assert.equal(phase1Misses.length, 0, JSON.stringify(phase1Misses));
+    const phase1Slugs = result.scraped
+      .map((s) => s.target.slug)
+      .filter((s) => s === "bread_500g" || s === "milk_1l")
+      .sort();
+    assert.deepEqual(phase1Slugs, ["bread_500g", "milk_1l"]);
   });
 
   it("picks a Pan de molde blanco (white sliced bread) loaf", () => {
