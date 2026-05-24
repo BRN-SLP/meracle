@@ -218,10 +218,20 @@ function pickBestMatch(
   return candidates[0]!;
 }
 
+/**
+ * Drive a remote chromium through a homepage warm + search navigation,
+ * then extract product tiles via DOM queries inside the page context.
+ *
+ * Sainsbury's renders each product as `<a title="..." class="pt__link"
+ * href="...">` for the title (no inner text, anchor body is decorative)
+ * and a sibling `.pt__cost` element for the price. The two live inside
+ * the same product tile container, so we walk up from the title anchor
+ * to the tile root, then scope the price lookup to that subtree.
+ */
 async function scrapeOneSearch(
   browser: Browser,
   query: string,
-): Promise<string> {
+): Promise<ParsedProduct[]> {
   // Browser Use sessions have an existing context+page, prefer that
   // when present to avoid double-spawning.
   const context =
@@ -240,9 +250,42 @@ async function scrapeOneSearch(
   const url = `${BASE}/gol-ui/SearchResults/${encodeURIComponent(query)}`;
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
   // Sainsbury's lazy-loads product tiles after initial paint.
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(5000);
 
-  return page.content();
+  const raw = await page.evaluate(() => {
+    const out: Array<{ title: string; priceText: string | null; href: string }> = [];
+    // The title anchor carries `title="<full name>"`, is the cleanest
+    // signal. Walk up to the tile container (`.pt`), then read the
+    // first .pt__cost text inside that subtree.
+    const anchors = document.querySelectorAll<HTMLAnchorElement>(
+      'a.pt__link[href*="/gol-ui/product/"][title]',
+    );
+    for (const a of Array.from(anchors)) {
+      const tile = a.closest(".pt") ?? a.closest("[class*='product-tile']") ?? a.parentElement;
+      const costEl = tile?.querySelector(".pt__cost, [class*='pricing__now'], [class*='pt-cost']");
+      out.push({
+        title: a.getAttribute("title") ?? "",
+        priceText: costEl?.textContent?.trim() ?? null,
+        href: a.href,
+      });
+    }
+    return out;
+  });
+
+  const products: ParsedProduct[] = [];
+  for (const r of raw) {
+    if (!r.title || !r.priceText) continue;
+    const price = parsePrice(r.priceText);
+    const size = parseSize(r.title);
+    if (price === null || size === null) continue;
+    products.push({
+      title: r.title,
+      priceMajor: price,
+      packSize: size,
+      sourceUrl: r.href,
+    });
+  }
+  return products;
 }
 
 /**
@@ -254,7 +297,7 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
   const scraped: ScrapedProduct[] = [];
   const misses: ScraperResult["misses"] = [];
 
-  await withSession("gb", SESSION_TIMEOUT_MIN, async (session) => {
+  await withSession("uk", SESSION_TIMEOUT_MIN, async (session) => {
     if (!session.cdpUrl) {
       throw new Error("Browser Use session has no cdpUrl");
     }
@@ -264,8 +307,7 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
         const picker = PICKERS[target.slug];
         let parsed: ParsedProduct[];
         try {
-          const html = await scrapeOneSearch(browser, picker.query);
-          parsed = parseProductsFromHtml(html);
+          parsed = await scrapeOneSearch(browser, picker.query);
         } catch (e: unknown) {
           const reason = e instanceof Error ? e.message : String(e);
           misses.push({ target, reason: `fetch: ${reason}` });
