@@ -19,9 +19,9 @@
  * `milk_1l` = 1000 mL). When a retailer sells a different size we
  * normalise math-wise in src/normalize.ts (price-per-unit * canonical).
  *
- * Phase 1 scope, 2 products * 3 countries = 6 observations per daily
- * cron. Expansion happens by appending entries here, the rest of the
- * pipeline is product-agnostic.
+ * Scope expands by appending entries here, the rest of the pipeline
+ * (encode, normalize, submit) is product-agnostic. Adding a new
+ * retailer requires a corresponding scraper module in src/scrapers/.
  */
 
 export type Retailer = "novus-ua" | "sainsburys-uk" | "mercadona-es";
@@ -49,7 +49,7 @@ export interface ProductTarget {
   sanityRange: { minMajor: number; maxMajor: number };
 }
 
-export const PHASE_1_TARGETS: readonly ProductTarget[] = [
+export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // UKRAINE, Novus Kyiv via zakaz.ua API
   {
     slug: "bread_500g",
@@ -112,5 +112,5 @@ export const PHASE_1_TARGETS: readonly ProductTarget[] = [
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
-  return PHASE_1_TARGETS.filter((t) => t.retailer === retailer);
+  return PRODUCT_TARGETS.filter((t) => t.retailer === retailer);
 }
