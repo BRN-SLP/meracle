@@ -47,6 +47,18 @@ const SessionResponseSchema = z.object({
 
 export type BrowserUseSession = z.infer<typeof SessionResponseSchema>;
 
+const BillingAccountSchema = z.object({
+  name: z.string(),
+  totalCreditsBalanceUsd: z.number(),
+  monthlyCreditsBalanceUsd: z.number(),
+  additionalCreditsBalanceUsd: z.number(),
+  rateLimit: z.number().int().nonnegative(),
+  isFreeTier: z.boolean(),
+  projectId: z.string(),
+});
+
+export type BillingAccount = z.infer<typeof BillingAccountSchema>;
+
 export class BrowserUseError extends Error {
   constructor(
     public readonly status: number,
@@ -125,6 +137,16 @@ export async function stopSession(sessionId: string): Promise<void> {
     method: "PATCH",
     body: JSON.stringify({ action: "stop" }),
   });
+}
+
+/**
+ * Read billing + free-tier status. Useful for daily sanity checks
+ * (am I still on the free tier?) and for the cron to bail out early
+ * if credits ever drop to zero on a paid plan.
+ */
+export async function readBillingAccount(): Promise<BillingAccount> {
+  const raw = await callApi("/billing/account", { method: "GET" });
+  return BillingAccountSchema.parse(raw);
 }
 
 /**
