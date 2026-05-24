@@ -151,6 +151,10 @@ export function scrapeFromFixture(
 
   for (const target of targets) {
     const picker = PICKERS[target.slug];
+    if (!picker) {
+      misses.push({ target, reason: "no picker configured for this slug" });
+      continue;
+    }
     const category = categoryById[picker.parentCategoryId];
     if (!category) {
       misses.push({
@@ -186,7 +190,11 @@ export async function scrapeMercadonaEs(
 ): Promise<ScraperResult> {
   const targets = targetsForRetailer("mercadona-es");
   const categoryIds = Array.from(
-    new Set(targets.map((t) => PICKERS[t.slug].parentCategoryId)),
+    new Set(
+      targets
+        .map((t) => PICKERS[t.slug]?.parentCategoryId)
+        .filter((cid): cid is number => cid !== undefined),
+    ),
   );
   const categoryById: Record<number, z.infer<typeof MercadonaCategorySchema>> =
     {};

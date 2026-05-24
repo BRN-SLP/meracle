@@ -309,6 +309,10 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
     try {
       for (const target of targets) {
         const picker = PICKERS[target.slug];
+        if (!picker) {
+          misses.push({ target, reason: "no picker configured for this slug" });
+          continue;
+        }
         let parsed: ParsedProduct[];
         try {
           parsed = await scrapeOneSearch(browser, picker.query);

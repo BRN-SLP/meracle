@@ -53,7 +53,7 @@ interface NovusPicker {
   sizeRange: { min: number; max: number };
 }
 
-const PICKERS: Record<ProductTarget["slug"], NovusPicker> = {
+const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
   bread_500g: {
     categoryId: "bakery",
     include: /\b(loaf|bread)\b/i,
@@ -143,6 +143,10 @@ export function scrapeFromFixture(
 
   for (const target of targets) {
     const picker = PICKERS[target.slug];
+    if (!picker) {
+      misses.push({ target, reason: "no picker configured for this slug" });
+      continue;
+    }
     const products = pageByCategory[picker.categoryId] ?? [];
     const match = pickBestMatch(products, picker);
     if (!match) {
@@ -172,7 +176,11 @@ export async function scrapeNovusUa(
 ): Promise<ScraperResult> {
   const targets = targetsForRetailer("novus-ua");
   const categoryIds = Array.from(
-    new Set(targets.map((t) => PICKERS[t.slug].categoryId)),
+    new Set(
+      targets
+        .map((t) => PICKERS[t.slug]?.categoryId)
+        .filter((cid): cid is string => cid !== undefined),
+    ),
   );
   const pageByCategory: Record<string, ZakazProduct[]> = {};
   for (const cid of categoryIds) {
