@@ -91,7 +91,13 @@ async function pollStatus(sessionToken: string): Promise<StatusResponse> {
       console.log(`  stage: ${status.stage}`);
       lastStage = status.stage;
     }
-    if (status.stage === "registered") return status;
+    // Self treats "completed" as the terminal success state for
+    // wallet-free registrations (the NFT is minted, the proof is
+    // submitted on chain). "registered" appears in some flow variants
+    // too, accept either to avoid a timeout on a successful run.
+    if (status.stage === "completed" || status.stage === "registered") {
+      return status;
+    }
     await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
   }
   throw new Error("Timed out waiting for Self Agent ID registration");
