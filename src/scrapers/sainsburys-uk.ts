@@ -168,6 +168,19 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Sainsbury's PLP search for "chicken breast fillet 1kg". UK supermarkets
+  // ship chicken breast as packs of fillets (300-650 g typically) with
+  // occasional 1 kg "large pack" or "family pack" SKUs. sizeRange 800-1200
+  // keeps the 1 kg packs and rejects portion-size ones. Marinated, breaded,
+  // smoked, mini-fillets and ready-cook variants are rejected.
+  chicken_breast_1kg: {
+    query: "chicken breast fillet 1kg",
+    include: /\bchicken\b.*\b(breast|breasts|fillet|fillets)\b/i,
+    exclude: [
+      /\b(thigh|drumstick|wing|leg|heart|liver|kiev|nugget|sausage|ham|smoked|breaded|crumb|marinad|frozen|mince|kebab|skewer|burger|stuffed|wrap|tikka|tandoori|bbq|jerk|teriyaki|peri-peri|coated|seasoned|cooked|ready|roast)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
