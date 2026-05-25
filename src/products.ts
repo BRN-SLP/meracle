@@ -45,7 +45,9 @@ export type ProductSlug =
   | "tomatoes_1kg"
   | "potatoes_1kg"
   | "olive_oil_1l"
-  | "water_bottled_1500ml";
+  | "water_bottled_1500ml"
+  | "bananas_1kg"
+  | "apples_1kg";
 
 export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT";
 
@@ -84,6 +86,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 15, maxMajor: 80 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 150, maxMajor: 900 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 30, maxMajor: 150 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 20, maxMajor: 200 } },
 
   // UNITED KINGDOM, Sainsbury's via Browser Use Cloud
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.5, maxMajor: 3 } },
@@ -96,6 +100,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.7, maxMajor: 4 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.3, maxMajor: 2 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.6, maxMajor: 3 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1, maxMajor: 5 } },
 
   // SPAIN, Mercadona (Madrid postal 28001)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
@@ -108,6 +114,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.7, maxMajor: 4 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.25, maxMajor: 2 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.8, maxMajor: 3.5 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1, maxMajor: 4 } },
 
   // POLAND, Biedronka (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2, maxMajor: 15 } },
@@ -120,6 +128,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2, maxMajor: 10 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 12, maxMajor: 60 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 1, maxMajor: 8 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 3, maxMajor: 15 } },
 
   // GERMANY, Rewe (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.6, maxMajor: 3.5 } },
@@ -132,6 +142,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.8, maxMajor: 4 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.25, maxMajor: 2 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1, maxMajor: 3.5 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1.2, maxMajor: 5 } },
 
   // FRANCE, Carrefour (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.7, maxMajor: 4 } },
@@ -144,6 +156,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.8, maxMajor: 4 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.25, maxMajor: 2 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 1, maxMajor: 3.5 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
 
   // ITALY, Esselunga (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
@@ -156,6 +170,8 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 4 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 3, maxMajor: 18 } },
   { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.25, maxMajor: 2.5 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1, maxMajor: 3.5 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
