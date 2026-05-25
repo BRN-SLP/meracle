@@ -94,6 +94,18 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Sainsbury's lists fresh tomatoes both as loose punnets ("Salad
+  // Tomatoes 500g") and as 1 kg bags. Sainsbury's UK uses a packSize
+  // tail in grams, so the picker filters down to ~1 kg packs and
+  // rejects cherry / vine specialty SKUs that ship at 250-500 g.
+  tomatoes_1kg: {
+    query: "tomatoes 1kg",
+    include: /\btomato/i,
+    exclude: [
+      /\b(paste|puree|ketchup|sauce|sundried|sun-dried|dried|tinned|canned|chopped|passata|juice|seeds)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
