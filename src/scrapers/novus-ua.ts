@@ -107,6 +107,16 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  tomatoes_1kg: {
+    categoryId: "fruits-and-vegetables",
+    // zakaz.ua titles a loose tomato as bare "Tomato" with unit="kg",
+    // which parseSizeFromProduct resolves to 1000 g. Cherry / branch
+    // variants come as "Cherry Tomatoes 250g" with unit="pcs", so the
+    // sizeRange filter keeps only the 1-kg loose entries.
+    include: /\btomato/i,
+    exclude: [/\b(paste|sauce|ketchup|juice|sundried|dried)\b/i],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
