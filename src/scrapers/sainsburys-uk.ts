@@ -131,6 +131,18 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Sainsbury's PLP search for "still water 1.5l". sizeRange 1400-1600 ml
+  // selects standard 1.5 L bottles. Sparkling / flavoured / tonic variants
+  // are the main confounders, all rejected by the exclude list. Distilled,
+  // baby, filter and cleaning waters are also rejected explicitly.
+  water_bottled_1500ml: {
+    query: "still water 1.5l",
+    include: /\bwater\b/i,
+    exclude: [
+      /\b(sparkling|carbonated|tonic|soda|cordial|squash|juice|flavou?red|infused|aromat|distilled|baby|infant|formula|filter|kettle|cleaner|cleansing|micellar|rose|coconut|barley|tap)\b/i,
+    ],
+    sizeRange: { min: 1400, max: 1600 },
+  },
 };
 
 interface ParsedProduct {
