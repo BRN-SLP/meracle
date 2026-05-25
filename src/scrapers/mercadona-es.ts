@@ -137,6 +137,27 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     exclude: [/con gas/i, /gaseosa/i, /sabor/i],
     sizeRange: { min: 1400, max: 1600 },
   },
+  // Chicken breast meat (pechuga de pollo). Mercadona surfaces both
+  // sliced fillets ("Filetes pechuga de pollo") and whole breasts
+  // ("Pechugas enteras de pollo") under subcategory 281 "Pollo".
+  // sizeRange 900-1200 g matches the 1.14 kg "familiar" pack and
+  // rejects 0.5 / 0.6 kg portion packs. Marinated, breaded and
+  // herb-flavoured variants are excluded explicitly.
+  chicken_breast_1kg: {
+    parentCategoryId: 38,
+    subcategoryMatch: /^pollo$/i,
+    include: /pechuga/i,
+    exclude: [
+      /marinad/i,
+      /empan/i,
+      /hierba/i,
+      /tierno/i,
+      /finas/i,
+      /salsa/i,
+      /asad|frit|cocid|crujient|nugget|hamburg|albondig|brocheta/i,
+    ],
+    sizeRange: { min: 900, max: 1200 },
+  },
 };
 
 /**
