@@ -146,6 +146,18 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Still mineral water in 1.5 L bottles. Lives in the `drinks`
+  // category alongside sodas, juices and sparkling water. Excludes
+  // carbonated / sparkling variants explicitly so the basket
+  // measures the cheap-staple slot, not a premium SKU.
+  water_bottled_1500ml: {
+    categoryId: "drinks",
+    include: /\bwater\b/i,
+    exclude: [
+      /\b(sparkling|carbonated|gas|tonic|soda|coca|fanta|sprite|cola|juice|extract|scented|cleansing|perfumed|infused|flavou?red|aroma|aromat|citrus|cherry|lemon|orange|raspberry|strawberry|kola|root|salt|sauce|cooking|distilled|baby|infant|formula|kettle|filter|cleaner)\b/i,
+    ],
+    sizeRange: { min: 1400, max: 1600 },
+  },
 };
 
 /**
