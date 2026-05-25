@@ -158,6 +158,33 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 1400, max: 1600 },
   },
+  // Loose bananas, sold by the kilo. zakaz.ua titles them as bare
+  // "Banana" with unit="kg" + volume=null, which parseSizeFromProduct
+  // resolves to 1000 g. Specialty variants (Baby Banana, Red Banana,
+  // Bananas Chips) and processed forms (Dried, Sublimated) are
+  // excluded explicitly so the basket measures the mass-market loose
+  // banana, not a premium SKU.
+  bananas_1kg: {
+    categoryId: "fruits-and-vegetables",
+    include: /\bbanana/i,
+    exclude: [
+      /\b(dried|sublimated|chips|baby|red|pink|chocolate|frozen|cake|cookie|biscuit|cream)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Loose apples, sold by the kilo. zakaz.ua surfaces named cultivars
+  // ("Golden", "Fuji", "Jonagold", "Idared", "Granny Smith") as well
+  // as a generic "Ukraine Apple 60-70" entry. All accepted, the
+  // cheapest variety wins. Critically excludes "Pineapple" which
+  // matches the bare "apple" stem, and processed forms.
+  apples_1kg: {
+    categoryId: "fruits-and-vegetables",
+    include: /\bapple/i,
+    exclude: [
+      /\b(pine|dried|sublimated|sliced|frozen|chips|cake|cookie|biscuit|cream|juice|sauce|cider|vinegar|wine)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
