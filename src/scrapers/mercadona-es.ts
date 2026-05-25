@@ -83,9 +83,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     sizeRange: { min: 800, max: 1100 },
   },
   // Eggs ship in Spain as 12-packs (the standard "Huevos grandes L" /
-  // "Huevos super grandes XL"). Catalog canonical is 10, normalize.ts
-  // rescales price to per-10 via packSize, so the band keeps 10-12.
-  eggs_10pcs: {
+  // "Huevos super grandes XL"). Catalog canonical matches at 12, so
+  // normalize.ts treats the price as-is on the common case and rescales
+  // any odd 10-pack to per-12.
+  eggs_12: {
     parentCategoryId: 77,
     subcategoryMatch: /^huevos$/i,
     include: /huevos/i,
