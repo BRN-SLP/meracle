@@ -117,6 +117,17 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     exclude: [/\b(paste|sauce|ketchup|juice|sundried|dried)\b/i],
     sizeRange: { min: 800, max: 1200 },
   },
+  potatoes_1kg: {
+    categoryId: "fruits-and-vegetables",
+    // Quirk: zakaz.ua titles loose potatoes as "White Рotatoes" using
+    // a Cyrillic Р instead of a Latin P (data-entry inconsistency on
+    // the retailer side). The character class [pр] handles both.
+    // Excludes sweet potato (botanically different) and processed
+    // variants (chips, crisps, mashed, dried).
+    include: /\b[pр]otato/i,
+    exclude: [/\b(sweet|chip|crisp|fries|mashed|dried|flake|starch|seed)\b/i],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
