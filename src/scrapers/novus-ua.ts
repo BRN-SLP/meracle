@@ -128,6 +128,24 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     exclude: [/\b(sweet|chip|crisp|fries|mashed|dried|flake|starch|seed)\b/i],
     sizeRange: { min: 800, max: 1200 },
   },
+  olive_oil_1l: {
+    // Olive oil sits in Novus "Grocery" alongside flour, pasta and
+    // dry goods. The dedicated `sauces-and-spices-novus` category
+    // only carries flavoured sauces, no bottled oils.
+    categoryId: "packets-cereals",
+    // Match both Latin "Olive Oil" and "Olive olive oil" variants.
+    // Excludes:
+    //   `sunflower`            blended sunflower + olive bottles
+    //   `with`                 "Olive Oil with Lemon" style infusions
+    //   `spray|infused|flavor` flavoured / spray variants
+    //   `truffle|garlic|herb|lemon|chili|basil|rosemary`  flavoured
+    include: /\bolive oil\b/i,
+    exclude: [
+      /\b(sunflower|spray|infused|flavoured|flavored|truffle|garlic|herb|lemon|chili|chilli|basil|rosemary|pesto)\b/i,
+      /\bwith\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
