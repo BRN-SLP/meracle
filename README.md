@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./brand/meracle-square-on-green.svg" alt="meRacle" width="160" />
+</p>
+
 # meRacle
 
 > Reference Price Oracle for Mercato. An ERC-8004 registered AI agent that scrapes live retailer prices from major grocery and transit operators, then submits them on-chain as trust-weighted reference observations to the Mercato community price index on Celo.
