@@ -106,6 +106,18 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Sainsbury's lists potatoes by named variety ("Maris Piper", "King
+  // Edward", "Charlotte") and as generic "white" or "salad" lines.
+  // sizeRange 800-1200 keeps 1-kg bags and rejects baby potato punnets
+  // (350g) and oversized 2.5kg bags.
+  potatoes_1kg: {
+    query: "potatoes 1kg",
+    include: /\bpotato/i,
+    exclude: [
+      /\b(sweet|chip|crisp|wedge|fries|mashed|dried|flake|sliced|baked|salad-bag|sausage|cake|waffle|microwave|ready)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
