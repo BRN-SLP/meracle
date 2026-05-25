@@ -42,7 +42,8 @@ export type ProductSlug =
   | "butter_200g"
   | "sugar_1kg"
   | "rice_1kg"
-  | "tomatoes_1kg";
+  | "tomatoes_1kg"
+  | "potatoes_1kg";
 
 export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT";
 
@@ -78,6 +79,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 20, maxMajor: 100 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 40, maxMajor: 200 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 30, maxMajor: 250 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 15, maxMajor: 80 } },
 
   // UNITED KINGDOM, Sainsbury's via Browser Use Cloud
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.5, maxMajor: 3 } },
@@ -87,6 +89,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.7, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1, maxMajor: 5 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1.5, maxMajor: 7 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.7, maxMajor: 4 } },
 
   // SPAIN, Mercadona (Madrid postal 28001)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
@@ -96,6 +99,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.7, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1, maxMajor: 5 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1.2, maxMajor: 6 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.7, maxMajor: 4 } },
 
   // POLAND, Biedronka (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2, maxMajor: 15 } },
@@ -105,6 +109,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 3, maxMajor: 12 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 4, maxMajor: 15 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 4, maxMajor: 18 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2, maxMajor: 10 } },
 
   // GERMANY, Rewe (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.6, maxMajor: 3.5 } },
@@ -114,6 +119,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.7, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1, maxMajor: 5 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1.5, maxMajor: 6 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.8, maxMajor: 4 } },
 
   // FRANCE, Carrefour (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.7, maxMajor: 4 } },
@@ -123,6 +129,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.8, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 1, maxMajor: 5 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 1.5, maxMajor: 6 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.8, maxMajor: 4 } },
 
   // ITALY, Esselunga (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
@@ -132,6 +139,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1, maxMajor: 5 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 4 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
