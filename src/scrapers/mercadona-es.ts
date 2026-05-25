@@ -126,6 +126,17 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     exclude: [/girasol/i, /mezcla/i, /sabor/i, /ajo/i, /lim[oó]n/i, /hierbas/i],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Still water in 1.5 L bottles. Subcategory `Agua sin gas` (id 525)
+  // under parent 156 (`Agua`) ships only flat water — sparkling lives
+  // in subcategory 528 and "gaseosa" (carbonated drinking water) in
+  // 529, both rejected by the subcategoryMatch predicate.
+  water_bottled_1500ml: {
+    parentCategoryId: 156,
+    subcategoryMatch: /^agua sin gas$/i,
+    include: /agua/i,
+    exclude: [/con gas/i, /gaseosa/i, /sabor/i],
+    sizeRange: { min: 1400, max: 1600 },
+  },
 };
 
 /**
