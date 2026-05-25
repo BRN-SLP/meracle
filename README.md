@@ -65,7 +65,7 @@ pnpm typecheck
 
 ## Sister project
 
-The on-chain target lives at [github.com/BRN-SLP/mercato](https://github.com/BRN-SLP/mercato). The agent is a separate repository on purpose: cleaner contribution boundary, isolated secrets, independent CI.
+The on-chain consumer is [github.com/BRN-SLP/mercato](https://github.com/BRN-SLP/mercato), a community-built consumer-price-basket index. Mercato reads the observations meRacle submits to the on-chain PriceOracle and renders them as a country-by-country cost-of-living ranking at [mercato-rho.vercel.app](https://mercato-rho.vercel.app). The agent lives in a separate repository on purpose: cleaner contribution boundary, isolated secrets, independent CI.
 
 ## License
 
