@@ -114,6 +114,18 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     exclude: [/leche/i, /bebida/i, /vinagre/i, /tortita/i, /harina/i],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Mercadona's olive-oil subcategory ships only pure olive oil
+  // variants (refinado / virgen / virgen extra Hacendado, plus a few
+  // PDO specials). No blends to filter out at this level, sizeRange
+  // 800-1200 ml automatically rejects 0.2 / 0.5 / 0.75 L premium SKUs
+  // and 3 L / 5 L family bottles.
+  olive_oil_1l: {
+    parentCategoryId: 112,
+    subcategoryMatch: /^aceite de oliva$/i,
+    include: /aceite de oliva/i,
+    exclude: [/girasol/i, /mezcla/i, /sabor/i, /ajo/i, /lim[oó]n/i, /hierbas/i],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
