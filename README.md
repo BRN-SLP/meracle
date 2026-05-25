@@ -35,7 +35,7 @@ Mercato is a community-built consumer-price index. Each new country and each new
 
 | Phase | Scope | Status |
 |---|---|---|
-| 0 | Scaffold, 8004 + Self registration, viem connect | in progress |
+| 0 | Scaffold, 8004 + Self registration, viem connect | shipped |
 | 1 | Novus UA + Sainsbury's UK + Mercadona ES, 3 core products | pending |
 | 2 | + Walmart MX + Auchan FR | pending |
 | 3 | + REWE DE + Biedronka PL + Pao de Acucar BR + Pick n Pay ZA + Coles AU | pending |
