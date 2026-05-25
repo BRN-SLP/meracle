@@ -143,6 +143,31 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 1400, max: 1600 },
   },
+  // Sainsbury's PLP search for "bananas 1kg". UK supermarkets sell
+  // bananas mostly loose (sold by weight) plus a handful of organic /
+  // baby / chocolate variants. sizeRange 800-1200 g keeps 1-kg packs
+  // and loose bags. Dried / freeze-dried / cake / muffin variants
+  // are excluded.
+  bananas_1kg: {
+    query: "bananas 1kg",
+    include: /\bbanana/i,
+    exclude: [
+      /\b(dried|freeze-dried|chips|crisps|baby|red|chocolate|frozen|cake|muffin|cookie|biscuit|cream|smoothie|loaf|bread|powder|flavou?red)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Sainsbury's PLP search for "apples 1kg". UK supermarkets surface
+  // apples by named variety (Braeburn, Gala, Pink Lady, Bramley, etc.)
+  // plus generic "by Sainsbury's" packs. Critically excludes pineapple,
+  // which matches the bare apple stem, plus processed forms.
+  apples_1kg: {
+    query: "apples 1kg",
+    include: /\bapple/i,
+    exclude: [
+      /\b(pine|dried|freeze-dried|sliced|frozen|chips|crisps|cake|cookie|biscuit|cream|juice|sauce|cider|vinegar|wine|crumble|strudel|toffee|caramel|flavou?red|sweet)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
