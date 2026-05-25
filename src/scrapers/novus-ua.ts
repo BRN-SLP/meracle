@@ -185,6 +185,20 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Chicken breast meat sold loose by the kilo. zakaz.ua titles the
+  // canonical mass-market entry as "Chilled Chicken Fillet" with
+  // unit="kg" + volume=null, which parseSizeFromProduct resolves to
+  // 1000 g. Other cuts (thigh, drumstick, wing, liver, etc.) and
+  // processed forms (mince, sausages, ham, smoked, breaded) are
+  // excluded so the picker measures the canonical staple cut.
+  chicken_breast_1kg: {
+    categoryId: "meat-fish-poultry",
+    include: /\bchicken\b.*\b(breast|fillet)\b/i,
+    exclude: [
+      /\b(mince|minced|thigh|drumstick|wing|heart|liver|quarter|wiener|sausage|roll|ham|smoked|boiled|fried|marinated|baked|grill|burger|kebab|nuggets|breaded|empan|frozen|stuffed|salami)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
