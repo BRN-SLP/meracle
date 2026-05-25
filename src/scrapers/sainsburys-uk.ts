@@ -118,6 +118,19 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Sainsbury's PLP search for "olive oil 1l". sizeRange 800-1200 ml
+  // selects 1-litre bottles and rejects 500 ml / 750 ml premium SKUs.
+  // Sunflower blends are the main confounder, blend-style mayos /
+  // tapenades / pestos may also surface, all excluded explicitly.
+  olive_oil_1l: {
+    query: "olive oil 1l",
+    include: /\bolive oil\b/i,
+    exclude: [
+      /\b(sunflower|spray|infused|flavoured|flavored|truffle|garlic|herb|lemon|chili|chilli|basil|rosemary|pesto|mayo|mayonnaise|tapenade)\b/i,
+      /\bwith\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
