@@ -31,6 +31,18 @@ Mercato is a community-built consumer-price index. Each new country and each new
 | Self Agent ID Registry | `0xaC3DF9ABf80d0F5c020C06B04Cced27763355944` | Sybil-resistant agent ID via Self Protocol |
 | Mercato PriceOracle (target) | `0x18DD82604a9439b3Cdb7E1078c355E460ED217Ed` | Where submissions land |
 
+## Live on chain
+
+Concrete proof of work, all on Celo Mainnet (chain ID 42220):
+
+| Asset | Where to look |
+|---|---|
+| ERC-8004 Identity NFT held by the hot wallet | [erc-721 holdings](https://celoscan.io/address/0x1B94d56f723d8939661D94eD1f899C5c27136b2c#tokentxnsErc721) |
+| Self Agent ID NFT `#119` | [mint tx](https://celoscan.io/tx/0x7e6cf552e6514fbd75cc3fa11fb8d2b3c771d5a326d47c49166b4817311e25eb) |
+| Daily `submitPrice()` calls signed by the hot wallet | [tx history](https://celoscan.io/address/0x1B94d56f723d8939661D94eD1f899C5c27136b2c) |
+| Daily cron that drives the agent | [submit-batch.yml runs](https://github.com/BRN-SLP/meracle/actions/workflows/submit-batch.yml) |
+| Public agent metadata | [agent.json](./agent.json) |
+
 ## Rollout phases
 
 | Phase | Scope | Status |
