@@ -71,12 +71,14 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1100 },
   },
-  eggs_10pcs: {
+  eggs_12: {
     categoryId: "dairy-and-eggs",
-    // "Chicken Eggs C0 10pcs", excludes quail / 15pcs / 20pcs via sizeRange.
+    // "Chicken Eggs C0 12pcs", excludes quail / 15pcs / 20pcs via sizeRange.
+    // sizeRange widened to 10..12 so a 10-pack still passes the gate and
+    // normalize.ts rescales to the canonical 12-pack price.
     include: /\bchicken eggs\b/i,
     exclude: [/\bquail\b/i],
-    sizeRange: { min: 9, max: 12 },
+    sizeRange: { min: 10, max: 12 },
   },
   butter_200g: {
     categoryId: "dairy-and-eggs",
@@ -112,7 +114,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
  * "... 1.5 L". Returns null when no size is present.
  */
 function parseSizeFromTitle(title: string): number | null {
-  // Piece-counted goods first (eggs "10pcs"). Matches integer counts
+  // Piece-counted goods first (eggs "12pcs"). Matches integer counts
   // so the regex does not collide with the "g" / "ml" / "l" branches.
   const pcs = title.match(/(\d+)\s*pcs\b/i);
   if (pcs) {

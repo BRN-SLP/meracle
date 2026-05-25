@@ -60,9 +60,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1300 },
   },
-  // UK eggs ship in 6 / 10 / 12 packs, catalog target is 10. Allow the
+  // UK eggs ship in 6 / 10 / 12 packs, catalog target is 12. Allow the
   // wider band, normalize.ts rescales the price per packSize.
-  eggs_10pcs: {
+  eggs_12: {
     query: "free range eggs",
     include: /\beggs?\b/i,
     exclude: [

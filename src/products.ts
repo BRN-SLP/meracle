@@ -38,7 +38,7 @@ export type Unit = "g" | "ml" | "pcs";
 export type ProductSlug =
   | "bread_500g"
   | "milk_1l"
-  | "eggs_10pcs"
+  | "eggs_12"
   | "butter_200g"
   | "sugar_1kg"
   | "rice_1kg";
@@ -72,7 +72,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // UKRAINE, Novus Kyiv via zakaz.ua API
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 15, maxMajor: 90 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 30, maxMajor: 90 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 40, maxMajor: 150 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 48, maxMajor: 180 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 50, maxMajor: 200 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 20, maxMajor: 100 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 40, maxMajor: 200 } },
@@ -80,7 +80,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // UNITED KINGDOM, Sainsbury's via Browser Use Cloud
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.5, maxMajor: 3 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.9, maxMajor: 2 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1.5, maxMajor: 5 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1.8, maxMajor: 6 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1, maxMajor: 4 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.7, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1, maxMajor: 5 } },
@@ -88,7 +88,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // SPAIN, Mercadona (Madrid postal 28001)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.8, maxMajor: 2 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1.5, maxMajor: 5 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1.8, maxMajor: 6 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1.5, maxMajor: 5 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.7, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1, maxMajor: 5 } },
@@ -96,7 +96,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // POLAND, Biedronka (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2, maxMajor: 15 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2.5, maxMajor: 10 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 5, maxMajor: 20 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 6, maxMajor: 24 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 5, maxMajor: 15 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 3, maxMajor: 12 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 4, maxMajor: 15 } },
@@ -104,7 +104,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // GERMANY, Rewe (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.6, maxMajor: 3.5 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.8, maxMajor: 2.5 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1.5, maxMajor: 5 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1.8, maxMajor: 6 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1.5, maxMajor: 4 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.7, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1, maxMajor: 5 } },
@@ -112,7 +112,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // FRANCE, Carrefour (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.7, maxMajor: 4 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.8, maxMajor: 2 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 2, maxMajor: 7 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 2.4, maxMajor: 8.4 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 2, maxMajor: 5 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.8, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 1, maxMajor: 5 } },
@@ -120,7 +120,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   // ITALY, Esselunga (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
   { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.9, maxMajor: 2 } },
-  { slug: "eggs_10pcs",  canonicalSize: 10,   unit: "pcs", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 2, maxMajor: 5 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 2.4, maxMajor: 6 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.5, maxMajor: 5 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 3 } },
   { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1, maxMajor: 5 } },
