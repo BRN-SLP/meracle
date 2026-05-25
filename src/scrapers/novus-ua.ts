@@ -137,6 +137,31 @@ function parseSizeFromTitle(title: string): number | null {
   return null;
 }
 
+/**
+ * Resolve a product's canonical size, in grams or mL, from either
+ * its title tail or its unit/volume fields. zakaz.ua titles like
+ * "Tomato" omit the size when the product is sold loose by the
+ * kilo, in which case `unit="kg"` and `volume=null` signals 1 kg
+ * (1000 g) as the natural quoting basis. Same logic applies to
+ * litre-priced products.
+ */
+function parseSizeFromProduct(p: ZakazProduct): number | null {
+  const fromTitle = parseSizeFromTitle(p.title);
+  if (fromTitle !== null) return fromTitle;
+
+  // Loose-weight produce: unit="kg" with no explicit volume means
+  // the displayed price is per 1 kg.
+  if (p.unit === "kg") {
+    const v = p.volume ?? 1;
+    return v * 1000;
+  }
+  if (p.unit === "l") {
+    const v = p.volume ?? 1;
+    return v * 1000;
+  }
+  return null;
+}
+
 function pickBestMatch(
   products: ZakazProduct[],
   picker: NovusPicker,
@@ -145,7 +170,7 @@ function pickBestMatch(
   for (const p of products) {
     if (!picker.include.test(p.title)) continue;
     if (picker.exclude.some((rx) => rx.test(p.title))) continue;
-    const size = parseSizeFromTitle(p.title);
+    const size = parseSizeFromProduct(p);
     if (size === null) continue;
     if (size < picker.sizeRange.min || size > picker.sizeRange.max) continue;
     candidates.push({ product: p, size });
