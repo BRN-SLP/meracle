@@ -18,6 +18,7 @@
     "scrape:mercadona": "tsx scripts/scrape-mercadona-es.ts",
     "scrape:sainsburys": "tsx scripts/scrape-sainsburys-uk.ts",
     "scrape:conad": "tsx scripts/scrape-conad-it.ts",
+    "scrape:carrefour": "tsx scripts/scrape-carrefour-fr.ts",
     "browseruse:usage": "tsx scripts/browseruse-usage.ts",
     "submit:batch": "tsx scripts/submit-batch.ts",
     "feedback:read": "tsx scripts/read-feedback.ts",
