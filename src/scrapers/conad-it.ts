@@ -121,6 +121,56 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
     ],
     sizeRange: { min: 350, max: 600 },
   },
+  // White bread, sliced (pane in cassetta / pane bianco a fette).
+  // Italian mass-market staple is the 400-500 g sliced loaf. Conad
+  // sells own-brand "Pane Bianco a Fette" at ~EUR 1.20-1.50.
+  bread_500g: {
+    query: "pane in cassetta",
+    include: /\bpan(e|ino)\b/i,
+    exclude: [
+      /\b(integrale|cereali|semi|noci|olive|tostat|grissini|cracker|focaccia|pizza|piadina|carasau|carrè|carre|raffermo|crouton|panko|dolce|farcito|brioche|pagnotta|baguett|ciabatta|nero|carbone|farro|kamut|orzo|segale|avena)\b/i,
+    ],
+    sizeRange: { min: 300, max: 700 },
+  },
+  // White granulated sugar (zucchero bianco / semolato). Conad ships
+  // own-brand "Zucchero Semolato 1 kg" as the staple. Excludes brown,
+  // cane, icing, vanilla-flavored, and sweetener substitutes.
+  sugar_1kg: {
+    query: "zucchero",
+    include: /\bzucchero\b/i,
+    exclude: [
+      /\b(canna|integrale|grezzo|moscovado|bruno|panela|vanigliato|vaniglia|velo|impalpabile|stevia|dolcificante|fruttosio|maltitolo|saccarina|eritritolo|aspartam)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Rice (riso). Italian rice varieties for risotto (Arborio,
+  // Carnaroli, Vialone Nano) plus long-grain (basmati, parboiled,
+  // jasmine, lungo). The picker accepts any pure rice 800-1200 g.
+  // Cheapest wins, which tends to be Arborio / long-grain Conad own.
+  rice_1kg: {
+    query: "riso",
+    include: /\briso\b/i,
+    exclude: [
+      /\b(latte|bevanda|sciroppo|farina|aceto|gallett|cracker|biscott|tortin|barrett|insalata|nero|venere|integrale)\b/i,
+      /\b(precotto|microond|pronto|surgelat|congelat|cotto)\b/i,
+      /\b(pilaf|sushi|orientale|cinese|thai|esotic)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Olive oil (olio di oliva). Italy is the canonical source: extra
+  // virgin (extravergine), virgin (vergine), refined (raffinato).
+  // Conad ships own-brand "Olio Extra Vergine di Oliva" 1 L bottles
+  // at EUR 5-7. Excludes blends, flavored, and seed oils.
+  olive_oil_1l: {
+    query: "olio extra vergine oliva",
+    include: /\bolio\b.*\boliv/i,
+    exclude: [
+      /\b(girasol|semi|mais|colza|arachidi|sesamo|palm|coco|burro)\b/i,
+      /\b(aromatizz|aromatic|tartuf|aglio|limon|peperonc|rosmarino|basilico|origano|menta|chili|ervas|infuso|spray)\b/i,
+      /\bcondimento\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
