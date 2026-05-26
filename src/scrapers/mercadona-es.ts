@@ -181,6 +181,44 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Cured / semi-cured / young hard cheese wedges. Spain's mass-market
+  // staple is the 'Queso curado mezcla Hacendado' (cow+sheep+goat
+  // blend) wedge at ~0.41 kg, but the cheapest pure variant per kg is
+  // 'Queso tierno gouda de vaca Hacendado' at 0.45 kg / EUR 7.33/kg.
+  // sizeRange 350-550 g catches the 0.40-0.45 kg standard wedges
+  // (rejects 100-300 g snack packs and 1+ kg family blocks). After
+  // normalize.ts rescaling to canonical 500 g, the on-chain price is
+  // priceMajor * (500 / packSize).
+  //
+  // Excludes:
+  // - Flavored variants (con trufa, con pimentón, ahumado)
+  // - DOP premium (manchego, viejo de oveja) - too expensive, not staple
+  // - Specialty cuts (tabla de quesos, snack)
+  // - Sheep/goat-only (viejo de oveja, cabra) - too expensive
+  cheese_local_500g: {
+    parentCategoryId: 54,
+    subcategoryMatch: /^queso (curado|semicurado|tierno)$/i,
+    include: /queso/i,
+    exclude: [
+      /trufa/i,
+      /pimentón|pimenton/i,
+      /ahumad/i,
+      /manchego/i,
+      /viejo/i,
+      /añejo|anejo/i,
+      /tabla/i,
+      /snack/i,
+      /cabra/i,
+      /oveja/i,
+      /tronch[oó]n/i,
+      /cuñit/i,
+      /dados/i,
+      /escamas/i,
+      /sin lactosa/i,
+      /baja en sal/i,
+    ],
+    sizeRange: { min: 350, max: 550 },
+  },
 };
 
 /**
