@@ -220,6 +220,32 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 400, max: 600 },
   },
+  // Imported single-can / single-bottle beer. Sainsbury's PLP search
+  // 'Heineken' typically surfaces 440ml UK-pint cans (the standard
+  // single SKU for imported lager in UK supermarkets) alongside
+  // multi-packs (4x440 / 12x330 etc., rejected by sizeRange). The
+  // whitelist below captures international brands sold at Sainsbury's
+  // as singles; British brands (Foster's, Carling, Tetley's,
+  // Boddington's, Theakston) are filtered out by virtue of not being
+  // on the whitelist.
+  //
+  // sizeRange 250-550 ml catches:
+  // - 440 ml UK-pint cans (Heineken, Stella, Carlsberg standard)
+  // - 500 ml continental cans (Becks, Krombacher, Paulaner)
+  // - 330 ml bottles (Corona, Peroni standard bottle)
+  // - 275 / 284 ml premium bottles (Hoegaarden, Leffe, Guinness)
+  //
+  // Excludes non-alcoholic / 0.0% / radler / shandy.
+  beer_imported_500ml: {
+    query: "Heineken",
+    include: /\b(heineken|carlsberg|tuborg|stella artois|becks|budweiser|corona extra|leffe|hoegaarden|krombacher|paulaner|warsteiner|asahi|peroni|kronenbourg|guinness|grolsch|amstel|miller|estrella damm|san miguel|moretti|tyskie|zywiec|lech)\b/i,
+    exclude: [
+      /\b(non-alcoholic|alcohol-free|0\.0%|0%|alc-free|alcohol free)\b/i,
+      /\b(radler|shandy)\b/i,
+      /\b(lite|light|low(-|\s)?alc)\b/i,
+    ],
+    sizeRange: { min: 250, max: 550 },
+  },
 };
 
 interface ParsedProduct {
