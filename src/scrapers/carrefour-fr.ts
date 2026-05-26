@@ -37,10 +37,13 @@ import { targetsForRetailer } from "../products.js";
 import type { ScrapedProduct, ScraperResult } from "../types.js";
 
 const BASE = "https://www.carrefour.fr";
-// 16 sequential searches under one session. Homepage warm + 16 navs +
-// hydration waits typically fit inside 3 min on a warm proxy. 5 min
-// cap is a safety belt; Browser Use bills per actual second.
-const SESSION_TIMEOUT_MIN = 5;
+// 16 sequential searches under one session. Each query runs a goto +
+// 15 s waitForFunction + DOM walk, roughly 20 s; with the homepage
+// warm the budget lands around 5.5 min. 8 min cap keeps a safety
+// margin for the slow tail (multi-pack water queries, the larger
+// PLP for `pommes` / `tomates` heuristic searches). Browser Use bills
+// per actual second, so the unused tail is free.
+const SESSION_TIMEOUT_MIN = 8;
 
 interface FrPicker {
   /** French search keyword. */
