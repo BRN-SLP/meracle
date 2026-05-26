@@ -181,6 +181,21 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Sainsbury's PLP search for "beef mince 1kg". UK supermarkets ship
+  // mince in 400-500 g standard packs, 750 g family packs, and
+  // occasional 1 kg "value" / "large" packs. sizeRange 800-1200 keeps
+  // the 1 kg packs and rejects portion-size ones. Fat percentages
+  // (5% / 12% / 20%) are all accepted, cheapest wins. Mixed protein
+  // (pork+beef "steak mince"), processed and ready-cooked variants
+  // are excluded explicitly.
+  beef_ground_1kg: {
+    query: "beef mince 1kg",
+    include: /\bbeef\b.*\b(mince|minced|ground)\b|\b(mince|minced|ground)\b.*\bbeef\b/i,
+    exclude: [
+      /\b(pork|chicken|turkey|lamb|veal|sausage|burger|meatball|kofta|frozen|smoked|cooked|marinad|kebab|skewer|stuffed|wrap|tikka|tandoori|bbq|peri-peri|seasoned|ready|spaghetti|bolognese|chilli|chili|lasagne|lasagna|cottage|shepherd|pie|wellington)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 interface ParsedProduct {
