@@ -158,6 +158,29 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     ],
     sizeRange: { min: 900, max: 1200 },
   },
+  // Pure beef ground meat (carne picada vacuno). Mercadona ships three
+  // pure-beef SKUs in subcategory 783 "Picadas y otros" (under parent
+  // 44 "Hamburguesas y picadas") at 0.4 / 0.5 / 1.0 kg pack sizes.
+  // sizeRange 800-1200 g keeps only the 1 kg "preparado familiar"
+  // pack at EUR 10.80/kg. Vacuno+cerdo blends, cerdo solo, pollo
+  // picada, albóndigas (meatballs) and processed/cooked forms are
+  // excluded explicitly.
+  beef_ground_1kg: {
+    parentCategoryId: 44,
+    subcategoryMatch: /^picadas y otros$/i,
+    include: /picada.*vacuno|vacuno.*picada/i,
+    exclude: [
+      /cerdo/i,
+      /pollo/i,
+      /pavo/i,
+      /cordero/i,
+      /albondig/i,
+      /hamburg/i,
+      /burger/i,
+      /asad|frit|cocid|crujient|nugget|brocheta|empan/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
