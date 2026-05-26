@@ -196,6 +196,30 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Cheddar block, UK's mass-market hard cheese staple. Sainsbury's
+  // ships own-brand cheddar in 400 g / 500 g / 750 g / 1 kg blocks
+  // across mild, medium, mature, extra-mature strengths plus the
+  // 'British' tier. The 500 g block is the standard SKU. sizeRange
+  // 400-600 g catches the typical block; the cheapest mature wins.
+  //
+  // Excludes:
+  // - Pre-sliced / grated / shredded variants (snack packaging)
+  // - Flavored / smoked / herbed cheddars (truffle, jalapeño, etc.)
+  // - 'Cheese spread' / 'cheese product' / processed
+  // - Other cheese types (red leicester, wensleydale, etc.)
+  // - Vegan / plant-based cheese substitutes
+  cheese_local_500g: {
+    query: "cheddar 500g",
+    include: /\bcheddar\b/i,
+    exclude: [
+      /\b(sliced|grated|shredded|spread|melt|processed|stick|snack|nibble|cube|portion|mini|baby|bites|crumbl)\b/i,
+      /\b(jalape|chilli|chili|smoked|herb|garlic|onion|pickle|chutney|cranberry|truffle|honey|whisky|wine|spicy|caramelised|ploughman)\b/i,
+      /\b(vegan|plant-based|dairy-free|lactose-free|free from)\b/i,
+      /\b(red leicester|wensleydale|stilton|cheshire|double gloucester|monterey|colby|gouda|edam|brie|camembert|mozzarella|feta|parmesan|halloumi|paneer)\b/i,
+      /\b(product|substitute|imitation)\b/i,
+    ],
+    sizeRange: { min: 400, max: 600 },
+  },
 };
 
 interface ParsedProduct {
