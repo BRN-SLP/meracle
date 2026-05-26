@@ -276,6 +276,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
   // 1.5 L PET bottle. Excludes sparkling (gazeuse / pétillante),
   // flavored, cosmetic (parfum, micellaire), infant, and household
   // (bain, douche, nettoyant) waters.
+  //
+  // Carrefour merchandises water as multi-packs by default (6 × 1.5 L
+  // shrink-wraps dominate the PLP), so the sizeRange caps at 12 L to
+  // catch 6 / 8 packs of 1.5 L bottles. normalize.ts rescales the
+  // aggregate volume back to the 1.5 L canonical, so a 6-pack at EUR
+  // 3.99 becomes EUR 0.665 per 1.5 L · within sanityRange.
   water_bottled_1500ml: {
     query: "eau de source",
     include: /\beau\b/i,
@@ -287,7 +293,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
       /\b(b[ée]b[ée]|nourrissons?|infants?|formula|sevrage)\b/i,
       /\b(piscine|aquarium|d[ée]calcaire)\b/i,
     ],
-    sizeRange: { min: 1400, max: 1600 },
+    sizeRange: { min: 1200, max: 12000 },
   },
   // Imported beer (bière importée). Whitelist of mass-market
   // international brands stocked by Carrefour. Standard bottle / can
