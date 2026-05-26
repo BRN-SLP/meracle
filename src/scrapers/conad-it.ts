@@ -1,0 +1,274 @@
+/**
+ * Conad Italy scraper, via Browser Use Cloud + Playwright CDP.
+ *
+ * Conad's online store (spesaonline.conad.it) sits behind a SAP
+ * Commerce (Hybris) OCC API at api.cfp5zmx7oc-conadscrl1-d1-public
+ * .model-t.cc.commerce.ondemand.com. The OCC endpoint demands an
+ * OAuth bearer token + recaptcha enterprise + storeId, so a direct
+ * fetch is blocked at the CORS layer. We work around it by driving
+ * a remote chromium that Browser Use Cloud provisions with an IT
+ * residential proxy, letting JS hydration populate prices.
+ *
+ * Strategy:
+ *   1. Spin up remote browser (IT proxy, ~5 min session)
+ *   2. Warm cookies + select a default store via homepage visit
+ *   3. Navigate to the search URL for the target slug
+ *   4. Wait for JS hydration (data-product[basePrice > 0] cards)
+ *   5. Extract product cards from the rendered DOM
+ *   6. Filter with a per-slug picker, pick cheapest match
+ *
+ * Conad embeds product metadata directly in each card via a
+ * `data-product='{"code":"...", "nome":"...", "netQuantity":..., ...}'
+ * JSON attribute. The pre-hydration SSR ships `basePrice: 0` for most
+ * cards; after the OCC fetch lands, the active store's prices are
+ * populated. The scraper waits for at least one priced card before
+ * reading.
+ *
+ * Picker config lives next to the scraper, NOT in ProductTarget, so
+ * ProductTarget stays retailer-agnostic.
+ */
+import { chromium } from "playwright-core";
+import type { Browser } from "playwright-core";
+
+import { withSession } from "../browseruse.js";
+import type { ProductTarget } from "../products.js";
+import { targetsForRetailer } from "../products.js";
+import type { ScrapedProduct, ScraperResult } from "../types.js";
+
+const BASE = "https://spesaonline.conad.it";
+// 16 sequential searches under one session. Homepage warm + 16 navs +
+// hydration waits typically finishes in 2-3 min. 5 min cap is a safety
+// belt; Browser Use bills per actual second so the cap is a guard, not
+// the target.
+const SESSION_TIMEOUT_MIN = 5;
+
+interface ConadPicker {
+  /** Italian search keyword. */
+  query: string;
+  /** Product name (nome) must match. */
+  include: RegExp;
+  /** Product name MUST NOT match. */
+  exclude: readonly RegExp[];
+  /** Pack size in target.unit (g or mL or pcs). */
+  sizeRange: { min: number; max: number };
+}
+
+// Pickers are added in follow-up commits one slug-group at a time.
+// An empty PICKERS map is valid; scrapeConadIt() reports every IT
+// target as a miss with reason "no picker configured", and the batch
+// pipeline tolerates that gracefully.
+const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {};
+
+/**
+ * Conad ships netQuantity in kg / L / pieces via netQuantityUm:
+ *   KG -> grams (multiply by 1000)
+ *   LT -> milliliters (multiply by 1000)
+ *   PZ -> pieces (passes through)
+ *
+ * The catalog stores pack size in the same units, so for eggs (PZ)
+ * a 6-pack returns 6, not 6000.
+ */
+function netQuantityToTargetUnit(
+  netQuantity: number,
+  netQuantityUm: string,
+): number {
+  const um = netQuantityUm.toUpperCase();
+  if (um === "KG" || um === "LT") return netQuantity * 1000;
+  return netQuantity;
+}
+
+export interface ConadProductRaw {
+  /** Conad SKU (5-6 digit numeric string). */
+  code: string;
+  /** Display name with brand + size suffix. */
+  nome: string;
+  /** Net quantity in the unit below. */
+  netQuantity: number;
+  /** Unit: "KG", "LT", "PZ". */
+  netQuantityUm: string;
+  /** EUR price major units. 0.0 means "ask in store" / unpriced. */
+  basePrice: number;
+}
+
+export interface ParsedProduct {
+  code: string;
+  title: string;
+  priceMajor: number;
+  packSize: number;
+  sourceUrl: string;
+}
+
+/**
+ * Parse the `data-product` JSON attribute from each rendered card.
+ * Cards with basePrice === 0 are dropped (variable / ask-in-store).
+ *
+ * Exported so unit tests can feed in fixtures.
+ */
+export function parseProductsFromCards(
+  cards: ConadProductRaw[],
+  baseUrl = BASE,
+): ParsedProduct[] {
+  const out: ParsedProduct[] = [];
+  for (const c of cards) {
+    if (!c.code || !c.nome) continue;
+    if (!Number.isFinite(c.basePrice) || c.basePrice <= 0) continue;
+    if (!Number.isFinite(c.netQuantity) || c.netQuantity <= 0) continue;
+    const size = netQuantityToTargetUnit(c.netQuantity, c.netQuantityUm);
+    // Conad product detail URL pattern, mirrors `assets/products/...`
+    // images: `/prodotto/<slug>--<code>`. Used as sourceUrl so the
+    // submitter can link back from on-chain observations.
+    const slugified = c.nome
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    out.push({
+      code: c.code,
+      title: c.nome,
+      priceMajor: c.basePrice,
+      packSize: size,
+      sourceUrl: `${baseUrl}/prodotto/${slugified}--${c.code}`,
+    });
+  }
+  return out;
+}
+
+function pickBestMatch(
+  products: ParsedProduct[],
+  picker: ConadPicker,
+): ParsedProduct | null {
+  const candidates = products.filter((p) => {
+    if (!picker.include.test(p.title)) return false;
+    if (picker.exclude.some((rx) => rx.test(p.title))) return false;
+    if (p.packSize < picker.sizeRange.min || p.packSize > picker.sizeRange.max)
+      return false;
+    return true;
+  });
+  if (candidates.length === 0) return null;
+  candidates.sort((a, b) => a.priceMajor - b.priceMajor);
+  return candidates[0]!;
+}
+
+/**
+ * Drive a remote chromium through a homepage warm + search navigation,
+ * then extract product cards via DOM queries inside the page context.
+ *
+ * Each product card carries `<div ... data-product='{...}'>` with the
+ * full SKU JSON. We page.evaluate() to parse all of them in one trip.
+ */
+async function scrapeOneSearch(
+  browser: Browser,
+  query: string,
+): Promise<ParsedProduct[]> {
+  const context =
+    browser.contexts()[0] ?? (await browser.newContext({
+      userAgent:
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+      locale: "it-IT",
+    }));
+  const page = context.pages()[0] ?? (await context.newPage());
+
+  // Warm the session on the homepage so Conad's JS picks a default
+  // store and the OCC API gets a valid storeId before our search.
+  await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.waitForTimeout(3000);
+
+  const url = `${BASE}/search?q=${encodeURIComponent(query)}`;
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+  // Conad lazy-renders the price after the SAP OCC fetch lands. Poll
+  // for the first card with basePrice > 0 in its data-product JSON.
+  await page
+    .waitForFunction(
+      () => {
+        const els = document.querySelectorAll<HTMLElement>("[data-product]");
+        for (const el of Array.from(els)) {
+          try {
+            const data = JSON.parse(el.getAttribute("data-product") ?? "");
+            if (typeof data.basePrice === "number" && data.basePrice > 0) {
+              return true;
+            }
+          } catch {
+            // skip malformed JSON
+          }
+        }
+        return false;
+      },
+      { timeout: 15000 },
+    )
+    .catch(() => {
+      // If no priced card appears within 15 s, fall through to extract
+      // whatever the DOM has. parseProductsFromCards drops basePrice=0
+      // entries so the miss is reported cleanly.
+    });
+
+  const cards = (await page.evaluate(() => {
+    const out: Array<Record<string, unknown>> = [];
+    const els = document.querySelectorAll<HTMLElement>("[data-product]");
+    for (const el of Array.from(els)) {
+      const raw = el.getAttribute("data-product");
+      if (!raw) continue;
+      try {
+        out.push(JSON.parse(raw));
+      } catch {
+        // skip malformed JSON
+      }
+    }
+    return out;
+  })) as unknown as ConadProductRaw[];
+
+  return parseProductsFromCards(cards);
+}
+
+/**
+ * Live scrape, exported entry point. Requires BROWSER_USE_API_KEY.
+ */
+export async function scrapeConadIt(): Promise<ScraperResult> {
+  const targets = targetsForRetailer("conad-it");
+  const scrapedAt = new Date().toISOString();
+  const scraped: ScrapedProduct[] = [];
+  const misses: ScraperResult["misses"] = [];
+
+  await withSession("it", SESSION_TIMEOUT_MIN, async (session) => {
+    if (!session.cdpUrl) {
+      throw new Error("Browser Use session has no cdpUrl");
+    }
+    const browser = await chromium.connectOverCDP(session.cdpUrl);
+    try {
+      for (const target of targets) {
+        const picker = PICKERS[target.slug];
+        if (!picker) {
+          misses.push({ target, reason: "no picker configured for this slug" });
+          continue;
+        }
+        let parsed: ParsedProduct[];
+        try {
+          parsed = await scrapeOneSearch(browser, picker.query);
+        } catch (e: unknown) {
+          const reason = e instanceof Error ? e.message : String(e);
+          misses.push({ target, reason: `fetch: ${reason}` });
+          continue;
+        }
+        const match = pickBestMatch(parsed, picker);
+        if (!match) {
+          misses.push({
+            target,
+            reason: `no match for "${picker.query}" (${parsed.length} candidates parsed)`,
+          });
+          continue;
+        }
+        scraped.push({
+          target,
+          retailerSku: match.code,
+          retailerTitle: match.title,
+          priceMajor: match.priceMajor,
+          packSize: match.packSize,
+          scrapedAt,
+          sourceUrl: match.sourceUrl,
+        });
+      }
+    } finally {
+      await browser.close();
+    }
+  });
+
+  return { retailer: "conad-it", scraped, misses };
+}

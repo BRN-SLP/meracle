@@ -31,7 +31,7 @@ export type Retailer =
   | "biedronka-pl"
   | "rewe-de"
   | "carrefour-fr"
-  | "esselunga-it";
+  | "conad-it";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -188,22 +188,22 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.8, maxMajor: 5 } },
 
   // ITALY, Esselunga (scraper pending)
-  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
-  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.9, maxMajor: 2 } },
-  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 2.4, maxMajor: 6 } },
-  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.5, maxMajor: 5 } },
-  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 3 } },
-  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1, maxMajor: 5 } },
-  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
-  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 4 } },
-  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 3, maxMajor: 18 } },
-  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.25, maxMajor: 2.5 } },
-  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1, maxMajor: 3.5 } },
-  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
-  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 5, maxMajor: 20 } },
-  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 7, maxMajor: 25 } },
-  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 3, maxMajor: 20 } },
-  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.8, maxMajor: 5 } },
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.9, maxMajor: 2 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 2.4, maxMajor: 6 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 1.5, maxMajor: 5 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.8, maxMajor: 3 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 1, maxMajor: 5 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.8, maxMajor: 4 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 3, maxMajor: 18 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.25, maxMajor: 2.5 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 1, maxMajor: 3.5 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 5, maxMajor: 20 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 7, maxMajor: 25 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 3, maxMajor: 20 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.8, maxMajor: 5 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {

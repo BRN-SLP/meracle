@@ -16,6 +16,7 @@
  */
 import { env } from "../src/env.js";
 import { normalize, NormalizationError } from "../src/normalize.js";
+import { scrapeConadIt } from "../src/scrapers/conad-it.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
 import { scrapeSainsburysUk } from "../src/scrapers/sainsburys-uk.js";
@@ -129,9 +130,9 @@ async function main(): Promise<void> {
 
   console.log("Scraping retailers ...");
   // Novus UA + Mercadona ES are free public APIs, always run.
-  // Sainsbury's UK requires Browser Use Cloud (BROWSER_USE_API_KEY).
-  // Skip it silently if the key isn't set so the batch still works
-  // with the two free retailers.
+  // Sainsbury's UK and Conad IT require Browser Use Cloud
+  // (BROWSER_USE_API_KEY). Skip silently if the key is unset so the
+  // batch still works with the two free retailers.
   const sainsburysPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
     ? scrapeSainsburysUk().catch((e: unknown) => {
         const msg = e instanceof Error ? e.message : String(e);
@@ -139,11 +140,19 @@ async function main(): Promise<void> {
         return null;
       })
     : Promise.resolve(null);
+  const conadPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
+    ? scrapeConadIt().catch((e: unknown) => {
+        const msg = e instanceof Error ? e.message : String(e);
+        console.warn(`  conad-it: scrape threw, skipping ($${msg})`);
+        return null;
+      })
+    : Promise.resolve(null);
 
-  const [novus, mercadona, sainsburys] = await Promise.all([
+  const [novus, mercadona, sainsburys, conad] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
+    conadPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -152,12 +161,18 @@ async function main(): Promise<void> {
   } else {
     console.log("  sainsburys-uk: SKIPPED (BROWSER_USE_API_KEY not set)");
   }
+  if (conad) {
+    console.log(`  conad-it     : ${conad.scraped.length} scraped, ${conad.misses.length} miss`);
+  } else {
+    console.log("  conad-it     : SKIPPED (BROWSER_USE_API_KEY not set)");
+  }
   console.log("");
 
   const allScrapes = [
     ...novus.scraped,
     ...mercadona.scraped,
     ...(sainsburys?.scraped ?? []),
+    ...(conad?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
