@@ -225,6 +225,39 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Chicken breast (petto di pollo). Italian supermarkets ship this
+  // as 'fettine' (slices), 'filetti' (fillets), or whole 'petto'
+  // ranging 300-1200 g. The 1 kg family pack ('petto di pollo
+  // famiglia') is the closest to the canonical. sizeRange 800-1200 g
+  // catches it; smaller portion packs and processed forms excluded.
+  chicken_breast_1kg: {
+    query: "petto di pollo",
+    include: /\bpetto\b.*\bpollo\b|\bpollo\b.*\bpetto\b/i,
+    exclude: [
+      /\b(coscia|alette|alett|fusi|cosciotti|sovracosc|sottocosc|fegatini|cuori)\b/i,
+      /\b(panat|crocchett|cordon|cordon bleu|nuggets|burger|kebab|hambur|salsicc|wurstel|spiedin|polpett|involtin)\b/i,
+      /\b(marinat|aromatizz|speziat|tandoori|tikka|teriyaki|barbecue|bbq|affumicat|prosciutto|cott|fritt|grigliat|arrost|stufat)\b/i,
+      /\b(surgelat|congelat|piatto pronto|ready|riscaldament)\b/i,
+      /\b(tacchino|anatra|oca|fagiano|coniglio|manzo|vitello|maiale|suino|agnello)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Ground beef (carne macinata di manzo / bovino). Italian
+  // supermarkets sell macinata in 300-500 g vaschette (trays) and
+  // 1 kg family packs. The Conad 1 kg pack at ~EUR 12-15/kg is the
+  // target. Mixed-meat (mista vitello+maiale) excluded explicitly.
+  beef_ground_1kg: {
+    query: "carne macinata manzo",
+    include: /\b(macinat|tritat)\b.*\b(manzo|bovin|vitellon|scottona)\b|\b(manzo|bovin|vitellon|scottona)\b.*\b(macinat|tritat)\b/i,
+    exclude: [
+      /\b(maiale|suin|cerdo|pollo|tacchino|agnello|coniglio|ovino|cavallo|misto|mista)\b/i,
+      /\b(hambur|burger|polpett|polpettin|crocchett|salsicc|wurstel|ragu|sugo|salsa|bolognese|involtin|spiedin|spezzatin|cotolett|fettin)\b/i,
+      /\b(marinat|aromatizz|speziat|cott|fritt|grigliat|arrost|stufat|brasato|sott'olio|sottolio)\b/i,
+      /\b(surgelat|congelat|piatto pronto|ready|riscaldament)\b/i,
+      /\b(vitello|veal)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
