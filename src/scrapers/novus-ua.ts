@@ -235,6 +235,30 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Imported single-can beer, 500ml. zakaz.ua ships dozens of
+  // international brands (Heineken, Carlsberg, Tuborg, Stella Artois,
+  // Becks, Budweiser Budvar, Corona, Leffe, Hoegaarden, Krombacher,
+  // Paulaner, Warsteiner, Asahi, Peroni, Kronenbourg, Guinness,
+  // Estrella Damm) at 0.5 L individual cans / bottles. The include
+  // regex whitelists these brands explicitly. Ukrainian domestic
+  // brands (Obolon, Slavutych, Chernihivske, Lvivske, Rohan, PPB)
+  // are filtered out via the same whitelist (they don't match).
+  //
+  // Excludes:
+  // - Non-alcoholic / 0.0% / unfiltered variants
+  // - Flavored / craft (radler, shandy, IPA, stout if specifically
+  //   labeled - the whitelist already prevents most)
+  // - Light/zero alcohol variants
+  beer_imported_500ml: {
+    categoryId: "beer",
+    include: /\b(heineken|carlsberg|tuborg|stella artois|becks|budweiser|corona extra|leffe|hoegaarden|krombacher|paulaner|warsteiner|asahi|peroni|kronenbourg|guinness|grolsch|estrella damm|miller)\b/i,
+    exclude: [
+      /\b(non-alcoholic|alcohol-free|0\.0%|0%|alc-free|alcohol free)\b/i,
+      /\bsin alcohol\b/i,
+      /\b(radler|shandy)\b/i,
+    ],
+    sizeRange: { min: 400, max: 550 },
+  },
 };
 
 /**
