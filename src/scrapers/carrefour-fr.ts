@@ -55,7 +55,77 @@ interface FrPicker {
 
 // Pickers are added in follow-up commits one slug-group at a time.
 // 5 thematic PRs: dairy, dry goods, produce, meat, beverages.
-const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {};
+const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
+  // Whole milk (lait entier). French supermarkets push demi-écrémé
+  // (half-skim) harder than entier, so the query is explicit. Carrefour
+  // ships own-brand "Carrefour Lait Entier UHT 1 L" at ~EUR 1.10. UHT
+  // bricks and refrigerated bottles both at 1 L; sizeRange 800-1100 ml
+  // catches both, normalize.ts rescales the outliers to canonical 1000.
+  milk_1l: {
+    query: "lait entier",
+    include: /\blait\b.*\bentier\b|\bentier\b.*\blait\b/i,
+    exclude: [
+      /\b(demi-[ée]cr[ée]m[ée]|[ée]cr[ée]m[ée]|sans lactose|d[ée]lactos[ée]|condens[ée]|en poudre|aromatis[ée]|chocolat|cacao|fraise|vanille|miel|caf[ée])\b/i,
+      /\b(soja|soya|riz|amande|coco|coconut|avoine|noisette|k[ée]fir|yaourt|cr[èe]me|cremeux|fromage)\b/i,
+      /\b(infantile|infant|b[ée]b[ée]|croissance|formula|maternis[ée])\b/i,
+    ],
+    sizeRange: { min: 800, max: 1100 },
+  },
+  // Fresh eggs (oeufs frais). French packs ship 4 / 6 / 10 / 12.
+  // Catalog canonical is 12, sizeRange 6..12 catches all common sizes
+  // and normalize.ts rescales to per-12. Carrefour Bio + own-brand
+  // "Plein Air" cage-free are the cheapest 12-packs; the picker just
+  // grabs any `<N> oeufs` title.
+  eggs_12: {
+    query: "oeufs frais",
+    include: /\b\d+\s*(?:œufs|oeufs|œuf|oeuf)\b/i,
+    exclude: [
+      /\b(caille|canard|oie|chocolat|p[âa]ques|raviol|tagliatell|glace|mayonnaise|liquid|albumen|blanc d'(?:œuf|oeuf)|jaune)\b/i,
+    ],
+    sizeRange: { min: 6, max: 12 },
+  },
+  // Butter (beurre). French bricks ship at 125 / 250 / 500 g. The
+  // canonical 200g slug matches 250g packs, sizeRange 180-300 catches
+  // the 200g and 250g variants and normalize.ts rescales. Doux (sweet)
+  // is the most common, demi-sel (Brittany salted) and salé (fully
+  // salted) are also accepted — all share the `beurre` stem and similar
+  // price per 100g; cheapest wins.
+  butter_200g: {
+    query: "beurre doux",
+    include: /\bbeurre\b/i,
+    exclude: [
+      /\b(margarine|[àa] tartiner|tartinable|spread|clarifi[ée]|ghee|ghi|anhydre)\b/i,
+      /\b(cacao|chocolat|noix|noisett|arachide|s[ée]same|amande|biscuit|brioche|aromatis[ée])\b/i,
+      /\b(cr[èe]me p[âa]tissi[èe]re|cr[èe]me dessert|cacahu[èe]te|peanut)\b/i,
+    ],
+    sizeRange: { min: 180, max: 300 },
+  },
+  // Hard cheese (fromage à pâte pressée). France's mass-market staples
+  // are Emmental (used in cooking, sold as râpé 500g + block), Comté
+  // (PDO/AOP, premium wedge), Gruyère, Cantal, Beaufort, Mimolette,
+  // Tomme. The cheapest among these wins after the 350-600g sizeRange
+  // filter; that's almost always Carrefour-brand Emmental Râpé 500g.
+  //
+  // Excludes:
+  // - Soft / fresh cheeses (camembert, brie, chèvre, mozzarella,
+  //   ricotta, mascarpone, fromage frais, fromage blanc, féta, halloumi)
+  // - Processed / spreads (vache qui rit, kiri, fondu, à tartiner)
+  // - Flavored variants (truffe, poivre, ail, fumé, herbes)
+  // - Vegan / lactose-free substitutes
+  // - French AOP soft / washed-rind (reblochon, munster, époisses,
+  //   livarot, pont-l'évêque, maroilles, rocamadour, valençay)
+  cheese_local_500g: {
+    query: "emmental",
+    include: /\b(emmental|comt[ée]|gruy[èe]re|cantal|beaufort|mimolette|tomme|raclette|abondance|edam|gouda)\b/i,
+    exclude: [
+      /\b(camembert|brie|ch[èe]vre|fromage blanc|fromage frais|f[ée]ta|mozzarella|ricotta|mascarpone|halloumi|philadelphia|reblochon|munster|maroilles|[ée]poisses|livarot|rocamadour|valen[çc]ay|crottin|b[ûu]chette?)\b/i,
+      /\b(fondu|[àa] tartiner|tartinable|vache qui rit|kiri|babybel|portion|carr[ée]|coeur|stick|b[âa]tonnet|nappage)\b/i,
+      /\b(truffe|poivre|piment|fum[ée]|aill?|herbes|cumin|fenouil|noix|noisette)\b/i,
+      /\b(v[ée]g[ée]tal|v[ée]g[ée]talien|v[ée]gan|sans lactose|d[ée]lactos[ée])\b/i,
+    ],
+    sizeRange: { min: 350, max: 600 },
+  },
+};
 
 export interface ParsedProduct {
   title: string;
