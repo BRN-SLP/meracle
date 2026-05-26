@@ -125,6 +125,63 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
     ],
     sizeRange: { min: 350, max: 600 },
   },
+  // Sliced packaged bread (pain de mie). The French boulangerie
+  // baguette is 200-300g and doesn't fit the 500g canonical, so the
+  // picker targets the supermarket sliced-loaf staple. Carrefour ships
+  // own-brand "Carrefour Pain de Mie Nature" 500g at ~EUR 1.20.
+  bread_500g: {
+    query: "pain de mie",
+    include: /\bpain\b/i,
+    exclude: [
+      /\b(complet|c[ée]r[ée]ales?|seigle|son|graines?|olive|tartines?|biscott|toast|grill[ée]|sucr[ée]|brioch[ée]?|cake|baguette|focaccia|p[âa]te|naan|pita|wrap|cubes?|crouton|panko|panini)\b/i,
+      /\b(farci|fourr[ée]|chocolat|fruit|raisin|p[ée]pite|hot dog|burger|hamburger)\b/i,
+      /\b(noix|noisette|amande)\b/i,
+    ],
+    sizeRange: { min: 300, max: 700 },
+  },
+  // White granulated sugar (sucre en poudre / sucre cristal). The
+  // canonical staple is `sucre en poudre` (white granulated) sold in
+  // 1 kg paper bags at ~EUR 0.90-1.40. Excludes brown / cane / icing
+  // / flavored / sweetener substitutes.
+  sugar_1kg: {
+    query: "sucre en poudre",
+    include: /\bsucre\b/i,
+    exclude: [
+      /\b(roux|brun|cassonade|muscovado|panela|complet|gel[ée]e|glace|impalpable|vanill[ée]|aromatis[ée])\b/i,
+      /\b(canne|cane)\b/i,
+      /\b(st[ée]via|fructose|maltose|aspartam|[ée]rythritol|saccharine?|[ée]dulcorant)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Rice (riz). French supermarkets stock long grain, basmati, thai
+  // jasmine, parboiled, plus risotto rices (arborio, carnaroli). The
+  // picker accepts any pure rice 800-1200 g; cheapest wins, which
+  // tends to be Carrefour-brand long grain. Excludes prepared rices
+  // and processed forms.
+  rice_1kg: {
+    query: "riz long",
+    include: /\briz\b/i,
+    exclude: [
+      /\b(boisson|lait|sirop|farine|vinaigre|galette|biscuit|cracker|noir|sauvage|wild)\b/i,
+      /\b(pr[ée]cuit|cuit|express|micro-ondes|surgel[ée]|congel[ée]|pr[êe]t)\b/i,
+      /\b(pilaf|au lait|cantonais|asiatique|paella)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Olive oil (huile d'olive vierge extra). Canonical FR cooking
+  // staple, sold in 750ml / 1L glass + PET bottles. Carrefour ships
+  // own-brand + branded (Puget, Tramier, Lesieur). Cheapest 1L extra
+  // virgin wins.
+  olive_oil_1l: {
+    query: "huile d'olive vierge extra",
+    include: /\bhuile\b.*\bolive/i,
+    exclude: [
+      /\b(tournesol|colza|p[ée]pin|s[ée]same|noix|noisette|argan|coco|coconut|palm|arachide|cacahu[èe]te)\b/i,
+      /\b(aromatis[ée]|truffe|aill?|citron|piment|romarin|basilic|origan|menthe|chili|infus[ée]|spray)\b/i,
+      /\b(condiment|assaisonnement|sauce|m[ée]lang[ée])\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 export interface ParsedProduct {
