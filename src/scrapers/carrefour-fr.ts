@@ -37,10 +37,13 @@ import { targetsForRetailer } from "../products.js";
 import type { ScrapedProduct, ScraperResult } from "../types.js";
 
 const BASE = "https://www.carrefour.fr";
-// 16 sequential searches under one session. Homepage warm + 16 navs +
-// hydration waits typically fit inside 3 min on a warm proxy. 5 min
-// cap is a safety belt; Browser Use bills per actual second.
-const SESSION_TIMEOUT_MIN = 5;
+// 16 sequential searches under one session. Each query runs a goto +
+// 15 s waitForFunction + DOM walk, roughly 20 s; with the homepage
+// warm the budget lands around 5.5 min. 8 min cap keeps a safety
+// margin for the slow tail (multi-pack water queries, the larger
+// PLP for `pommes` / `tomates` heuristic searches). Browser Use bills
+// per actual second, so the unused tail is free.
+const SESSION_TIMEOUT_MIN = 8;
 
 interface FrPicker {
   /** French search keyword. */
@@ -276,6 +279,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
   // 1.5 L PET bottle. Excludes sparkling (gazeuse / pétillante),
   // flavored, cosmetic (parfum, micellaire), infant, and household
   // (bain, douche, nettoyant) waters.
+  //
+  // Carrefour merchandises water as multi-packs by default (6 × 1.5 L
+  // shrink-wraps dominate the PLP), so the sizeRange caps at 12 L to
+  // catch 6 / 8 packs of 1.5 L bottles. normalize.ts rescales the
+  // aggregate volume back to the 1.5 L canonical, so a 6-pack at EUR
+  // 3.99 becomes EUR 0.665 per 1.5 L · within sanityRange.
   water_bottled_1500ml: {
     query: "eau de source",
     include: /\beau\b/i,
@@ -287,7 +296,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
       /\b(b[ée]b[ée]|nourrissons?|infants?|formula|sevrage)\b/i,
       /\b(piscine|aquarium|d[ée]calcaire)\b/i,
     ],
-    sizeRange: { min: 1400, max: 1600 },
+    sizeRange: { min: 1200, max: 12000 },
   },
   // Imported beer (bière importée). Whitelist of mass-market
   // international brands stocked by Carrefour. Standard bottle / can
@@ -329,13 +338,41 @@ export interface ParsedProduct {
  *   "Eau de source 1,5 L"          -> 1500 mL
  *   "12 oeufs frais bio"           -> 12 pieces
  *   "Heineken 33 cl"               -> 330 mL
+ *   "Acheter 6x1l" (multi-pack)    -> 6000 mL (6 × 1 L)
  *   "Pommes Gala 1 kg"             -> 1000 g
  */
 export function parseSize(text: string): number | null {
-  // Piece counts first (FR egg labels: "12 oeufs", "Boîte de 12",
+  // Multi-pack first ("6x1l", "4 x 500g", "2x33cl"). Carrefour's
+  // search cards print the size as `Acheter {N}x{amount}{unit}` for
+  // packs and `Acheter {amount}{unit}` for singles. The multi case
+  // must be tried before the single-unit patterns or "6x1l" would
+  // match as 1 L and the multi factor would be lost.
+  let m = text.match(/\b(\d+)\s*x\s*(\d+(?:[.,]\d+)?)\s*(ml|cl|l|kg|g)\b/i);
+  if (m) {
+    const count = Number.parseInt(m[1]!, 10);
+    const amount = Number.parseFloat(m[2]!.replace(",", "."));
+    const unit = m[3]!.toLowerCase();
+    const factor =
+      unit === "ml"
+        ? 1
+        : unit === "cl"
+          ? 10
+          : unit === "l"
+            ? 1000
+            : unit === "kg"
+              ? 1000
+              : 1; // "g"
+    return count * amount * factor;
+  }
+
+  // Piece counts (FR egg labels: "12 oeufs", "Boîte de 12",
   // "Pack de 10"). Tried before weight so "10 oeufs frais" doesn't
   // accidentally trip the grams regex via stray "10 g" further down.
-  let m = text.match(/\b(\d+)\s*œ?(?:o|0)?eufs?\b/i);
+  // The œ ligature ("œufs") and the ASCII transliteration ("oeufs")
+  // are both common on Carrefour titles, hence the explicit
+  // alternation rather than a character class that would swallow
+  // "ufs" with the wrong prefix.
+  m = text.match(/\b(\d+)\s*(?:œufs?|oeufs?)\b/i);
   if (m) return Number.parseInt(m[1]!, 10);
   m = text.match(/\b(?:bo[iî]te|pack|lot|paquet)\s+de\s+(\d+)\b/i);
   if (m) return Number.parseInt(m[1]!, 10);
@@ -368,23 +405,47 @@ export function parseSize(text: string): number | null {
 /**
  * Parse an EUR price (1,99 €, 12,34€, "1.99 €") from a label.
  *
- * French standard uses a comma decimal separator with a trailing
- * euro sign. Some Carrefour widgets render the euro sign as a
- * separate span, so we accept whitespace between the number and €.
+ * Carrefour's PLP renders the price across multiple text nodes,
+ * which collapse to `"1 ,10 €"` (integer, space, comma, decimal,
+ * space, euro) once we read `Element.textContent`. We therefore
+ * accept whitespace between every piece of the number too, not just
+ * between the number and the euro sign. The decimal part is
+ * always 1-2 digits (centimes).
+ *
+ * Limitation: a French thousands-separated price like "1 234,50 €"
+ * would parse as 234.50, not 1234.50. Carrefour grocery items
+ * cap below EUR 100, so this is acceptable for now. If we ever
+ * scrape wine or premium goods, switch to a stricter parser.
  */
 export function parsePrice(text: string): number | null {
-  const m = text.match(/(\d+(?:[.,]\d+)?)\s*€/);
-  if (m) return Number.parseFloat(m[1]!.replace(",", "."));
-  return null;
+  const m = text.match(/(\d+)(?:\s*[.,]\s*(\d{1,2}))?\s*€/);
+  if (!m) return null;
+  const integerPart = m[1]!;
+  const rawDecimal = m[2];
+  const decimalPart =
+    rawDecimal === undefined
+      ? "00"
+      : rawDecimal.length === 1
+        ? `${rawDecimal}0`
+        : rawDecimal;
+  return Number.parseFloat(`${integerPart}.${decimalPart}`);
 }
 
 /**
- * Extract product cards from the rendered HTML. Tries JSON-LD first
- * (the modern schema.org embed pattern most retailers ship) and
- * falls back to an anchor scrape that looks for Carrefour's PDP
- * route (`/p/...`).
+ * Extract product cards from rendered HTML using embedded JSON-LD.
  *
- * Exported so unit tests can feed in fixtures.
+ * Used as a secondary path. Carrefour's PLP only embeds JSON-LD for
+ * `WebSite` and `BreadcrumbList`, not `Product` blocks, so this
+ * function returns an empty array on live FR search results. We
+ * keep it for fixtures and for the edge case of a future retailer
+ * variant that does embed Product LD.
+ *
+ * The primary extraction path lives in `scrapeOneSearch` and walks
+ * the live DOM: anchor `<a href*="/p/">` is the seed, walk up to
+ * the nearest ancestor whose textContent contains `€`, then parse
+ * price + size from that card's textContent.
+ *
+ * Exported so future unit tests can feed in fixtures.
  */
 export function parseProductsFromHtml(
   html: string,
@@ -392,84 +453,59 @@ export function parseProductsFromHtml(
 ): ParsedProduct[] {
   const out: ParsedProduct[] = [];
 
-  // 1) JSON-LD ItemList / Product blocks.
   const ldMatches = html.match(
     /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi,
   );
-  if (ldMatches) {
-    for (const block of ldMatches) {
-      const inner = block.replace(/<script[^>]*>|<\/script>/gi, "");
-      try {
-        const data = JSON.parse(inner) as unknown;
-        const items = Array.isArray(data)
-          ? data
-          : typeof data === "object" && data !== null
-            ? [data]
-            : [];
-        const flat: Array<Record<string, unknown>> = [];
-        const walk = (n: unknown): void => {
-          if (Array.isArray(n)) n.forEach(walk);
-          else if (n && typeof n === "object") {
-            const obj = n as Record<string, unknown>;
-            flat.push(obj);
-            for (const v of Object.values(obj)) walk(v);
-          }
-        };
-        items.forEach(walk);
-        for (const node of flat) {
-          if (node["@type"] !== "Product") continue;
-          const title =
-            typeof node.name === "string" ? node.name : null;
-          const offers = node.offers as Record<string, unknown> | undefined;
-          const priceRaw =
-            offers && typeof offers === "object"
-              ? (offers as Record<string, unknown>).price
-              : undefined;
-          const price =
-            typeof priceRaw === "string"
-              ? Number.parseFloat(priceRaw.replace(",", "."))
-              : typeof priceRaw === "number"
-                ? priceRaw
-                : null;
-          const urlRaw = typeof node.url === "string" ? node.url : null;
-          if (title && price !== null && Number.isFinite(price)) {
-            const size = parseSize(title);
-            if (size !== null) {
-              out.push({
-                title,
-                priceMajor: price,
-                packSize: size,
-                sourceUrl: urlRaw
-                  ? new URL(urlRaw, baseUrl).toString()
-                  : baseUrl,
-              });
-            }
+  if (!ldMatches) return out;
+
+  for (const block of ldMatches) {
+    const inner = block.replace(/<script[^>]*>|<\/script>/gi, "");
+    try {
+      const data = JSON.parse(inner) as unknown;
+      const items = Array.isArray(data)
+        ? data
+        : typeof data === "object" && data !== null
+          ? [data]
+          : [];
+      const flat: Array<Record<string, unknown>> = [];
+      const walk = (n: unknown): void => {
+        if (Array.isArray(n)) n.forEach(walk);
+        else if (n && typeof n === "object") {
+          const obj = n as Record<string, unknown>;
+          flat.push(obj);
+          for (const v of Object.values(obj)) walk(v);
+        }
+      };
+      items.forEach(walk);
+      for (const node of flat) {
+        if (node["@type"] !== "Product") continue;
+        const title = typeof node.name === "string" ? node.name : null;
+        const offers = node.offers as Record<string, unknown> | undefined;
+        const priceRaw =
+          offers && typeof offers === "object"
+            ? (offers as Record<string, unknown>).price
+            : undefined;
+        const price =
+          typeof priceRaw === "string"
+            ? Number.parseFloat(priceRaw.replace(",", "."))
+            : typeof priceRaw === "number"
+              ? priceRaw
+              : null;
+        const urlRaw = typeof node.url === "string" ? node.url : null;
+        if (title && price !== null && Number.isFinite(price)) {
+          const size = parseSize(title);
+          if (size !== null) {
+            out.push({
+              title,
+              priceMajor: price,
+              packSize: size,
+              sourceUrl: urlRaw ? new URL(urlRaw, baseUrl).toString() : baseUrl,
+            });
           }
         }
-      } catch {
-        // Non-JSON or malformed LD block, skip.
       }
-    }
-  }
-
-  // 2) Fallback: anchor scrape, find "<a href='/p/...'> ... title ... 1,99€ ... 1L </a>"
-  if (out.length === 0) {
-    const anchorRegex =
-      /<a[^>]+href="([^"]*\/p\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
-    let m: RegExpExecArray | null;
-    while ((m = anchorRegex.exec(html)) !== null) {
-      const href = m[1]!;
-      const body = m[2]!.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-      const price = parsePrice(body);
-      const size = parseSize(body);
-      if (price && size && body.length > 5) {
-        out.push({
-          title: body,
-          priceMajor: price,
-          packSize: size,
-          sourceUrl: new URL(href, baseUrl).toString(),
-        });
-      }
+    } catch {
+      // Non-JSON or malformed LD block, skip.
     }
   }
 
@@ -496,10 +532,18 @@ function pickBestMatch(
  * Drive a remote chromium through a homepage warm + search navigation,
  * then extract product tiles via DOM queries inside the page context.
  *
- * Carrefour's PLP markup is React-rendered; tiles typically expose
- * `<a href="/p/...">` with a `data-testid` attribute on the wrapper.
- * The DOM scrape below is best-effort, the JSON-LD path in
- * parseProductsFromHtml is the durable primary surface.
+ * Carrefour's PLP renders product tiles via React. The PLP does NOT
+ * embed Product JSON-LD (only WebSite + BreadcrumbList), so we walk
+ * the live DOM instead of parsing the HTML string. Each tile carries:
+ *   - <a href="/p/{slug}-{ean}">       product link (sometimes 2-3 per card)
+ *   - sibling text nodes with the title, price ("1 ,10 €"), and the
+ *     size CTA ("Acheter 1l" or "Acheter 6x1l")
+ *
+ * Strategy: collect every `/p/` anchor, dedup by base href (strip
+ * `?anchor=pdp-customers-reviews` review links), walk up to the
+ * nearest ancestor whose textContent contains `€`, then return the
+ * card's collapsed textContent. parsePrice + parseSize handle the
+ * French quirks (thin-space numbers, multi-pack `6x1l`).
  */
 async function scrapeOneSearch(
   browser: Browser,
@@ -534,8 +578,49 @@ async function scrapeOneSearch(
       // returned. The empty result is reported as a miss upstream.
     });
 
-  const html = await page.content();
-  return parseProductsFromHtml(html);
+  const rawCards = await page.evaluate(() => {
+    interface RawCard {
+      title: string;
+      href: string;
+    }
+    const anchors = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('a[href*="/p/"]'),
+    );
+    const seen = new Set<string>();
+    const out: RawCard[] = [];
+    for (const a of anchors) {
+      // Dedup on the base path. Carrefour emits up to 3 anchors per
+      // card (title link, brand link, review-anchor link). Strip
+      // ?anchor=... fragments so they collapse to one entry.
+      const baseHref = a.href.split("?")[0]!.split("#")[0]!;
+      if (seen.has(baseHref)) continue;
+      seen.add(baseHref);
+      let card: Element = a;
+      for (let i = 0; i < 8; i++) {
+        if ((card.textContent ?? "").includes("€")) break;
+        if (!card.parentElement) break;
+        card = card.parentElement;
+      }
+      const cardText = (card.textContent ?? "").replace(/\s+/g, " ").trim();
+      if (!cardText.includes("€")) continue;
+      out.push({ title: cardText, href: baseHref });
+    }
+    return out;
+  });
+
+  const products: ParsedProduct[] = [];
+  for (const raw of rawCards) {
+    const priceMajor = parsePrice(raw.title);
+    const packSize = parseSize(raw.title);
+    if (priceMajor === null || packSize === null) continue;
+    products.push({
+      title: raw.title,
+      priceMajor,
+      packSize,
+      sourceUrl: new URL(raw.href, BASE).toString(),
+    });
+  }
+  return products;
 }
 
 /**
