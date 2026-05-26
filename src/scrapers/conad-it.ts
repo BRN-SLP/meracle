@@ -258,6 +258,44 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Still bottled water (acqua naturale). Italy is the EU's largest
+  // bottled-water market by per-capita consumption. Standard size is
+  // the 1.5 L PET bottle. Conad ships own-brand + branded (San
+  // Benedetto, Sant'Anna, Levissima, Lete, Ferrarelle still-water,
+  // Vera, Sangemini). The picker accepts any pure still water 1.5 L
+  // bottle; cheapest wins.
+  water_bottled_1500ml: {
+    query: "acqua naturale",
+    include: /\bacqua\b/i,
+    exclude: [
+      /\b(frizzant|gassat|effervescent|gasata|brillante|con gas|leggermente frizzante)\b/i,
+      /\b(aromatizz|aromatic|sabor|gusto|limon|cocktail|tonic|saporit|fragol|menta|the|tè)\b/i,
+      /\b(cologn|profumo|cosmetic|micellar|bagno|doccia|shampoo|detergente)\b/i,
+      /\b(cottura|salata|sale|distillata|deionizz|demineralizz)\b/i,
+      /\b(neonati|infante|bambini|baby|infant|formula|svezzament)\b/i,
+    ],
+    sizeRange: { min: 1400, max: 1600 },
+  },
+  // Imported single-can / single-bottle beer (birra). Italian
+  // supermarkets stock imported brands (Heineken, Carlsberg, Tuborg,
+  // Becks, Stella Artois, Corona, Budweiser, Leffe, Hoegaarden,
+  // Krombacher, Paulaner, Warsteiner, Asahi, Kronenbourg, Guinness)
+  // in 33 cl singles + 50 cl cans. Italian domestic brands (Moretti,
+  // Peroni, Ichnusa, Forst, Menabrea, Birra del Borgo, Theresianer)
+  // excluded via the include whitelist by construction.
+  //
+  // sizeRange 250-550 ml catches 33 cl bottles + 50 cl cans;
+  // normalize.ts rescales to canonical 500 ml.
+  beer_imported_500ml: {
+    query: "birra heineken",
+    include: /\b(heineken|carlsberg|tuborg|stella artois|becks|budweiser|corona extra|leffe|hoegaarden|krombacher|paulaner|warsteiner|asahi|kronenbourg|guinness|grolsch|amstel|miller|estrella damm|san miguel|tyskie|zywiec|lech)\b/i,
+    exclude: [
+      /\b(senza alcol|analcoli|alc-free|alcohol-free|0\.0%|0%|0,0%)\b/i,
+      /\b(radler|shandy|aromatizz|gusto|sabor)\b/i,
+      /\b(light|leggera|low(-|\s)?alc)\b/i,
+    ],
+    sizeRange: { min: 250, max: 550 },
+  },
 };
 
 /**
