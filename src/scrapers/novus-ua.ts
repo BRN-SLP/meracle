@@ -214,6 +214,27 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Hard / semi-hard cheese, sold loose by the kilo at the deli
+  // counter (unit="kg" + volume=null, parseSizeFromProduct resolves
+  // to 1000 g). zakaz.ua surfaces dozens of Gouda / Maasdam / Edam /
+  // Dutch / Cheddar variants plus local Ukrainian hard cheese brands
+  // (Novgorod-Siverskyi, Pyryatyn, Komo). The canonical 500g slug
+  // resolves via normalize.ts: the loose-kg price gets halved.
+  //
+  // Excludes soft / processed / spread / cottage cheeses, flavored
+  // variants (truffle, pesto, garlic, herbs, chili, rose), and
+  // grated / sliced packaging which doesn't represent the
+  // mass-market staple wedge.
+  cheese_local_500g: {
+    categoryId: "dairy-and-eggs",
+    include: /\bcheese\b/i,
+    exclude: [
+      /\b(cream|spread|cottage|melted|processed|sliced|grated|shredded|fresh|soft|brie|camembert|mozzarella|ricotta|parmesan|feta|mascarpone|philadelphia|smoked|baby|infant|formula|bryndza|adyghe|suluguni|fita|halloumi|paneer|blue|brunost)\b/i,
+      /\b(truffle|pesto|garlic|herbs?|chili|chilli|caraway|rose|pepper|lavender|wild|fenugreek|nut|fruit|raisin)\b/i,
+      /\b(product|substitute|imitation)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
