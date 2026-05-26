@@ -57,7 +57,71 @@ interface ConadPicker {
 // An empty PICKERS map is valid; scrapeConadIt() reports every IT
 // target as a miss with reason "no picker configured", and the batch
 // pipeline tolerates that gracefully.
-const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {};
+const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
+  // Whole milk (latte intero). Italian milk is sold UHT (long-life,
+  // 1 L bricks) and fresco (refrigerated, 1 L bottles). Conad's
+  // own-brand "Latte Intero UHT 1 L" is the mass-market staple.
+  // sizeRange 800-1100 ml allows for the rare 900 / 1000 / 1050 ml
+  // variant, normalize.ts rescales to canonical 1000.
+  milk_1l: {
+    query: "latte intero",
+    include: /\blatte\b.*\bintero\b|\bintero\b.*\blatte\b/i,
+    exclude: [
+      /\b(scremato|parzialmente|delattosato|senza lattosio|cappuccino|cacao|cioccolat|caffè|caffe|fragola|vaniglia|miele|condensato|polvere|infante|crescita|bevanda|soia|riso|mandorla|cocco|avena|kefir|yogurt|panna|crema|alta digeribilità)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1100 },
+  },
+  // Fresh eggs, 6-pack standard. Conad ships "6 Uova Fresche da
+  // Galline Allevate a Terra" at EUR 1.99 (probed live). 12-packs
+  // (the catalog canonical) and 10-packs both exist; sizeRange 6..12
+  // catches all, normalize.ts rescales 6 / 10 / 12 to per-12 price.
+  eggs_12: {
+    query: "uova fresche",
+    include: /\b\d+\s+uova\b/i,
+    exclude: [
+      /\b(quaglia|anatra|oca|cioccolat|pasqua|paste|tortelloni|ravioli|tagliatell|gelato|maionese|liquid|albume|tuorlo)\b/i,
+    ],
+    sizeRange: { min: 6, max: 12 },
+  },
+  // Butter (burro). Italian standard sizes: 125g / 200g / 250g /
+  // 500g bricks. The canonical 200g slug matches the 200-250g typical
+  // pack. sizeRange 180-300g catches 200g and 250g, normalize.ts
+  // rescales to per-200g.
+  butter_200g: {
+    query: "burro",
+    include: /\bburro\b/i,
+    exclude: [
+      /\b(margarina|spalmabile|chiarificato|ghi|anidro|cacao|cioccolat|noci|nocciol|arachidi|sesamo|mandorl|spread|biscott|brioche|crema|salat|aromatizzat)\b/i,
+    ],
+    sizeRange: { min: 180, max: 300 },
+  },
+  // Hard cheese wedges. Italy's mass-market staple is Parmigiano
+  // Reggiano / Grana Padano in 200-500g wedges. Conad ships these
+  // alongside Asiago, Pecorino, Provolone, Caciocavallo. The picker
+  // accepts any hard / aged cheese variant; cheapest per pack wins.
+  // After normalize.ts rescaling to canonical 500g, the on-chain
+  // price is priceMajor * (500 / packSize).
+  //
+  // Excludes:
+  // - Soft / fresh cheeses (mozzarella, ricotta, mascarpone, fresco)
+  // - Branded soft (philadelphia, brie, camembert, feta, halloumi)
+  // - Spreads / slices / cubes / shavings (snack packaging)
+  // - Flavored / smoked variants (al tartufo, alla pepe, affumicato)
+  // - 'Formaggio fuso' (processed cheese) substitutes
+  cheese_local_500g: {
+    query: "formaggio grattugiato",
+    include: /\b(parmigiano|grana padano|grana|asiago|pecorino|provolone|caciocavallo|fontina|montasio|gruviera|emmental|sbrinz)\b/i,
+    exclude: [
+      /\b(grattugia|grattugiato|fiocchi|scaglie|fuso|spalmabile|fett|cubett|tagliat|filant|stick|snack|portatile|baby|porzion)\b/i,
+      /\b(mozzarell|ricott|mascarpon|crescenz|stracchin|robiola|caprino|tomino|burrata|burrini|fresco|fresch)\b/i,
+      /\b(philadelphia|brie|camembert|feta|halloumi|paneer|gorgonzola|stilton|cheddar|gouda|edam|brunost)\b/i,
+      /\b(tartuf|peperoncin|piccant|affumicat|alle erbe|al pepe|al cumino|al peperone|alla noce|al miele)\b/i,
+      /\b(vegan|vegetal|senza lattosio|delattosato)\b/i,
+      /\b(prodotto|imitazione|sostituto)\b/i,
+    ],
+    sizeRange: { min: 350, max: 600 },
+  },
+};
 
 /**
  * Conad ships netQuantity in kg / L / pieces via netQuantityUm:
