@@ -219,6 +219,36 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     ],
     sizeRange: { min: 350, max: 550 },
   },
+  // Imported single-can beer 500ml. Mercadona's `Cerveza lata` (cat
+  // 549 under parent 164) ships Heineken at 0.33 L singles for EUR
+  // 0.79. Other available imports are sparse: Steinburg is Mercadona
+  // own-brand domestic, Mahou / Estrella Galicia / Voll-Damm / Alhambra
+  // are Spanish, 1925 Alhambra is Spanish premium. The whitelist below
+  // captures imported international brands; in practice Heineken is
+  // the only consistent match at Mercadona Madrid.
+  //
+  // sizeRange 250-550 ml catches:
+  // - 0.33 L single cans (standard for ES, normalize.ts rescales)
+  // - 0.5 L singles if Mercadona stocks any
+  // - 0.25 L bottles (botellín) of imported brands
+  //
+  // Multi-pack SKUs (Heineken 8x33cl = 2.64 L total) are rejected by
+  // the global is_pack check in pickBestMatch.
+  //
+  // Excludes:
+  // - Non-alcoholic / sin alcohol variants
+  // - Radler / shandy / aromatizada flavored variants
+  beer_imported_500ml: {
+    parentCategoryId: 164,
+    subcategoryMatch: /^cerveza (lata|botella y botellín|botella y botellin)$/i,
+    include: /\b(heineken|carlsberg|tuborg|stella artois|becks|budweiser|corona extra|leffe|hoegaarden|krombacher|paulaner|warsteiner|asahi|peroni|kronenbourg|guinness|grolsch|miller|amstel|desperados)\b/i,
+    exclude: [
+      /sin alcohol/i,
+      /\b(0\.0%|0%|alcohol-free|non-alcoholic)\b/i,
+      /\b(radler|shandy|aromatizada|sabor|con zumo)\b/i,
+    ],
+    sizeRange: { min: 250, max: 550 },
+  },
 };
 
 /**
