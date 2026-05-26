@@ -199,6 +199,21 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Pure beef ground (minced) meat, sold loose by the kilo. zakaz.ua
+  // surfaces a small set of mince SKUs: a Pork+Beef blend ("Assorti"),
+  // a pure beef "For Cutlets" loose pack, and packaged 450g blocks
+  // (Skott Smeat). The picker keeps only pure beef, loose-kg pricing,
+  // by including any title containing both "beef" and a mince stem
+  // (mince/minced/ground) while excluding other proteins, packaged
+  // forms and processed variants.
+  beef_ground_1kg: {
+    categoryId: "meat-fish-poultry",
+    include: /\bbeef\b.*\b(mince|minced|ground)\b|\b(mince|minced|ground)\b.*\bbeef\b/i,
+    exclude: [
+      /\b(pork|chicken|turkey|lamb|veal|assorti|stuffed|sausage|burger|wiener|frozen|smoked|cooked|boiled|fried|marinated|baked|grill|kebab|nuggets|breaded|ham|salami|roll)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
