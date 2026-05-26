@@ -171,6 +171,60 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Fresh tomatoes (pomodori). Italy ships these as named cultivars:
+  // ciliegino (cherry), datterino (date), cuore di bue (oxheart),
+  // pachino (Sicilian PDO), san marzano, costoluto. The picker
+  // accepts any loose 1 kg variant; cheapest wins. Processed forms
+  // (passata, pelati, polpa, conserva) excluded explicitly.
+  tomatoes_1kg: {
+    query: "pomodori",
+    include: /\bpomodor/i,
+    exclude: [
+      /\b(passat|pelat|polpa|conserv|concentrat|salsa|sugo|ketchup|essicat|sundri|secchi|seccati|liofilizz|surgelat|congelat)\b/i,
+      /\b(succo|bevanda|prosciutto|farciti|ripieni|condimento|aromatizzat)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Potatoes (patate). Loose by kg in the produce aisle. Italian
+  // varieties: novelle (new), pasta gialla (yellow flesh), pasta
+  // bianca (white flesh), rosse (red skin), viola (purple). The
+  // generic 1 kg bag wins, processed forms excluded.
+  potatoes_1kg: {
+    query: "patate",
+    include: /\bpatat/i,
+    exclude: [
+      /\b(dolc|dolce|americana|batata|igname)\b/i,
+      /\b(chips|crocchett|gnocchi|pure|fritt|surgelat|congelat|essicat|liofilizz|farina|fecola|amido)\b/i,
+      /\b(condit|aromatizz|sale|paprika|aromi|spezie)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Bananas (banane). Sold loose by kg or in 1 kg netted bags.
+  // Conad ships own-brand + branded (Chiquita, Bonita). Excludes
+  // dried / chips / chocolate-coated variants.
+  bananas_1kg: {
+    query: "banane",
+    include: /\bbanan/i,
+    exclude: [
+      /\b(secch|essicat|liofilizz|chips|cioccolat|frullat|frull|gelato|surgelat|congelat|farina|polver|biscott|merend|baby|infant)\b/i,
+      /\b(plantain|verde|piscar|rossa|baby banana)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Apples (mele). Italian cultivars: Gala, Pink Lady, Granny Smith,
+  // Fuji, Golden Delicious, Renetta, Stark. All accepted, cheapest
+  // wins. Excludes processed and pineapple (ananas; doesn't share the
+  // stem but kept consistent with other-country pickers as a guard).
+  apples_1kg: {
+    query: "mele",
+    include: /\bmel(a|e)\b/i,
+    exclude: [
+      /\b(ananas|cotogn|cotognat)\b/i,
+      /\b(succo|bevanda|aceto|sidro|liofilizz|essicat|chips|biscott|crostat|torta|crostina|crumble|strudel|composta|conserva|marmellata|gelatina|gelato|surgelat|congelat|farciti|ripieni)\b/i,
+      /\b(cera|profumat|aromatizzat|gomma|caramelle)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 /**
