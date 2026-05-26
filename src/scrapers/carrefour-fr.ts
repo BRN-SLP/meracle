@@ -237,6 +237,39 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Chicken breast (filet / blanc / escalope de poulet). Carrefour
+  // ships chicken breast as `filet`, `blanc`, or `escalope de poulet`
+  // in 300-650 g standard packs and 1 kg family packs. sizeRange
+  // 800-1200 g catches the family pack. Smaller portion packs and
+  // processed forms (nuggets, breaded, smoked, marinaded, kebab) are
+  // rejected. Turkey / duck / pork / other birds also excluded.
+  chicken_breast_1kg: {
+    query: "filet de poulet",
+    include: /\b(filets?|blancs?|escalopes?)\b.*\bpoulet\b|\bpoulet\b.*\b(filets?|blancs?|escalopes?)\b/i,
+    exclude: [
+      /\b(cuisses?|pilons?|ailes?|c(?:œ|oe)urs?|foies?|abats?|carcasses?)\b/i,
+      /\b(nuggets?|saucisses?|wurstel|chair|hach[ée]e?s?|kebab|brochettes?|boulettes?|burgers?|hamburgers?|cordon bleu|farcies?|fourr[ée]es?)\b/i,
+      /\b(marin[ée]e?s?|pan[ée]e?s?|fum[ée]e?s?|grill[ée]e?s?|r[ôo]tie?s?|cuite?s?|cuisin[ée]e?s?|pr[êe]te?s?|micro-ondes|surgel[ée]e?s?|congel[ée]e?s?|barbecue|bbq|tandoori|tikka)\b/i,
+      /\b(dinde|canard|oie|caille|faisan|lapin|porc|veau|b(?:œ|oe)uf|agneau)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Ground beef (boeuf haché / viande hachée de boeuf / steak haché
+  // pur boeuf). Carrefour stocks 5%, 15%, 20% fat percentages in
+  // 350-500 g and 1 kg packs. sizeRange 800-1200 g catches the 1 kg
+  // family pack. Mixed-meat (boeuf + porc), prepared (hamburger,
+  // kofta), marinaded and ready-cook variants excluded.
+  beef_ground_1kg: {
+    query: "boeuf haché",
+    include: /\bb(?:œ|oe)uf\b.*\bhach[ée]e?\b|\bhach[ée]e?\b.*\bb(?:œ|oe)uf\b|\bsteak hach[ée]\b/i,
+    exclude: [
+      /\b(porc|poulet|dinde|agneau|veau|cheval|cabri|mixte|m[ée]lang[ée]e?)\b/i,
+      /\b(hamburgers?|burgers?|boulettes?|kofta|saucisses?|nuggets?|brochettes?|chapelure|cordon bleu|farcies?|fourr[ée]es?)\b/i,
+      /\b(marin[ée]e?s?|fum[ée]e?s?|grill[ée]e?s?|r[ôo]tie?s?|cuite?s?|cuisin[ée]e?s?|pr[êe]te?s?|micro-ondes|surgel[ée]e?s?|congel[ée]e?s?|barbecue|bbq)\b/i,
+      /\b(spaghetti|bolognaise|chili|cottage|hachis|parmentier|lasagne)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 export interface ParsedProduct {
