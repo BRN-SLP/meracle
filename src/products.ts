@@ -49,7 +49,8 @@ export type ProductSlug =
   | "bananas_1kg"
   | "apples_1kg"
   | "chicken_breast_1kg"
-  | "beef_ground_1kg";
+  | "beef_ground_1kg"
+  | "cheese_local_500g";
 
 export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT";
 
@@ -92,6 +93,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 20, maxMajor: 200 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 100, maxMajor: 500 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 150, maxMajor: 700 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "UA", currency: "UAH", retailer: "novus-ua",      sanityRange: { minMajor: 100, maxMajor: 500 } },
 
   // UNITED KINGDOM, Sainsbury's via Browser Use Cloud
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.5, maxMajor: 3 } },
@@ -108,6 +110,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 1, maxMajor: 5 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 3, maxMajor: 12 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 4, maxMajor: 18 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 2, maxMajor: 12 } },
 
   // SPAIN, Mercadona (Madrid postal 28001)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
@@ -124,6 +127,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 1, maxMajor: 4 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 5, maxMajor: 22 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 2.5, maxMajor: 15 } },
 
   // POLAND, Biedronka (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 2, maxMajor: 15 } },
@@ -140,6 +144,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 15, maxMajor: 60 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 20, maxMajor: 90 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PL", currency: "PLN", retailer: "biedronka-pl",  sanityRange: { minMajor: 8, maxMajor: 45 } },
 
   // GERMANY, Rewe (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 0.6, maxMajor: 3.5 } },
@@ -156,6 +161,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 1.2, maxMajor: 5 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 5, maxMajor: 18 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 6, maxMajor: 22 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "DE", currency: "EUR", retailer: "rewe-de",       sanityRange: { minMajor: 2.5, maxMajor: 15 } },
 
   // FRANCE, Carrefour (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 0.7, maxMajor: 4 } },
@@ -172,6 +178,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 5, maxMajor: 18 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 6, maxMajor: 22 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "FR", currency: "EUR", retailer: "carrefour-fr",  sanityRange: { minMajor: 3, maxMajor: 18 } },
 
   // ITALY, Esselunga (scraper pending)
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 0.6, maxMajor: 3 } },
@@ -188,6 +195,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 1.2, maxMajor: 5 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 5, maxMajor: 20 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 7, maxMajor: 25 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "IT", currency: "EUR", retailer: "esselunga-it",  sanityRange: { minMajor: 3, maxMajor: 20 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
