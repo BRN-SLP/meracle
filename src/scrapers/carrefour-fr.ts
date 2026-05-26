@@ -270,6 +270,46 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Still bottled water (eau de source / eau minérale). French
+  // mass-market brands: Cristaline (cheapest), Evian, Volvic, Vittel,
+  // Contrex, Hépar, plus Carrefour-brand "Carrefour Source". Standard
+  // 1.5 L PET bottle. Excludes sparkling (gazeuse / pétillante),
+  // flavored, cosmetic (parfum, micellaire), infant, and household
+  // (bain, douche, nettoyant) waters.
+  water_bottled_1500ml: {
+    query: "eau de source",
+    include: /\beau\b/i,
+    exclude: [
+      /\b(gazeuse|p[ée]tillante|gaz[ée]ifi[ée]|effervescente|finement gazeuse|tonic|p[ée]tillant|fines bulles)\b/i,
+      /\b(aromatis[ée]e?|ar[ôo]me|saveur|citron|menthe|fruit|fraise|cocktail|sirop|th[ée])\b/i,
+      /\b(cologne|parfum|cosm[ée]tique|micel(?:laire)?|bain|douche|shampoing|d[ée]tergent|nettoyant|d[ée]maquillant|tonique)\b/i,
+      /\b(cuisson|sal[ée]e?|distill[ée]e?|d[ée]ionis[ée]e?|d[ée]min[ée]ralis[ée]e?)\b/i,
+      /\b(b[ée]b[ée]|nourrissons?|infants?|formula|sevrage)\b/i,
+      /\b(piscine|aquarium|d[ée]calcaire)\b/i,
+    ],
+    sizeRange: { min: 1400, max: 1600 },
+  },
+  // Imported beer (bière importée). Whitelist of mass-market
+  // international brands stocked by Carrefour. Standard bottle / can
+  // sizes: 25, 27.5, 33, 44, 50 cl. sizeRange 250-550 ml catches all,
+  // normalize.ts rescales to per-500ml. Rejects non-alcoholic, radler /
+  // shandy / panaché, and flavored variants.
+  //
+  // French domestic brands (Kronenbourg, 1664, Pelforth, Fischer,
+  // Meteor) are commonly grouped with imported / international in FR
+  // supermarkets and share the same shelf segment; Kronenbourg is
+  // intentionally on the whitelist for consistency with Sainsbury's
+  // and Conad. Cheapest international match wins.
+  beer_imported_500ml: {
+    query: "heineken",
+    include: /\b(heineken|carlsberg|tuborg|stella artois|becks|budweiser|corona extra|leffe|hoegaarden|krombacher|paulaner|warsteiner|asahi|peroni|kronenbourg|guinness|grolsch|amstel|miller|estrella damm|san miguel|moretti|tyskie|zywiec|lech)\b/i,
+    exclude: [
+      /\b(sans alcool|alc-free|alcohol-free|0\.0\s*%|0\s*%|0,0\s*%|0 alcool|sans-alcool)\b/i,
+      /\b(radler|shandy|panach[ée]|aromatis[ée]e?|saveur|cocktail|fruit[ée]e?)\b/i,
+      /\b(light|l[ée]g[èe]re|low-alc|low alc)\b/i,
+    ],
+    sizeRange: { min: 250, max: 550 },
+  },
 };
 
 export interface ParsedProduct {
