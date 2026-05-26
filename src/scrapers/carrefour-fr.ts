@@ -182,6 +182,61 @@ const PICKERS: Partial<Record<ProductTarget["slug"], FrPicker>> = {
     ],
     sizeRange: { min: 800, max: 1200 },
   },
+  // Fresh tomatoes (tomates). French cultivars: ronde, coeur de boeuf,
+  // noire de Crimée, Roma, Marmande, ananas, cocktail, grappe (vine).
+  // The picker accepts any loose 1 kg variant; cheapest wins. Processed
+  // forms (purée, coulis, pelées, concentrée, sauce, ketchup) excluded.
+  tomatoes_1kg: {
+    query: "tomates",
+    include: /\btomate/i,
+    exclude: [
+      /\b(pur[ée]e|coulis|pel[ée]es?|concass[ée]es?|concentr[ée]e?|sauce|ketchup|s[ée]ch[ée]es?|confit|jus|graines?|conserve)\b/i,
+      /\b(farcie?s?|chutney|pesto|m[ée]lang[ée]|aromatis[ée]|saveur)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Potatoes (pommes de terre). French varieties: Charlotte, Bintje,
+  // Ratte, Roseval, Amandine, Désirée, Vitelotte. Loose by kg in the
+  // produce aisle, plus 1 kg netted bags. Sweet potatoes (patate /
+  // pomme de terre douce) and processed forms excluded.
+  potatoes_1kg: {
+    query: "pommes de terre",
+    include: /\bpommes?\s+de\s+terre\b/i,
+    exclude: [
+      /\b(douce|patate)\b/i,
+      /\b(chips|frites?|cubes?|pur[ée]e|mousseline|flocons|f[ée]cule|farine|amidon|gratin|gnocchi|pr[ée]cuit|pr[êe]tes?|micro-ondes|surgel[ée]es?|congel[ée]es?|s[ée]ch[ée]es?)\b/i,
+      /\b(assaisonn[ée]es?|aromatis[ée]es?|paprika|herbes|[ée]pices)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Bananas (bananes). Sold loose by kg or in 1 kg netted bags.
+  // Carrefour stocks own-brand + Chiquita / Bonita branded. Excludes
+  // dried / chips / baby / chocolate-coated and plantain variants.
+  bananas_1kg: {
+    query: "bananes",
+    include: /\bbanan/i,
+    exclude: [
+      /\b(s[ée]ch[ée]es?|d[ée]shydrat[ée]es?|lyophilis[ée]es?|chips|cubes?|cookies?|biscuits?|smoothie|frapp[ée]|gel[ée]es?)\b/i,
+      /\b(chocolat|cacao|enrob[ée]es?|caramel|aromatis[ée]es?|saveur|baby|b[ée]b[ée]|infant)\b/i,
+      /\b(plantain|verte|rouge|pisang)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
+  // Apples (pommes). French cultivars: Golden, Gala, Granny Smith,
+  // Pink Lady, Royal Gala, Fuji, Braeburn, Reinette. Cheapest 1 kg
+  // pack wins. Critically excludes "pommes de terre" (potatoes) plus
+  // processed apple products (jus, compote, cidre, vinaigre, tarte).
+  apples_1kg: {
+    query: "pommes",
+    include: /\bpommes?\b/i,
+    exclude: [
+      /\bpommes?\s+de\s+terre\b/i,
+      /\b(jus|boisson|compote|coulis|cidre|vinaigre|sirop|sauce|chutney|confiture|gel[ée]e)\b/i,
+      /\b(s[ée]ch[ée]es?|chips|cubes?|biscuits?|tarte|crumble|strudel|chausson|beignet|p[âa]te|cake|muffin)\b/i,
+      /\b(d'amour|d'or|chocolat|cacao|caramel|enrob[ée]es?|aromatis[ée]es?|d'eau|de pin|de douche)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+  },
 };
 
 export interface ParsedProduct {
