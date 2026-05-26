@@ -16,6 +16,7 @@
  */
 import { env } from "../src/env.js";
 import { normalize, NormalizationError } from "../src/normalize.js";
+import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
@@ -130,9 +131,9 @@ async function main(): Promise<void> {
 
   console.log("Scraping retailers ...");
   // Novus UA + Mercadona ES are free public APIs, always run.
-  // Sainsbury's UK and Conad IT require Browser Use Cloud
-  // (BROWSER_USE_API_KEY). Skip silently if the key is unset so the
-  // batch still works with the two free retailers.
+  // Sainsbury's UK, Conad IT, and Carrefour FR require Browser Use
+  // Cloud (BROWSER_USE_API_KEY). Skip silently if the key is unset so
+  // the batch still works with the two free retailers.
   const sainsburysPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
     ? scrapeSainsburysUk().catch((e: unknown) => {
         const msg = e instanceof Error ? e.message : String(e);
@@ -147,12 +148,20 @@ async function main(): Promise<void> {
         return null;
       })
     : Promise.resolve(null);
+  const carrefourPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
+    ? scrapeCarrefourFr().catch((e: unknown) => {
+        const msg = e instanceof Error ? e.message : String(e);
+        console.warn(`  carrefour-fr: scrape threw, skipping ($${msg})`);
+        return null;
+      })
+    : Promise.resolve(null);
 
-  const [novus, mercadona, sainsburys, conad] = await Promise.all([
+  const [novus, mercadona, sainsburys, conad, carrefour] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
     conadPromise,
+    carrefourPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -166,6 +175,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  conad-it     : SKIPPED (BROWSER_USE_API_KEY not set)");
   }
+  if (carrefour) {
+    console.log(`  carrefour-fr : ${carrefour.scraped.length} scraped, ${carrefour.misses.length} miss`);
+  } else {
+    console.log("  carrefour-fr : SKIPPED (BROWSER_USE_API_KEY not set)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -173,6 +187,7 @@ async function main(): Promise<void> {
     ...mercadona.scraped,
     ...(sainsburys?.scraped ?? []),
     ...(conad?.scraped ?? []),
+    ...(carrefour?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
