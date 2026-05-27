@@ -20,6 +20,7 @@ import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
+import { scrapeReweDe } from "../src/scrapers/rewe-de.js";
 import { scrapeSainsburysUk } from "../src/scrapers/sainsburys-uk.js";
 import { agentAddress, readNextId, submitObservation } from "../src/submit.js";
 import type { PriceObservation, ScraperResult, ScrapedProduct } from "../src/types.js";
@@ -156,12 +157,24 @@ async function main(): Promise<void> {
       })
     : Promise.resolve(null);
 
-  const [novus, mercadona, sainsburys, conad, carrefour] = await Promise.all([
+  // REWE Germany runs over plain HTTP and ignores BROWSER_USE_API_KEY.
+  // The scraper itself reports clean misses when REWE_WW_IDENT and
+  // REWE_MARKET_CODE are not configured (see docs/deferred-retailers.md).
+  const rewePromise: Promise<ScraperResult | null> = scrapeReweDe().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  rewe-de: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
     conadPromise,
     carrefourPromise,
+    rewePromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -180,6 +193,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  carrefour-fr : SKIPPED (BROWSER_USE_API_KEY not set)");
   }
+  if (rewe) {
+    console.log(`  rewe-de      : ${rewe.scraped.length} scraped, ${rewe.misses.length} miss`);
+  } else {
+    console.log("  rewe-de      : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -188,6 +206,7 @@ async function main(): Promise<void> {
     ...(sainsburys?.scraped ?? []),
     ...(conad?.scraped ?? []),
     ...(carrefour?.scraped ?? []),
+    ...(rewe?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
