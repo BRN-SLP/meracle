@@ -10,15 +10,16 @@
 
 Mercato is a community-built consumer-price index. Each new country and each new product starts with zero data: the community has to seed it. meRacle solves that cold-start problem by acting as a deterministic, auditable oracle:
 
-1. Scrape live prices from the official sites of major retailers (Novus UA, Sainsbury's UK, Mercadona ES, and more).
-2. Submit them to the Mercato PriceOracle contract on Celo Mainnet via `submitPrice()`.
+1. Scrape live prices from the official sites of five mass-market retailers (Novus UA, Sainsbury's UK, Mercadona ES, Conad IT, Carrefour FR), covering 16 canonical grocery slugs each.
+2. Submit each observation to the Mercato PriceOracle contract on Celo Mainnet via `submitPrice()`.
 3. Carry an ERC-8004 reputation so the community can verify each observation and weight the agent's submissions accordingly.
 
 ## Architecture
 
-- **Runtime**: Node 20 + TypeScript (strict)
+- **Runtime**: Node 20 + TypeScript (strict, no `any` in app code)
 - **Chain client**: viem 2.x against Celo Mainnet (`https://forno.celo.org`)
-- **Scrapers**: Playwright with retailer-specific modules under `src/retailers/`
+- **Scrapers**: retailer-specific modules under `src/scrapers/`. Two paths: free public APIs (Novus, Mercadona) and remote chromium via Browser Use Cloud + Playwright CDP (Sainsbury's, Conad, Carrefour) when the retailer is behind Akamai or Cloudflare
+- **Tests**: 94 unit tests across five scrapers + the normalise / submit pipeline
 - **Schedule**: GitHub Actions cron, daily at 06:00 UTC
 - **Identity**: ERC-8004 Identity NFT + ERC-8004 Reputation feedback loop + Self Agent ID
 
@@ -49,10 +50,14 @@ Concrete proof of work, all on Celo Mainnet (chain ID 42220):
 |---|---|---|
 | 0 | Scaffold, 8004 + Self registration, viem connect | shipped |
 | 1 | Novus UA + Sainsbury's UK + Mercadona ES, 6 core products | shipped |
-| 2 | + Walmart MX + Auchan FR | pending |
-| 3 | + REWE DE + Biedronka PL + Pao de Acucar BR + Pick n Pay ZA + Coles AU | pending |
-| 4 | Expand from 3 core products to the full Mercato basket of 33 | pending |
-| 5 | Reputation building via community feedback | continuous |
+| 4 | Expand to the full 16 canonical grocery slugs (bread / milk / eggs / butter / sugar / rice / olive oil / water / tomatoes / potatoes / bananas / apples / chicken breast / ground beef / hard cheese / imported beer) | shipped |
+| 5 | + Conad IT via Browser Use Cloud + `data-product` JSON extraction | shipped |
+| 6 | + Carrefour FR via Browser Use Cloud + DOM walk (JSON-LD path retained as fallback) | shipped |
+| 7 | Rewe DE: probed, deferred. Online prices are store-specific (Konkreter Preis abhängig vom Standort) and Usercentrics + multi-step Standort modal flow gates every search. See [docs/deferred-retailers.md](./docs/deferred-retailers.md) | deferred |
+| 8 | Biedronka PL: no online shop exists. Alternatives (Carrefour PL, Auchan PL, Frisco) all fail on consent overlays or proxy IP bans. See [docs/deferred-retailers.md](./docs/deferred-retailers.md) | deferred |
+| 9 | Reputation building via community feedback | continuous |
+
+Current live coverage: 5 countries × 16 slugs = **80 picker entries** running through the daily cron.
 
 ## Quick start
 
