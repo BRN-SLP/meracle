@@ -163,11 +163,20 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   // apples by named variety (Braeburn, Gala, Pink Lady, Bramley, etc.)
   // plus generic "by Sainsbury's" packs. Critically excludes pineapple,
   // which matches the bare apple stem, plus processed forms.
+  //
+  // The squash, cordial, drink, concentrate, blackcurrant exclude
+  // band is a separate line because UK supermarkets shelve fruit-
+  // flavoured beverages (canonical example: "Robinsons Apple &
+  // Blackcurrant Squash 1L") on the `apples 1kg` PLP, and the 1 L
+  // size happens to fall inside the 800 to 1200 sizeRange window.
+  // That beverage line was the cheapest fixture in the prior live
+  // cron run and won the cheapest-priced selection on apples_1kg.
   apples_1kg: {
     query: "apples 1kg",
     include: /\bapple/i,
     exclude: [
       /\b(pine|dried|freeze-dried|sliced|frozen|chips|crisps|cake|cookie|biscuit|cream|juice|sauce|cider|vinegar|wine|crumble|strudel|toffee|caramel|flavou?red|sweet)\b/i,
+      /\b(squash|cordial|drink|concentrate|blackcurrant|sparkling|fizz|beverage|water|soda|kombucha|smoothie|tea)\b/i,
     ],
     sizeRange: { min: 800, max: 1200 },
   },
