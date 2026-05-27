@@ -188,8 +188,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   chicken_breast_1kg: {
     query: "chicken breast fillet 1kg",
     include: /\bchicken\b.*\b(breast|breasts|fillet|fillets)\b/i,
+    // Excludes match prefix stems (no trailing \b) so `nugget` blocks
+    // both `Nugget` and `Nuggets`. The previous trailing word boundary
+    // let "Sainsbury's Chicken Breast Nuggets 1kg" (processed) win the
+    // cheapest-priced sort over fresh fillet packs.
     exclude: [
-      /\b(thigh|drumstick|wing|leg|heart|liver|kiev|nugget|sausage|ham|smoked|breaded|crumb|marinad|frozen|mince|kebab|skewer|burger|stuffed|wrap|tikka|tandoori|bbq|jerk|teriyaki|peri-peri|coated|seasoned|cooked|ready|roast)\b/i,
+      /\b(thigh|drumstick|wing|leg|heart|liver|kiev|nugget|sausage|ham|smoked|breaded|crumb|marinad|frozen|mince|kebab|skewer|burger|stuffed|wrap|tikka|tandoori|bbq|jerk|teriyaki|peri-peri|coated|seasoned|cooked|ready|roast|goujon|popper|dipper|tender|popcorn)/i,
     ],
     sizeRange: { min: 800, max: 1200 },
   },
@@ -223,12 +227,15 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   cheese_local_500g: {
     query: "cheddar 500g",
     include: /\bcheddar\b/i,
+    // Excludes match prefix stems so `slice` blocks both `Slice` and
+    // `Sliced` / `Slices`. The previous trailing-\b form let processed-
+    // cheese SKUs through and broke the cheese sanity range floor.
     exclude: [
-      /\b(sliced|grated|shredded|spread|melt|processed|stick|snack|nibble|cube|portion|mini|baby|bites|crumbl)\b/i,
-      /\b(jalape|chilli|chili|smoked|herb|garlic|onion|pickle|chutney|cranberry|truffle|honey|whisky|wine|spicy|caramelised|ploughman)\b/i,
-      /\b(vegan|plant-based|dairy-free|lactose-free|free from)\b/i,
-      /\b(red leicester|wensleydale|stilton|cheshire|double gloucester|monterey|colby|gouda|edam|brie|camembert|mozzarella|feta|parmesan|halloumi|paneer)\b/i,
-      /\b(product|substitute|imitation)\b/i,
+      /\b(slice|grat|shred|spread|melt|process|stick|snack|nibble|cube|portion|mini|baby|bite|crumbl|dipper|stringer|dunker)/i,
+      /\b(jalape|chilli|chili|smoked|herb|garlic|onion|pickle|chutney|cranberry|truffle|honey|whisky|wine|spicy|caramelis|ploughman)/i,
+      /\b(vegan|plant-based|dairy-free|lactose-free|free from)/i,
+      /\b(red leicester|wensleydale|stilton|cheshire|double gloucester|monterey|colby|gouda|edam|brie|camembert|mozzarell|feta|parmesan|halloumi|paneer)/i,
+      /\b(product|substitute|imitation)/i,
     ],
     sizeRange: { min: 400, max: 600 },
   },
