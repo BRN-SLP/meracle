@@ -26,11 +26,14 @@ import { targetsForRetailer } from "../products.js";
 import type { ScrapedProduct, ScraperResult } from "../types.js";
 
 const BASE = "https://www.sainsburys.co.uk";
-// One scrape (homepage warm + 2 searches + DOM extract) finishes in
-// well under a minute. Browser Use Cloud bills only for the time the
-// session is actually alive, but a tight timeout is a safety belt:
-// if our code hangs, the session auto-kills before draining credits.
-const SESSION_TIMEOUT_MIN = 2;
+// 16 sequential PLP searches under one session. Homepage warm + 16
+// navigations + lazy-load waits typically finishes in 4 to 5 min. The
+// earlier 2-min cap killed the session mid-batch after roughly four
+// slugs (production cron held on to 11 of 16 by accident; everything
+// after `olive_oil_1l` reliably hit "browser has been closed"). 8 min
+// matches the working Carrefour FR ceiling; Browser Use bills per
+// actual second so the unused tail is free.
+const SESSION_TIMEOUT_MIN = 8;
 
 interface UkPicker {
   /** Search keyword. */
