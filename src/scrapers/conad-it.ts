@@ -72,7 +72,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
   // variant, normalize.ts rescales to canonical 1000.
   milk_1l: {
     category: "/c/latte--0404",
-    include: /\blatte\b.*\bintero\b|\bintero\b.*\blatte\b/i,
+    // Inside the /c/latte category, the cheapest priced whole milk
+    // ships as "Più Tempo ... Pastorizzato Intero" with no "latte"
+    // token in the name (it's implied by the category). Match on
+    // `intero` alone and let the exclude list strip skimmed and
+    // plant-based variants.
+    include: /\bintero\b/i,
     exclude: [
       /\b(scremato|parzialmente|delattosato|senza lattosio|cappuccino|cacao|cioccolat|caffè|caffe|fragola|vaniglia|miele|condensato|polvere|infante|crescita|bevanda|soia|riso|mandorla|cocco|avena|kefir|yogurt|panna|crema|alta digeribilità)\b/i,
     ],
@@ -112,15 +117,21 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
     category: "/c/formaggi--0401",
     include:
       /\b(parmigiano|grana padano|grana|asiago|pecorino|provolone|caciocavallo|fontina|montasio|gruviera|emmental|sbrinz)\b/i,
+    // Excludes match prefix-stems (no trailing \b) so `fett` strikes
+    // both `Fette` (slices) and `Fettine`, matching Italian morphology.
     exclude: [
-      /\b(grattugia|grattugiato|fiocchi|scaglie|fuso|spalmabile|fett|cubett|tagliat|filant|stick|snack|portatile|baby|porzion)\b/i,
-      /\b(mozzarell|ricott|mascarpon|crescenz|stracchin|robiola|caprino|tomino|burrata|burrini|fresco|fresch)\b/i,
-      /\b(philadelphia|brie|camembert|feta|halloumi|paneer|gorgonzola|stilton|cheddar|gouda|edam|brunost)\b/i,
-      /\b(tartuf|peperoncin|piccant|affumicat|alle erbe|al pepe|al cumino|al peperone|alla noce|al miele)\b/i,
-      /\b(vegan|vegetal|senza lattosio|delattosato)\b/i,
-      /\b(prodotto|imitazione|sostituto)\b/i,
+      /\b(grattugia|grattugiat|fiocchi|scaglie|fuso|spalmabile|fett|cubett|tagliat|filant|stick|snack|portatile|baby|porzion)/i,
+      /\b(mozzarell|ricott|mascarpon|crescenz|stracchin|robiola|caprino|tomino|burrata|burrini|fresco|fresch)/i,
+      /\b(philadelphia|brie|camembert|feta|halloumi|paneer|gorgonzola|stilton|cheddar|gouda|edam|brunost)/i,
+      /\b(tartuf|peperoncin|piccant|affumicat|alle erbe|al pepe|al cumino|al peperone|alla noce|al miele)/i,
+      /\b(vegan|vegetal|senza lattosio|delattosato)/i,
+      /\b(prodotto|imitazione|sostituto)/i,
     ],
-    sizeRange: { min: 350, max: 600 },
+    // Hard cheese ships in 100 to 500g wedges at Conad; the canonical
+    // 500g slug rescales via normalize.ts. Widening from 350 to 600
+    // catches the 200 to 300g Asiago / Emmental wedges priced
+    // anonymously in the category.
+    sizeRange: { min: 100, max: 600 },
   },
   // White sliced bread (pane in cassetta / pane bianco a fette).
   // Italian mass-market staple is the 400 to 500 g sliced loaf. Conad
@@ -149,11 +160,17 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
   // jasmine, lungo). The picker accepts any pure rice 800 to 1200 g.
   rice_1kg: {
     category: "/c/riso--1005",
-    include: /\briso\b/i,
+    // Inside /c/riso, Conad ships pure-rice SKUs as the variety name
+    // (Parboiled, Arborio, Carnaroli, Originario, Ribe, Roma, Vialone
+    // Nano) with no "riso" token in the name. Include the variety
+    // whitelist, leave exclude defending against rice flour, drinks,
+    // and ready-to-eat reheats.
+    include:
+      /\b(riso|arborio|carnaroli|vialone|basmati|parboiled|originario|ribe|roma|jasmin|fragrante|lungo|thai)\b/i,
     exclude: [
       /\b(latte|bevanda|sciroppo|farina|aceto|gallett|cracker|biscott|tortin|barrett|insalata|nero|venere|integrale)\b/i,
       /\b(precotto|microond|pronto|surgelat|congelat|cotto)\b/i,
-      /\b(pilaf|sushi|orientale|cinese|thai|esotic)\b/i,
+      /\b(pilaf|sushi|orientale|cinese|esotic)\b/i,
     ],
     sizeRange: { min: 800, max: 1200 },
   },
@@ -179,7 +196,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
   // excluded.
   chicken_breast_1kg: {
     category: "/c/carne-di-pollo-e-tacchino--0204",
-    include: /\bpetto\b.*\bpollo\b|\bpollo\b.*\bpetto\b/i,
+    // Include `filetti` (fillets) alongside `petto`; both denote
+    // breast meat at Conad and the typical priced SKU is "Filetti di
+    // Petto di Pollo".
+    include:
+      /\bpetto\b.*\bpollo\b|\bpollo\b.*\bpetto\b|\bfilett\w*\b.*\bpollo\b/i,
     exclude: [
       /\b(coscia|alette|alett|fusi|cosciotti|sovracosc|sottocosc|fegatini|cuori)\b/i,
       /\b(panat|crocchett|cordon|cordon bleu|nuggets|burger|kebab|hambur|salsicc|wurstel|spiedin|polpett|involtin)\b/i,
@@ -187,7 +208,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
       /\b(surgelat|congelat|piatto pronto|ready|riscaldament)\b/i,
       /\b(tacchino|anatra|oca|fagiano|coniglio|manzo|vitello|maiale|suino|agnello)\b/i,
     ],
-    sizeRange: { min: 800, max: 1200 },
+    // Conad sells chicken breast in 300 to 1200g portion packs. Widen
+    // sizeRange to accept the 400g vaschetta common at the cheap end;
+    // normalize.ts rescales to per-1kg.
+    sizeRange: { min: 300, max: 1200 },
   },
   // Still bottled water (acqua naturale). Italy is the EU's largest
   // bottled-water market by per-capita consumption. Standard size is
@@ -195,12 +219,17 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
   water_bottled_1500ml: {
     category: "/c/acqua--1801",
     include: /\bacqua\b/i,
+    // Excludes use stem prefixes without a trailing word boundary so
+    // that `frizzant` matches both `Frizzante` and `Frizzantine`. The
+    // earlier `\bfrizzant\b` form let "Acqua Minerale ... Frizzante"
+    // through and the cheapest sparkling water won.
     exclude: [
-      /\b(frizzant|gassat|effervescent|gasata|brillante|con gas|leggermente frizzante)\b/i,
-      /\b(aromatizz|aromatic|sabor|gusto|limon|cocktail|tonic|saporit|fragol|menta|the|tè)\b/i,
-      /\b(cologn|profumo|cosmetic|micellar|bagno|doccia|shampoo|detergente)\b/i,
-      /\b(cottura|salata|sale|distillata|deionizz|demineralizz)\b/i,
-      /\b(neonati|infante|bambini|baby|infant|formula|svezzament)\b/i,
+      /\bfrizzant/i,
+      /\b(gassat|gasat|gasata|effervescent|brillante|con gas|leggermente frizzante)/i,
+      /\b(aromatizz|aromatic|sabor|gusto|cocktail|tonic|saporit|fragol|menta|the|tè)/i,
+      /\b(cologn|profumo|cosmetic|micellar|bagno|doccia|shampoo|detergente)/i,
+      /\b(cottura|salata|sale|distillata|deionizz|demineralizz)/i,
+      /\b(neonati|infante|bambini|baby|infant|formula|svezzament)/i,
     ],
     sizeRange: { min: 1400, max: 1600 },
   },
