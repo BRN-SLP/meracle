@@ -22,14 +22,19 @@ async function main(): Promise<void> {
   console.log("");
 
   for (const s of result.scraped) {
-    const observation = normalize(s);
     console.log(`[${s.target.country}/${s.target.slug}]`);
     console.log(`  title    : ${s.retailerTitle}`);
     console.log(`  raw size : ${s.packSize} ${s.target.unit}`);
     console.log(`  raw price: ${s.priceMajor.toFixed(2)} ${s.target.currency}`);
-    console.log(
-      `  norm     : ${(observation.priceCents / 100).toFixed(2)} ${s.target.currency} (cents ${observation.priceCents})`,
-    );
+    try {
+      const observation = normalize(s);
+      console.log(
+        `  norm     : ${(observation.priceCents / 100).toFixed(2)} ${s.target.currency} (cents ${observation.priceCents})`,
+      );
+    } catch (e: unknown) {
+      const reason = e instanceof Error ? e.message : String(e);
+      console.log(`  norm     : SKIP (${reason})`);
+    }
     console.log(`  source   : ${s.sourceUrl}`);
     console.log("");
   }
