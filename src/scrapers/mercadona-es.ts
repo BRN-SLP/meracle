@@ -65,6 +65,15 @@ interface MercadonaPicker {
   exclude: readonly RegExp[];
   /** Pack size in target.unit (g or mL). */
   sizeRange: { min: number; max: number };
+  /**
+   * Whether `is_pack: true` items count as candidates. Off by default
+   * so beverage/dairy slugs do not get a 6-bottle multipack price.
+   * On for produce: Mercadona ships loose fruit / vegetables as
+   * single-unit items (e.g. 0.2 kg apple at EUR 0.44) AND bagged
+   * bulk packs (1.55 kg bag of apples at EUR 3.10). The bulk pack is
+   * cheaper per kg and is the correct cheapest-staple match.
+   */
+  allowPacks?: boolean;
 }
 
 const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
@@ -274,7 +283,11 @@ function pickBestMatch(
   for (const sc of category.categories) {
     if (!picker.subcategoryMatch.test(sc.name)) continue;
     for (const p of sc.products) {
-      if (p.price_instructions.is_pack) continue; // skip 6-bottle multipacks
+      // Default behaviour: skip 6-bottle / 4-can multipacks because
+      // those are not the slug's cheapest-staple proxy. Produce
+      // pickers opt in via picker.allowPacks (loose-fruit single
+      // units AND bagged kg-bulk packs both count).
+      if (p.price_instructions.is_pack && !picker.allowPacks) continue;
       if (!picker.include.test(p.display_name)) continue;
       if (picker.exclude.some((rx) => rx.test(p.display_name))) continue;
       const size = sizeToTargetUnit(p);
@@ -283,11 +296,26 @@ function pickBestMatch(
     }
   }
   if (candidates.length === 0) return null;
-  candidates.sort(
-    (a, b) =>
-      Number.parseFloat(a.product.price_instructions.unit_price) -
-      Number.parseFloat(b.product.price_instructions.unit_price),
-  );
+  // Sort by per-kg / per-L `bulk_price` when packs are in play
+  // (produce ships single units AND bulk bags side by side, so the
+  // raw sticker `unit_price` ranks the smallest bag first instead of
+  // the cheapest per-kg pack). For non-pack slugs, sizes inside the
+  // picker's sizeRange are comparable and the two orderings agree;
+  // we keep `unit_price` there to avoid touching the existing
+  // baseline.
+  if (picker.allowPacks) {
+    candidates.sort(
+      (a, b) =>
+        Number.parseFloat(a.product.price_instructions.bulk_price) -
+        Number.parseFloat(b.product.price_instructions.bulk_price),
+    );
+  } else {
+    candidates.sort(
+      (a, b) =>
+        Number.parseFloat(a.product.price_instructions.unit_price) -
+        Number.parseFloat(b.product.price_instructions.unit_price),
+    );
+  }
   return candidates[0]!;
 }
 
