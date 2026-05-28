@@ -40,7 +40,8 @@ export type Retailer =
   | "auchan-ro"
   | "rimi-ee"
   | "rimi-lv"
-  | "rimi-lt";
+  | "rimi-lt"
+  | "continente-pt";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -62,7 +63,7 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT";
 
 export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON";
 
@@ -435,6 +436,37 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "LT", currency: "EUR", retailer: "rimi-lt",       sanityRange: { minMajor: 3, maxMajor: 25 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "LT", currency: "EUR", retailer: "rimi-lt",       sanityRange: { minMajor: 2.5, maxMajor: 14 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "LT", currency: "EUR", retailer: "rimi-lt",       sanityRange: { minMajor: 0.8, maxMajor: 4 } },
+
+  // PORTUGAL via Continente (SSR `data-product-tile-impression`
+  // JSON envelope + `pwc-tile--quantity` text). Prices in EUR.
+  // Eggs: Portuguese retail sells 6 / 10 / 12 / 18 / 30 piece
+  // cartons, all common; pack-size parser accepts any. Loose
+  // produce ships in 500 g / 1 kg / 2 kg bags (Continente
+  // does not sell true loose per-kg fresh produce online), so
+  // the produce slugs accept 500-2500 g packs and normalize.ts
+  // scales the on-chain price to per-kg. Beer cans are 0.33 L
+  // (Super Bock Sky) or 0.5 L (Heineken / Carlsberg / standard
+  // Super Bock), so the sizeRange allows both with a 250-600 ml
+  // window. Five SKUs lead with non-ASCII Portuguese diacritics
+  // (acucar with a-acute, agua with a-acute, oleo with o-acute,
+  // maca with c-cedilla, oleo) and the include regex uses a
+  // Unicode lookbehind.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.6, maxMajor: 3.5 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.7, maxMajor: 2.5 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 1.8, maxMajor: 7 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 1.2, maxMajor: 5 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.6, maxMajor: 3 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.8, maxMajor: 5 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 1, maxMajor: 6 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.5, maxMajor: 4 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 3, maxMajor: 20 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.25, maxMajor: 3 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 1, maxMajor: 4 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.8, maxMajor: 4.5 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 4, maxMajor: 15 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 2.5, maxMajor: 15 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.4, maxMajor: 3 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
