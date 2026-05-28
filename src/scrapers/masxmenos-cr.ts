@@ -118,11 +118,19 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // UND" (anonymous-brand value pack). Olimpica also tags brown
   // ("tipo b" or "kikes color") which is fine.
   eggs_12: {
-    query: "huevos 30",
+    // CR catalog drops the "30" cardinality suffix, and the bare
+    // "huevos" query is dominated by quail eggs ("codorniz") and
+    // chocolate eggs. "huevo gallina" surfaces the chicken-egg
+    // cartons (Marketside / Don Cristobal), the picker filters
+    // out the 60-pack on the sizeRange.
+    query: "huevo gallina",
     include: /\bhuevos?\b/i,
     exclude: [
       /\b(?:liquido|líquido|pasteurizado|polvo|chocolate|pascua)\b/i,
       /\b(?:codorniz|pato)\b/i,
+      // CR-specific noise: mayo / pre-pizza both contain the
+      // word "huevos" in their ingredient blurb.
+      /\b(?:mayonesa|pan\s+konig|pre\s*pizza)\b/i,
     ],
     sizeRange: { min: 6, max: 30 },
     unitFromTitle: "pcs",
@@ -132,7 +140,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // returns mostly ghee (clarified butter) which is a different
   // product class for our purposes.
   butter_200g: {
-    query: "mantequilla colanta",
+    // CR's dairy butter staple is Dos Pinos. "Colanta" (Colombian
+    // brand) returns 0 results. Switching to "mantequilla dos
+    // pinos" returns 7 cards including the 115g, 200g and 460g
+    // canonical packs.
+    query: "mantequilla dos pinos",
     include: /\bmantequilla\b/i,
     exclude: [
       /\b(?:ghee|clarificada|mani|maní|cacahuate|almendra|coco)\b/i,
@@ -183,7 +195,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // Excludes sauces, pastes, soups, and canned tomato products
   // that show up under the same keyword.
   tomatoes_1kg: {
-    query: "tomate kg",
+    // MxM tags loose tomatoes as "Tomate Kg" with measurementUnit
+    // "kg" and unitMultiplier 0.15-0.25. The bare-Kg branch in
+    // parseProduct picks them up as 1000g. "tomate hortifruti"
+    // (the in-house produce brand) surfaces the cleanest cards.
+    query: "tomate hortifruti",
     include: /\btomate/i,
     exclude: [
       /\b(?:salsa|pasta|pulpa|extracto|sopa|jugo|conserva|enlatado)\b/i,
@@ -235,12 +251,13 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // and apparel-aliased SKUs (Olimpica's search incorrectly returns
   // "Top sin mangas" under "sin gas").
   water_bottled_1500ml: {
-    // Olimpica CO catalog does NOT carry a 1.5 L Brisa SKU, only
-    // 600 ml / 1 L / 3 L / 6 L for that brand. Switch to Agua
-    // Manantial, which sells "Agua Manantial sin Gas 1,5 Lt" as
-    // the consumer 1.5 L PET staple.
-    query: "agua manantial sin gas 1.5",
-    include: /\bagua\b.*\b(?:manantial|cristal|brisa|epm)\b/i,
+    // CR brands: Agua Alpina and Agua Cristal are the staples.
+    // Alpina ships 600 / 1000 / 2000 / 6000 ml. Cristal ships
+    // 355 / 600 / 1000 / 1750 ml. Widen the size band to 1000-
+    // 2200 ml so the 1.75 L Cristal and 2 L Alpina both clear,
+    // normalize.ts scales each to the canonical 1.5 L.
+    query: "agua cristal",
+    include: /\bagua\b.*\b(?:alpina|cristal|naturela|epm)\b/iu,
     exclude: [
       /\b(?:con gas|gasificada|gaseada|soda|tonica|tonic)\b/i,
       /\b(?:saborizada|aromatizada|frutal|limon|naranja|fresa)\b/i,
@@ -249,17 +266,20 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
       /\b(?:top|short|camiseta|sin mangas|leggings|safetti)\b/i,
       /\b(?:bid[oó]n)\b/i,
     ],
-    // 1.5 L PET bottle staple. 5 L and 6 L family carafes are
-    // bulk-priced and break per-canonical-1.5L comparability
-    // against single-bottle picks elsewhere.
-    sizeRange: { min: 1300, max: 1700 },
+    // 1 L / 1.75 L Cristal and 2 L Alpina PET bottles. 5 L and 6 L
+    // family carafes are bulk-priced and break per-canonical-1.5L
+    // comparability against single-bottle picks elsewhere.
+    sizeRange: { min: 1000, max: 2200 },
     unitFromTitle: "ml",
   },
   // Bananas per kg ("Banano Económico a Granel X Kg" is cheapest
   // at Olimpica). Excludes plantain prep, banana flavoured drinks,
   // chips, baby food.
   bananas_1kg: {
-    query: "banano kg",
+    // CR cheapest fresh banana is the "Banano Datil Empacado Kg".
+    // Querying with the variety name surfaces it as the only card,
+    // bare "banano kg" returns the bulk Pro chip 400g pack instead.
+    query: "banano datil",
     include: /\bbanano\b/i,
     exclude: [
       /\b(?:yogur|yogurt|bebida|smoothie|jugo|aroma|saborizado|nectar)\b/i,
@@ -296,7 +316,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // Bandeja Familiar X Kg" is per-kg. Excludes nuggets, fingers,
   // burgers, smoked, sausages, and animal-product look-alikes.
   chicken_breast_1kg: {
-    query: "pechuga pollo bandeja",
+    // CR butcher tags "Pechuga de Pollo Entera Don Cristobal" with
+    // measurementUnit "kg" and unitMultiplier 1, the bare-Kg branch
+    // in parseProduct emits 1000 g. "pollo pechuga" surfaces it as
+    // the first card; "pechuga pollo bandeja" returned 5 mixed
+    // candidates with cold-cut variants.
+    query: "pollo pechuga entera",
     include: /\bpechuga\b.*\bpollo\b/i,
     exclude: [
       /\bpavo\b/i,
@@ -314,7 +339,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // 500 G" are the staples. Excludes pork, chicken, lamb, and
   // pre-prepared dishes (rellenas / preparadas / empanadas).
   beef_ground_1kg: {
-    query: "carne molida res",
+    // CR butcher tags ground beef with measurementUnit "kg" and
+    // fractional unitMultiplier (0.25, 0.6). The bare-Kg branch in
+    // parseProduct normalizes them to 1000 g. "carne molida magra"
+    // narrows to Don Cristobal 95% magra (canonical lean ground).
+    query: "carne molida magra",
     include: /\bcarne\b.*\bmolida\b/i,
     exclude: [
       /\b(?:cerdo|chancho|pollo|pavo|cordero|chivo|cabra|conejo)\b/i,
@@ -331,7 +360,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // Excludes processed slices, blue cheese, ricotta, mozzarella
   // string-fingers, and grated.
   cheese_local_500g: {
-    query: "queso campesino",
+    // CR's signature local cheese is "Queso Turrialba" (denominación
+    // de origen). Dos Pinos and Del Prado ship 300-500 g varieties
+    // around 1700-3500 CRC. "queso turrialba" returns 7 cards.
+    query: "queso turrialba",
     include: /\bqueso\b/i,
     exclude: [
       /\b(?:rallado|rayado|polvo|deshidratado|en polvo)\b/i,
@@ -400,6 +432,29 @@ export function parseSizeFromName(
   // string to avoid mid-title brand fragments.
   const bareKg = s.match(/\b(?:x\s*kg|kg)\s*$/i);
   if (bareKg) return { value: 1000, unit: "g" };
+  // Eggs first: "Huevo Gallina ... Cartón de 15 Uds" contains
+  // both "por Kilo" (per-kilo pricing) and a real piece count.
+  // Detect the pieces token before falling into the kilo phrase
+  // branches below, otherwise eggs collapse to 1000 g.
+  const piecesEarly = s.match(
+    /\bcart[oó]n\s+de\s+(\d{1,3})\s*(?:unid(?:ades?)?|unds?|u)\b/i,
+  );
+  if (piecesEarly) {
+    const v = parseInt(piecesEarly[1]!, 10);
+    if (Number.isFinite(v) && v > 0 && v < 200) return { value: v, unit: "pcs" };
+  }
+  // MxM-style phrase-Kg: "Por Kilo", "Por Kg", "Empacado Kg",
+  // "Indicado por Kilo", "Por Kg. Aproximadamente" (anywhere in
+  // title because MxM butcher titles append free-text qualifiers
+  // after the unit phrase).
+  const phraseKg = s.match(
+    /\b(?:por|empacado|empacada|indicado)\s+(?:x\s+)?k(?:g|ilo|ilogramo)s?\b/i,
+  );
+  if (phraseKg) return { value: 1000, unit: "g" };
+  // Trailing "Kilo" or "Kilogramo" without a preceding digit,
+  // used by Don Cristobal cuts like "Precio indicado por Kilo".
+  const trailingKilo = s.match(/\bk(?:ilo|ilogramo)s?\s*\.?\s*$/i);
+  if (trailingKilo) return { value: 1000, unit: "g" };
   // Centilitres / cc: "330cc"
   const cc = s.match(/(?<![a-zA-Z%\d.,])(\d{2,5})\s*cc\b/i);
   if (cc) {
@@ -449,7 +504,18 @@ export function parseProduct(p: MasXMenosProduct): ParsedProduct | null {
     ? `${API_BASE}/${linkText}/p`
     : `${API_BASE}/${item.itemId}`;
 
-  const size = parseSizeFromName(p.productName);
+  let size = parseSizeFromName(p.productName);
+  // MxM butcher titles sometimes truncate the unit phrase ("...
+  // Empacado" with no Kilo). When the VTEX measurementUnit says
+  // "kg", use unitMultiplier × 1000 g as the pack weight, the
+  // listed Price quotes the pack so normalize.ts can scale it to
+  // the canonical 1 kg.
+  if (size === null && item.measurementUnit.toLowerCase() === "kg") {
+    const grams = Math.round(item.unitMultiplier * 1000);
+    if (Number.isFinite(grams) && grams >= 100 && grams <= 5000) {
+      size = { value: grams, unit: "g" };
+    }
+  }
   if (size === null) return null;
   return {
     itemId: item.itemId,
