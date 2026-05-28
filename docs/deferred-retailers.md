@@ -137,6 +137,43 @@ That shape is materially simpler than the original 7-step UI flow:
 the consent / postcode dance becomes a one-time setup, daily ops
 are pure HTTP.
 
+### DE · `marketselection` API namespace, 2026-05-28
+
+A live Playwright run against shop.rewe.de revealed one new working
+endpoint:
+
+```
+GET https://www.rewe.de/api/marketselection/configuration?checkMarketSelection=false
+-> 200 OK, 147 B
+{ "selectedService": null, "isOrderModificationEnabled": false,
+  "selectedMarket": null, "isLoggedIn": false,
+  "customerZipCode": null, "intention": "undefined" }
+```
+
+So Rewe DOES expose a market-selection API root at
+`/api/marketselection/`. The companion `/search`, `/markets`,
+`/configure`, `/select` paths all return either 23 B
+`{"error": "Not found"}` (200) or 10 B (404). The shape of the action
+endpoint (POST body, headers, exact path) is gated behind a CSRF or
+HMAC token that the SPA emits but is not in the page HTML, so a
+blind curl POST cannot complete it.
+
+The cheapest unlock path remains: drive the SPA UI flow once (any
+headed browser works, even a manual session in the contributor's
+own Chrome via DevTools to read the cookie) and hardcode the
+resulting `(wwIdent, marketCode)` pair into `.env`. The cache lives
+~6 months.
+
+When Browser Use Cloud credits are unavailable, an alternative is:
+- Cached Playwright Chromium binaries on the contributor's mac live
+  under `~/Library/Caches/ms-playwright/chromium-<channel>/chrome-mac-x64/
+  Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`
+- `chromium.launch({ executablePath: ... })` from `playwright-core`
+  (already a project dep) drives them with no Browser Use Cloud
+  involvement. The consent + Standort modal selectors are the
+  remaining trap, the UI redesign each quarter is what keeps Rewe
+  brittle.
+
 ### PL · Auchan SPA bootstrap stays 2 KB
 
 `https://www.auchan.pl` and every `/sklep/...`, `/online-supermarket/...`,
