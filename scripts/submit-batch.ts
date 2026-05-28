@@ -22,6 +22,7 @@ import { scrapeRimiEe } from "../src/scrapers/rimi-ee.js";
 import { scrapeRimiLv } from "../src/scrapers/rimi-lv.js";
 import { scrapeRimiLt } from "../src/scrapers/rimi-lt.js";
 import { scrapeContinentePt } from "../src/scrapers/continente-pt.js";
+import { scrapeCarullaCo } from "../src/scrapers/carulla-co.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -280,7 +281,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente] = await Promise.all([
+  // Carulla Colombia, 2nd CO retailer for per-slug cross-check.
+  // Shares the VTEX engine with Olimpica.
+  const carullaPromise: Promise<ScraperResult | null> =
+    scrapeCarullaCo().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  carulla-co: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -298,6 +308,7 @@ async function main(): Promise<void> {
     rimiLvPromise,
     rimiLtPromise,
     continentePromise,
+    carullaPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -376,6 +387,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  continente-pt: SKIPPED (scraper threw)");
   }
+  if (carulla) {
+    console.log(`  carulla-co   : ${carulla.scraped.length} scraped, ${carulla.misses.length} miss`);
+  } else {
+    console.log("  carulla-co   : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -396,6 +412,7 @@ async function main(): Promise<void> {
     ...(rimiLv?.scraped ?? []),
     ...(rimiLt?.scraped ?? []),
     ...(continente?.scraped ?? []),
+    ...(carulla?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
