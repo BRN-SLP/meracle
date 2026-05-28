@@ -16,6 +16,7 @@
  */
 import { env } from "../src/env.js";
 import { normalize, NormalizationError } from "../src/normalize.js";
+import { scrapeAuchanPl } from "../src/scrapers/auchan-pl.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -219,7 +220,16 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui] = await Promise.all([
+  // Auchan Poland runs over plain HTTP, SSR __INITIAL_STATE__ extract.
+  const auchanPromise: Promise<ScraperResult | null> = scrapeAuchanPl().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  auchan-pl: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -231,6 +241,7 @@ async function main(): Promise<void> {
     wongPromise,
     olimpicaPromise,
     chedrauiPromise,
+    auchanPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -279,6 +290,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  chedraui-mx  : SKIPPED (scraper threw)");
   }
+  if (auchan) {
+    console.log(`  auchan-pl    : ${auchan.scraped.length} scraped, ${auchan.misses.length} miss`);
+  } else {
+    console.log("  auchan-pl    : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -293,6 +309,7 @@ async function main(): Promise<void> {
     ...(wong?.scraped ?? []),
     ...(olimpica?.scraped ?? []),
     ...(chedraui?.scraped ?? []),
+    ...(auchan?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
