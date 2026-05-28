@@ -36,7 +36,8 @@ export type Retailer =
   | "disco-ar"
   | "wong-pe"
   | "olimpica-co"
-  | "chedraui-mx";
+  | "chedraui-mx"
+  | "auchan-ro";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -58,9 +59,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -328,6 +329,31 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 100, maxMajor: 500 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 40, maxMajor: 250 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 20, maxMajor: 100 } },
+
+  // ROMANIA via Auchan (VTEX catalog API). Prices in RON (Romanian
+  // leu). Auchan RO exposes two bonus fields not present on other
+  // VTEX retailers, `Nume unitate` (unit name: kg / l / buc) and
+  // `Cantitate unitate` (quantity as string), but the scraper sticks
+  // with title-regex parsing for consistency with the other VTEX
+  // adapters; size is recoverable from the title for every product
+  // worth picking. Eggs ship in cartons of 10 (not 12), so the
+  // packSize=10 canonical=12 scale is handled by normalize.ts.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 3, maxMajor: 15 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 12, maxMajor: 36 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 8, maxMajor: 25 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 3, maxMajor: 15 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 4, maxMajor: 25 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 2, maxMajor: 12 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 20, maxMajor: 100 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 1.5, maxMajor: 15 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 4, maxMajor: 15 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 3, maxMajor: 20 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 20, maxMajor: 70 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 30, maxMajor: 150 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 10, maxMajor: 50 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "RO", currency: "RON", retailer: "auchan-ro",     sanityRange: { minMajor: 3, maxMajor: 15 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
