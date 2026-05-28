@@ -83,7 +83,291 @@ interface PtPicker {
   unitFromTitle?: ParsedUnit;
 }
 
-const PICKERS: Partial<Record<ProductTarget["slug"], PtPicker>> = {};
+const PICKERS: Partial<Record<ProductTarget["slug"], PtPicker>> = {
+  // "Pão de Forma" = sliced white sandwich bread. Continente
+  // own-brand and Rio Maior / Panrico are the typical floor
+  // picks. Excludes whole-grain ("integral"), seeds ("sementes"),
+  // toast ("torrado" / "tosta"), sweet pastries.
+  bread_500g: {
+    query: "pao de forma branco 500g",
+    include: /\bp[ãa]o\b/iu,
+    exclude: [
+      /\b(?:integral|integrais|m[áa]ltico|aveia|centeio)\b/iu,
+      /\b(?:sementes|s[ée]samo|girassol|chia|linha[çc]a)\b/iu,
+      /\b(?:tostas?|torrad|aperitivo|panini|hamb[úu]rguer|burger|hotdog)\b/iu,
+      /\b(?:doce|mel|canela|chocolate|fruta)\b/iu,
+      /\b(?:b[ôo]l[ai]|broa|alentejana|cebola)\b/iu,
+    ],
+    sizeRange: { min: 300, max: 800 },
+    unitFromTitle: "g",
+  },
+  // Standard milk in a 1 L carton. "Meio Gordo" (semi-skim) and
+  // "Gordo" / "Inteiro" (whole) are both valid canonical picks;
+  // "Magro" (skim) and "Sem Lactose" are excluded to keep the
+  // class consistent with the other countries.
+  milk_1l: {
+    query: "leite meio gordo 1l",
+    include: /\bleite\b/i,
+    exclude: [
+      /\bsem\s+lactose\b/iu,
+      /\b(?:magro|desnatado|0%\s+gordura)\b/iu,
+      /\b(?:soja|amend|coco|aveia|arroz|am[êe]ndoa|cevad)\b/iu,
+      /\b(?:achocolatad|aromatizad|sabor|chocolate|morango|baunilha)\b/iu,
+      /\b(?:iogurte|kefir|natas|creme|requeij[ãa]o|manteig)\b/iu,
+      /\b(?:beb[ée]|infantil|crescimento|crian)\b/iu,
+      /\b(?:condensado|evaporado|em\s+p[óo])\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1300 },
+    unitFromTitle: "ml",
+  },
+  // Class M or M/L eggs in 12-piece cartons (Portuguese retail
+  // also stocks 6 / 18 / 30 cartons). Excludes liquid eggs,
+  // chocolate eggs, quail, sun-dried (not a thing for eggs but
+  // protects against false positives).
+  eggs_12: {
+    query: "ovos classe m 12",
+    include: /\bovos\b/iu,
+    exclude: [
+      /\b(?:chocolate|pascoa|p[áa]scoa|kinder)\b/iu,
+      /\b(?:codorniz|peru|pato|ganso)\b/iu,
+      /\b(?:l[ií]quidos?|p[óo]|desidratad)\b/iu,
+      /\b(?:salada|maionese|sandes|comida)\b/iu,
+    ],
+    sizeRange: { min: 6, max: 30 },
+    unitFromTitle: "pcs",
+  },
+  // 200-250 g butter (Continente, Mimosa, Primor are the floor
+  // picks). Excludes nut butters, margarine, ghee, lard.
+  butter_200g: {
+    query: "manteiga 250g",
+    include: /\bmanteiga\b/iu,
+    exclude: [
+      /\b(?:amendoim|amend[oô]a|caju|coco|girassol|sementes)\b/iu,
+      /\b(?:margarina|creme\s+vegetal|spread|tartin)\b/iu,
+      /\b(?:ghee|clarificada|fundida)\b/iu,
+      /\b(?:banha|toucinho)\b/iu,
+      /\b(?:bolacha|tosta|biscoito|pastel)\b/iu,
+      /\b(?:cacau|chocolate|caramelo|fig[ao])\b/iu,
+    ],
+    sizeRange: { min: 100, max: 350 },
+    unitFromTitle: "g",
+  },
+  // White granulated sugar 1 kg (Continente own-brand 0.89 EUR is
+  // the canonical floor). "Açúcar" leads with non-ASCII so the
+  // include uses a Unicode lookbehind. Excludes brown sugar,
+  // cane (cana), icing (em pó), cubes (cubos), sachets, sticks,
+  // syrups, sweeteners.
+  sugar_1kg: {
+    query: "acucar branco 1kg",
+    include: /(?<!\p{L})a[çc][úu]car\b/iu,
+    exclude: [
+      /\bamarelo\b/iu,
+      /\b(?:cana|mascavado|m[óo]rena|m[óo]reno)\b/iu,
+      /\b(?:p[óo]|em\s+p[óo]|cubos|saquetas|sticks|terr[ãa]o)\b/iu,
+      /\b(?:xarope|caramelo|invertido|coco)\b/iu,
+      /\b(?:fructose|frutose|stevia|sucralose|aspartame|edulcorante)\b/iu,
+      /\b(?:para\s+conservas|granulado\s+especial)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // White long-grain "arroz agulha" 1 kg. Excludes carolino
+  // (round-grain, different product class), basmati, parboiled,
+  // brown, wild, baby food, rice cakes, rice flour.
+  rice_1kg: {
+    query: "arroz agulha 1kg",
+    include: /\barroz\b/iu,
+    exclude: [
+      /\b(?:carolino|basmati|jasmim|vaporizado|integral|selvagem)\b/iu,
+      /\b(?:beb[ée]|infantil|crian[çc])\b/iu,
+      /\b(?:bolacha|tosta|farinha|leite\s+de\s+arroz)\b/iu,
+      /\b(?:risott|paella|sushi)\b/i,
+      /\b(?:pronto|cozinhar|tempero)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose / packed fresh tomatoes per kg (Continente sells in
+  // 500 g / 1 kg / 2 kg pre-packs). Excludes cherry, sun-dried,
+  // ketchup / paste / sauce, salads, canned.
+  tomatoes_1kg: {
+    query: "tomate kg",
+    include: /\btomate\b/iu,
+    exclude: [
+      /\b(?:cherry|mini|cocktail|chucha|amarelo)\b/iu,
+      /\b(?:seco|secos|desidrat|kalt|liof)\b/iu,
+      /\b(?:ketchup|polpa|molho|past|conserv|enlat|pelad)\b/iu,
+      /\b(?:salada|prepara|sopa|cozinha)\b/iu,
+      /\b(?:beb[ée]|infantil)\b/iu,
+    ],
+    sizeRange: { min: 400, max: 2500 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh white potatoes per kg. Excludes sweet potato
+  // ("batata doce"), frozen / fried / chips processed, salads,
+  // mash, croquettes.
+  potatoes_1kg: {
+    query: "batata kg",
+    include: /\bbatata\b/iu,
+    exclude: [
+      /\bdoce\b/iu,
+      /\b(?:fritas|chips|stick|palha|crocant)\b/iu,
+      /\b(?:congelad|pre[- ]?cozid|pronta)\b/iu,
+      /\b(?:p[ée]\s+de|crocant|pur[ée]|esmagada)\b/iu,
+      /\b(?:salada|tortilla|tortilh)\b/iu,
+      /\b(?:beb[ée]|infantil)\b/iu,
+    ],
+    sizeRange: { min: 500, max: 5500 },
+    unitFromTitle: "g",
+  },
+  // Olive oil 1 L bottle. Continente own-brand "Azeite
+  // Poupança" is the canonical floor at 4.59 EUR; Oliveira da
+  // Serra / Gallo are mid-market premium. Excludes shampoos,
+  // soaps, cosmetics with olive-oil naming, and other vegetable
+  // oils.
+  olive_oil_1l: {
+    query: "azeite 1l",
+    include: /\bazeite\b/iu,
+    exclude: [
+      /\b(?:champ[ôo]|sabonete|creme|loc[ãa]o|cosm[ée]tic|sab[ãa]o)\b/iu,
+      /\b(?:girassol|amendoim|colza|milho|s[ée]samo|linha[çc]a)\b/iu,
+      /\b(?:spray|aerossol)\b/iu,
+      /\b(?:tempero|prepara|biscoito|bolacha)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "ml",
+  },
+  // Still water 1.5 L PET. Continente own-brand at 1.86 EUR for
+  // 6 x 1.5 L = 11.16, ~1.86 per 1.5 L pack. Single-bottle
+  // floor pickers (Caldas de Penacova, Luso, Vitalis) range
+  // 0.45-2 EUR per 1.5 L bottle. Leading "Á" non-ASCII so
+  // include uses a Unicode lookbehind.
+  water_bottled_1500ml: {
+    query: "agua sem gas 1,5l",
+    include: /(?<!\p{L})[áa]gua\b/iu,
+    exclude: [
+      /\bcom\s+g[áa]s\b/iu,
+      /\b(?:gaseificad|carbonatad|gas[oeéifi])\b/iu,
+      /\b(?:sabor|aromatizad|fruta|lim[ãa]o|laranja|frutos|cereja)\b/iu,
+      /\b(?:beb[ée]|infantil)\b/iu,
+      /\b(?:t[óo]nica|coca|pepsi|sprite|isot[óo]nica|gatorade|powerade)\b/iu,
+      /\b(?:perfume|col[ôo]nia|destilad)\b/iu,
+    ],
+    sizeRange: { min: 1300, max: 1700 },
+    unitFromTitle: "ml",
+  },
+  // Loose fresh bananas per kg (Continente own-brand "Banana da
+  // Madeira" / Banana Bio). Excludes baby food, banana chips,
+  // snack bars, juices, smoothies, baked goods, ice cream.
+  bananas_1kg: {
+    query: "banana kg",
+    include: /\bbanana\b/iu,
+    exclude: [
+      /\b(?:bolo|bolinho|brownie|cake|paozinho|p[ãa]o)\b/iu,
+      /\b(?:cereal|granola|barra|m[uú]sli|prote[íi]na|preparado)\b/iu,
+      /\b(?:sumo|n[ée]ctar|smoothie|bebida|leite|iogurte)\b/iu,
+      /\b(?:chips|chip|desidrat|liof|seca)\b/iu,
+      /\b(?:beb[ée]|infantil|papa)\b/iu,
+      /\b(?:gelado|sorvete|sobremesa)\b/iu,
+    ],
+    sizeRange: { min: 500, max: 2500 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh apples per kg ("Maçã" with c-cedilla and
+  // a-tilde, but leading M is ASCII so `\b` anchors). Excludes
+  // apple juice / cider / vinegar, baby food, dried, sweets,
+  // baked goods.
+  apples_1kg: {
+    query: "maca golden kg",
+    include: /\bma[çc][ãa]\b/iu,
+    exclude: [
+      /\b(?:sumo|n[ée]ctar|cidra|vinagre|cidre)\b/iu,
+      /\b(?:beb[ée]|infantil|papa|crescimento)\b/iu,
+      /\b(?:cereal|granola|barra|m[uú]sli)\b/iu,
+      /\b(?:chips|chip|desidrat|liof|seca|crocant)\b/iu,
+      /\b(?:strudel|compota|geleia|doce|tarte|pastel)\b/iu,
+      /\b(?:champ[ôo]|sabonete|creme|cosm[ée]tic)\b/iu,
+      /\b(?:vegan|hambur|burger)\b/iu,
+    ],
+    sizeRange: { min: 500, max: 2500 },
+    unitFromTitle: "g",
+  },
+  // Fresh chicken breast filet ("peito de frango"). Excludes
+  // turkey ("peru"), ham / cold cuts ("fiambre"), nuggets,
+  // frozen, sausages, ground meat ("carne picada de frango").
+  chicken_breast_1kg: {
+    query: "peito frango kg",
+    include: /\bpeito\b.*\bfrango\b/iu,
+    exclude: [
+      /\bperu\b/iu,
+      /\b(?:fiambre|presunto|mortadela|salame|salsicha|paio|chouri)\b/iu,
+      /\b(?:nuggets|filetes\s+panad|panad|empanad|crocant|crispy)\b/iu,
+      /\b(?:congelad|congel|frozen|ultracongel)\b/iu,
+      /\b(?:fumad|defumad|tabule|temperado|marinado|adobado)\b/iu,
+      /\b(?:picada|moida|carne\s+picada)\b/iu,
+      /\b(?:caldo|sopa|salada|tempero|prepara)\b/iu,
+    ],
+    sizeRange: { min: 300, max: 1500 },
+    unitFromTitle: "g",
+  },
+  // Fresh ground beef ("carne picada de bovino / vaca"). Excludes
+  // pork ("porco / suino"), chicken / turkey, burgers, mixed
+  // ("mista"), canned, dog/cat food.
+  beef_ground_1kg: {
+    query: "carne picada bovino kg",
+    include: /\bcarne\s+picada\b/iu,
+    exclude: [
+      /\b(?:porco|su[íi]no|frango|peru|borrego|cordeiro|coelho)\b/iu,
+      /\b(?:mista|mistura|combinada|misto)\b/iu,
+      /\b(?:hamb[úu]rguer|burger|almondega|alm[ôo]ndega|kebab)\b/iu,
+      /\b(?:conserv|enlat|conserv[ao])\b/iu,
+      /\b(?:c[ãa]o|gato|cachorro|pet)\b/iu,
+      /\b(?:congelad|congel|ultracongel)\b/iu,
+    ],
+    sizeRange: { min: 300, max: 1500 },
+    unitFromTitle: "g",
+  },
+  // Portuguese "queijo flamengo" (yellow semi-hard cheese,
+  // analogous to gouda) is the canonical local pick at 500 g.
+  // Excludes specialty / blue / processed slices / cream
+  // cheese / fresh cheese ("fresco"), grated, snack-sized,
+  // halloumi / mozzarella.
+  cheese_local_500g: {
+    query: "queijo flamengo 500g",
+    include: /\bqueijo\b/iu,
+    exclude: [
+      /\b(?:ralado|ralad|p[óo]|polvilho)\b/iu,
+      /\b(?:fresco|fresh|requeij[ãa]o|cottage|ricotta|mascarpone)\b/iu,
+      /\b(?:azul|brie|camembert|cheddar|parmes[ãa]o|gouda|gruyere)\b/iu,
+      /\b(?:halloumi|mozzarella|mozzar[ée]la|stracciatella|burrata)\b/iu,
+      /\b(?:snack|relleno|preparado|fondue|dip|salsa)\b/iu,
+      /\b(?:saborizad|aromatizad|fumad|defumad|ervas)\b/iu,
+      /\b(?:vegan|vegetal|sem\s+lactose)\b/iu,
+    ],
+    sizeRange: { min: 250, max: 700 },
+    unitFromTitle: "g",
+  },
+  // 500 ml / 33 cl beer can ("Cerveja em Lata"). Portuguese
+  // retail Super Bock 0.33 L cans are the canonical floor;
+  // Heineken / Carlsberg / Sagres also qualify. Excludes
+  // non-alcoholic ("sem alcool"), flavoured (Radler / shandy),
+  // cider ("sidra"), sausage / cheese cross-contamination,
+  // gift kits, multi-pack-only.
+  beer_imported_500ml: {
+    query: "cerveja lata 33cl",
+    include: /\bcerveja\b/iu,
+    exclude: [
+      /\bsem\s+[áa]lcool\b/iu,
+      /\b(?:radler|sabor|frutas|cocktail|aromatizad)\b/iu,
+      /\b(?:sidra|cidre|cidra)\b/iu,
+      /\b(?:queijo|salsicha|past|salgad)\b/iu,
+      /\b(?:caixa|kit|presente|prenda|set)\b/iu,
+      /\b(?:abridor|copo|caneca)\b/iu,
+    ],
+    sizeRange: { min: 250, max: 600 },
+    unitFromTitle: "ml",
+  },
+};
 
 export type ParsedUnit = "ml" | "g" | "pcs";
 
