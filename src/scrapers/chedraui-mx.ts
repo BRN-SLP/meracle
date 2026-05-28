@@ -178,16 +178,24 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MxPicker>> = {
     unitFromTitle: "g",
   },
   // Fresh tomatoes ("Tomate Bola por kg", "Tomate Saladette por
-  // kg"). Excludes salsas, purees, ketchup, and pizza pre-mixes.
+  // kg"). Excludes salsas, purees, ketchup, pizza pre-mixes, and
+  // canned crushed varieties ("Tomate Molido Del Fuerte"); those
+  // are processed pantry goods, not the fresh produce the canonical
+  // tomatoes_1kg slug represents.
   tomatoes_1kg: {
     query: "tomate kg",
     include: /\btomate/i,
     exclude: [
       /\b(?:salsa|catsup|ketchup|pulpa|extracto|sopa|jugo|conserva|enlatado)\b/i,
       /\bpur[eé](?!\p{L})/iu,
-      /\b(?:la costeña|herdez|hellmann|del monte|maggi|knorr|valle)\b/i,
+      /\b(?:la costeña|herdez|hellmann|del monte|del fuerte|maggi|knorr|valle)\b/i,
       /\b(?:pizza|empanada|tarta|relleno|preparado|mix|frijol)\b/i,
       /\b(?:deshidratado|secado|seco|polvo|aroma|saborizado)\b/i,
+      /\b(?:molid[oa]s?|tritura(?:d[oa]s?|do)|aplastad[oa]s?|condimentad[oa]s?|sazonad[oa]s?)\b/i,
+      // Tomatillo ("Tomate Verde") is Physalis ixocarpa, a different
+      // species. The canonical tomatoes_1kg slug means red tomato
+      // (Solanum lycopersicum) for cross-country comparability.
+      /\b(?:verde|verdes|tomatill[oa]s?)\b/i,
     ],
     sizeRange: { min: 100, max: 3000 },
     unitFromTitle: "g",
@@ -232,7 +240,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MxPicker>> = {
   // line which is flavoured water labelled as "agua" but with red
   // berry / lemon / cucumber notes.
   water_bottled_1500ml: {
-    query: "agua natural sin gas",
+    query: "agua natural ciel 1.5",
     include: /\bagua\b/i,
     exclude: [
       /\b(?:con gas|gasificada|mineralizada|soda|tonica|tónica|tonic)\b/i,
@@ -241,9 +249,13 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MxPicker>> = {
       /\bsabor\b/i,
       /\b(?:gaseosa|cola|sprite|pepsi|coca|inca|isotonica|gatorade|powerade)\b/i,
       /\b(?:destilada|colonia|limpiavidrios|hidratante|energizante)\b/i,
-      /\b(?:purificadora|garrafa|garrafón|cajeta|bebida)\b/i,
+      /\b(?:purificadora|garrafa|garrafón|cajeta|bebida|sixpack|six pack|paquete)\b/i,
     ],
-    sizeRange: { min: 700, max: 6000 },
+    // 1.5 L PET single-bottle staple. The 5 L Ciel family bottle
+    // was being preferred at 8.70 MXN per-canonical-1.5L, well
+    // below the actual shelf price of a single 1.5 L bottle (~12-15
+    // MXN). Tighten to the consumer pack only.
+    sizeRange: { min: 1300, max: 1700 },
     unitFromTitle: "ml",
   },
   // Fresh bananas ("Plátano Chiapas por Kg", "Plátano Tabasco por

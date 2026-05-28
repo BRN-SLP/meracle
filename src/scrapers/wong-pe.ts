@@ -148,7 +148,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
       /\b(?:stevia|sucralosa|edulcorante|fructosa|aspartam)\b/i,
       /\b(?:caramelo|chocolate|galleta|polvo gelatina|chupetin)\b/i,
     ],
-    sizeRange: { min: 800, max: 5500 },
+    // 1 kg consumer pack only. The 5 kg restaurant bag pulls
+    // per-canonical-kg below the shelf staple.
+    sizeRange: { min: 800, max: 1200 },
     unitFromTitle: "g",
   },
   // Long-grain "extra" or "superior" rice in 750g / 1 kg / 5 kg
@@ -225,17 +227,25 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // Excludes carbonated ("con gas", "gasificada"), tonic, flavoured,
   // and non-drinking household products (limpiavidrios, cologne).
   water_bottled_1500ml: {
-    query: "agua mineral sin gas",
-    include: /\bagua\b/i,
+    // Wong PE's catalog does not stock a 1.5 L plain still water as
+    // single bottle; the cheapest local SKU at that size is sparkling
+    // (Socosani con gas), and the only 1.5 L still option is Evian
+    // (imported French premium, ~5x the staple price). Cielo is the
+    // Peruvian local staple (San Luis / San Mateo are tier-2), so the
+    // picker targets local brands and accepts 1 L or 2.5 L as the
+    // closest single-bottle stand-in.
+    query: "agua sin gas cielo",
+    include: /\bagua\b.*\b(?:cielo|san\s+(?:luis|mateo|carlos)|loa|cuisine)\b/i,
     exclude: [
-      /\b(?:con gas|gasificada|gasificada|soda|tonica|tónica|tonic)\b/i,
+      /\b(?:con gas|gasificada|soda|tonica|tónica|tonic|mineral con gas)\b/i,
       /\b(?:saborizada|aromatizada|frutal|limon|limón|naranja|fresa)\b/i,
       /\b(?:gaseosa|cola|sprite|pepsi|coca|inca kola|isotonica|gatorade|powerade)\b/i,
       /\b(?:destilada|desionizada|colonia|limpiavidrios|lavandina)\b/i,
       /\b(?:bebida|jugo|nectar|hidratante|energizante)\b/i,
-      /\b(?:pollo|gaseosa|menu|combo|rostizado)\b/i,
+      /\b(?:pollo|menu|combo|rostizado|sixpack|caja|bid[oó]n)\b/i,
+      /\b(?:evian|acqua panna|fiji|perrier|vichy)\b/i,
     ],
-    sizeRange: { min: 700, max: 6000 },
+    sizeRange: { min: 900, max: 3000 },
     unitFromTitle: "ml",
   },
   // Bananas ("plátano" in Peru — "banana" matches a few brand names
@@ -279,8 +289,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // Chicken breast ("filete de pechuga de pollo x kg"). The Wong /
   // San Fernando / Redondos butcher counter sells fresh pechuga
   // per kg with kg measurement. Excludes nuggets, fingers (deditos),
-  // burgers, schnitzel, smoked, sausages, turkey (pavo), and the
-  // ready-meal combos that include rotisserie chicken.
+  // burgers, schnitzel, smoked, sausages, turkey (pavo), the
+  // ready-meal combos that include rotisserie chicken, and the
+  // "pechuga con ala" combo cut (breast attached to wing, sold
+  // cheaper per kg because the wing is mostly bone, so the picker
+  // would pick it as the cheapest, breaking comparability against
+  // pure-breast picks elsewhere).
   chicken_breast_1kg: {
     query: "pechuga pollo",
     include: /\bpechuga\b.*\bpollo\b/i,
@@ -294,6 +308,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
       /\b(?:relleno|rellena|marinada|adobada|tandoori|barbacoa)\b/i,
       /\b(?:congelada|congelado|frozen)\b/i,
       /\b(?:combo|menu|rostizado|gaseosa|papas fritas)\b/i,
+      /\b(?:con\s+(?:ala|alas|hueso|pelleja|piel|menudencia)|con\s+ad[óo]bo)\b/i,
     ],
     sizeRange: { min: 300, max: 1500 },
     unitFromTitle: "g",

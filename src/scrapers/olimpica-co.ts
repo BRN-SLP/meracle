@@ -79,16 +79,21 @@ interface CoPicker {
 }
 
 const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
-  // Sliced "pan tajado" bread. Bimbo, Milenio, Olimpica private
-  // label, Fitcook. Excludes croissant-style and snack breads.
+  // White sliced "pan tajado" bread. Bimbo, Milenio, Olimpica
+  // private label, Fitcook. Excludes croissant-style and snack
+  // breads, and excludes whole-grain ("integral") which is a
+  // different SKU class and breaks per-canonical-500g
+  // cross-country comparability with the white-bread picks in
+  // other countries.
   bread_500g: {
-    query: "pan tajado",
+    query: "pan blanco tajado",
     include: /\bpan\b/i,
     exclude: [
       /\b(?:hamburguesa|hot dog|hotdog|pita|naan|chapa)\b/i,
       /\b(?:croissant|brioche|bizcocho|panecillo|donut|rosca)\b/i,
       /\b(?:relleno|crema|chocolate|dulce|mermelada)\b/i,
       /\b(?:perro caliente|sandwichero|tortilla)\b/i,
+      /\b(?:integral|integrales|multicereal|multi[- ]cereal|cereales|avena|salvado|centeno|linaza|chia|chía|semilla|grano entero|fibra|light|fitness|fitcook)\b/i,
     ],
     sizeRange: { min: 300, max: 800 },
     unitFromTitle: "g",
@@ -152,7 +157,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
       /\b(?:caramelo|chocolate|galleta|chupetin|sobre|sobres)\b/i,
       /\bmango\b/i,
     ],
-    sizeRange: { min: 800, max: 5500 },
+    // 1 kg consumer pack only. The 2.5 / 5 kg restaurant bags discount
+    // the per-canonical-kg price and misrepresent the shelf staple.
+    sizeRange: { min: 800, max: 1200 },
     unitFromTitle: "g",
   },
   // Long-grain rice in 454 g / 1 kg / 3 kg bags. "Arroz Mi Arroz"
@@ -209,7 +216,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // Olitalia, Carbonell. Excludes shower gels and skincare that
   // name-drop olive oil, plus condiments / mayonnaise.
   olive_oil_1l: {
-    query: "aceite oliva",
+    query: "aceite oliva 1 litro",
     include: /\baceite\b.*\boliva\b/i,
     exclude: [
       /\b(?:girasol|maiz|maíz|mezcla|soja|canola|sansa)\b/i,
@@ -218,7 +225,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
       /\b(?:mayonesa|ketchup|mostaza|hummus)\b/i,
       /\b(?:atun|atún|sardina|anchoa|conserva|en lata)\b/i,
     ],
-    sizeRange: { min: 200, max: 2200 },
+    // 1 L bottle staple. The 2 L jug discounts per-canonical-L too
+    // aggressively for the shelf-staple oracle target.
+    sizeRange: { min: 800, max: 1200 },
     unitFromTitle: "ml",
   },
   // Still water in 500ml / 1 L / 1.5 L / 2 L / 6 L bottles. Brisa
@@ -226,16 +235,24 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // and apparel-aliased SKUs (Olimpica's search incorrectly returns
   // "Top sin mangas" under "sin gas").
   water_bottled_1500ml: {
-    query: "agua brisa",
-    include: /\bagua\b.*\bbrisa\b/i,
+    // Olimpica CO catalog does NOT carry a 1.5 L Brisa SKU, only
+    // 600 ml / 1 L / 3 L / 6 L for that brand. Switch to Agua
+    // Manantial, which sells "Agua Manantial sin Gas 1,5 Lt" as
+    // the consumer 1.5 L PET staple.
+    query: "agua manantial sin gas 1.5",
+    include: /\bagua\b.*\b(?:manantial|cristal|brisa|epm)\b/i,
     exclude: [
       /\b(?:con gas|gasificada|gaseada|soda|tonica|tonic)\b/i,
       /\b(?:saborizada|aromatizada|frutal|limon|naranja|fresa)\b/i,
       /\b(?:gaseosa|cola|sprite|pepsi|coca|inca kola|gatorade|powerade)\b/i,
       /\b(?:destilada|colonia|limpiavidrios|hidratante|energizante)\b/i,
       /\b(?:top|short|camiseta|sin mangas|leggings|safetti)\b/i,
+      /\b(?:bid[oó]n)\b/i,
     ],
-    sizeRange: { min: 500, max: 7000 },
+    // 1.5 L PET bottle staple. 5 L and 6 L family carafes are
+    // bulk-priced and break per-canonical-1.5L comparability
+    // against single-bottle picks elsewhere.
+    sizeRange: { min: 1300, max: 1700 },
     unitFromTitle: "ml",
   },
   // Bananas per kg ("Banano Económico a Granel X Kg" is cheapest
