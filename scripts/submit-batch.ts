@@ -19,6 +19,7 @@ import { normalize, NormalizationError } from "../src/normalize.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
+import { scrapeMigrosTr } from "../src/scrapers/migros-tr.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
 import { scrapeReweDe } from "../src/scrapers/rewe-de.js";
 import { scrapeSainsburysUk } from "../src/scrapers/sainsburys-uk.js";
@@ -169,13 +170,23 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe] = await Promise.all([
+  // Migros Turkey runs over plain HTTP, public unauthenticated API.
+  const migrosPromise: Promise<ScraperResult | null> = scrapeMigrosTr().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  migros-tr: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
     conadPromise,
     carrefourPromise,
     rewePromise,
+    migrosPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -199,6 +210,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  rewe-de      : SKIPPED (scraper threw)");
   }
+  if (migros) {
+    console.log(`  migros-tr    : ${migros.scraped.length} scraped, ${migros.misses.length} miss`);
+  } else {
+    console.log("  migros-tr    : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -208,6 +224,7 @@ async function main(): Promise<void> {
     ...(conad?.scraped ?? []),
     ...(carrefour?.scraped ?? []),
     ...(rewe?.scraped ?? []),
+    ...(migros?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
