@@ -131,10 +131,11 @@ async function main(): Promise<void> {
   printHeader();
 
   console.log("Scraping retailers ...");
-  // Novus UA + Mercadona ES are free public APIs, always run.
-  // Sainsbury's UK, Conad IT, and Carrefour FR require Browser Use
-  // Cloud (BROWSER_USE_API_KEY). Skip silently if the key is unset so
-  // the batch still works with the two free retailers.
+  // Novus UA, Mercadona ES, Conad IT, and Rewe DE run over plain
+  // HTTP, no Browser Use Cloud needed. Sainsbury's UK and Carrefour
+  // FR sit behind Akamai Bot Manager and require BROWSER_USE_API_KEY
+  // (a residential proxy). Skip those silently if the key is unset
+  // so the batch still works with the four HTTP retailers.
   const sainsburysPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
     ? scrapeSainsburysUk().catch((e: unknown) => {
         const msg = e instanceof Error ? e.message : String(e);
@@ -142,13 +143,13 @@ async function main(): Promise<void> {
         return null;
       })
     : Promise.resolve(null);
-  const conadPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
-    ? scrapeConadIt().catch((e: unknown) => {
-        const msg = e instanceof Error ? e.message : String(e);
-        console.warn(`  conad-it: scrape threw, skipping ($${msg})`);
-        return null;
-      })
-    : Promise.resolve(null);
+  const conadPromise: Promise<ScraperResult | null> = scrapeConadIt().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  conad-it: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
   const carrefourPromise: Promise<ScraperResult | null> = env.BROWSER_USE_API_KEY
     ? scrapeCarrefourFr().catch((e: unknown) => {
         const msg = e instanceof Error ? e.message : String(e);
@@ -186,7 +187,7 @@ async function main(): Promise<void> {
   if (conad) {
     console.log(`  conad-it     : ${conad.scraped.length} scraped, ${conad.misses.length} miss`);
   } else {
-    console.log("  conad-it     : SKIPPED (BROWSER_USE_API_KEY not set)");
+    console.log("  conad-it     : SKIPPED (scraper threw)");
   }
   if (carrefour) {
     console.log(`  carrefour-fr : ${carrefour.scraped.length} scraped, ${carrefour.misses.length} miss`);
