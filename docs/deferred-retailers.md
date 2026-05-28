@@ -98,6 +98,64 @@ Until those land, the two catalog slots stay populated but score zero
 observations per daily cron run, and the batch pipeline silently
 moves on.
 
+## Newer probes (2026-05-27)
+
+### DE · Rewe API opens with marketCode
+
+`https://shop.rewe.de/api/products?search=<term>&serviceTypes=PICKUP&page=1`
+returns 200 with ~80 KB of JSON via plain `node:fetch` (no Browser
+Use Cloud, no Akamai gate). The response carries 40 products per
+page across 90 pages (3565 total for `milch`).
+
+The catch: every product ships `_embedded.articles: []` until the
+request also includes a valid `wwIdent` + `marketCode` pair. Without
+the pair the `type` is `SEARCH_RESULT` but no prices populate.
+Guessing market codes (`010301`, `8748469`, etc.) returns
+`type: NO_HIT` with `count: 0`.
+
+The market-discovery endpoints all 404 or 403:
+
+- `/api/marketsearch`, `/api/markets`, `/api/markets/search`,
+  `/api/postal-code/<zip>`, `/api/zipcode-suggestion`,
+  `/api/markets/zipcode/<zip>`, `/api/marktauswahl`,
+  `/api/zip-code-availability`, etc.
+- `/sitemap.xml`, `/marktauswahl`, `/marktseite/...` on both
+  `shop.rewe.de` and `www.rewe.de` are blocked at the Akamai edge.
+
+The cheapest path to ship Rewe is:
+
+1. Run a one-off Browser Use Cloud session that walks the postcode
+   modal once and intercepts the `wwIdent` cookie or the network
+   request that follows the market click.
+2. Hardcode that pair as `REWE_DEFAULT_MARKET = { wwIdent: ..., marketCode: ... }`
+   in `src/scrapers/rewe-de.ts`, valid for ~6 months until Rewe
+   rotates IDs.
+3. Daily cron then runs the 16 queries through `/api/products?...&wwIdent=<id>&marketCode=<id>`
+   with plain `node:fetch`, no Browser Use Cloud session at all.
+
+That shape is materially simpler than the original 7-step UI flow:
+the consent / postcode dance becomes a one-time setup, daily ops
+are pure HTTP.
+
+### PL · Auchan SPA bootstrap stays 2 KB
+
+`https://www.auchan.pl` and every `/sklep/...`, `/online-supermarket/...`,
+`/api/...` path returns the same ~2 KB Vue shell with `<div id="app"></div>`
+and references to `chunk-vendors.*.js` + `app.*.js`. No SSR'd product
+data anywhere.
+
+Knuspr.de (Schwarz Group, mentioned above) still returns 403 to
+`/c/milch-und-milchprodukte/103-25` directly. Edeka returns 403 on
+`/eh/suche.html?search=milch`. Picnic.de returns 404 on its inferred
+storefront API.
+
+The least-effort PL approach remains Auchan via Browser Use Cloud,
+but only if a non-blocked proxy locale exists. The earlier failure
+(`ERR_TUNNEL_CONNECTION_FAILED` from `de` and `us` proxies) is the
+gating issue. Until Browser Use ships a `pl` proxy or a non-proxy
+runner option (e.g. dispatch from a GitHub Actions runner with a
+public IP), PL stays uncovered.
+
 ## Catalog stability
 
 `Retailer = "novus-ua" | "sainsburys-uk" | "mercadona-es" |
