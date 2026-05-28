@@ -31,7 +31,8 @@ export type Retailer =
   | "biedronka-pl"
   | "rewe-de"
   | "carrefour-fr"
-  | "conad-it";
+  | "conad-it"
+  | "migros-tr";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -53,9 +54,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -204,6 +205,30 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 7, maxMajor: 25 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 3, maxMajor: 20 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "IT", currency: "EUR", retailer: "conad-it"     ,  sanityRange: { minMajor: 0.8, maxMajor: 5 } },
+
+  // TURKEY, Migros via migros.com.tr public JSON API.
+  // Prices in TRY (Türk lirası). Sanity ranges sit wide because the
+  // Turkish lira is on a fast inflation curve, so the band is sized
+  // for both shelf prices today AND drift over a 6 to 12 month
+  // window before the catalog is retuned. Beer is officially listed
+  // as not-sold-online by Migros TR (alcohol licensing) so the slug
+  // will surface as a clean miss on every cron until that changes.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 5, maxMajor: 80 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 20, maxMajor: 100 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 50, maxMajor: 300 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 50, maxMajor: 300 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 20, maxMajor: 100 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 30, maxMajor: 300 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 25, maxMajor: 200 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 10, maxMajor: 80 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 150, maxMajor: 900 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 3, maxMajor: 40 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 40, maxMajor: 200 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 30, maxMajor: 250 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 100, maxMajor: 600 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 250, maxMajor: 1500 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 80, maxMajor: 500 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 30, maxMajor: 250 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
