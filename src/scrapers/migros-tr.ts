@@ -262,7 +262,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], TrPicker>> = {
   // per-litre price is what matters for the oracle and rescaling is
   // automatic.
   water_bottled_1500ml: {
-    query: "doğal kaynak suyu",
+    // Restrict to the standard 1.5 L PET single bottle (consumer
+    // staple). The 5 L family pack discounts the per-canonical-1.5L
+    // price by ~3x and breaks comparability with single-bottle
+    // picks elsewhere (Mercadona, Conad, Novus, Auchan PL).
+    query: "doğal kaynak suyu 1,5",
     // The keyword "su" alone is too broad (matches yogurts, juices,
     // and unrelated "suyu" = "juice"). Anchor on the staple phrase.
     include: /(?<!\p{L})(?:doğal kaynak|içme suyu|kaynak suyu|içme su|doğal su)/iu,
@@ -272,7 +276,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], TrPicker>> = {
       /(?<!\p{L})(?:kolonya|losyon|krem|şampuan|cilt|saç|hava|nem|buhar|kapsül|tablet)/iu,
       /(?<!\p{L})(?:bebek|maması|sterilize|s[üu]t|yo[gğ]urt)/iu,
     ],
-    sizeRange: { min: 1000, max: 6000 },
+    sizeRange: { min: 1400, max: 1600 },
     unitFromTitle: "ml",
   },
   // Bananas sold per kg loose ("Muz Yerli Kg" = local from Anamur,
