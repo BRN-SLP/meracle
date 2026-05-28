@@ -19,6 +19,7 @@ import { normalize, NormalizationError } from "../src/normalize.js";
 import { scrapeAuchanPl } from "../src/scrapers/auchan-pl.js";
 import { scrapeAuchanRo } from "../src/scrapers/auchan-ro.js";
 import { scrapeRimiEe } from "../src/scrapers/rimi-ee.js";
+import { scrapeRimiLv } from "../src/scrapers/rimi-lv.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -250,7 +251,16 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe] = await Promise.all([
+  // Rimi Latvia, identical SSR extract pattern as rimi-ee.
+  const rimiLvPromise: Promise<ScraperResult | null> = scrapeRimiLv().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  rimi-lv: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -265,6 +275,7 @@ async function main(): Promise<void> {
     auchanPromise,
     auchanRoPromise,
     rimiEePromise,
+    rimiLvPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -328,6 +339,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  rimi-ee      : SKIPPED (scraper threw)");
   }
+  if (rimiLv) {
+    console.log(`  rimi-lv      : ${rimiLv.scraped.length} scraped, ${rimiLv.misses.length} miss`);
+  } else {
+    console.log("  rimi-lv      : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -345,6 +361,7 @@ async function main(): Promise<void> {
     ...(auchan?.scraped ?? []),
     ...(auchanRo?.scraped ?? []),
     ...(rimiEe?.scraped ?? []),
+    ...(rimiLv?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);

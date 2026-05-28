@@ -38,7 +38,8 @@ export type Retailer =
   | "olimpica-co"
   | "chedraui-mx"
   | "auchan-ro"
-  | "rimi-ee";
+  | "rimi-ee"
+  | "rimi-lv";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -60,7 +61,7 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV";
 
 export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON";
 
@@ -381,6 +382,32 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "EE", currency: "EUR", retailer: "rimi-ee",       sanityRange: { minMajor: 6, maxMajor: 22 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "EE", currency: "EUR", retailer: "rimi-ee",       sanityRange: { minMajor: 2.5, maxMajor: 12 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "EE", currency: "EUR", retailer: "rimi-ee",       sanityRange: { minMajor: 0.7, maxMajor: 4 } },
+
+  // LATVIA via Rimi (same data-gtm-eec-product SSR shape as Rimi
+  // EE, served from rimi.lv at /e-veikals/lv/meklesana). Prices in
+  // EUR (Eurozone since 2014). Eggs ship as 10-piece cartons, same
+  // canonical 12/10 scaling via normalize.ts. Latvian retail uses
+  // its own set of diacritics (a-macron, e-macron, i-macron,
+  // u-macron, c-caron, s-caron, z-caron, plus l-cedilla and
+  // n-cedilla), so pickers needing leading-diacritic words wrap
+  // their include patterns in a Unicode lookbehind (same trick as
+  // EE apples/beer).
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.5, maxMajor: 3.5 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.5, maxMajor: 2.5 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 1.5, maxMajor: 7 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.8, maxMajor: 5 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.5, maxMajor: 3 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 1, maxMajor: 8 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.8, maxMajor: 6 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.5, maxMajor: 4 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 4, maxMajor: 30 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.3, maxMajor: 3 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.5, maxMajor: 3 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.4, maxMajor: 4 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 3, maxMajor: 15 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 2.5, maxMajor: 12 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "LV", currency: "EUR", retailer: "rimi-lv",       sanityRange: { minMajor: 0.6, maxMajor: 4 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
