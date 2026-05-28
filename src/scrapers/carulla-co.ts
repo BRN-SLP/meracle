@@ -183,7 +183,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // Excludes sauces, pastes, soups, and canned tomato products
   // that show up under the same keyword.
   tomatoes_1kg: {
-    query: "tomate kg",
+    // Carulla's index drops zero-price SKUs when the query ends in
+    // a unit suffix, "tomate kg" returns 0 results. Bare "tomate
+    // chonto" gives 9 cards including the canonical FRESCAMPO 1 kg
+    // pack.
+    query: "tomate chonto",
     include: /\btomate/i,
     exclude: [
       /\b(?:salsa|pasta|pulpa|extracto|sopa|jugo|conserva|enlatado)\b/i,
@@ -199,7 +203,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // sweet potato (camote / batata), frozen fries (McCain Rapi Papa),
   // and the "yuca" / "ñame" tubers that also surface under "papa".
   potatoes_1kg: {
-    query: "papa kg",
+    // Carulla's index drops zero-price SKUs when the query ends in
+    // a unit suffix, "papa kg" returns 0 results. "papa pastusa"
+    // gives the canonical Granel (loose, 1 kg) listing.
+    query: "papa pastusa",
     include: /\bpapa\b/i,
     exclude: [
       /\b(?:camote|batata|olluco|oca|yuca|ñame|name|arracacha)\b/i,
@@ -216,7 +223,11 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // Olitalia, Carbonell. Excludes shower gels and skincare that
   // name-drop olive oil, plus condiments / mayonnaise.
   olive_oil_1l: {
-    query: "aceite oliva 1 litro",
+    // Carulla's catalog tops out at 900 ml Olivetto for the staple
+    // SKUs. The "1 litro" suffix on the query collapses the result
+    // set to zero, so we drop it and widen the size band to allow
+    // the 900 ml bottle, normalize.ts scales to canonical 1 L.
+    query: "aceite de oliva",
     include: /\baceite\b.*\boliva\b/i,
     exclude: [
       /\b(?:girasol|maiz|maíz|mezcla|soja|canola|sansa)\b/i,
@@ -225,9 +236,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
       /\b(?:mayonesa|ketchup|mostaza|hummus)\b/i,
       /\b(?:atun|atún|sardina|anchoa|conserva|en lata)\b/i,
     ],
-    // 1 L bottle staple. The 2 L jug discounts per-canonical-L too
-    // aggressively for the shelf-staple oracle target.
-    sizeRange: { min: 800, max: 1200 },
+    // 500 ml / 900 ml staples. Carulla doesn't stock 1 L Olivetto;
+    // the 2 L jug discounts per-canonical-L too aggressively so we
+    // cap at 1200.
+    sizeRange: { min: 400, max: 1200 },
     unitFromTitle: "ml",
   },
   // Still water in 500ml / 1 L / 1.5 L / 2 L / 6 L bottles. Brisa
@@ -259,8 +271,13 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // at Olimpica). Excludes plantain prep, banana flavoured drinks,
   // chips, baby food.
   bananas_1kg: {
-    query: "banano kg",
-    include: /\bbanano\b/i,
+    // Carulla indexes bananas mostly as per-unit ("Banano 1 und")
+    // and as the "Platano Insuperable FRESCAMPO 1600 gr" bulk pack.
+    // Querying with "kg" suffix returns zero, "platano" surfaces
+    // the canonical FRESCAMPO 1.6 kg pack which normalize.ts scales
+    // to 1 kg.
+    query: "platano",
+    include: /\b(?:banano|pl[áa]tano)\b/iu,
     exclude: [
       /\b(?:yogur|yogurt|bebida|smoothie|jugo|aroma|saborizado|nectar)\b/i,
       /\b(?:chip|chips|snack|chifle|deshidratado|seco|frito|liofilizado)\b/i,
@@ -276,7 +293,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
   // detergents that use apple as a fragrance, so the include
   // requires "manzana" to actually be the product type.
   apples_1kg: {
-    query: "manzana kg",
+    // Carulla's index drops zero-price SKUs when the query ends in
+    // "kg", "manzana kg" returns 0 results. Bare "manzana roja"
+    // surfaces the FRESCAMPO 1 kg fresh pack.
+    query: "manzana roja",
     include: /\bmanzana\b/i,
     exclude: [
       /\b(?:deterg|detergente|jab[oó]n|lavavajilla|fragancia|aroma)\b/i,
