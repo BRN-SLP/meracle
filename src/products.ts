@@ -35,7 +35,8 @@ export type Retailer =
   | "migros-tr"
   | "disco-ar"
   | "wong-pe"
-  | "olimpica-co";
+  | "olimpica-co"
+  | "chedraui-mx";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -57,9 +58,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -299,6 +300,29 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 12000, maxMajor: 50000 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 6000, maxMajor: 30000 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 2500, maxMajor: 15000 } },
+
+  // Mexico via Chedraui (Mexican retailer running on VTEX). Prices
+  // in MXN whole pesos with decimals (USD 1 ~ 17 MXN). Loose produce
+  // uses measurementUnit "kg" with fractional unitMultiplier
+  // (same as Disco AR / Wong PE). Mexico-specific terminology in
+  // the picker: "mantequilla" for butter (not manteca = lard),
+  // "plátano" for banana, "frijoles" for beans (not used).
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 20, maxMajor: 60 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 20, maxMajor: 80 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 20, maxMajor: 100 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 15, maxMajor: 60 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 20, maxMajor: 120 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 10, maxMajor: 80 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 100, maxMajor: 800 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 8, maxMajor: 50 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 10, maxMajor: 60 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 25, maxMajor: 150 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 80, maxMajor: 300 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 100, maxMajor: 500 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 40, maxMajor: 250 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "MX", currency: "MXN", retailer: "chedraui-mx",   sanityRange: { minMajor: 20, maxMajor: 100 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
