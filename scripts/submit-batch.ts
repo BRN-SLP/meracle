@@ -25,6 +25,7 @@ import { scrapeContinentePt } from "../src/scrapers/continente-pt.js";
 import { scrapeCarullaCo } from "../src/scrapers/carulla-co.js";
 import { scrapeMasXMenosCr } from "../src/scrapers/masxmenos-cr.js";
 import { scrapePlazaVeaPe } from "../src/scrapers/plaza-vea-pe.js";
+import { scrapeMamboBr } from "../src/scrapers/mambo-br.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -310,7 +311,15 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea] = await Promise.all([
+  // Mambo Brazil, mid-tier São Paulo VTEX storefront, 18th country.
+  const mamboPromise: Promise<ScraperResult | null> =
+    scrapeMamboBr().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  mambo-br: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -331,6 +340,7 @@ async function main(): Promise<void> {
     carullaPromise,
     masxmenosPromise,
     plazaVeaPromise,
+    mamboPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -424,6 +434,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  plaza-vea-pe : SKIPPED (scraper threw)");
   }
+  if (mambo) {
+    console.log(`  mambo-br     : ${mambo.scraped.length} scraped, ${mambo.misses.length} miss`);
+  } else {
+    console.log("  mambo-br     : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -447,6 +462,7 @@ async function main(): Promise<void> {
     ...(carulla?.scraped ?? []),
     ...(masxmenos?.scraped ?? []),
     ...(plazaVea?.scraped ?? []),
+    ...(mambo?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
