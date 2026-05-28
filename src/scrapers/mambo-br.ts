@@ -72,17 +72,18 @@ interface PePicker {
 }
 
 const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
-  // White sliced "pan de molde" loaves. Wong, Bimbo, Orno are the
-  // main brands. Excludes flatbreads, snack breads, sweet rolls,
-  // bagels, and the "Cuisine & Co Sandwich" microwaveable kit.
+  // Brazilian sliced bread ("pão de forma"). Pullman, Wickbold,
+  // Bauducco. Excludes flatbreads, snack breads, sweet rolls,
+  // bagels, garlic bread, and "pão de queijo" cheese rolls.
   bread_500g: {
-    query: "pan molde",
-    include: /\bpan\b.*\b(?:molde|integral|campesino|multigranos)\b/i,
+    query: "pao de forma branco",
+    include: /\bp[ãa]o\b.*\b(?:forma|integral|multigr[ãa]os|caseiro)\b/iu,
     exclude: [
-      /\b(?:pita|hamburguesa|hot dog|hotdog|burger|sandwichero|sandwich)\b/i,
-      /\b(?:bizcocho|bizcochuelo|pasteleria|panaderia|tostada|baguette)\b/i,
-      /\b(?:rosca|tortilla|chapa|chapati|naan|pretzel|donut)\b/i,
-      /\b(?:dulce|chocolate|relleno|crema|mermelada|miel)\b/i,
+      /\b(?:pita|hamburguer|hot\s*dog|hotdog|burger|sandu[ií]che)\b/iu,
+      /\b(?:bolo|biscoito|tosta|torrada|baguete|baguette)\b/iu,
+      /\b(?:rosca|tortilha|chapa|chapati|naan|pretzel|donut)\b/iu,
+      /\b(?:doce|chocolate|recheio|recheado|creme|geleia|mel)\b/iu,
+      /\bp[ãa]o\s+de\s+(?:queijo|alho|mel|a[çc][úu]car)\b/iu,
     ],
     sizeRange: { min: 250, max: 700 },
     unitFromTitle: "g",
@@ -92,13 +93,13 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // flavoured chocolate (chocolatada), evaporated (only sold as
   // pantry milk in cans), and dairy adjacent (yogurt, kefir).
   milk_1l: {
-    query: "leche entera",
-    include: /\bleche\b/i,
+    query: "leite integral",
+    include: /\bleite\b/iu,
     exclude: [
-      /\b(?:descremada|desc|deslactosada|deslactosada|sin lactosa|zerolact)\b/i,
-      /\b(?:chocolatada|achocolatada|fresa|vainilla|polvo|saborizada)\b/i,
-      /\b(?:soja|almendra|coco|avena|arroz|bebida)\b/i,
-      /\b(?:condensada|evaporada|crema|dulce|manjar|nata)\b/i,
+      /\b(?:desnatado|semi[- ]desnatado|sem\s+lactose|zero\s+lactose)\b/iu,
+      /\b(?:achocolatado|chocolate|morango|baunilha|p[óo]|saborizado)\b/iu,
+      /\b(?:soja|am[êe]ndoa|coco|aveia|arroz|bebida)\b/iu,
+      /\b(?:condensado|evaporado|creme|doce|nata)\b/iu,
       /\b(?:yogur|kefir|infant|bebe|maternizada)\b/i,
     ],
     sizeRange: { min: 700, max: 1100 },
@@ -108,8 +109,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // San Fernando. Excludes liquid egg, powdered, dyed Easter eggs,
   // quail eggs.
   eggs_12: {
-    query: "huevos",
-    include: /\bhuevos?\b/i,
+    query: "ovos brancos",
+    include: /\bovos?\b/iu,
     exclude: [
       /\b(?:liquido|líquido|pasteurizado|polvo|chocolate|pascua)\b/i,
       /\b(?:codorniz|pato|avestruz)\b/i,
@@ -122,8 +123,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // ("mantequilla de mani"), almond / coconut butter, ghee, and
   // butter-cookie / pastry confectionery.
   butter_200g: {
-    query: "mantequilla",
-    include: /\bmantequilla\b/i,
+    query: "manteiga",
+    include: /\bmanteiga\b/iu,
     exclude: [
       /\b(?:mani|maní|cacahuate|almendra|coco|nuez|avellana|girasol|ghee)\b/i,
       /\b(?:spread|untable|margarina|vegetal|light|reducida)\b/i,
@@ -139,8 +140,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // bags (per-kg sort still picks the cheapest, but the 1 kg pack
   // is the canonical reference).
   sugar_1kg: {
-    query: "azucar rubia 1kg",
-    include: /\baz[uú]car\b/i,
+    query: "acucar refinado 1kg",
+    include: /\ba[çc][úu]car\b/iu,
     exclude: [
       /\b(?:gaseosa|bebida|jugo|soda|cola|sprite|pepsi|coca|inca|kola)\b/i,
       /\b(?:sin azucar|sin azúcar|zero|light|diet|cero)\b/i,
@@ -157,7 +158,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // bags. Paisana, Wong, Costeño, Vallenorte. Excludes rice cakes,
   // rice flour, rice drinks, parboiled "chaufa" prepared mixes.
   rice_1kg: {
-    query: "arroz 1kg",
+    query: "arroz tipo 1",
     include: /\barroz\b/i,
     exclude: [
       /\b(?:galleta|biscocho|snack|chip|harina|fideo|pasta|tallarin)\b/i,
@@ -172,7 +173,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // "Tomate Sachatomate" (Andean variety). Excludes sauces, pastes,
   // pulp, dried, and stuffed prep mixes.
   tomatoes_1kg: {
-    query: "tomate kg",
+    query: "tomate italiano",
     include: /\btomate/i,
     exclude: [
       /\b(?:salsa|pulpa|extracto|sopa|jugo|conserva|enlatado)\b/i,
@@ -190,16 +191,18 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // ("camote", "batata"), frozen fries, snack chips, and potato
   // flour.
   potatoes_1kg: {
-    query: "papa kg",
-    include: /\bpapa\b/i,
+    // BR "batata" = regular potato (Peru's "batata" = sweet potato,
+    // hence the deleted self-exclude). Brazilian variant for sweet
+    // potato is "batata doce". Bolinha = baby potatoes.
+    query: "batata rosada",
+    include: /\bbatata\b/iu,
     exclude: [
-      /\b(?:camote|batata|olluco|oca|mashua|yuca)\b/i,
-      /\b(?:frita|fritas|baston|bastones|nugget|smile)\b/i,
-      /\b(?:chip|chips|snack|tortilla|nacho)\b/i,
-      /\b(?:congelada|prefrita|horno|microondas|cocida|hervida)\b/i,
-      /\b(?:fecula|almidón|harina)\b/i,
-      /\b(?:relleno|tarta|empanada|mix|salsa|aderezo|preparado)\b/i,
-      /\bpapas a la huancaina\b/i,
+      /\bbatata\s+doce\b/iu,
+      /\b(?:gnocchi|n[ho]ohi|fritas?|palito|nugget|smile)\b/iu,
+      /\b(?:chips?|snack|tortilha|nacho)\b/iu,
+      /\b(?:congelada|pr[ée]-frita|forno|micro|cozida)\b/iu,
+      /\b(?:f[éee]cula|amido|farinha)\b/iu,
+      /\b(?:recheio|recheada|torta|empanada|mix|molho|prepara)\b/iu,
     ],
     sizeRange: { min: 500, max: 5500 },
     unitFromTitle: "g",
@@ -209,8 +212,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // dressings, mayonnaise / tuna products that name-drop olive oil
   // in the descriptor, and "atún en aceite oliva" canned fish.
   olive_oil_1l: {
-    query: "aceite oliva",
-    include: /\baceite\b.*\boliva\b/i,
+    query: "azeite oliva extra virgem",
+    include: /\bazeite\b.*\boliva\b/iu,
     exclude: [
       /\b(?:girasol|maiz|maíz|mezcla|soja|canola|sésamo|sesamo|palma)\b/i,
       /\b(?:aerosol|spray|crema|loción|cosmetic|jabón|champu|champú)\b/i,
@@ -222,30 +225,24 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
     sizeRange: { min: 200, max: 1200 },
     unitFromTitle: "ml",
   },
-  // Still mineral water in 500 ml / 1 L / 1.5 L / 2.5 L bottles or
-  // 5 / 7 L bidones. San Mateo, Cielo, San Luis, San Carlos.
-  // Excludes carbonated ("con gas", "gasificada"), tonic, flavoured,
-  // and non-drinking household products (limpiavidrios, cologne).
+  // Mineral water without gas. Brazilian staples: Minalba, Crystal,
+  // Bonafont, São Lourenço, Prata. Mambo SP stocks 510 ml individual
+  // bottles + 5 L bulk bidões; no 1.5 L SKU surfaces. Size band
+  // widened to 400-2200 ml so the 510 ml single bottle qualifies,
+  // normalize.ts scales the price to the canonical 1.5 L.
   water_bottled_1500ml: {
-    // Mambo BR's catalog does not stock a 1.5 L plain still water as
-    // single bottle; the cheapest local SKU at that size is sparkling
-    // (Socosani con gas), and the only 1.5 L still option is Evian
-    // (imported French premium, ~5x the staple price). Cielo is the
-    // Peruvian local staple (San Luis / San Mateo are tier-2), so the
-    // picker targets local brands and accepts 1 L or 2.5 L as the
-    // closest single-bottle stand-in.
-    query: "agua sin gas cielo",
-    include: /\bagua\b.*\b(?:cielo|san\s+(?:luis|mateo|carlos)|loa|cuisine)\b/i,
+    query: "agua mineral sem gas",
+    include: /(?<!\p{L})[áa]gua\s+(?:mineral|sem\s+g[áa]s)\b/iu,
     exclude: [
-      /\b(?:con gas|gasificada|soda|tonica|tónica|tonic|mineral con gas)\b/i,
-      /\b(?:saborizada|aromatizada|frutal|limon|limón|naranja|fresa)\b/i,
-      /\b(?:gaseosa|cola|sprite|pepsi|coca|inca kola|isotonica|gatorade|powerade)\b/i,
-      /\b(?:destilada|desionizada|colonia|limpiavidrios|lavandina)\b/i,
-      /\b(?:bebida|jugo|nectar|hidratante|energizante)\b/i,
-      /\b(?:pollo|menu|combo|rostizado|sixpack|caja|bid[oó]n)\b/i,
-      /\b(?:evian|acqua panna|fiji|perrier|vichy)\b/i,
+      /\bcom\s+g[áa]s\b/iu,
+      /\b(?:gaseificada|t[óo]nica|tonic|soda|club soda)\b/iu,
+      /\b(?:saborizada|aromatizada|sabor|lim[ãa]o|laranja|morango)\b/iu,
+      /\b(?:refrigerante|cola|sprite|pepsi|coca|guaran[áa]|gatorade|powerade)\b/iu,
+      /\b(?:destilada|deionizada|c[ôo]l[ôo]nia|limpa\s+vidros)\b/iu,
+      /\b(?:bebida|suco|n[ée]ctar|hidratante|energ[ée]tic)\b/iu,
+      /\b(?:evian|acqua\s+panna|fiji|perrier|vichy|sao\s+pellegrino|san\s+pellegrino)\b/iu,
     ],
-    sizeRange: { min: 900, max: 3000 },
+    sizeRange: { min: 400, max: 2200 },
     unitFromTitle: "ml",
   },
   // Bananas ("plátano" in Peru — "banana" matches a few brand names
@@ -254,8 +251,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // products and platano-meaning-dessert (chifle = fried plantain
   // chips).
   bananas_1kg: {
-    query: "platano kg",
-    include: /\bpl[áa]tano\b/i,
+    query: "banana prata",
+    include: /\bbanana\b/iu,
     exclude: [
       /\b(?:yogur|yogurt|bebida|smoothie|jugo|aroma|saborizado|nectar)\b/i,
       /\b(?:chip|chips|snack|chifle|chifles|deshidratado|seco|frito)\b/i,
@@ -272,16 +269,19 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // sold per kg. Excludes apple juice, vinegar, dried, sauce, snack
   // bars / candies / chips.
   apples_1kg: {
-    query: "manzana kg",
-    include: /\bmanzana/i,
+    // BR varietals: Fuji (national), Gala, Red Argentina. All sold
+    // loose per kg via the bare-Kg branch. Excludes apple juice
+    // ("suco"), cider, dried, sauce, snack bars / candies / chips.
+    query: "maca fuji",
+    include: /(?<!\p{L})ma[çc][ãa](?!\p{L})/iu,
     exclude: [
-      /\b(?:jugo|bebida|gaseosa|isotonica|gatorade|powerade|nectar)\b/i,
-      /\b(?:vinagre|sidra|fermentada|alcohol)\b/i,
-      /\b(?:deshidratada|seca|chip|chips|snack|crocante)\b/i,
-      /\b(?:compota|mermelada|jalea|relleno|tarta|salsa)\b/i,
-      /\bpur[eé](?!\p{L})/iu,
-      /\b(?:bebe|infant|maternal|leche|yogur|cereal)\b/i,
-      /\b(?:aroma|saborizad|esencia|extracto)\b/i,
+      /\b(?:suco|bebida|refrigerante|gatorade|powerade|n[ée]ctar)\b/iu,
+      /\b(?:vinagre|sidra|cidra|fermentad|[áa]lcool)\b/iu,
+      /\b(?:desidratad|seca|chips?|snack|crocante)\b/iu,
+      /\b(?:compota|geleia|recheio|torta|molho)\b/iu,
+      /\bpur[êee]\b/iu,
+      /\b(?:beb[êe]|infant|maternal|leite|iogurte|cereal)\b/iu,
+      /\b(?:aroma|sabor|ess[êe]ncia|extrato|energ[ée]tic)\b/iu,
     ],
     sizeRange: { min: 100, max: 3000 },
     unitFromTitle: "g",
@@ -296,8 +296,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // would pick it as the cheapest, breaking comparability against
   // pure-breast picks elsewhere).
   chicken_breast_1kg: {
-    query: "pechuga pollo",
-    include: /\bpechuga\b.*\bpollo\b/i,
+    query: "peito frango",
+    include: /\bpeito\b.*\bfrango\b/iu,
     exclude: [
       /\bpavo\b/i,
       /\b(?:nugget|deditos|tiras|patty|burger|hamburguesa|chicharron)\b/i,
@@ -317,14 +317,15 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // Nacional", "Premium", "Vacuna". Excludes pork ("cerdo"), chicken
   // ("pollo"), turkey, lamb, premade burgers, sausage stuffing.
   beef_ground_1kg: {
-    query: "carne molida",
-    include: /\bcarne\b.*\bmolida\b/i,
+    query: "carne moida patinho",
+    include: /\bcarne\b.*\bmo[íi]da\b/iu,
     exclude: [
-      /\b(?:cordero|pollo|cerdo|chancho|pavo|conejo|cabra)\b/i,
-      /\b(?:hamburguesa|burger|patty|milanesa|albondiga|empanada|chorizo)\b/i,
-      /\b(?:rellena|relleno|preparada|preparado|congelada|ahumada)\b/i,
-      /\b(?:mascotas|perro|gato|cachorro|comida|alimento)\b/i,
-      /\b(?:embutido|salame|salami|morcilla|fiambre|salchicha)\b/i,
+      /\b(?:porco|su[íi]no|frango|peru|cordeiro|coelho|cabra)\b/iu,
+      /\b(?:hamb[úu]rguer|burger|alm[ôo]ndega|empanada|chouri[çc]o)\b/iu,
+      /\b(?:recheada?|recheio|prepara|congelada|defumada|ahumada)\b/iu,
+      /\b(?:c[ãa]o|gato|filhote|cachorro|pet)\b/iu,
+      /\b(?:embutido|salame|salami|morcela|presunto|mortadela|salsicha)\b/iu,
+      /\b(?:vegetal|vegano|sint[ée]tica)\b/iu,
     ],
     sizeRange: { min: 300, max: 1500 },
     unitFromTitle: "g",
@@ -333,8 +334,8 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // Gloria, Piamonte, Ecologic. Excludes grated, smoked, processed
   // slices, blue / soft cheeses, and snack-format cheese.
   cheese_local_500g: {
-    query: "queso fresco",
-    include: /\bqueso\b/i,
+    query: "queijo minas frescal",
+    include: /\bqueijo\b/iu,
     exclude: [
       /\b(?:rallado|rayado|polvo|deshidratado|en polvo)\b/i,
       /\b(?:untable|crema|mascarpone|ricota|ricotta|cottage)\b/i,
@@ -352,7 +353,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // alcoholic, malt-only, cocktail-style beverages, and packs of 4+
   // priced as a single SKU (fourpack / sixpack).
   beer_imported_500ml: {
-    query: "cerveza heineken",
+    query: "cerveja heineken lata",
     include:
       /\b(?:heineken|carlsberg|stella|corona|budweiser|peroni|guinness|leffe|hoegaarden|asahi|kronenbourg|amstel|miller|becks)\b/i,
     exclude: [
@@ -541,7 +542,7 @@ export async function scrapeMamboBr(
     if (candidates.length === 0) {
       misses.push({
         target,
-        reason: `wong returned no candidates for "${picker.query}"`,
+        reason: `mambo returned no candidates for "${picker.query}"`,
       });
       continue;
     }
