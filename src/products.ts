@@ -44,7 +44,8 @@ export type Retailer =
   | "continente-pt"
   | "carulla-co"
   | "masxmenos-cr"
-  | "plaza-vea-pe";
+  | "plaza-vea-pe"
+  | "mambo-br";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -66,9 +67,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT" | "CR";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT" | "CR" | "BR";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON" | "CRC";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON" | "CRC" | "BRL";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -311,6 +312,27 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 15, maxMajor: 80 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 10, maxMajor: 80 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 4, maxMajor: 30 } },
+
+  // Brazil via Mambo (mid-tier São Paulo VTEX storefront). Prices
+  // in BRL with two decimals. Brazilian fresh meat / produce uses
+  // VTEX measurementUnit "kg" with unitMultiplier 1, the bare-Kg
+  // branch in the Wong-shaped parser handles them.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 4, maxMajor: 25 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 4, maxMajor: 18 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 6, maxMajor: 30 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 6, maxMajor: 30 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 4, maxMajor: 25 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 3, maxMajor: 18 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 20, maxMajor: 120 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 2, maxMajor: 15 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 3, maxMajor: 15 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 15, maxMajor: 60 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 20, maxMajor: 90 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 8, maxMajor: 50 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 4, maxMajor: 25 } },
 
   // Colombia via Olimpica (VTEX catalog API). Prices in COP whole
   // pesos. Olimpica is a department store, every product carries
