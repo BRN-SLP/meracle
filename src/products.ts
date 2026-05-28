@@ -33,7 +33,8 @@ export type Retailer =
   | "carrefour-fr"
   | "conad-it"
   | "migros-tr"
-  | "disco-ar";
+  | "disco-ar"
+  | "wong-pe";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -55,9 +56,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -252,6 +253,28 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 4000, maxMajor: 30000 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 3000, maxMajor: 25000 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1000, maxMajor: 8000 } },
+
+  // Peru via Wong (Cencosud, VTEX catalog API). Prices in PEN
+  // (Peruvian Sol) whole units, the wire format includes decimals
+  // (e.g. 4.50 PEN). Sanity ranges target post-COVID Lima retail
+  // basket rates; loose produce is per-kg under measurementUnit
+  // "kg" with fractional unitMultiplier (same as Disco AR).
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 5, maxMajor: 30 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 8, maxMajor: 30 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 8, maxMajor: 40 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 2, maxMajor: 10 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 2, maxMajor: 15 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 3, maxMajor: 20 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 1, maxMajor: 15 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 30, maxMajor: 250 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 2, maxMajor: 20 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 2, maxMajor: 12 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 3, maxMajor: 25 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 10, maxMajor: 60 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 10, maxMajor: 80 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 4, maxMajor: 30 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
