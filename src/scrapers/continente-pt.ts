@@ -356,7 +356,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PtPicker>> = {
   // cider ("sidra"), sausage / cheese cross-contamination,
   // gift kits, multi-pack-only.
   beer_imported_500ml: {
-    query: "cerveja lata 33cl",
+    query: "cerveja super bock",
     include: /\bcerveja\b/iu,
     exclude: [
       /\bsem\s+[áa]lcool\b/iu,
@@ -440,8 +440,9 @@ export function parseSizeFromEmb(
 ): { value: number; unit: ParsedUnit } | null {
   const s = label.replace(/\xa0/g, " ").trim();
   // Try multi-pack first: "4 x 200 ml" / "6 x 1 lt" / "12 x 1 Kg"
+  // / "6 x 33 cl" (Continente uses cl for beer cans / bottles).
   const multi = s.match(
-    /(\d+(?:[,.]\d+)?)\s*x\s*(\d+(?:[,.]\d+)?)\s*(lt|litro|l|ml|kg|kilo|g|gr|un|und|unid)\b/i,
+    /(\d+(?:[,.]\d+)?)\s*x\s*(\d+(?:[,.]\d+)?)\s*(lt|litro|l|cl|ml|kg|kilo|g|gr|un|und|unid)\b/i,
   );
   if (multi) {
     const mult = parseFloat(multi[1]!.replace(",", "."));
@@ -457,9 +458,9 @@ export function parseSizeFromEmb(
       return { value: Math.round(mult * qty * unit.factor), unit: unit.unit };
     }
   }
-  // Single pack: "1 Lt" / "500 g" / "12 Un"
+  // Single pack: "1 Lt" / "500 g" / "12 Un" / "33 cl" (beer can).
   const single = s.match(
-    /(\d+(?:[,.]\d+)?)\s*(lt|litro|l|ml|kg|kilo|g|gr|un|und|unid)\b/i,
+    /(\d+(?:[,.]\d+)?)\s*(lt|litro|l|cl|ml|kg|kilo|g|gr|un|und|unid)\b/i,
   );
   if (single) {
     const qty = parseFloat(single[1]!.replace(",", "."));
@@ -476,6 +477,7 @@ function normaliseUnit(
 ): { unit: ParsedUnit; factor: number } | null {
   const r = raw.toLowerCase();
   if (r === "lt" || r === "litro" || r === "l") return { unit: "ml", factor: 1000 };
+  if (r === "cl") return { unit: "ml", factor: 10 };
   if (r === "ml") return { unit: "ml", factor: 1 };
   if (r === "kg" || r === "kilo") return { unit: "g", factor: 1000 };
   if (r === "g" || r === "gr") return { unit: "g", factor: 1 };
