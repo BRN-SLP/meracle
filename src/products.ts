@@ -139,18 +139,23 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "ES", currency: "EUR", retailer: "mercadona-es",  sanityRange: { minMajor: 0.6, maxMajor: 5 } },
 
   // POLAND, Auchan via zakupy.auchan.pl SSR __INITIAL_STATE__
-  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 2, maxMajor: 15 } },
-  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 2.5, maxMajor: 10 } },
+  // Ranges tuned against live Auchan prices (2026-05-28). Polish
+  // staple grocery prices skew lower than expected: own-brand UHT
+  // milk at 2.45 PLN, 1 kg sugar at 1.98 PLN, 1.5 L spring water at
+  // ~1 PLN, 1 kg potatoes at 1.98 PLN — the previous floors based on
+  // Biedronka public list prices were 20-50 percent too high.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 1.5, maxMajor: 15 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 2, maxMajor: 10 } },
   { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 6, maxMajor: 24 } },
-  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 5, maxMajor: 15 } },
-  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 3, maxMajor: 12 } },
-  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 4, maxMajor: 15 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 4, maxMajor: 15 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 1.5, maxMajor: 12 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 3, maxMajor: 15 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 4, maxMajor: 18 } },
-  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 2, maxMajor: 10 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 1.5, maxMajor: 10 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 12, maxMajor: 60 } },
-  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 1, maxMajor: 8 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 0.5, maxMajor: 8 } },
   { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 3, maxMajor: 12 } },
-  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 3, maxMajor: 15 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 2, maxMajor: 15 } },
   { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 15, maxMajor: 60 } },
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 20, maxMajor: 90 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PL", currency: "PLN", retailer: "auchan-pl",  sanityRange: { minMajor: 8, maxMajor: 45 } },
