@@ -32,7 +32,8 @@ export type Retailer =
   | "rewe-de"
   | "carrefour-fr"
   | "conad-it"
-  | "migros-tr";
+  | "migros-tr"
+  | "disco-ar";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -54,9 +55,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -229,6 +230,28 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 250, maxMajor: 1500 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 80, maxMajor: 500 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 30, maxMajor: 250 } },
+
+  // Argentina via Disco (Cencosud, VTEX catalog API). Prices in ARS
+  // whole pesos. Loose produce ("Por Kg") returns Price as the per-
+  // kilo rate. Sanity ranges target post-2025 stabilised pricing
+  // under the Milei administration; values that crater the floor or
+  // rip the ceiling are flagged before they touch the chain.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1500, maxMajor: 8000 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1000, maxMajor: 4500 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 2500, maxMajor: 9000 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 2500, maxMajor: 8000 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 800, maxMajor: 4000 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1500, maxMajor: 7000 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1500, maxMajor: 8000 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 800, maxMajor: 5000 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 10000, maxMajor: 50000 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 800, maxMajor: 5000 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1000, maxMajor: 4500 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1500, maxMajor: 8000 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 3000, maxMajor: 25000 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 4000, maxMajor: 30000 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 3000, maxMajor: 25000 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "AR", currency: "ARS", retailer: "disco-ar",      sanityRange: { minMajor: 1000, maxMajor: 8000 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
