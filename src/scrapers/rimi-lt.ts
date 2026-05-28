@@ -71,7 +71,296 @@ interface LtPicker {
   unitFromTitle?: ParsedUnit;
 }
 
-const PICKERS: Partial<Record<ProductTarget["slug"], LtPicker>> = {};
+const PICKERS: Partial<Record<ProductTarget["slug"], LtPicker>> = {
+  // White wheat sandwich bread "balta duona" (Sumuštinių duona,
+  // Skrudinimo duona TOSTE). Excludes black rye ("juoda duona"),
+  // garlic-baked ("česnakine"), grain biscuits, pastries.
+  bread_500g: {
+    query: "balta duona 500g",
+    include: /\bduona\b/i,
+    exclude: [
+      /\bjuoda\b/i,
+      /\b(?:rugin|rugiu|m[oō]čiut[ėe]s)\b/iu,
+      /\b(?:česnak|kepta\s+duona)\b/iu,
+      /\b(?:duoniukai|grūdų|paplot|krekery|krekeris)\b/iu,
+      /\b(?:saldumai|šokolad|kakao|braškės)\b/iu,
+      /\b(?:hot\s*dog|burger|hamburger|salotomis|salotin)\b/i,
+      /\b(?:džiūvėsiai|sausainiai|biskvit|napol)\b/iu,
+    ],
+    sizeRange: { min: 300, max: 700 },
+    unitFromTitle: "g",
+  },
+  // Standard milk in a 1 L carton (DVARO, ROKIŠKIO NAMINIS).
+  // Excludes plant milks (kokoso / migdolų / sojos), AUGA
+  // lactose-free, kefir, yoghurt, sour cream, curd cheese,
+  // baby formula.
+  milk_1l: {
+    query: "pienas 1l",
+    include: /\bpienas\b/i,
+    exclude: [
+      /\bbe\s+lakt(?:ozes)?\b/iu,
+      /\b(?:soja|kokos|avižų|ryžių|migdolų|grikių)\b/iu,
+      /\b(?:jogurt|kefyr|grietin|varšk|pasūk)\b/iu,
+      /\b(?:kūdik|formul|šeimynine)\b/iu,
+      /\b(?:liesas|lengvas)\b/iu,
+      /\b(?:šokoladin|braškin|aromatiz)\b/iu,
+      /\b(?:gėrimas|gertis)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1300 },
+    unitFromTitle: "ml",
+  },
+  // Fresh chicken eggs in 10-piece cartons. Excludes chocolate
+  // eggs, quail / goose / duck eggs, liquid / powdered, dyed
+  // Easter eggs.
+  eggs_12: {
+    query: "kiausiniai 10vnt",
+    include: /\bkiaušiniai\b/iu,
+    exclude: [
+      /\b(?:šokolad|saldumai|kakao)\b/iu,
+      /\b(?:putpel|žąsų|antie|antis)\b/iu,
+      /\b(?:skystieji|miltel|sausi)\b/iu,
+      /\b(?:velyk|dažytos)\b/iu,
+      /\b(?:šliuk|šiukšl|nat\s*ūr|gėl)\b/iu,
+    ],
+    sizeRange: { min: 6, max: 30 },
+    unitFromTitle: "pcs",
+  },
+  // 200 g butter bar (ROKIŠKIO, DVARO, ŽEMAITIJOS, all 82%).
+  // Excludes nut / peanut butters, margarine, ghee, lard.
+  butter_200g: {
+    query: "sviestas 200g",
+    include: /\bsviestas\b/i,
+    exclude: [
+      /\b(?:žemės\s+riešut|riešut|migdol|kokos)\b/iu,
+      /\b(?:margarin|tartin|spread|aug[ai]l|s[ėe]klų)\b/iu,
+      /\b(?:ghee|lydytas|kausintas)\b/iu,
+      /\b(?:lardas?|tauk)\b/iu,
+      /\b(?:saldumai|biskvit|kremas)\b/iu,
+    ],
+    sizeRange: { min: 100, max: 300 },
+    unitFromTitle: "g",
+  },
+  // White granulated 1 kg sugar (RIMI SMART 0.67 EUR, RIMI 1.09,
+  // PANEVĖŽIO PLIUS 0.79). Excludes brown, organic premium,
+  // powder / icing / cube / syrup, vanilla.
+  sugar_1kg: {
+    query: "cukrus baltas",
+    include: /\bcukrus\b/i,
+    exclude: [
+      /\brudasis?\s+cukrus\b/iu,
+      /\b(?:milteliai?|pulveris|kubel|sirop)\b/iu,
+      /\b(?:vanili|cinam|fruktoz|stevija|aspart)\b/iu,
+      /\b(?:ekologišk)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // White rice 1 kg / 800 g bag (Apvalieji ryžiai GRALLA 800g
+  // is the canonical Lithuanian retail pick). Excludes basmati,
+  // jasmine, brown, wild, rice flour / cakes / drinks, baby.
+  // Leading "r" is ASCII so `\b` anchors, the non-ASCII "ž" sits
+  // in the middle of the word and does not break the boundary.
+  rice_1kg: {
+    query: "ryziai balti",
+    include: /\bryžiai\b/iu,
+    exclude: [
+      /\b(?:basmati|jazmin|laukinis|rudieji|t[uū]turai)\b/iu,
+      /\b(?:risotto|paella|sushi)\b/i,
+      /\b(?:kūdik|piebar|formul)\b/iu,
+      /\b(?:miltai|duona|pyrag|sausainiai)\b/iu,
+      /\b(?:košė|kruopos|tirštas)\b/iu,
+    ],
+    sizeRange: { min: 500, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh red tomatoes per kg ("Lietuviški pomidorai
+  // 2 kl., kg" 2.59 EUR, "Raudonieji pomidorai 1 kl., 1 kg"
+  // 1.76 EUR). Excludes cherry / mini varieties, sauce / paste
+  // / ketchup, sun-dried, marinated, salads.
+  tomatoes_1kg: {
+    query: "pomidorai kg",
+    include: /\bpomidorai\b/i,
+    exclude: [
+      /\b(?:cherry|slyvini|mažieji|mažas|smulkieji)\b/iu,
+      /\b(?:saltyk|kečup|pasta|padaž|sals)\b/iu,
+      /\b(?:konservuoti|virti|kepti|marinuoti?)\b/iu,
+      /\b(?:saulėje\s+džiov|džiov|liofiliz)\b/iu,
+      /\b(?:salot|past|sriub)\b/iu,
+      /\b(?:geltonieji|oranzin)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh potatoes per kg ("Lietuviškos bulvės Gala/Jelly,
+  // d.45+, 1 kg" 0.22 EUR is the canonical floor pick).
+  // Excludes sweet potatoes (batatai), salads, mashed, croquettes,
+  // chips, frozen processed. Leading "b" is ASCII so `\b` works.
+  potatoes_1kg: {
+    query: "bulves kg",
+    include: /\bbulvės\b/iu,
+    exclude: [
+      /\b(?:bata[at]|saldoji)\b/iu,
+      /\b(?:salot|kep|čips|traškučiai)\b/iu,
+      /\b(?:košė|tyrelė|tarkuotos)\b/iu,
+      /\b(?:šald|šaldyt)\b/iu,
+      /\b(?:šlauneliu|paplotė)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 5500 },
+    unitFromTitle: "g",
+  },
+  // Olive oil bottle. Rimi LT stocks 750 ml extra virgin packs
+  // as the closest-to-1L sensible canonical (RIMI EXTRA VIRGIN
+  // 750 ml 10.49 EUR scales to 13.99 EUR per litre). Excludes
+  // shampoos / soaps named with olive, sunflower / corn / rape.
+  olive_oil_1l: {
+    query: "alyvuogiu aliejus",
+    include: /\balyvuogi[ųu]\s+aliejus\b/iu,
+    exclude: [
+      /\b(?:šampūnas?|kremas?|losjon|kosmetika|muilas?)\b/iu,
+      /\b(?:saulėgr|rapsų|kukurūzų|sojos|linų)\b/iu,
+      /\b(?:aerozolis|purškiklis)\b/iu,
+    ],
+    sizeRange: { min: 700, max: 1200 },
+    unitFromTitle: "ml",
+  },
+  // Still water 1.5 L PET (AKVILĖ 0.79 EUR, NEPTŪNAS 0.86).
+  // The include requires both "vanduo" and "negaz" so all
+  // sparkling rows drop out. Leading "v" / "n" are ASCII so
+  // `\b` works.
+  // Word order in Lithuanian titles is reversed compared to EE
+  // and LV ("Negaz. mineralinis vanduo NEPTŪNAS, 1,5l"); the
+  // include uses two lookaheads so the still-water marker and
+  // the "vanduo" word can appear in either order.
+  water_bottled_1500ml: {
+    query: "vanduo negazuotas 1,5l",
+    include: /(?=.*\bvanduo\b)(?=.*\bnegaz)/iu,
+    exclude: [
+      /\bgazuotas\b/iu,
+      /\b(?:aromatizuotas|skonio|citrinos|braškiu|uogų)\b/iu,
+      /\b(?:kūdik|kūdikių|šeimynine)\b/iu,
+      /\b(?:tonik|izotonin|sport|elektrolit)\b/iu,
+      /\b(?:dest|kondicionav|kosmetika)\b/iu,
+    ],
+    sizeRange: { min: 1400, max: 1600 },
+    unitFromTitle: "ml",
+  },
+  // Loose fresh bananas per kg ("Bananai Cavendish 1kg" 0.89
+  // EUR). Excludes juices, smoothies, dried banana chips,
+  // baby cereals, baked goods named with banana.
+  bananas_1kg: {
+    query: "bananai kg",
+    include: /\bbananai\b/i,
+    exclude: [
+      /\b(?:sultys|nektaras|gėrimas|kokteil|tirštas)\b/iu,
+      /\b(?:traškučiai|čips|džiov|liofiliz)\b/iu,
+      /\b(?:kūdik|šeimynine|kruopos)\b/iu,
+      /\b(?:ledai|tortas|sausai|jogurt|pyrag)\b/iu,
+      /\b(?:šokoladin|kremas)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh apples per kg ("Obuoliai Champion 1 kl., 1 kg"
+  // 0.49 EUR canonical). Excludes apple juice, cider, vinegar,
+  // shampoos / soaps, jams, baby food, pastries.
+  apples_1kg: {
+    query: "obuoliai kg",
+    include: /\bobuoliai\b/i,
+    exclude: [
+      /\b(?:sultys|nektaras|sidras|actas|kremas)\b/iu,
+      /\b(?:kūdik|šeimynine|brokastys|tirštas)\b/iu,
+      /\b(?:saldumai|cinam|cinamon|šokol)\b/iu,
+      /\b(?:past|tyrel|uoge|dziem)\b/iu,
+      /\b(?:tortas|sausai|pyrag|ledai)\b/iu,
+      /\b(?:šampūnas?|losjon)\b/iu,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Fresh chicken breast filet (broiler filė, 400 / 500 g
+  // consumer tray). Excludes chicken liver (kepenėlės),
+  // legs / thighs (šlaunelės / šlaunis), wings, pork
+  // (kiauliena), turkey (kalakutiena), ground meat, eggs.
+  // The trailing `\b` on "filė" fails in ASCII-mode \b because
+  // "ė" is non-word, so we drop the trailing anchor entirely.
+  // Excludes drop the trailing `\b` for the same reason on the
+  // various non-ASCII-suffix Lithuanian noun stems.
+  chicken_breast_1kg: {
+    query: "broileris filete",
+    include: /\bbroileri[ouų]?\b.*\bfil[ėe]/iu,
+    exclude: [
+      /\bkepenėl/iu,
+      /\bšlaun/iu,
+      /\b(?:sparnel|sparnai|kojel|kojos|nugarin)/iu,
+      /\b(?:kiauliena|kalakutien|jautien)/iu,
+      /\b(?:kiaušiniai|maltinis|smulk|šaldyt)/iu,
+      /\b(?:rūkyt|kept|šaldyt|panieruot)/iu,
+      /\b(?:vidin\b|kepsny|antrekot|šniceli)/iu,
+      /\b(?:mėsa|kotletai)\b/iu,
+    ],
+    sizeRange: { min: 300, max: 1500 },
+    unitFromTitle: "g",
+  },
+  // Ground beef ("smulkinta jautiena", typically RIMI 1 kg tray
+  // at 4.25 EUR / kg). Excludes pork mixes ("kiauliena ir
+  // jautiena"), turkey / chicken, americano burgers, steaks,
+  // sausages, canned beef.
+  beef_ground_1kg: {
+    query: "smulkinta jautiena",
+    include: /\b(?:smulk(?:inta)?\.?|smulkint)\b.*\bjautien/iu,
+    exclude: [
+      /\bkiauliena\b/iu,
+      /\b(?:kalakut|vista|broileri|antie|av[ie]ena)\b/iu,
+      /\b(?:americano|burger|kepsnys?|antrekot|kumpio)\b/iu,
+      /\b(?:dešra|sausa|konser|past)\b/iu,
+      /\b(?:salot|šaldyt[ai])\b/iu,
+    ],
+    sizeRange: { min: 300, max: 1500 },
+    unitFromTitle: "g",
+  },
+  // Local hard cheese 200-300 g tray (RIMI SMART Tilsit 250 g
+  // 1.49 EUR canonical floor, DVARO / ROKIŠKIO 240 g around
+  // 2.85-3.19). Rimi LT does not stock the 500 g packs that EE
+  // and LV both carry, so the sizeRange targets the smaller
+  // tray and normalize.ts scales the on-chain price up by
+  // canonical/packSize so the cross-country comparison stays
+  // valid. Excludes halloumi / mozzarella / cream cheese /
+  // feta, kid cheese sticks, sausage-style snack cheese.
+  cheese_local_500g: {
+    query: "fermentinis suris",
+    include: /\bsūris\b/iu,
+    exclude: [
+      /\b(?:halloumi|mocarell|mozzarell|brie|camembert|feta)\b/iu,
+      /\b(?:lydytas|tirpus|sūrelis|kremin|frischk)\b/iu,
+      /\b(?:dešrel|pikenikas|pik-nik|sniukšt)\b/iu,
+      /\b(?:salotų|sūr.?\s+sausainiai|šveižias)\b/iu,
+      /\b(?:šokol|kūdik|saldumai)\b/iu,
+      /\b(?:tarkuot|smulkint|švieži[as]?\s+sūris)\b/iu,
+    ],
+    sizeRange: { min: 150, max: 350 },
+    unitFromTitle: "g",
+  },
+  // 500 ml beer can (KAUNO alus 0,5l 1.79 EUR canonical local;
+  // ESTRELLA Damm, VOLFAS ENGELMAN, KALNAPILIS at 1.39-1.95
+  // also qualify). Excludes non-alcoholic, Radler, flavoured,
+  // cider, sausage / cheese cross-contamination, gift kits.
+  // Excludes drop the trailing `\b` so the Lithuanian noun
+  // ending "nis" / "iniai" on "nealkoholinis" / "bealkoholinis"
+  // is still caught.
+  beer_imported_500ml: {
+    query: "alus skardine 500ml",
+    include: /\balus\b/i,
+    exclude: [
+      /\b(?:bealkohol|be\s+alkohol|nealkohol|0[,.]0%)/iu,
+      /\b(?:radler|kokteilis|aromat|skoni[us]|braški|cidr)\b/iu,
+      /\b(?:sviestas|sūris|past|dešra|salot)\b/iu,
+      /\b(?:dovan|rinkin|kompl|paket|kalėd|šventin)\b/iu,
+      /\b(?:vyšni[ųu]\s+kriek)\b/iu,
+    ],
+    sizeRange: { min: 450, max: 600 },
+    unitFromTitle: "ml",
+  },
+};
 
 export type ParsedUnit = "ml" | "g" | "pcs";
 
