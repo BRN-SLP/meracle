@@ -353,21 +353,24 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ArPicker>> = {
     sizeRange: { min: 300, max: 1500 },
     unitFromTitle: "g",
   },
-  // Local cheese ("queso") in 200 / 500 g wedges and per-kg bars.
-  // Cremoso, port salut, cuartirolo, and sardo are the Argentine
-  // staples. Excludes grated cheese ("rallado"), processed slice
-  // singles, blue cheese ("roquefort"), and snack-format cheese
-  // products.
+  // Hard / semi-hard local cheese. AR's mass-market staples in this
+  // class are Reggianito (Argentine parmigiano clone), Sardo,
+  // Provolone, Sbrinz, Pategrás. Excludes Queso Cremoso (a soft
+  // fresh cheese, distinct from hard cheese; the previous query
+  // collapsed onto it and broke per-canonical-kg cross-country
+  // comparability) and all other soft / fresh / spread / processed
+  // variants.
   cheese_local_500g: {
-    query: "queso cremoso",
-    include: /\bqueso\b/i,
+    query: "queso reggianito",
+    include:
+      /\b(?:reggianito|sardo|sbrinz|provolone|pategr[áa]s|tybo|holanda|edam|porteño)\b/i,
     exclude: [
       /\b(?:rallado|rayado|polvo|deshidratado|en polvo)\b/i,
-      /\b(?:untable|crema|mascarpone|ricota|ricotta|cottage)\b/i,
-      /\b(?:roquefort|azul|cabra|brie|camembert|gouda|cheddar|parmesano|parmesan|gruyere)\b/i,
-      /\b(?:hellim|halloumi|mozzarella en sticks|sticks|bocadito|bocaditos)\b/i,
-      /\b(?:snack|atado|relleno|preparado|salsa|fondue|dip)\b/i,
-      /\b(?:saborizado|ahumado|aromatizado|condimentado|hierbas)\b/i,
+      /\b(?:cremos[oa]|fresc[oa]|blando|untable|crema|mascarpone|ricota|ricotta|cottage)\b/i,
+      /\b(?:roquefort|azul|cabra|brie|camembert|cheddar|feta|halloumi|paneer)\b/i,
+      /\b(?:mozzarella|muzzarella|port salut|cuartirolo|criollo)\b/i,
+      /\b(?:hellim|sticks|bocadito|bocaditos|snack|atado|relleno|preparado|salsa|fondue|dip)\b/i,
+      /\b(?:saborizado|ahumado|aromatizado|condimentado|hierbas|tartufo|trufa)\b/i,
     ],
     sizeRange: { min: 150, max: 1100 },
     unitFromTitle: "g",
