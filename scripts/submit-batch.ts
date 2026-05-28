@@ -17,6 +17,7 @@
 import { env } from "../src/env.js";
 import { normalize, NormalizationError } from "../src/normalize.js";
 import { scrapeAuchanPl } from "../src/scrapers/auchan-pl.js";
+import { scrapeAuchanRo } from "../src/scrapers/auchan-ro.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -229,7 +230,16 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan] = await Promise.all([
+  // Auchan Romania runs over the plain VTEX catalog API.
+  const auchanRoPromise: Promise<ScraperResult | null> = scrapeAuchanRo().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  auchan-ro: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -242,6 +252,7 @@ async function main(): Promise<void> {
     olimpicaPromise,
     chedrauiPromise,
     auchanPromise,
+    auchanRoPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -295,6 +306,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  auchan-pl    : SKIPPED (scraper threw)");
   }
+  if (auchanRo) {
+    console.log(`  auchan-ro    : ${auchanRo.scraped.length} scraped, ${auchanRo.misses.length} miss`);
+  } else {
+    console.log("  auchan-ro    : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -310,6 +326,7 @@ async function main(): Promise<void> {
     ...(olimpica?.scraped ?? []),
     ...(chedraui?.scraped ?? []),
     ...(auchan?.scraped ?? []),
+    ...(auchanRo?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
