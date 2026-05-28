@@ -21,6 +21,7 @@ import { scrapeConadIt } from "../src/scrapers/conad-it.js";
 import { scrapeDiscoAr } from "../src/scrapers/disco-ar.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
 import { scrapeMigrosTr } from "../src/scrapers/migros-tr.js";
+import { scrapeWongPe } from "../src/scrapers/wong-pe.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
 import { scrapeReweDe } from "../src/scrapers/rewe-de.js";
 import { scrapeSainsburysUk } from "../src/scrapers/sainsburys-uk.js";
@@ -189,7 +190,16 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco] = await Promise.all([
+  // Wong Peru runs over plain HTTP, public VTEX catalog API.
+  const wongPromise: Promise<ScraperResult | null> = scrapeWongPe().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  wong-pe: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -198,6 +208,7 @@ async function main(): Promise<void> {
     rewePromise,
     migrosPromise,
     discoPromise,
+    wongPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -231,6 +242,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  disco-ar     : SKIPPED (scraper threw)");
   }
+  if (wong) {
+    console.log(`  wong-pe      : ${wong.scraped.length} scraped, ${wong.misses.length} miss`);
+  } else {
+    console.log("  wong-pe      : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -242,6 +258,7 @@ async function main(): Promise<void> {
     ...(rewe?.scraped ?? []),
     ...(migros?.scraped ?? []),
     ...(disco?.scraped ?? []),
+    ...(wong?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
