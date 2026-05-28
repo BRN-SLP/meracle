@@ -76,7 +76,297 @@ interface RoPicker {
   unitFromTitle?: ParsedUnit;
 }
 
-const PICKERS: Partial<Record<ProductTarget["slug"], RoPicker>> = {};
+const PICKERS: Partial<Record<ProductTarget["slug"], RoPicker>> = {
+  // Estonian "sai" = white wheat sandwich loaf. Excludes "leib"
+  // (dark rye bread, different product class), sweet pastries,
+  // burger buns. Pack sizes 300 g and 500 g are both common;
+  // sort-by-unit-price picks the cheapest per gram.
+  bread_500g: {
+    query: "sai 500g",
+    include: /\bsai\b/i,
+    exclude: [
+      /\bleib\b/i,
+      /\b(?:röstsai|toast)\b/i,
+      /\b(?:hamburger|burger|hotdog|kuklid)\b/i,
+      /\b(?:saiakene|magus|p[äa]rl|kaneeli|sokol|kakaov|kookos)\b/i,
+      /\b(?:croissant|brios)\b/i,
+    ],
+    sizeRange: { min: 250, max: 800 },
+    unitFromTitle: "g",
+  },
+  // Standard milk, any fat percent in the 2,5%-3,5% range. Excludes
+  // lactose-free (laktoosivaba), plant milks (soja / kaerajook /
+  // kookos / mandel), yoghurt, kefir, sour cream, baby formula,
+  // and curd cheese (kohupiim is a fresh dairy spread, not milk).
+  milk_1l: {
+    query: "täispiim 1l",
+    include: /\bpiim\b/i,
+    exclude: [
+      /\blaktoosivaba\b/i,
+      /\b(?:kohu?piim|piimajook|kakaojook|jogurtijook)\b/i,
+      /\b(?:hapukoor|kreem|frische|vahukreem)\b/i,
+      /\b(?:jogurt|joogurt|kefir|skyr)\b/i,
+      /\b(?:soja|kaera|kookos|mandel|riisipiim)\b/i,
+      /\b(?:beebi|imikute|maternal|formula)\b/i,
+      /\b(?:lahja|kerge)\s+piim\b/i,
+      /\b(?:vahukommi|maasika|sokolaad|vanilli|aroom)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1300 },
+    unitFromTitle: "ml",
+  },
+  // Chicken eggs in cartons of 10 (Baltic retail standard). The
+  // picker accepts the "M10" / "L10" / "Õrrekanade M10" grade
+  // tags inside the title via the parser's egg-grade fallback.
+  // Excludes liquid eggs, fish roe, salads, chocolate Easter eggs.
+  eggs_12: {
+    query: "kanamunad 10tk",
+    include: /\bmunad\b/i,
+    exclude: [
+      /\b(?:sokolaad|kakao|kommid|sool|nool)\b/i,
+      /\b(?:past|salat|salaks|kreem|past[eö]r)\b/i,
+      /\b(?:vutimunad|hanemu|partsi|jaanip)\b/i,
+      /\b(?:lihatoit|kalamari|kala)\b/i,
+      /\b(?:liter|liite)\b/i,
+      /\bvedel\b/i,
+    ],
+    sizeRange: { min: 6, max: 30 },
+    unitFromTitle: "pcs",
+  },
+  // 200 g butter bar (Rimi own-brand, Tere, Alma, MO Saaremaa).
+  // Excludes nut butters, margarine, ghee, and the place-name
+  // brand "Võiste" / "Vaarikatomat Võiste" that trips on the
+  // word "või". Pack 100-300 g covers the local consumer formats.
+  butter_200g: {
+    query: "või 200g",
+    include: /\bvõi\b/i,
+    exclude: [
+      /\bvõiste\b/i,
+      /\bvaarik(?:a|atomat)\b/i,
+      /\b(?:tomat|kurk|salat|liha|kala|p[eo]rgu)\b/i,
+      /\b(?:maapahkleid?|maapähkel|pähkli|kookos|mandel)\b/i,
+      /\b(?:ghee|klaariv|sulatatud)\b/i,
+      /\b(?:taimeõli|margarin|spread|tartin|või-)\b/i,
+      /\b(?:küpsis|saiakene|magus)\b/i,
+    ],
+    sizeRange: { min: 100, max: 300 },
+    unitFromTitle: "g",
+  },
+  // White granulated 1 kg sugar (Rimi own-brand cheapest at 0.65,
+  // Dan Sukker at 0.85). Excludes brown sugar, icing sugar,
+  // cubes, syrup, low-cal sweeteners, and confectionery uses.
+  sugar_1kg: {
+    query: "suhkur 1kg",
+    include: /\bsuhkur\b/i,
+    exclude: [
+      /\bpruun\b/i,
+      /\b(?:fariin|tume|toor|kookospal)\b/i,
+      /\b(?:vanilli|tuhk|kuubikud?|siirup|melass)\b/i,
+      /\b(?:fruktoos|sukral|stevia|asparta|aspart|erit[aä]ti)\b/i,
+      /\b(?:küpsis|leib|sai|magus|kompvek)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // White long-grain rice 1 kg bag (Veski Mati "sõmer", Tartu
+  // Mill "aurutatud", Bosto). Excludes brown / wild / basmati /
+  // jasmine rice (different product classes), rice flour / cakes
+  // / drinks, baby food.
+  rice_1kg: {
+    query: "riis 1kg",
+    include: /\briis\b/i,
+    exclude: [
+      /\b(?:basmati|jasm[äa]ti|metsik|t[äa]istera|t[üu]ras|pruun)\b/i,
+      /\b(?:küpsis|j[ää]tis|saiakene|noodels?|nuudl|krõbu)\b/i,
+      /\b(?:risot|paella|sushi|sushi-)\b/i,
+      /\b(?:beebi|imik|imikute)\b/i,
+      /\b(?:jook|piim|kreem|piimar)\b/i,
+      /\b(?:faina|jahu|leib|sai)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh red tomatoes ("Tomat 1kl, kg"). Excludes canned
+  // (tükeldatud / purustatud), sun-dried, sauce / ketchup, baby
+  // food, and the place-name "Võiste" cross-contamination from
+  // strawberry-tomato. "Lihatomat" (beef tomato) is the local
+  // term for a large round variety, kept in scope.
+  tomatoes_1kg: {
+    query: "tomat punane kg",
+    include: /\btomat\b/i,
+    exclude: [
+      /\b(?:t[üu]keldatud|purustatud|p[üa]ikesekuivatatud|p[üa]ikesek)\b/i,
+      /\b(?:ket[sš]up|paste|past[äa]|kons|s[oõ]s|hautis|sup|supp)\b/i,
+      /\b(?:vaarikatomat|võiste)\b/i,
+      /\b(?:salat|liha-?salat|hommiku|paste)\b/i,
+      /\b(?:beebi|imik)\b/i,
+      /\b(?:kuiv|kuivat)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh potatoes per-kg (Kartul pesemata / kollane /
+  // punane / Spunta). Excludes potato salad, mash, croquettes,
+  // pelmeni dumplings with potato filling, dried potato flakes,
+  // and "bataat" (sweet potato, different class).
+  potatoes_1kg: {
+    query: "kartul kg",
+    include: /\bkartul(?:id)?\b/i,
+    exclude: [
+      /\b(?:salat|puder|krokett|laast|kips)\b/i,
+      /\b(?:pelmeen|vorst|kotlett|burger)\b/i,
+      /\b(?:röst|kuivat|p[üa]ikesek)\b/i,
+      /\b(?:saiakene|leib|pehmik|paks)\b/i,
+      /\bbataat\b/i,
+    ],
+    sizeRange: { min: 800, max: 5500 },
+    unitFromTitle: "g",
+  },
+  // Olive oil 1 L bottle. Rimi stocks both the extra-virgin
+  // ("Extra Light", weirdly named) at 13.29 EUR and pomace
+  // ("oliivijää") at 9.89 EUR. Excludes shampoos / soaps with
+  // olive oil in the name, and other vegetable oils.
+  olive_oil_1l: {
+    query: "oliiviõli 1l",
+    include: /\b(?:oliivi[õo]li|oliivij[ää]k[õo]li)\b/i,
+    exclude: [
+      /\b(?:šampoo|seep|kreem|losjoon|kosmeetika|p[äa]rfüümi)\b/i,
+      /\b(?:p[äa]ikeselill|rüps|raps|maisi|s[i]idum|linaõli)\b/i,
+      /\b(?:spray|aerosool)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "ml",
+  },
+  // Still water 1.5 L PET (Aura Gaasita is the canonical at
+  // 0.89 EUR; Värska Aluseline alkaline is a niche keep). The
+  // include requires "gaasita" (still) so all sparkling /
+  // carbonated rows are filtered before the cheap-water sort.
+  water_bottled_1500ml: {
+    query: "vesi 1,5l gaasita",
+    include: /\bvesi\b.*\bgaasita\b/i,
+    exclude: [
+      /\bgaasiga\b/i,
+      /\b(?:karb[oõ]niseer|k[äa]rbon|sodavesi)\b/i,
+      /\b(?:must|maasik|sidr|fruit|lim|kr[oa]ndev|aprikoos|aroom)\b/i,
+      /\b(?:beebi|imikute|tervis)\b/i,
+      /\b(?:cola|sprite|pepsi|tonik|isotoonil)\b/i,
+      /\b(?:p[üa]ha|p[üa]hahõimuv)\b/i,
+    ],
+    sizeRange: { min: 1400, max: 1600 },
+    unitFromTitle: "ml",
+  },
+  // Loose fresh bananas per-kg ("Banaan Cavendish 1kl, kg"
+  // 0.90 EUR; eco variants 1.69). Excludes baby food, banana
+  // chips, snack bars, drinks, ice cream, baked goods.
+  bananas_1kg: {
+    query: "banaan kg",
+    include: /\bbanaan(?:id)?\b/i,
+    exclude: [
+      /\b(?:p[üa]ree|jook|smoothie|kokteil|jogurt|magus|chips|laast)\b/i,
+      /\b(?:beebi|imik|teravilja)\b/i,
+      /\b(?:j[ää]tis|tort|kook|cake|baton)\b/i,
+      /\b(?:p[äa]hkleid|kookos|maasika|sokol)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Loose fresh apples per-kg (Gloster / Gala / Golden Delicious
+  // varieties). Excludes apple juice, cider, vinegar, baby food,
+  // shampoos / soaps named with apple, jams, and sweets.
+  // The leading anchor uses a Unicode-aware lookbehind because
+  // JavaScript's `\b` is ASCII-only and treats the leading "Õ"
+  // (U+00D5) as a non-word character; `\bõun\b` would never
+  // match the typical "Õun Gloster" title.
+  apples_1kg: {
+    query: "oun kg",
+    include: /(?<!\p{L})õun(?:ad)?\b/iu,
+    exclude: [
+      /\b(?:mahl|jook|nektar|sidr|smoothie|kompvek)\b/i,
+      /\b(?:šampoo|seep|kreem|deod|kosmeetika)\b/i,
+      /\b(?:beebi|imik|imikute|teravilja)\b/i,
+      /\b(?:past|p[üa]ree|jogurt|hommiku|m[üü]sli)\b/i,
+      /\b(?:chips|laast|kuivat|liofiil)\b/i,
+      /\bõunavili\b/i,
+      /\b(?:kook|tort|saiakene|pehmik|magus)\b/i,
+    ],
+    sizeRange: { min: 800, max: 1200 },
+    unitFromTitle: "g",
+  },
+  // Fresh chicken breast filet ("broileri rinnafilee", abbrev.
+  // "br.rinnafil"). The mu=kg branch covers the per-kg loose
+  // 4.43 EUR Tallegg SKU; the standard 500 g consumer tray runs
+  // 3.15-4.69 EUR. Excludes turkey, ham, sausage, nuggets,
+  // pre-marinated, frozen-breaded, and cooked products.
+  chicken_breast_1kg: {
+    query: "kanafilee kg",
+    include:
+      /\b(?:kanafilee|kana\s*filee|broileri?\s+rinnafil|br\.?\s*rinnafil|br\.?\s*r\.?\s*fil)/i,
+    exclude: [
+      /\b(?:kalkun|sealiha|sea\s|vorst|sink|jambon)\b/i,
+      /\b(?:past|tooraine|kotlett|nugget|fileeriba|tükid)\b/i,
+      /\b(?:k[üu]lm|valmis|hommik|marin|maitse|jog\.?\s*tilli)\b/i,
+      /\b(?:k[üü]ps|röst|gril|panat)\b/i,
+      /\b(?:lihasalat|salat|past)\b/i,
+    ],
+    sizeRange: { min: 300, max: 1500 },
+    unitFromTitle: "g",
+  },
+  // Ground beef ("veisehakkliha"). Rimi sells in 300-400 g
+  // trays. Excludes pork mixes ("sea- ja veisehakkliha"),
+  // chicken / turkey, organic premium ("Mahe rohumaa-veise"),
+  // pre-formed burgers / meatballs, and canned beef.
+  beef_ground_1kg: {
+    query: "veisehakkliha",
+    include: /\bveisehakkliha\b/i,
+    exclude: [
+      /\bsea-?\s*ja\b/i,
+      /\b(?:sealiha|sea\s|kana|kalkun|seape)\b/i,
+      /\b(?:konserv|past|kotlett|burger|p[ää]l)\b/i,
+      /\b(?:k[üü]ps|gril|röst|valmistoit|valmis)\b/i,
+      /\b(?:beebi|imik)\b/i,
+      /\bmahe\b/i,
+    ],
+    sizeRange: { min: 250, max: 1100 },
+    unitFromTitle: "g",
+  },
+  // Estonian "juust Eesti" yellow cheese, canonical 500 g (Valio
+  // Atleet, E-Piim Eesti, Estover, Royal Gouda — all hard yellow
+  // varieties, retail-equivalent). Excludes specialty imports
+  // (brie / camembert / parmesan / halloumi / blue / feta),
+  // cream cheese, processed slices, grated, sweet cheese.
+  cheese_local_500g: {
+    query: "juust eesti 500g",
+    include: /\bjuust\b/i,
+    exclude: [
+      /\b(?:purustatud|riivit|sulatatud|t[üu]keldatud|viil)\b/i,
+      /\b(?:kreem|m[oõ]rsk|frische|frisch|cottage|kohuke|feta)\b/i,
+      /\b(?:brie|camembert|cheddar|parm|moots|halloumi|sinihallit|sini)\b/i,
+      /\b(?:purk|kotis|salat|sushi|pizz)\b/i,
+      /\b(?:beebi|imik|magus|kook|j[ää]tis)\b/i,
+      /\b(?:must|mozzarella|maasika|tomat)\b/i,
+    ],
+    sizeRange: { min: 250, max: 600 },
+    unitFromTitle: "g",
+  },
+  // Imported beer in 500 ml can (Heineken, Carlsberg,
+  // Kronenbourg, Saku, Walter, A.LeCoq Alexander). Pack size
+  // includes the slightly-larger 0.568 L UK pint can (Alexander).
+  // Excludes alcohol-free, flavoured / fruit, ciders / cocktails,
+  // and gift kits.
+  beer_imported_500ml: {
+    query: "õlu purk 0,5l",
+    // Same Unicode-aware leading anchor as apples_1kg.
+    include: /(?<!\p{L})õlu\b/iu,
+    exclude: [
+      /\b(?:gluteen|alkoholivaba|alkoh[oõ]livaba|0[,.]0%|nul|null)\b/i,
+      /\b(?:maitselised|maitseline|nimet|p[üa]hahõim|magus|maasika|sidr)\b/i,
+      /\b(?:cider|cidre|cocktail|kokteil|spritz|radler)\b/i,
+      /\b(?:tass|set|kit|paket|kink|kingitus|kollekts)\b/i,
+      /\b(?:malta|leib|drojd)\b/i,
+    ],
+    sizeRange: { min: 450, max: 600 },
+    unitFromTitle: "ml",
+  },
+};
 
 export type ParsedUnit = "ml" | "g" | "pcs";
 
@@ -101,11 +391,12 @@ export function parseSizeFromName(
     if (Number.isFinite(v) && v > 0 && v < 100)
       return { value: Math.round(v * 1000), unit: "g" };
   }
-  // Loose per-kg, the Estonian "1kl, kg" tail. The card lists a
-  // standard kilo SKU even though the on-shelf price is per kilo.
-  if (/\b1kl,?\s*kg\b/i.test(s) || /,\s*kg\s*$/i.test(s)) {
-    return { value: 1000, unit: "g" };
-  }
+  // Loose per-kg, two Estonian patterns:
+  //   "1kl, kg" / "1kl kg" inside the title (apples / bananas)
+  //   ", kg" trailer with optional suffix (kartul: ", kg Eesti")
+  // Both mean the row is priced per kilogram.
+  if (/\b1kl,?\s*kg\b/i.test(s)) return { value: 1000, unit: "g" };
+  if (/,\s*kg(?:\b|\s)/i.test(s)) return { value: 1000, unit: "g" };
   // Millilitres ("500ml", "330 ml")
   const ml = s.match(/(?<![a-zA-Z%\d.,])(\d{2,5})\s*ml\b/i);
   if (ml) {
