@@ -65,6 +65,15 @@ interface MercadonaPicker {
   exclude: readonly RegExp[];
   /** Pack size in target.unit (g or mL). */
   sizeRange: { min: number; max: number };
+  /**
+   * Whether `is_pack: true` items count as candidates. Off by default
+   * so beverage/dairy slugs do not get a 6-bottle multipack price.
+   * On for produce: Mercadona ships loose fruit / vegetables as
+   * single-unit items (e.g. 0.2 kg apple at EUR 0.44) AND bagged
+   * bulk packs (1.55 kg bag of apples at EUR 3.10). The bulk pack is
+   * cheaper per kg and is the correct cheapest-staple match.
+   */
+  allowPacks?: boolean;
 }
 
 const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
@@ -249,6 +258,70 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MercadonaPicker>> = {
     ],
     sizeRange: { min: 250, max: 550 },
   },
+  // Bananas (plátano / banana). Cat 27 sub 853 "Plátano y uva" ships
+  // single-bunch loose units (e.g. 0.15 kg single Plátano de Canarias
+  // at EUR 0.44, or 0.18 kg Banana at EUR 0.23) and bulk bags. The
+  // `allowPacks` flag enables the bagged version to compete on the
+  // per-kg bulk_price axis. `plátano macho` (cooking plantain) is
+  // ranged out via include with no need for an exclude.
+  bananas_1kg: {
+    parentCategoryId: 27,
+    subcategoryMatch: /pl[áa]tano/i,
+    include: /\b(pl[áa]tano|banana)\b/i,
+    exclude: [
+      /\b(macho|fritura|chips|deshidrat|seco|congelad|preparad|snack|tostada|smoothie|zumo|jugo|barrita|papilla)\b/i,
+    ],
+    sizeRange: { min: 100, max: 3000 },
+    allowPacks: true,
+  },
+  // Apples (manzana). Cat 27 sub 251 "Manzana y pera" ships loose
+  // single fruit (Golden, Granny Smith, roja, acidulce; ~0.16 to
+  // 0.28 kg each) and bagged kg multipacks. The bagged 1.55 kg pack
+  // typically wins on bulk_price. Excludes block pears and apple
+  // products (juice, baby food, sauce).
+  apples_1kg: {
+    parentCategoryId: 27,
+    subcategoryMatch: /manzana/i,
+    include: /\bmanzanas?\b/i,
+    exclude: [
+      /\bpera\b|\bperas\b/i,
+      /\b(zumo|jugo|smoothie|papilla|compot|asada|pur[ée]|crema|barrita|t[ée]|snack|deshidrat|sec|seca|congelad)\b/i,
+    ],
+    sizeRange: { min: 100, max: 3000 },
+    allowPacks: true,
+  },
+  // Tomatoes (tomate). Cat 29 sub 855 "Tomate" ships loose single
+  // tomatoes (ensalada ~0.28 kg, canario ~0.19 kg, pera ~0.17 kg)
+  // and tray packs. Cheapest per kg wins. Excludes block tomato
+  // products (frito, triturado, deshidratado, soup, gazpacho).
+  tomatoes_1kg: {
+    parentCategoryId: 29,
+    subcategoryMatch: /tomate/i,
+    include: /\btomates?\b/i,
+    exclude: [
+      /\b(frito|triturad|deshidrat|sec|seca|conserv|salsa|gazpach|sopa|crema|zumo|jugo|relleno|aliñad|salpic)\b/i,
+    ],
+    sizeRange: { min: 100, max: 3000 },
+    allowPacks: true,
+  },
+  // Potatoes (patata). Cat 29 sub 854 "Patata" ships loose units
+  // (~0.22 kg single Patata at EUR 0.42) and 2 to 3 kg bulk bags
+  // (Patatas rojas 2 kg at EUR 3.80, Patatas 3 kg at EUR 4.65). The
+  // bagged versions usually win on bulk_price. Excludes block fries
+  // (sub 267 Verduras al vapor "Patatas para microondas", frozen
+  // chips in Congelados, snack crisps in Aperitivos, all of which
+  // live outside cat 29 anyway but defended against in case sub 854
+  // ever carries them).
+  potatoes_1kg: {
+    parentCategoryId: 29,
+    subcategoryMatch: /patata/i,
+    include: /\bpatatas?\b/i,
+    exclude: [
+      /\b(frita|frito|chips|crujient|onduladas?|microondas|prefrit|congelad|deshidrat|seco|seca|cocida|cocinada|pur[ée]|copos)\b/i,
+    ],
+    sizeRange: { min: 100, max: 5000 },
+    allowPacks: true,
+  },
 };
 
 /**
@@ -274,7 +347,11 @@ function pickBestMatch(
   for (const sc of category.categories) {
     if (!picker.subcategoryMatch.test(sc.name)) continue;
     for (const p of sc.products) {
-      if (p.price_instructions.is_pack) continue; // skip 6-bottle multipacks
+      // Default behaviour: skip 6-bottle / 4-can multipacks because
+      // those are not the slug's cheapest-staple proxy. Produce
+      // pickers opt in via picker.allowPacks (loose-fruit single
+      // units AND bagged kg-bulk packs both count).
+      if (p.price_instructions.is_pack && !picker.allowPacks) continue;
       if (!picker.include.test(p.display_name)) continue;
       if (picker.exclude.some((rx) => rx.test(p.display_name))) continue;
       const size = sizeToTargetUnit(p);
@@ -283,11 +360,26 @@ function pickBestMatch(
     }
   }
   if (candidates.length === 0) return null;
-  candidates.sort(
-    (a, b) =>
-      Number.parseFloat(a.product.price_instructions.unit_price) -
-      Number.parseFloat(b.product.price_instructions.unit_price),
-  );
+  // Sort by per-kg / per-L `bulk_price` when packs are in play
+  // (produce ships single units AND bulk bags side by side, so the
+  // raw sticker `unit_price` ranks the smallest bag first instead of
+  // the cheapest per-kg pack). For non-pack slugs, sizes inside the
+  // picker's sizeRange are comparable and the two orderings agree;
+  // we keep `unit_price` there to avoid touching the existing
+  // baseline.
+  if (picker.allowPacks) {
+    candidates.sort(
+      (a, b) =>
+        Number.parseFloat(a.product.price_instructions.bulk_price) -
+        Number.parseFloat(b.product.price_instructions.bulk_price),
+    );
+  } else {
+    candidates.sort(
+      (a, b) =>
+        Number.parseFloat(a.product.price_instructions.unit_price) -
+        Number.parseFloat(b.product.price_instructions.unit_price),
+    );
+  }
   return candidates[0]!;
 }
 

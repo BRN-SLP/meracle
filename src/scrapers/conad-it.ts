@@ -62,6 +62,16 @@ interface ConadPicker {
   exclude: readonly RegExp[];
   /** Pack size in target.unit (g or mL or pcs). */
   sizeRange: { min: number; max: number };
+  /**
+   * Override the netQuantity-derived pack size by extracting a piece
+   * count from the product title. Used for slugs measured in pieces
+   * (eggs, yogurt cups) where Conad reports weight in KG. The first
+   * non-empty capture group is parsed as an integer. If the regex
+   * does not match a candidate, that candidate is dropped (no
+   * fallback to the weight-derived size, otherwise we would let in
+   * obviously wrong matches).
+   */
+  pcsFromTitle?: RegExp;
 }
 
 const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
@@ -87,13 +97,21 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ConadPicker>> = {
   // Galline Allevate a Terra" at EUR 1.99 (probed live). 12-packs
   // (the catalog canonical) and 10-packs both exist; sizeRange 6 to 12
   // catches all, normalize.ts rescales 6 / 10 / 12 to per-12 price.
+  //
+  // Conad reports the SKU netQuantity as the carton WEIGHT in KG
+  // (0.381 KG for 6 eggs) but our slug measures pieces. Use
+  // `pcsFromTitle` to recover the count from the product name. Two
+  // alternative shapes:
+  //   - "6 Uova Fresche..."        -> capture 1
+  //   - "Uova medie x 10..."       -> capture 2
   eggs_12: {
     category: "/c/uova-di-gallina--0406",
-    include: /\b\d+\s+uova\b/i,
+    include: /\buova\b/i,
     exclude: [
       /\b(quaglia|anatra|oca|cioccolat|pasqua|paste|tortelloni|ravioli|tagliatell|gelato|maionese|liquid|albume|tuorlo)\b/i,
     ],
     sizeRange: { min: 6, max: 12 },
+    pcsFromTitle: /\b(\d{1,2})\s+uova\b|\buova\b[^0-9]{0,30}\bx\s*(\d{1,2})\b/i,
   },
   // Butter (burro). Italian standard sizes: 125g / 200g / 250g /
   // 500g bricks. The canonical 200g slug matches the 200 to 250g
@@ -384,17 +402,45 @@ export function extractCardsFromHtml(html: string): ConadProductRaw[] {
   return out;
 }
 
+/**
+ * Re-derive packSize from the title when a picker carries
+ * `pcsFromTitle`. Conad ships some piece-priced SKUs (eggs, yogurt
+ * cups) with the count in the product name and the weight in
+ * netQuantity, so the weight-derived size is wrong for piece slugs.
+ * Returns the input unchanged when the picker has no override or
+ * when the regex does not match (the caller then drops that
+ * candidate via the sizeRange filter).
+ *
+ * Exported for unit tests.
+ */
+export function overridePackSizeFromTitle(
+  product: ParsedProduct,
+  picker: { pcsFromTitle?: RegExp },
+): ParsedProduct {
+  if (!picker.pcsFromTitle) return product;
+  const m = product.title.match(picker.pcsFromTitle);
+  if (!m) return { ...product, packSize: NaN };
+  const captured = m.slice(1).find((g) => typeof g === "string" && g.length > 0);
+  if (!captured) return { ...product, packSize: NaN };
+  const pcs = parseInt(captured, 10);
+  if (!Number.isFinite(pcs) || pcs <= 0) return { ...product, packSize: NaN };
+  return { ...product, packSize: pcs };
+}
+
 function pickBestMatch(
   products: ParsedProduct[],
   picker: ConadPicker,
 ): ParsedProduct | null {
-  const candidates = products.filter((p) => {
-    if (!picker.include.test(p.title)) return false;
-    if (picker.exclude.some((rx) => rx.test(p.title))) return false;
-    if (p.packSize < picker.sizeRange.min || p.packSize > picker.sizeRange.max)
-      return false;
-    return true;
-  });
+  const candidates = products
+    .map((p) => overridePackSizeFromTitle(p, picker))
+    .filter((p) => {
+      if (!picker.include.test(p.title)) return false;
+      if (picker.exclude.some((rx) => rx.test(p.title))) return false;
+      if (!Number.isFinite(p.packSize)) return false;
+      if (p.packSize < picker.sizeRange.min || p.packSize > picker.sizeRange.max)
+        return false;
+      return true;
+    });
   if (candidates.length === 0) return null;
   candidates.sort((a, b) => a.priceMajor - b.priceMajor);
   return candidates[0]!;

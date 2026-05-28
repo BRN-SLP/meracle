@@ -75,3 +75,112 @@ describe("Mercadona ES scraper, fixture path", async () => {
     }
   });
 });
+
+describe("Mercadona ES scraper, produce allowPacks ordering", () => {
+  // Inline fixture: category 27 (Fruta) with sub 251 (Manzana y pera)
+  // carrying two apple SKUs that intentionally disagree on which is
+  // cheapest by sticker vs which is cheapest per kg. The bagged
+  // version is cheaper per kg (2.00 EUR/kg) but the loose single
+  // costs less in absolute terms (0.44 EUR). The picker should pick
+  // the bag because allowPacks sorts on bulk_price.
+  function appleCategoryFixture(): unknown {
+    return {
+      id: 27,
+      name: "Fruta",
+      categories: [
+        {
+          id: 251,
+          name: "Manzana y pera",
+          products: [
+            {
+              id: "appleSingle",
+              display_name: "Manzana Golden",
+              packaging: null,
+              price_instructions: {
+                unit_size: 0.2,
+                size_format: "kg",
+                total_units: null,
+                unit_price: "0.44",
+                bulk_price: "2.20",
+                is_pack: false,
+              },
+            },
+            {
+              id: "appleBag",
+              display_name: "Manzanas Golden",
+              packaging: null,
+              price_instructions: {
+                unit_size: 1.55,
+                size_format: "kg",
+                total_units: null,
+                unit_price: "3.10",
+                bulk_price: "2.00",
+                is_pack: true,
+              },
+            },
+          ],
+        },
+      ],
+    };
+  }
+
+  it("picks the bagged 1.55 kg pack over the 0.2 kg single by bulk_price", () => {
+    const result = scrapeFromFixture(
+      { 27: appleCategoryFixture() as never },
+      "2026-05-28T00:00:00.000Z",
+    );
+    const apple = result.scraped.find((s) => s.target.slug === "apples_1kg");
+    assert.ok(apple, "apples_1kg missing");
+    assert.equal(apple.retailerTitle, "Manzanas Golden");
+    assert.equal(apple.packSize, 1550);
+    assert.equal(apple.priceMajor, 3.1);
+  });
+
+  it("normalizes the bagged apple to 2.00 EUR/kg (cents 200)", () => {
+    const result = scrapeFromFixture(
+      { 27: appleCategoryFixture() as never },
+      "2026-05-28T00:00:00.000Z",
+    );
+    const apple = result.scraped.find((s) => s.target.slug === "apples_1kg");
+    assert.ok(apple);
+    const obs = normalize(apple);
+    assert.equal(obs.priceCents, 200);
+  });
+
+  it("still skips is_pack for non-produce slugs (default false)", () => {
+    // Sanity check the default branch: a milk multipack must not win
+    // when the picker has no allowPacks. Build a synthetic cat 72 with
+    // only a 6-bottle pack to exercise the skip.
+    const milkPackOnly = {
+      id: 72,
+      name: "Leche y bebidas vegetales",
+      categories: [
+        {
+          id: 99,
+          name: "Leche entera",
+          products: [
+            {
+              id: "milkPack6",
+              display_name: "Leche entera Hacendado",
+              packaging: null,
+              price_instructions: {
+                unit_size: 1,
+                size_format: "l",
+                total_units: 6,
+                unit_price: "0.96",
+                bulk_price: "0.96",
+                is_pack: true,
+              },
+            },
+          ],
+        },
+      ],
+    };
+    const result = scrapeFromFixture(
+      { 72: milkPackOnly as never },
+      "2026-05-28T00:00:00.000Z",
+    );
+    const milk = result.scraped.find((s) => s.target.slug === "milk_1l");
+    assert.equal(milk, undefined, "the 6-pack must NOT match milk_1l");
+  });
+});
