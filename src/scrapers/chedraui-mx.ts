@@ -178,16 +178,24 @@ const PICKERS: Partial<Record<ProductTarget["slug"], MxPicker>> = {
     unitFromTitle: "g",
   },
   // Fresh tomatoes ("Tomate Bola por kg", "Tomate Saladette por
-  // kg"). Excludes salsas, purees, ketchup, and pizza pre-mixes.
+  // kg"). Excludes salsas, purees, ketchup, pizza pre-mixes, and
+  // canned crushed varieties ("Tomate Molido Del Fuerte"); those
+  // are processed pantry goods, not the fresh produce the canonical
+  // tomatoes_1kg slug represents.
   tomatoes_1kg: {
     query: "tomate kg",
     include: /\btomate/i,
     exclude: [
       /\b(?:salsa|catsup|ketchup|pulpa|extracto|sopa|jugo|conserva|enlatado)\b/i,
       /\bpur[eé](?!\p{L})/iu,
-      /\b(?:la costeña|herdez|hellmann|del monte|maggi|knorr|valle)\b/i,
+      /\b(?:la costeña|herdez|hellmann|del monte|del fuerte|maggi|knorr|valle)\b/i,
       /\b(?:pizza|empanada|tarta|relleno|preparado|mix|frijol)\b/i,
       /\b(?:deshidratado|secado|seco|polvo|aroma|saborizado)\b/i,
+      /\b(?:molid[oa]s?|tritura(?:d[oa]s?|do)|aplastad[oa]s?|condimentad[oa]s?|sazonad[oa]s?)\b/i,
+      // Tomatillo ("Tomate Verde") is Physalis ixocarpa, a different
+      // species. The canonical tomatoes_1kg slug means red tomato
+      // (Solanum lycopersicum) for cross-country comparability.
+      /\b(?:verde|verdes|tomatill[oa]s?)\b/i,
     ],
     sizeRange: { min: 100, max: 3000 },
     unitFromTitle: "g",
