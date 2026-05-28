@@ -273,13 +273,15 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PtPicker>> = {
     sizeRange: { min: 500, max: 2500 },
     unitFromTitle: "g",
   },
-  // Loose fresh apples per kg ("Maçã" with c-cedilla and
-  // a-tilde, but leading M is ASCII so `\b` anchors). Excludes
-  // apple juice / cider / vinegar, baby food, dried, sweets,
-  // baked goods.
+  // Loose fresh apples per kg ("Maçã"). JS `\b` is ASCII-only,
+  // so the trailing `\b` after non-ASCII `ã` never anchors:
+  // (ã = non-word, space = non-word, no boundary). Use Unicode
+  // lookbehind/lookahead with `\p{L}` instead, which also lets
+  // the plural form "maçãs" match. Excludes apple juice /
+  // cider / vinegar, baby food, dried, sweets, baked goods.
   apples_1kg: {
     query: "maca golden kg",
-    include: /\bma[çc][ãa]\b/iu,
+    include: /(?<!\p{L})ma[çc][ãa](?!\p{L})|(?<!\p{L})ma[çc][ãa]s(?!\p{L})/iu,
     exclude: [
       /\b(?:sumo|n[ée]ctar|cidra|vinagre|cidre)\b/iu,
       /\b(?:beb[ée]|infantil|papa|crescimento)\b/iu,
