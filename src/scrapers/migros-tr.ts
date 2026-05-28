@@ -174,16 +174,20 @@ const PICKERS: Partial<Record<ProductTarget["slug"], TrPicker>> = {
     sizeRange: { min: 180, max: 550 },
     unitFromTitle: "g",
   },
-  // White granulated sugar in 1 / 2 / 2.5 / 5 kg bags. Excludes brown,
-  // cube, vanilla, candied, and sugar-substitute SKUs.
+  // White granulated sugar. Migros TR carries 1 / 2 / 2.5 / 5 kg
+  // bags; the picker accepts only the 1 kg consumer pack because
+  // bulk discounts on the 5 kg bag pull the per-canonical-kg price
+  // unrealistically low for an oracle representing the everyday
+  // consumer SKU. Excludes brown, cube, vanilla, candied, and
+  // sugar-substitute variants.
   sugar_1kg: {
-    query: "şeker",
+    query: "şeker 1 kg",
     include: /(?<!\p{L})şeker/iu,
     exclude: [
       /(?<!\p{L})(?:esmer|kahverengi|kamış|hindistan|panela|pudra|kesme|küp|vanilya|tarçın|kayısı)/iu,
       /(?<!\p{L})(?:tatlandırıcı|stevia|aspartam|sakarin|fruktoz|maltitol|eritritol|şekersiz|şekerleme|jelibon|sakız|akide|lokum|çikolat|kakaolu|bonbon)/iu,
     ],
-    sizeRange: { min: 800, max: 5500 },
+    sizeRange: { min: 800, max: 1200 },
     unitFromTitle: "g",
   },
   // Rice in 1 / 2 / 2.5 kg bags. Baldo / Osmancık / Basmati / Jasmine
