@@ -4,8 +4,10 @@ import { describe, it } from "node:test";
 import {
   decodeDataProductValue,
   extractCardsFromHtml,
+  overridePackSizeFromTitle,
   parseProductsFromCards,
   type ConadProductRaw,
+  type ParsedProduct,
 } from "./conad-it.js";
 
 /** Convenience: minimal valid card. */
@@ -258,5 +260,55 @@ describe("extractCardsFromHtml (HTML scanning)", () => {
     const out = extractCardsFromHtml(html);
     assert.equal(out.length, 1);
     assert.equal(out[0]!.basePrice, 0);
+  });
+});
+
+describe("overridePackSizeFromTitle (eggs and other piece-priced slugs)", () => {
+  function product(over: Partial<ParsedProduct> = {}): ParsedProduct {
+    return {
+      code: "X",
+      title: "6 Uova Fresche da Galline Allevate a Terra Medie Percorso Qualità Conad",
+      priceMajor: 1.69,
+      packSize: 381,
+      sourceUrl: "https://example.com",
+      ...over,
+    };
+  }
+
+  it("returns input unchanged when picker has no pcsFromTitle override", () => {
+    const p = product();
+    const out = overridePackSizeFromTitle(p, {});
+    assert.equal(out, p);
+  });
+
+  it("rewrites packSize from a '<n> uova' leading match", () => {
+    const out = overridePackSizeFromTitle(product(), {
+      pcsFromTitle: /\b(\d{1,2})\s+uova\b/i,
+    });
+    assert.equal(out.packSize, 6);
+    assert.equal(out.priceMajor, 1.69, "non-size fields preserved");
+  });
+
+  it("rewrites packSize from the 'uova ... x <n>' alternative form", () => {
+    const out = overridePackSizeFromTitle(
+      product({ title: "Uova medie x 10 da allevamento a terra Conad" }),
+      { pcsFromTitle: /\b(\d{1,2})\s+uova\b|\buova\b[^0-9]{0,30}\bx\s*(\d{1,2})\b/i },
+    );
+    assert.equal(out.packSize, 10);
+  });
+
+  it("returns NaN packSize when the regex does not match (caller drops it)", () => {
+    const out = overridePackSizeFromTitle(
+      product({ title: "Tagliatelle all'uovo 250 g Conad" }),
+      { pcsFromTitle: /\b(\d{1,2})\s+uova\b/i },
+    );
+    assert.ok(Number.isNaN(out.packSize));
+  });
+
+  it("does not mutate the input product", () => {
+    const p = product();
+    const before = { ...p };
+    overridePackSizeFromTitle(p, { pcsFromTitle: /\b(\d{1,2})\s+uova\b/i });
+    assert.deepEqual(p, before);
   });
 });
