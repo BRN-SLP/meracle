@@ -42,7 +42,8 @@ export type Retailer =
   | "rimi-lv"
   | "rimi-lt"
   | "continente-pt"
-  | "carulla-co";
+  | "carulla-co"
+  | "masxmenos-cr";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -64,9 +65,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT" | "CR";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON" | "CRC";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -489,6 +490,29 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 5, maxMajor: 25 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 2.5, maxMajor: 15 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PT", currency: "EUR", retailer: "continente-pt", sanityRange: { minMajor: 0.4, maxMajor: 3 } },
+
+  // Costa Rica via Más x Menos (Walmart-owned VTEX store). Prices in
+  // Costa Rican Colón (CRC). USD-CRC ≈ 1:520 so bread 700-2150 CRC
+  // ≈ 1.40-4.10 USD. The supermarket indexes butcher meats with
+  // measurementUnit "kg" and unitMultiplier 0.5-0.6 like Olimpica CO
+  // and Disco AR, so the bare-Kg branch in parseProduct will pick
+  // them up unchanged.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 600, maxMajor: 4000 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 700, maxMajor: 2500 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 1500, maxMajor: 5000 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 1500, maxMajor: 6000 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 600, maxMajor: 3000 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 800, maxMajor: 4000 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 800, maxMajor: 4000 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 600, maxMajor: 3500 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 4000, maxMajor: 25000 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 400, maxMajor: 3000 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 500, maxMajor: 3000 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 1500, maxMajor: 7000 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 2000, maxMajor: 10000 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 4000, maxMajor: 16000 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 1500, maxMajor: 8000 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 700, maxMajor: 3000 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
