@@ -43,7 +43,8 @@ export type Retailer =
   | "rimi-lt"
   | "continente-pt"
   | "carulla-co"
-  | "masxmenos-cr";
+  | "masxmenos-cr"
+  | "plaza-vea-pe";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -289,6 +290,27 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 15, maxMajor: 80 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 10, maxMajor: 80 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 4, maxMajor: 30 } },
+
+  // Peru 2nd retailer via Plaza Vea (large VTEX supermarket chain).
+  // Same currency, same canonical sizes, same VTEX adapter as Wong,
+  // so Plaza Vea unlocks a cross-check signal per PE slug. Sanity
+  // ranges mirror wong-pe.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 5, maxMajor: 30 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 8, maxMajor: 30 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 8, maxMajor: 40 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 2, maxMajor: 10 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 2, maxMajor: 15 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 3, maxMajor: 20 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 1, maxMajor: 15 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 30, maxMajor: 250 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 2, maxMajor: 20 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 2, maxMajor: 12 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 3, maxMajor: 25 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 10, maxMajor: 60 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 10, maxMajor: 80 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 4, maxMajor: 30 } },
 
   // Colombia via Olimpica (VTEX catalog API). Prices in COP whole
   // pesos. Olimpica is a department store, every product carries
