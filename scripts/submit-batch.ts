@@ -23,6 +23,7 @@ import { scrapeRimiLv } from "../src/scrapers/rimi-lv.js";
 import { scrapeRimiLt } from "../src/scrapers/rimi-lt.js";
 import { scrapeContinentePt } from "../src/scrapers/continente-pt.js";
 import { scrapeCarullaCo } from "../src/scrapers/carulla-co.js";
+import { scrapeMasXMenosCr } from "../src/scrapers/masxmenos-cr.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -290,7 +291,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla] = await Promise.all([
+  // Más x Menos Costa Rica, Walmart-owned VTEX storefront.
+  // 17th country (CR) on the oracle.
+  const masxmenosPromise: Promise<ScraperResult | null> =
+    scrapeMasXMenosCr().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  masxmenos-cr: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -309,6 +319,7 @@ async function main(): Promise<void> {
     rimiLtPromise,
     continentePromise,
     carullaPromise,
+    masxmenosPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -392,6 +403,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  carulla-co   : SKIPPED (scraper threw)");
   }
+  if (masxmenos) {
+    console.log(`  masxmenos-cr : ${masxmenos.scraped.length} scraped, ${masxmenos.misses.length} miss`);
+  } else {
+    console.log("  masxmenos-cr : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -413,6 +429,7 @@ async function main(): Promise<void> {
     ...(rimiLt?.scraped ?? []),
     ...(continente?.scraped ?? []),
     ...(carulla?.scraped ?? []),
+    ...(masxmenos?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
