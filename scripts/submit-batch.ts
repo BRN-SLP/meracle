@@ -18,6 +18,7 @@ import { env } from "../src/env.js";
 import { normalize, NormalizationError } from "../src/normalize.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
+import { scrapeDiscoAr } from "../src/scrapers/disco-ar.js";
 import { scrapeMercadonaEs } from "../src/scrapers/mercadona-es.js";
 import { scrapeMigrosTr } from "../src/scrapers/migros-tr.js";
 import { scrapeNovusUa } from "../src/scrapers/novus-ua.js";
@@ -179,7 +180,16 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros] = await Promise.all([
+  // Disco Argentina runs over plain HTTP, public VTEX catalog API.
+  const discoPromise: Promise<ScraperResult | null> = scrapeDiscoAr().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  disco-ar: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -187,6 +197,7 @@ async function main(): Promise<void> {
     carrefourPromise,
     rewePromise,
     migrosPromise,
+    discoPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -215,6 +226,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  migros-tr    : SKIPPED (scraper threw)");
   }
+  if (disco) {
+    console.log(`  disco-ar     : ${disco.scraped.length} scraped, ${disco.misses.length} miss`);
+  } else {
+    console.log("  disco-ar     : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -225,6 +241,7 @@ async function main(): Promise<void> {
     ...(carrefour?.scraped ?? []),
     ...(rewe?.scraped ?? []),
     ...(migros?.scraped ?? []),
+    ...(disco?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
