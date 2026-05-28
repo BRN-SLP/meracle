@@ -271,7 +271,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ArPicker>> = {
   // ("con gas", "gasificada", "soda"), flavoured, tonic water, and
   // non-drinking liquid products.
   water_bottled_1500ml: {
-    query: "agua mineral sin gas",
+    query: "agua mineral sin gas 1.5 l",
     include: /\bagua\b/i,
     exclude: [
       /\b(?:con gas|gasificada|gaseada|soda|tonica|tónica|tonic)\b/i,
@@ -279,8 +279,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ArPicker>> = {
       /\b(?:gaseosa|cola|sprite|pepsi|coca|isotonica|isotónica|gatorade|powerade)\b/i,
       /\b(?:destilada|desionizada|colonia|limpiavidrios|lavandina)\b/i,
       /\b(?:oxigenada|peroxido|peróxido)\b/i,
+      /\b(?:bid[óo]n|dispenser|garrafa|caja|sixpack|six pack|pack)\b/i,
     ],
-    sizeRange: { min: 1000, max: 6000 },
+    // 1.5 L PET single-bottle consumer staple. The 5 L family
+    // carafe was being preferred at 870 ARS-normalized, breaking
+    // per-canonical-1.5L comparability.
+    sizeRange: { min: 1300, max: 1700 },
     unitFromTitle: "ml",
   },
   // Bananas sold per kg loose ("Banana por Kg"). Excludes banana-
