@@ -26,11 +26,14 @@ import { targetsForRetailer } from "../products.js";
 import type { ScrapedProduct, ScraperResult } from "../types.js";
 
 const BASE = "https://www.sainsburys.co.uk";
-// One scrape (homepage warm + 2 searches + DOM extract) finishes in
-// well under a minute. Browser Use Cloud bills only for the time the
-// session is actually alive, but a tight timeout is a safety belt:
-// if our code hangs, the session auto-kills before draining credits.
-const SESSION_TIMEOUT_MIN = 2;
+// 16 sequential PLP searches under one session. Homepage warm + 16
+// navigations + lazy-load waits typically finishes in 4 to 5 min. The
+// earlier 2-min cap killed the session mid-batch after roughly four
+// slugs (production cron held on to 11 of 16 by accident; everything
+// after `olive_oil_1l` reliably hit "browser has been closed"). 8 min
+// matches the working Carrefour FR ceiling; Browser Use bills per
+// actual second so the unused tail is free.
+const SESSION_TIMEOUT_MIN = 8;
 
 interface UkPicker {
   /** Search keyword. */
@@ -160,11 +163,20 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   // apples by named variety (Braeburn, Gala, Pink Lady, Bramley, etc.)
   // plus generic "by Sainsbury's" packs. Critically excludes pineapple,
   // which matches the bare apple stem, plus processed forms.
+  //
+  // The squash, cordial, drink, concentrate, blackcurrant exclude
+  // band is a separate line because UK supermarkets shelve fruit-
+  // flavoured beverages (canonical example: "Robinsons Apple &
+  // Blackcurrant Squash 1L") on the `apples 1kg` PLP, and the 1 L
+  // size happens to fall inside the 800 to 1200 sizeRange window.
+  // That beverage line was the cheapest fixture in the prior live
+  // cron run and won the cheapest-priced selection on apples_1kg.
   apples_1kg: {
     query: "apples 1kg",
     include: /\bapple/i,
     exclude: [
       /\b(pine|dried|freeze-dried|sliced|frozen|chips|crisps|cake|cookie|biscuit|cream|juice|sauce|cider|vinegar|wine|crumble|strudel|toffee|caramel|flavou?red|sweet)\b/i,
+      /\b(squash|cordial|drink|concentrate|blackcurrant|sparkling|fizz|beverage|water|soda|kombucha|smoothie|tea)\b/i,
     ],
     sizeRange: { min: 800, max: 1200 },
   },
@@ -176,8 +188,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   chicken_breast_1kg: {
     query: "chicken breast fillet 1kg",
     include: /\bchicken\b.*\b(breast|breasts|fillet|fillets)\b/i,
+    // Excludes match prefix stems (no trailing \b) so `nugget` blocks
+    // both `Nugget` and `Nuggets`. The previous trailing word boundary
+    // let "Sainsbury's Chicken Breast Nuggets 1kg" (processed) win the
+    // cheapest-priced sort over fresh fillet packs.
     exclude: [
-      /\b(thigh|drumstick|wing|leg|heart|liver|kiev|nugget|sausage|ham|smoked|breaded|crumb|marinad|frozen|mince|kebab|skewer|burger|stuffed|wrap|tikka|tandoori|bbq|jerk|teriyaki|peri-peri|coated|seasoned|cooked|ready|roast)\b/i,
+      /\b(thigh|drumstick|wing|leg|heart|liver|kiev|nugget|sausage|ham|smoked|breaded|crumb|marinad|frozen|mince|kebab|skewer|burger|stuffed|wrap|tikka|tandoori|bbq|jerk|teriyaki|peri-peri|coated|seasoned|cooked|ready|roast|goujon|popper|dipper|tender|popcorn)/i,
     ],
     sizeRange: { min: 800, max: 1200 },
   },
@@ -211,12 +227,15 @@ const PICKERS: Partial<Record<ProductTarget["slug"], UkPicker>> = {
   cheese_local_500g: {
     query: "cheddar 500g",
     include: /\bcheddar\b/i,
+    // Excludes match prefix stems so `slice` blocks both `Slice` and
+    // `Sliced` / `Slices`. The previous trailing-\b form let processed-
+    // cheese SKUs through and broke the cheese sanity range floor.
     exclude: [
-      /\b(sliced|grated|shredded|spread|melt|processed|stick|snack|nibble|cube|portion|mini|baby|bites|crumbl)\b/i,
-      /\b(jalape|chilli|chili|smoked|herb|garlic|onion|pickle|chutney|cranberry|truffle|honey|whisky|wine|spicy|caramelised|ploughman)\b/i,
-      /\b(vegan|plant-based|dairy-free|lactose-free|free from)\b/i,
-      /\b(red leicester|wensleydale|stilton|cheshire|double gloucester|monterey|colby|gouda|edam|brie|camembert|mozzarella|feta|parmesan|halloumi|paneer)\b/i,
-      /\b(product|substitute|imitation)\b/i,
+      /\b(slice|grat|shred|spread|melt|process|stick|snack|nibble|cube|portion|mini|baby|bite|crumbl|dipper|stringer|dunker)/i,
+      /\b(jalape|chilli|chili|smoked|herb|garlic|onion|pickle|chutney|cranberry|truffle|honey|whisky|wine|spicy|caramelis|ploughman)/i,
+      /\b(vegan|plant-based|dairy-free|lactose-free|free from)/i,
+      /\b(red leicester|wensleydale|stilton|cheshire|double gloucester|monterey|colby|gouda|edam|brie|camembert|mozzarell|feta|parmesan|halloumi|paneer)/i,
+      /\b(product|substitute|imitation)/i,
     ],
     sizeRange: { min: 400, max: 600 },
   },
