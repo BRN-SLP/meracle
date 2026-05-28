@@ -79,16 +79,21 @@ interface CoPicker {
 }
 
 const PICKERS: Partial<Record<ProductTarget["slug"], CoPicker>> = {
-  // Sliced "pan tajado" bread. Bimbo, Milenio, Olimpica private
-  // label, Fitcook. Excludes croissant-style and snack breads.
+  // White sliced "pan tajado" bread. Bimbo, Milenio, Olimpica
+  // private label, Fitcook. Excludes croissant-style and snack
+  // breads, and excludes whole-grain ("integral") which is a
+  // different SKU class and breaks per-canonical-500g
+  // cross-country comparability with the white-bread picks in
+  // other countries.
   bread_500g: {
-    query: "pan tajado",
+    query: "pan blanco tajado",
     include: /\bpan\b/i,
     exclude: [
       /\b(?:hamburguesa|hot dog|hotdog|pita|naan|chapa)\b/i,
       /\b(?:croissant|brioche|bizcocho|panecillo|donut|rosca)\b/i,
       /\b(?:relleno|crema|chocolate|dulce|mermelada)\b/i,
       /\b(?:perro caliente|sandwichero|tortilla)\b/i,
+      /\b(?:integral|integrales|multicereal|multi[- ]cereal|cereales|avena|salvado|centeno|linaza|chia|chía|semilla|grano entero|fibra|light|fitness|fitcook)\b/i,
     ],
     sizeRange: { min: 300, max: 800 },
     unitFromTitle: "g",
