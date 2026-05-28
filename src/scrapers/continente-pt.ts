@@ -146,7 +146,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PtPicker>> = {
       /\b(?:margarina|creme\s+vegetal|spread|tartin)\b/iu,
       /\b(?:ghee|clarificada|fundida)\b/iu,
       /\b(?:banha|toucinho)\b/iu,
-      /\b(?:bolacha|tosta|biscoito|pastel)\b/iu,
+      /\b(?:bolacha|tosta|biscoito|pastel|wafer)/iu,
       /\b(?:cacau|chocolate|caramelo|fig[ao])\b/iu,
     ],
     sizeRange: { min: 100, max: 350 },
