@@ -54,6 +54,15 @@ const EnvSchema = z.object({
   // wallet which submits prices on chain, this one is the human owner.
   // Required only by scripts/register-self.ts in ed25519-linked mode.
   SELF_HUMAN_ADDRESS: hexAddress.optional(),
+  // REWE delivery market identifier. Without it the /api/products
+  // endpoint returns the catalog without prices (NO_HIT or empty
+  // articles list). Capture once via a Browser Use Cloud session that
+  // walks the Standort modal at 10115 Berlin Mitte, then hardcode the
+  // pair here. Both keys are the same numeric string in practice but
+  // Rewe expects both names on every request.
+  // See docs/deferred-retailers.md for the discovery procedure.
+  REWE_WW_IDENT: z.string().regex(/^\d{4,8}$/).optional(),
+  REWE_MARKET_CODE: z.string().regex(/^\d{4,8}$/).optional(),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
