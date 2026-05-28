@@ -41,7 +41,8 @@ export type Retailer =
   | "rimi-ee"
   | "rimi-lv"
   | "rimi-lt"
-  | "continente-pt";
+  | "continente-pt"
+  | "carulla-co";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -310,6 +311,27 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 12000, maxMajor: 50000 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 6000, maxMajor: 30000 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 2500, maxMajor: 15000 } },
+
+  // Colombia 2nd retailer via Carulla (Grupo Éxito's premium VTEX
+  // store, sister to Éxito.com). Same currency, same canonical
+  // sizes, same VTEX adapter as Olimpica, so Carulla unlocks a
+  // cross-check signal per CO slug.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 4000, maxMajor: 20000 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 2500, maxMajor: 10000 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 4000, maxMajor: 18000 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 6000, maxMajor: 25000 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 2500, maxMajor: 12000 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 2000, maxMajor: 12000 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 3500, maxMajor: 20000 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 1500, maxMajor: 12000 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 25000, maxMajor: 150000 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 1500, maxMajor: 15000 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 1500, maxMajor: 8000 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 5000, maxMajor: 25000 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 12000, maxMajor: 45000 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 12000, maxMajor: 50000 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 6000, maxMajor: 30000 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "CO", currency: "COP", retailer: "carulla-co",    sanityRange: { minMajor: 2500, maxMajor: 15000 } },
 
   // Mexico via Chedraui (Mexican retailer running on VTEX). Prices
   // in MXN whole pesos with decimals (USD 1 ~ 17 MXN). Loose produce
