@@ -20,6 +20,7 @@ import { scrapeAuchanPl } from "../src/scrapers/auchan-pl.js";
 import { scrapeAuchanRo } from "../src/scrapers/auchan-ro.js";
 import { scrapeRimiEe } from "../src/scrapers/rimi-ee.js";
 import { scrapeRimiLv } from "../src/scrapers/rimi-lv.js";
+import { scrapeRimiLt } from "../src/scrapers/rimi-lt.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -260,7 +261,16 @@ async function main(): Promise<void> {
     },
   );
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv] = await Promise.all([
+  // Rimi Lithuania, identical SSR extract pattern as rimi-ee / rimi-lv.
+  const rimiLtPromise: Promise<ScraperResult | null> = scrapeRimiLt().catch(
+    (e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  rimi-lt: scrape threw, skipping ($${msg})`);
+      return null;
+    },
+  );
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -276,6 +286,7 @@ async function main(): Promise<void> {
     auchanRoPromise,
     rimiEePromise,
     rimiLvPromise,
+    rimiLtPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -344,6 +355,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  rimi-lv      : SKIPPED (scraper threw)");
   }
+  if (rimiLt) {
+    console.log(`  rimi-lt      : ${rimiLt.scraped.length} scraped, ${rimiLt.misses.length} miss`);
+  } else {
+    console.log("  rimi-lt      : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -362,6 +378,7 @@ async function main(): Promise<void> {
     ...(auchanRo?.scraped ?? []),
     ...(rimiEe?.scraped ?? []),
     ...(rimiLv?.scraped ?? []),
+    ...(rimiLt?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
