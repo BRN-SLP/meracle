@@ -279,8 +279,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // Chicken breast ("filete de pechuga de pollo x kg"). The Wong /
   // San Fernando / Redondos butcher counter sells fresh pechuga
   // per kg with kg measurement. Excludes nuggets, fingers (deditos),
-  // burgers, schnitzel, smoked, sausages, turkey (pavo), and the
-  // ready-meal combos that include rotisserie chicken.
+  // burgers, schnitzel, smoked, sausages, turkey (pavo), the
+  // ready-meal combos that include rotisserie chicken, and the
+  // "pechuga con ala" combo cut (breast attached to wing, sold
+  // cheaper per kg because the wing is mostly bone, so the picker
+  // would pick it as the cheapest, breaking comparability against
+  // pure-breast picks elsewhere).
   chicken_breast_1kg: {
     query: "pechuga pollo",
     include: /\bpechuga\b.*\bpollo\b/i,
@@ -294,6 +298,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
       /\b(?:relleno|rellena|marinada|adobada|tandoori|barbacoa)\b/i,
       /\b(?:congelada|congelado|frozen)\b/i,
       /\b(?:combo|menu|rostizado|gaseosa|papas fritas)\b/i,
+      /\b(?:con\s+(?:ala|alas|hueso|pelleja|piel|menudencia)|con\s+ad[óo]bo)\b/i,
     ],
     sizeRange: { min: 300, max: 1500 },
     unitFromTitle: "g",
