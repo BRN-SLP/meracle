@@ -34,7 +34,8 @@ export type Retailer =
   | "conad-it"
   | "migros-tr"
   | "disco-ar"
-  | "wong-pe";
+  | "wong-pe"
+  | "olimpica-co";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -56,9 +57,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -275,6 +276,29 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 15, maxMajor: 80 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 10, maxMajor: 80 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "wong-pe",       sanityRange: { minMajor: 4, maxMajor: 30 } },
+
+  // Colombia via Olimpica (VTEX catalog API). Prices in COP whole
+  // pesos. Olimpica is a department store, every product carries
+  // measurementUnit "un" (no kg-measurement class), so loose
+  // produce is tagged with "X Kg" or "Kg" in the title; the parser
+  // treats that as a 1000 g pack (mirrors Migros TR's bare-Kg
+  // branch). Sanity ranges sized for Bogota retail in COP.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 4000, maxMajor: 20000 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 2500, maxMajor: 10000 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 4000, maxMajor: 18000 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 6000, maxMajor: 25000 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 2500, maxMajor: 12000 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 2000, maxMajor: 12000 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 3500, maxMajor: 20000 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 1500, maxMajor: 12000 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 25000, maxMajor: 150000 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 1500, maxMajor: 15000 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 1500, maxMajor: 8000 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 5000, maxMajor: 25000 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 12000, maxMajor: 45000 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 12000, maxMajor: 50000 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 6000, maxMajor: 30000 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "CO", currency: "COP", retailer: "olimpica-co",   sanityRange: { minMajor: 2500, maxMajor: 15000 } },
 ];
 
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
