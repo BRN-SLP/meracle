@@ -24,6 +24,7 @@ import { scrapeRimiLt } from "../src/scrapers/rimi-lt.js";
 import { scrapeContinentePt } from "../src/scrapers/continente-pt.js";
 import { scrapeCarullaCo } from "../src/scrapers/carulla-co.js";
 import { scrapeMasXMenosCr } from "../src/scrapers/masxmenos-cr.js";
+import { scrapePlazaVeaPe } from "../src/scrapers/plaza-vea-pe.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -300,7 +301,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos] = await Promise.all([
+  // Plaza Vea Peru, 2nd PE retailer for per-slug cross-check.
+  // Same VTEX engine as Wong PE.
+  const plazaVeaPromise: Promise<ScraperResult | null> =
+    scrapePlazaVeaPe().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  plaza-vea-pe: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -320,6 +330,7 @@ async function main(): Promise<void> {
     continentePromise,
     carullaPromise,
     masxmenosPromise,
+    plazaVeaPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -408,6 +419,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  masxmenos-cr : SKIPPED (scraper threw)");
   }
+  if (plazaVea) {
+    console.log(`  plaza-vea-pe : ${plazaVea.scraped.length} scraped, ${plazaVea.misses.length} miss`);
+  } else {
+    console.log("  plaza-vea-pe : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -430,6 +446,7 @@ async function main(): Promise<void> {
     ...(continente?.scraped ?? []),
     ...(carulla?.scraped ?? []),
     ...(masxmenos?.scraped ?? []),
+    ...(plazaVea?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
