@@ -218,7 +218,7 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 50, maxMajor: 300 } },
   { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 50, maxMajor: 300 } },
   { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 20, maxMajor: 100 } },
-  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 40, maxMajor: 250 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 30, maxMajor: 300 } },
   { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 25, maxMajor: 200 } },
   { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 10, maxMajor: 80 } },
   { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "TR", currency: "TRY", retailer: "migros-tr",     sanityRange: { minMajor: 150, maxMajor: 900 } },
