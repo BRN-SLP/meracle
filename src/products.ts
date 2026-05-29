@@ -49,7 +49,8 @@ export type Retailer =
   | "exito-co"
   | "zona-sul-br"
   | "vea-ar"
-  | "metro-pe";
+  | "metro-pe"
+  | "hortifruti-br";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -401,6 +402,29 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 20, maxMajor: 90 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 8, maxMajor: 50 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 4, maxMajor: 25 } },
+
+  // Brazil 3rd retailer via Hortifruti (national chain, fresh-produce
+  // focused, VTEX catalog API). Cloudflare allows direct API access
+  // when a browser User-Agent is sent. With Mambo (SP) + Zona Sul
+  // (RJ) + Hortifruti (national footprint) we get full BR
+  // triangulation across two metros + national.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 4, maxMajor: 25 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 4, maxMajor: 18 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 6, maxMajor: 30 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 6, maxMajor: 30 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 4, maxMajor: 25 } },
+  // tomatoes_1kg / potatoes_1kg / bananas_1kg / apples_1kg:
+  // Hortifruti sells fresh produce by Unidade (single piece) with
+  // unitMultiplier 1 and no weight in the title, so we cannot
+  // reliably normalize to a 1 kg canonical price. Mambo + Zona Sul
+  // still cover these slugs.
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 20, maxMajor: 120 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 2, maxMajor: 15 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 15, maxMajor: 60 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 20, maxMajor: 90 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 8, maxMajor: 50 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "BR", currency: "BRL", retailer: "hortifruti-br",  sanityRange: { minMajor: 4, maxMajor: 25 } },
 
   // Colombia via Olimpica (VTEX catalog API). Prices in COP whole
   // pesos. Olimpica is a department store, every product carries
