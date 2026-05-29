@@ -30,6 +30,7 @@ import { scrapeExitoCo } from "../src/scrapers/exito-co.js";
 import { scrapeZonaSulBr } from "../src/scrapers/zona-sul-br.js";
 import { scrapeVeaAr } from "../src/scrapers/vea-ar.js";
 import { scrapeMetroPe } from "../src/scrapers/metro-pe.js";
+import { scrapeHortifrutiBr } from "../src/scrapers/hortifruti-br.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -359,7 +360,19 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro] = await Promise.all([
+  // Hortifruti Brazil, national produce-focused VTEX chain. 3rd BR
+  // retailer; pairs with Mambo (SP) and Zona Sul (RJ) for BR
+  // triangulation. Catalog skips fresh produce slugs sold per
+  // Unidade (potatoes / bananas / apples / tomatoes); the other 12
+  // slugs participate in the cross-check.
+  const hortifrutiPromise: Promise<ScraperResult | null> =
+    scrapeHortifrutiBr().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  hortifruti-br: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro, hortifruti] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -385,6 +398,7 @@ async function main(): Promise<void> {
     zonaSulPromise,
     veaPromise,
     metroPromise,
+    hortifrutiPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -503,6 +517,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  metro-pe     : SKIPPED (scraper threw)");
   }
+  if (hortifruti) {
+    console.log(`  hortifruti-br: ${hortifruti.scraped.length} scraped, ${hortifruti.misses.length} miss`);
+  } else {
+    console.log("  hortifruti-br: SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -531,6 +550,7 @@ async function main(): Promise<void> {
     ...(zonaSul?.scraped ?? []),
     ...(vea?.scraped ?? []),
     ...(metro?.scraped ?? []),
+    ...(hortifruti?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
