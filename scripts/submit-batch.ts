@@ -28,6 +28,7 @@ import { scrapePlazaVeaPe } from "../src/scrapers/plaza-vea-pe.js";
 import { scrapeMamboBr } from "../src/scrapers/mambo-br.js";
 import { scrapeExitoCo } from "../src/scrapers/exito-co.js";
 import { scrapeZonaSulBr } from "../src/scrapers/zona-sul-br.js";
+import { scrapeVeaAr } from "../src/scrapers/vea-ar.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -339,7 +340,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul] = await Promise.all([
+  // Vea Argentina, Cencosud's tier-2 VTEX chain. 2nd AR retailer;
+  // pairs with Disco AR for cross-chain cross-check.
+  const veaPromise: Promise<ScraperResult | null> =
+    scrapeVeaAr().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  vea-ar: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -363,6 +373,7 @@ async function main(): Promise<void> {
     mamboPromise,
     exitoPromise,
     zonaSulPromise,
+    veaPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -471,6 +482,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  zona-sul-br  : SKIPPED (scraper threw)");
   }
+  if (vea) {
+    console.log(`  vea-ar       : ${vea.scraped.length} scraped, ${vea.misses.length} miss`);
+  } else {
+    console.log("  vea-ar       : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -497,6 +513,7 @@ async function main(): Promise<void> {
     ...(mambo?.scraped ?? []),
     ...(exito?.scraped ?? []),
     ...(zonaSul?.scraped ?? []),
+    ...(vea?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
