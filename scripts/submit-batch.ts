@@ -32,6 +32,7 @@ import { scrapeVeaAr } from "../src/scrapers/vea-ar.js";
 import { scrapeMetroPe } from "../src/scrapers/metro-pe.js";
 import { scrapeHortifrutiBr } from "../src/scrapers/hortifruti-br.js";
 import { scrapeDiaAr } from "../src/scrapers/dia-ar.js";
+import { scrapeEldoradoUy } from "../src/scrapers/eldorado-uy.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -382,7 +383,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro, hortifruti, dia] = await Promise.all([
+  // El Dorado Uruguay (VTEX). 20th country, first UY adapter, new
+  // UYU currency. Conaprole dominates dairy; locals carry beer.
+  const eldoradoPromise: Promise<ScraperResult | null> =
+    scrapeEldoradoUy().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  eldorado-uy: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro, hortifruti, dia, eldorado] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -410,6 +420,7 @@ async function main(): Promise<void> {
     metroPromise,
     hortifrutiPromise,
     diaPromise,
+    eldoradoPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -538,6 +549,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  dia-ar       : SKIPPED (scraper threw)");
   }
+  if (eldorado) {
+    console.log(`  eldorado-uy  : ${eldorado.scraped.length} scraped, ${eldorado.misses.length} miss`);
+  } else {
+    console.log("  eldorado-uy  : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -568,6 +584,7 @@ async function main(): Promise<void> {
     ...(metro?.scraped ?? []),
     ...(hortifruti?.scraped ?? []),
     ...(dia?.scraped ?? []),
+    ...(eldorado?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
