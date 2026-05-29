@@ -51,7 +51,8 @@ export type Retailer =
   | "vea-ar"
   | "metro-pe"
   | "hortifruti-br"
-  | "dia-ar";
+  | "dia-ar"
+  | "eldorado-uy";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -73,9 +74,9 @@ export type ProductSlug =
   | "cheese_local_500g"
   | "beer_imported_500ml";
 
-export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT" | "CR" | "BR";
+export type CountryCode = "UA" | "GB" | "ES" | "PL" | "DE" | "FR" | "IT" | "TR" | "AR" | "PE" | "CO" | "MX" | "RO" | "EE" | "LV" | "LT" | "PT" | "CR" | "BR" | "UY";
 
-export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON" | "CRC" | "BRL";
+export type CurrencyCode = "UAH" | "GBP" | "EUR" | "PLN" | "TRY" | "ARS" | "PEN" | "COP" | "MXN" | "RON" | "CRC" | "BRL" | "UYU";
 
 export interface ProductTarget {
   /** Mercato canonical slug, hashed to bytes12 barcode. */
@@ -319,6 +320,27 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 3500, maxMajor: 28000 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 2500, maxMajor: 22000 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 800, maxMajor: 7000 } },
+
+  // Uruguay via El Dorado (VTEX catalog API). Prices in UYU (Uruguayan
+  // Peso) whole units with up to two decimals. Sanity ranges target
+  // Montevideo retail basket. Conaprole dominates dairy; local brands
+  // for beer (Pilsen, Patricia, Norteña) instead of Heineken.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 60, maxMajor: 300 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 40, maxMajor: 150 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 100, maxMajor: 400 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 100, maxMajor: 400 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 50, maxMajor: 200 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 60, maxMajor: 250 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 60, maxMajor: 350 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 30, maxMajor: 200 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 400, maxMajor: 2500 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 30, maxMajor: 200 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 40, maxMajor: 200 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 60, maxMajor: 300 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 150, maxMajor: 800 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 200, maxMajor: 1200 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 150, maxMajor: 1000 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "UY", currency: "UYU", retailer: "eldorado-uy",   sanityRange: { minMajor: 50, maxMajor: 400 } },
 
   // Peru via Wong (Cencosud, VTEX catalog API). Prices in PEN
   // (Peruvian Sol) whole units, the wire format includes decimals
