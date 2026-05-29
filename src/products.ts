@@ -46,7 +46,8 @@ export type Retailer =
   | "masxmenos-cr"
   | "plaza-vea-pe"
   | "mambo-br"
-  | "exito-co";
+  | "exito-co"
+  | "zona-sul-br";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -334,6 +335,27 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 20, maxMajor: 90 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 8, maxMajor: 50 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "BR", currency: "BRL", retailer: "mambo-br",      sanityRange: { minMajor: 4, maxMajor: 25 } },
+
+  // Brazil 2nd retailer via Zona Sul (Rio de Janeiro VTEX hypermarket
+  // chain, mid-tier premium). Cross-check for BR: Mambo (São Paulo)
+  // + Zona Sul (Rio de Janeiro) covers the two largest BR metros and
+  // catches regional pricing divergence.
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 4, maxMajor: 25 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 4, maxMajor: 18 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 6, maxMajor: 30 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 6, maxMajor: 30 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 4, maxMajor: 25 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 3, maxMajor: 18 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 20, maxMajor: 120 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 2, maxMajor: 15 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 3, maxMajor: 15 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 5, maxMajor: 25 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 15, maxMajor: 60 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 20, maxMajor: 90 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 8, maxMajor: 50 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "BR", currency: "BRL", retailer: "zona-sul-br",   sanityRange: { minMajor: 4, maxMajor: 25 } },
 
   // Colombia via Olimpica (VTEX catalog API). Prices in COP whole
   // pesos. Olimpica is a department store, every product carries
