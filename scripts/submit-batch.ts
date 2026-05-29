@@ -31,6 +31,7 @@ import { scrapeZonaSulBr } from "../src/scrapers/zona-sul-br.js";
 import { scrapeVeaAr } from "../src/scrapers/vea-ar.js";
 import { scrapeMetroPe } from "../src/scrapers/metro-pe.js";
 import { scrapeHortifrutiBr } from "../src/scrapers/hortifruti-br.js";
+import { scrapeDiaAr } from "../src/scrapers/dia-ar.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -372,7 +373,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro, hortifruti] = await Promise.all([
+  // Dia Argentina, Spanish discount chain (not Cencosud). 3rd AR
+  // retailer; gives Argentina full triangulation (Disco + Vea + Dia).
+  const diaPromise: Promise<ScraperResult | null> =
+    scrapeDiaAr().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  dia-ar: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro, hortifruti, dia] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -399,6 +409,7 @@ async function main(): Promise<void> {
     veaPromise,
     metroPromise,
     hortifrutiPromise,
+    diaPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -522,6 +533,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  hortifruti-br: SKIPPED (scraper threw)");
   }
+  if (dia) {
+    console.log(`  dia-ar       : ${dia.scraped.length} scraped, ${dia.misses.length} miss`);
+  } else {
+    console.log("  dia-ar       : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -551,6 +567,7 @@ async function main(): Promise<void> {
     ...(vea?.scraped ?? []),
     ...(metro?.scraped ?? []),
     ...(hortifruti?.scraped ?? []),
+    ...(dia?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
