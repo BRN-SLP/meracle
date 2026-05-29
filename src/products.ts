@@ -50,7 +50,8 @@ export type Retailer =
   | "zona-sul-br"
   | "vea-ar"
   | "metro-pe"
-  | "hortifruti-br";
+  | "hortifruti-br"
+  | "dia-ar";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -295,6 +296,29 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "vea-ar",        sanityRange: { minMajor: 4000, maxMajor: 30000 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "AR", currency: "ARS", retailer: "vea-ar",        sanityRange: { minMajor: 3000, maxMajor: 25000 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "AR", currency: "ARS", retailer: "vea-ar",        sanityRange: { minMajor: 1000, maxMajor: 8000 } },
+
+  // Argentina 3rd retailer via Dia (Spanish discount chain, not part
+  // of Cencosud's Disco/Vea group). Same VTEX engine, same currency.
+  // With Disco + Vea + Dia we get true AR triangulation across two
+  // ownership groups (Cencosud x Distribuidora Internacional de
+  // Alimentacion). Sanity ranges nudged lower because Dia targets
+  // the discount tier (typically 10-15% below Disco shelf prices).
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 1200, maxMajor: 7000 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 900, maxMajor: 4000 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 2000, maxMajor: 8000 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 2000, maxMajor: 7000 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 700, maxMajor: 3500 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 1200, maxMajor: 6000 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 1200, maxMajor: 7000 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 700, maxMajor: 4500 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 8000, maxMajor: 45000 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 700, maxMajor: 4500 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 800, maxMajor: 4000 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 1200, maxMajor: 7000 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 2500, maxMajor: 22000 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 3500, maxMajor: 28000 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 2500, maxMajor: 22000 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "AR", currency: "ARS", retailer: "dia-ar",        sanityRange: { minMajor: 800, maxMajor: 7000 } },
 
   // Peru via Wong (Cencosud, VTEX catalog API). Prices in PEN
   // (Peruvian Sol) whole units, the wire format includes decimals
