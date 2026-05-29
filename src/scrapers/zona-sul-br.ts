@@ -193,8 +193,10 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   potatoes_1kg: {
     // BR "batata" = regular potato (Peru's "batata" = sweet potato,
     // hence the deleted self-exclude). Brazilian variant for sweet
-    // potato is "batata doce". Bolinha = baby potatoes.
-    query: "batata rosada",
+    // potato is "batata doce". Bolinha = baby potatoes. Zona Sul
+    // RJ uses "batata inglesa" as the canonical descriptor; Mambo
+    // SP uses "batata rosada".
+    query: "batata inglesa",
     include: /\bbatata\b/iu,
     exclude: [
       /\bbatata\s+doce\b/iu,
@@ -212,8 +214,12 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PePicker>> = {
   // dressings, mayonnaise / tuna products that name-drop olive oil
   // in the descriptor, and "atún en aceite oliva" canned fish.
   olive_oil_1l: {
-    query: "azeite oliva extra virgem",
-    include: /\bazeite\b.*\boliva\b/iu,
+    // Zona Sul drops "de Oliva" from titles ("Azeite Extra Virgem
+    // Italiano Due 500ml" not "Azeite de Oliva ..."). Include now
+    // matches either "azeite ... oliva" (Mambo SP convention) or
+    // "azeite ... virgem" (Zona Sul RJ convention).
+    query: "azeite extra virgem",
+    include: /\bazeite\b.*\b(?:oliva|virgem)\b/iu,
     exclude: [
       /\b(?:girasol|maiz|maíz|mezcla|soja|canola|sésamo|sesamo|palma)\b/i,
       /\b(?:aerosol|spray|crema|loción|cosmetic|jabón|champu|champú)\b/i,
