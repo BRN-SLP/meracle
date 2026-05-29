@@ -48,7 +48,8 @@ export type Retailer =
   | "mambo-br"
   | "exito-co"
   | "zona-sul-br"
-  | "vea-ar";
+  | "vea-ar"
+  | "metro-pe";
 
 export type Unit = "g" | "ml" | "pcs";
 
@@ -336,6 +337,28 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 15, maxMajor: 80 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 10, maxMajor: 80 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "plaza-vea-pe",  sanityRange: { minMajor: 4, maxMajor: 30 } },
+
+  // Peru 3rd retailer via Metro PE (Cencosud's cash-and-carry banner,
+  // sister to Wong). Same currency, same VTEX engine, so the Wong
+  // adapter library carries over. With Wong + Plaza Vea + Metro we
+  // get true triangulation for PE (3 independent retailers, two
+  // ownership groups: Cencosud x Intercorp).
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 5, maxMajor: 30 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 3, maxMajor: 12 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 8, maxMajor: 30 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 8, maxMajor: 40 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 2, maxMajor: 10 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 2, maxMajor: 15 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 3, maxMajor: 20 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 1, maxMajor: 15 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 30, maxMajor: 250 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 2, maxMajor: 20 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 2, maxMajor: 12 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 3, maxMajor: 25 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 10, maxMajor: 60 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 10, maxMajor: 80 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "PE", currency: "PEN", retailer: "metro-pe",       sanityRange: { minMajor: 4, maxMajor: 30 } },
 
   // Brazil via Mambo (mid-tier São Paulo VTEX storefront). Prices
   // in BRL with two decimals. Brazilian fresh meat / produce uses

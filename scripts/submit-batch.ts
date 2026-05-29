@@ -29,6 +29,7 @@ import { scrapeMamboBr } from "../src/scrapers/mambo-br.js";
 import { scrapeExitoCo } from "../src/scrapers/exito-co.js";
 import { scrapeZonaSulBr } from "../src/scrapers/zona-sul-br.js";
 import { scrapeVeaAr } from "../src/scrapers/vea-ar.js";
+import { scrapeMetroPe } from "../src/scrapers/metro-pe.js";
 import { scrapeCarrefourFr } from "../src/scrapers/carrefour-fr.js";
 import { scrapeChedrauiMx } from "../src/scrapers/chedraui-mx.js";
 import { scrapeConadIt } from "../src/scrapers/conad-it.js";
@@ -349,7 +350,16 @@ async function main(): Promise<void> {
       return null;
     });
 
-  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea] = await Promise.all([
+  // Metro Peru, Cencosud's cash-and-carry banner. 3rd PE retailer;
+  // gives Peru full triangulation (Wong + Plaza Vea + Metro).
+  const metroPromise: Promise<ScraperResult | null> =
+    scrapeMetroPe().catch((e: unknown) => {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.warn(`  metro-pe: scrape threw, skipping ($${msg})`);
+      return null;
+    });
+
+  const [novus, mercadona, sainsburys, conad, carrefour, rewe, migros, disco, wong, olimpica, chedraui, auchan, auchanRo, rimiEe, rimiLv, rimiLt, continente, carulla, masxmenos, plazaVea, mambo, exito, zonaSul, vea, metro] = await Promise.all([
     scrapeNovusUa(),
     scrapeMercadonaEs(),
     sainsburysPromise,
@@ -374,6 +384,7 @@ async function main(): Promise<void> {
     exitoPromise,
     zonaSulPromise,
     veaPromise,
+    metroPromise,
   ]);
   console.log(`  novus-ua     : ${novus.scraped.length} scraped, ${novus.misses.length} miss`);
   console.log(`  mercadona-es : ${mercadona.scraped.length} scraped, ${mercadona.misses.length} miss`);
@@ -487,6 +498,11 @@ async function main(): Promise<void> {
   } else {
     console.log("  vea-ar       : SKIPPED (scraper threw)");
   }
+  if (metro) {
+    console.log(`  metro-pe     : ${metro.scraped.length} scraped, ${metro.misses.length} miss`);
+  } else {
+    console.log("  metro-pe     : SKIPPED (scraper threw)");
+  }
   console.log("");
 
   const allScrapes = [
@@ -514,6 +530,7 @@ async function main(): Promise<void> {
     ...(exito?.scraped ?? []),
     ...(zonaSul?.scraped ?? []),
     ...(vea?.scraped ?? []),
+    ...(metro?.scraped ?? []),
   ];
   const rows = normalizeBatch(allScrapes);
   printPreview(rows);
