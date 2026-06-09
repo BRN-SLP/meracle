@@ -1,8 +1,8 @@
 /**
  * Submit a PriceObservation to Mercato PriceOracle on Celo Mainnet.
  *
- * The agent's wallet pays gas in cUSD via CIP-64 (feeCurrency =
- * cUSD address), same as the register-identity script. Each
+ * The agent's wallet pays gas natively in CELO (the one-off
+ * register-identity script still uses cUSD via CIP-64). Each
  * submission is one transaction, one Mercato submissionId in
  * return.
  *
@@ -18,7 +18,6 @@ import priceOracleAbiRaw from "../abi/price-oracle.json" with { type: "json" };
 
 import {
   agentAddress,
-  cusdFeeCurrency,
   publicClient,
   walletClient,
 } from "./chain.js";
@@ -64,7 +63,6 @@ export async function submitObservation(
     abi: priceOracleAbi,
     functionName: "submitPrice",
     args: [barcode, zoneKey, BigInt(observation.priceCents), receiptHash],
-    feeCurrency: cusdFeeCurrency,
   });
 
   const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash });
