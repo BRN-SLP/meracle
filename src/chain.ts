@@ -6,11 +6,11 @@
  * `env.ts`) so the agent address is deterministic, the same key
  * always produces the same address.
  *
- * Fee currency: every write call should be passed `feeCurrency:
- * CUSD_ADDRESS` so gas is paid in cUSD. The agent holds cUSD only,
- * no CELO. cUSD is 18-decimal Mento stablecoin and is whitelisted
- * as a native fee currency (no adapter required, unlike 6-decimal
- * USDC/USDT which need adapters).
+ * Fee currency: submitPrice pays gas natively in CELO, so the agent
+ * wallet must hold CELO for gas. The one-off register-identity script
+ * still passes `feeCurrency: cusdFeeCurrency` to pay its gas in cUSD
+ * (an 18-decimal Mento stablecoin whitelisted as a native fee
+ * currency, no adapter required, unlike 6-decimal USDC/USDT).
  *
  * CIP-64 transactions (type `0x7b`) carry ~50k gas overhead vs
  * native CELO gas, factor that in when budgeting.
