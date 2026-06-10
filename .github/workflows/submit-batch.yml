@@ -26,7 +26,11 @@ permissions:
 jobs:
   submit:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Scrape is ~8 min; with submits actually landing (native CELO gas),
+    # each tx waits for its receipt, so a full ~230-SKU batch needs well
+    # over the old 10 min (the 2026-06-10 run was canceled mid-batch at
+    # 156 submits).
+    timeout-minutes: 45
     env:
       # cUSD-paid gas. Non-secret config, hardcoded here so the workflow
       # is self-describing and a single secret rotation suffices.

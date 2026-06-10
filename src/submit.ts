@@ -45,6 +45,23 @@ export interface SubmitResult {
 }
 
 /**
+ * Forno load-balances across nodes, so the nonce viem fetches for a new tx
+ * can lag the tx that was just mined ("nonce too low: next nonce N+1, tx
+ * nonce N" from the sequencer). viem refetches the nonce on every
+ * writeContract call, so a short backoff + one retry resolves the race.
+ */
+async function sendWithNonceRetry(send: () => Promise<Hex>): Promise<Hex> {
+  try {
+    return await send();
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : String(e);
+    if (!/nonce too low|nonce/i.test(message)) throw e;
+    await new Promise((r) => setTimeout(r, 2000));
+    return send();
+  }
+}
+
+/**
  * Encode + send one observation. Awaits the receipt and parses the
  * PriceSubmitted event to recover the submissionId.
  */
@@ -58,12 +75,14 @@ export async function submitObservation(
     observation.observedAt,
   );
 
-  const txHash = await walletClient.writeContract({
-    address: env.MERCATO_ADDRESS as `0x${string}`,
-    abi: priceOracleAbi,
-    functionName: "submitPrice",
-    args: [barcode, zoneKey, BigInt(observation.priceCents), receiptHash],
-  });
+  const txHash = await sendWithNonceRetry(() =>
+    walletClient.writeContract({
+      address: env.MERCATO_ADDRESS as `0x${string}`,
+      abi: priceOracleAbi,
+      functionName: "submitPrice",
+      args: [barcode, zoneKey, BigInt(observation.priceCents), receiptHash],
+    }),
+  );
 
   const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash });
 
