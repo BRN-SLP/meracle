@@ -437,7 +437,7 @@ export function parseSizeFromName(
   // Detect the pieces token before falling into the kilo phrase
   // branches below, otherwise eggs collapse to 1000 g.
   const piecesEarly = s.match(
-    /\bcart[oó]n\s+de\s+(\d{1,3})\s*(?:unid(?:ades?)?|unds?|u)\b/i,
+    /\bcart[oó]n\s+de\s+(\d{1,3})\s*(?:unid(?:ades?)?|unds?|uds?|u)\b/i,
   );
   if (piecesEarly) {
     const v = parseInt(piecesEarly[1]!, 10);
@@ -474,7 +474,7 @@ export function parseSizeFromName(
     if (Number.isFinite(v) && v > 0) return { value: v, unit: "g" };
   }
   // Pieces: " 12 Unds", " 30 Unds", " 12 Unidades"
-  const pcs = s.match(/(?<![a-zA-Z%\d.,])(\d{1,3})\s*(?:unid(?:ades?)?|unds?|un|u)\b/i);
+  const pcs = s.match(/(?<![a-zA-Z%\d.,])(\d{1,3})\s*(?:unid(?:ades?)?|unds?|uds?|un|u)\b/i);
   if (pcs) {
     const v = parseInt(pcs[1]!, 10);
     if (Number.isFinite(v) && v > 0 && v < 200)
@@ -505,6 +505,17 @@ export function parseProduct(p: MasXMenosProduct): ParsedProduct | null {
     : `${API_BASE}/${item.itemId}`;
 
   let size = parseSizeFromName(p.productName);
+  let priceMajor = price;
+  // MxM lists chicken eggs with per-kilo pricing: measurementUnit
+  // "kg", Price quoting one kilo, unitMultiplier the carton weight
+  // in kg, and the piece count only in the title ("Carton de 15
+  // Uds"). Charge the carton: Price x unitMultiplier.
+  if (size?.unit === "pcs" && item.measurementUnit.toLowerCase() === "kg") {
+    const cartonPrice = price * item.unitMultiplier;
+    if (Number.isFinite(cartonPrice) && cartonPrice > 0) {
+      priceMajor = cartonPrice;
+    }
+  }
   // MxM butcher titles sometimes truncate the unit phrase ("...
   // Empacado" with no Kilo). When the VTEX measurementUnit says
   // "kg", use unitMultiplier × 1000 g as the pack weight, the
@@ -520,7 +531,7 @@ export function parseProduct(p: MasXMenosProduct): ParsedProduct | null {
   return {
     itemId: item.itemId,
     title: p.productName,
-    priceMajor: price,
+    priceMajor,
     packSize: size.value,
     packUnit: size.unit,
     sourceUrl,
