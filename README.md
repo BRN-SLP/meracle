@@ -58,7 +58,7 @@ Concrete proof of work, all on Celo Mainnet (chain ID 42220):
 | 8 | Biedronka PL: no online shop exists. Alternatives (Carrefour PL, Auchan PL, Frisco) all fail on consent overlays or proxy IP bans. See [docs/deferred-retailers.md](./docs/deferred-retailers.md) | deferred |
 | 9 | Reputation building via community feedback | continuous |
 
-Current live coverage: 5 countries × 16 slugs = **80 picker entries** running through the daily cron.
+Current live coverage: 20 countries, 28 retailers, **444 picker entries** running through the daily cron.
 
 ## Quick start
 
