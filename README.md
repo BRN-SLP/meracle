@@ -10,7 +10,7 @@
 
 Mercato is a community-built consumer-price index. Each new country and each new product starts with zero data: the community has to seed it. meRacle solves that cold-start problem by acting as a deterministic, auditable oracle:
 
-1. Scrape live prices from the official sites of five mass-market retailers (Novus UA, Sainsbury's UK, Mercadona ES, Conad IT, Carrefour FR), covering 16 canonical grocery slugs each.
+1. Scrape live prices from the official sites of 28 mass-market retailers across 20 countries, covering 16 canonical grocery slugs each.
 2. Submit each observation to the Mercato PriceOracle contract on Celo Mainnet via `submitPrice()`.
 3. Carry an ERC-8004 reputation so the community can verify each observation and weight the agent's submissions accordingly.
 
