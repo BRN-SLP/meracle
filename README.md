@@ -18,7 +18,7 @@ Mercato is a community-built consumer-price index. Each new country and each new
 
 - **Runtime**: Node 20 + TypeScript (strict, no `any` in app code)
 - **Chain client**: viem 2.x against Celo Mainnet (`https://forno.celo.org`)
-- **Scrapers**: retailer-specific modules under `src/scrapers/`. Two paths: free public APIs (Novus, Mercadona) and remote chromium via Browser Use Cloud + Playwright CDP (Sainsbury's, Conad, Carrefour) when the retailer is behind Akamai or Cloudflare
+- **Scrapers**: retailer-specific modules under `src/scrapers/`. Two paths: free public APIs (Novus, Mercadona, the VTEX catalog chains across Latin America) and remote chromium via Browser Use Cloud + Playwright CDP (Sainsbury's, Conad, Carrefour) when the retailer is behind Akamai or Cloudflare
 - **Tests**: 94 unit tests across five scrapers + the normalise / submit pipeline
 - **Schedule**: GitHub Actions cron, daily at 06:00 UTC
 - **Identity**: ERC-8004 Identity NFT + ERC-8004 Reputation feedback loop + Self Agent ID
