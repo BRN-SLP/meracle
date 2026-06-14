@@ -53,6 +53,7 @@ Concrete proof of work, all on Celo Mainnet (chain ID 42220):
 | 4 | Expand to the full 16 canonical grocery slugs (bread / milk / eggs / butter / sugar / rice / olive oil / water / tomatoes / potatoes / bananas / apples / chicken breast / ground beef / hard cheese / imported beer) | shipped |
 | 5 | + Conad IT via Browser Use Cloud + `data-product` JSON extraction | shipped |
 | 6 | + Carrefour FR via Browser Use Cloud + DOM walk (JSON-LD path retained as fallback) | shipped |
+| 10+ | Retailer expansion to 28 chains across 20 countries: VTEX wave (Disco/Vea/Dia AR, Wong/Metro/Plaza Vea PE, Olimpica/Carulla/Exito CO, Chedraui MX, MasxMenos CR, Mambo/Zona Sul/Hortifruti BR, El Dorado UY), EU + Baltics (Auchan PL/RO, Continente PT, Rimi EE/LV/LT), Migros TR | shipped |
 | 7 | Rewe DE: probed, deferred. Online prices are store-specific (Konkreter Preis abhängig vom Standort) and Usercentrics + multi-step Standort modal flow gates every search. See [docs/deferred-retailers.md](./docs/deferred-retailers.md) | deferred |
 | 8 | Biedronka PL: no online shop exists. Alternatives (Carrefour PL, Auchan PL, Frisco) all fail on consent overlays or proxy IP bans. See [docs/deferred-retailers.md](./docs/deferred-retailers.md) | deferred |
 | 9 | Reputation building via community feedback | continuous |
