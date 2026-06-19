@@ -154,7 +154,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], NovusPicker>> = {
     categoryId: "drinks",
     include: /\bwater\b/i,
     exclude: [
-      /\b(sparkling|carbonated|gas|tonic|soda|coca|fanta|sprite|cola|juice|extract|scented|cleansing|perfumed|infused|flavou?red|aroma|aromat|citrus|cherry|lemon|orange|raspberry|strawberry|kola|root|salt|sauce|cooking|distilled|baby|infant|formula|kettle|filter|cleaner)\b/i,
+      /\b(sparkling|(?<!non[- ])carbonated|gas|tonic|soda|coca|fanta|sprite|cola|juice|extract|scented|cleansing|perfumed|infused|flavou?red|aroma|aromat|citrus|cherry|lemon|orange|raspberry|strawberry|kola|root|salt|sauce|cooking|distilled|baby|infant|formula|kettle|filter|cleaner)\b/i,
     ],
     sizeRange: { min: 1400, max: 1600 },
   },
