@@ -231,7 +231,7 @@ const PICKERS: Partial<Record<ProductTarget["slug"], TrPicker>> = {
   // wrongly tagged as "patates" (mayonnaise, ketchup), snack crisps,
   // and sweet potato.
   potatoes_1kg: {
-    query: "patates yerli",
+    query: "patates kg",
     include: /(?<!\p{L})patates/iu,
     exclude: [
       /(?<!\p{L})(?:cips|chips|kızartmalık|don[dm][au][şs]|frozen|dondurul|haşlanmı[şs]|köfte|kroket|salata|püre|pure|nişasta|baharat|paçanga|kek)/iu,
