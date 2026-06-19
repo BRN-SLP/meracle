@@ -15,6 +15,7 @@
     "register:identity": "tsx scripts/register-identity.ts",
     "register:self": "tsx scripts/register-self.ts",
     "scrape:novus": "tsx scripts/scrape-novus-ua.ts",
+    "scrape:auchan-ua": "tsx scripts/scrape-auchan-ua.ts",
     "scrape:mercadona": "tsx scripts/scrape-mercadona-es.ts",
     "scrape:sainsburys": "tsx scripts/scrape-sainsburys-uk.ts",
     "scrape:conad": "tsx scripts/scrape-conad-it.ts",
