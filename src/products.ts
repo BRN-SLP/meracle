@@ -26,6 +26,7 @@
 
 export type Retailer =
   | "novus-ua"
+  | "tavriav-ua"
   | "auchan-ua"
   | "sainsburys-uk"
   | "mercadona-es"
@@ -134,6 +135,22 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "UA", currency: "UAH", retailer: "auchan-ua",      sanityRange: { minMajor: 150, maxMajor: 700 } },
   { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "UA", currency: "UAH", retailer: "auchan-ua",      sanityRange: { minMajor: 100, maxMajor: 500 } },
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "UA", currency: "UAH", retailer: "auchan-ua",      sanityRange: { minMajor: 30, maxMajor: 200 } },
+  { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 15, maxMajor: 90 } },
+  { slug: "milk_1l",     canonicalSize: 1000, unit: "ml",  country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 30, maxMajor: 90 } },
+  { slug: "eggs_12",  canonicalSize: 12,   unit: "pcs", country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 48, maxMajor: 180 } },
+  { slug: "butter_200g", canonicalSize: 200,  unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 50, maxMajor: 200 } },
+  { slug: "sugar_1kg",   canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 20, maxMajor: 100 } },
+  { slug: "rice_1kg",    canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 40, maxMajor: 200 } },
+  { slug: "tomatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 30, maxMajor: 250 } },
+  { slug: "potatoes_1kg",canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "olive_oil_1l",canonicalSize: 1000, unit: "ml",  country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 150, maxMajor: 900 } },
+  { slug: "water_bottled_1500ml",canonicalSize: 1500, unit: "ml", country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 15, maxMajor: 80 } },
+  { slug: "bananas_1kg", canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 30, maxMajor: 150 } },
+  { slug: "apples_1kg",  canonicalSize: 1000, unit: "g",   country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 20, maxMajor: 200 } },
+  { slug: "chicken_breast_1kg",canonicalSize: 1000, unit: "g", country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 100, maxMajor: 500 } },
+  { slug: "beef_ground_1kg",canonicalSize: 1000, unit: "g", country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 150, maxMajor: 700 } },
+  { slug: "cheese_local_500g",canonicalSize: 500, unit: "g", country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 100, maxMajor: 500 } },
+  { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "UA", currency: "UAH", retailer: "tavriav-ua",      sanityRange: { minMajor: 30, maxMajor: 200 } },
 
   // UNITED KINGDOM, Sainsbury's via Browser Use Cloud
   { slug: "bread_500g",  canonicalSize: 500,  unit: "g",   country: "GB", currency: "GBP", retailer: "sainsburys-uk", sanityRange: { minMajor: 0.5, maxMajor: 3 } },
