@@ -655,3 +655,4 @@ export async function scrapeDiaAr(
   return { retailer: "dia-ar", scraped, misses };
 }
 // @scraper: dia-ar
+// @rate-limit: respect retailer crawl policy
