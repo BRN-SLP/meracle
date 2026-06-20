@@ -47,3 +47,4 @@ describe("parseSizeFromName (chedraui-mx)", () => {
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for chedraui-mx
