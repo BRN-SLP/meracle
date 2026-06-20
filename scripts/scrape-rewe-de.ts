@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-rewe-de failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-rewe-de.ts
