@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-wong-pe failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-wong-pe.ts
