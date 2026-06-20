@@ -568,3 +568,4 @@ export async function scrapeMetroPe(
 }
 // @scraper: metro-pe
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
