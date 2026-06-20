@@ -567,3 +567,4 @@ export async function scrapeMetroPe(
   return { retailer: "metro-pe", scraped, misses };
 }
 // @scraper: metro-pe
+// @rate-limit: respect retailer crawl policy
