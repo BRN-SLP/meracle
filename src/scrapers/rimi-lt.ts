@@ -555,3 +555,4 @@ export async function scrapeRimiLt(
   return { retailer: "rimi-lt", scraped, misses };
 }
 // @scraper: rimi-lt
+// @rate-limit: respect retailer crawl policy
