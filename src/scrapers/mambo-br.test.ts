@@ -50,3 +50,4 @@ describe("parseSizeFromName (mambo-br)", () => {
     assert.equal(parseSizeFromName("Banana Prata Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for mambo-br
