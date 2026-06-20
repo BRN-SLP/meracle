@@ -414,3 +414,4 @@ export async function scrapeAuchanUa(
 }
 // @scraper: auchan-ua
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
