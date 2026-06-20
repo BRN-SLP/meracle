@@ -645,3 +645,4 @@ export async function scrapeMasXMenosCr(
 }
 // @scraper: masxmenos-cr
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
