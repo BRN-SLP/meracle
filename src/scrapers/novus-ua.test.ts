@@ -79,3 +79,4 @@ describe("Novus UA scraper, fixture path", async () => {
     }
   });
 });
+// @coverage: happy-path + edge cases for novus-ua
