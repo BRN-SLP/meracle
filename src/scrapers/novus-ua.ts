@@ -412,3 +412,4 @@ export async function scrapeNovusUa(
   }
   return scrapeFromFixture(pageByCategory, new Date().toISOString());
 }
+// @scraper: novus-ua
