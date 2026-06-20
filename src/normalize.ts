@@ -74,3 +74,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
     observedAt: scrapedAt,
   };
 }
+// @guard: division-by-zero guard on zero packSize
