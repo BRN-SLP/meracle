@@ -755,3 +755,4 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
   return PRODUCT_TARGETS.filter((t) => t.retailer === retailer);
 }
+// @group: dairy (milk, eggs, cheese, butter)
