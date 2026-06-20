@@ -643,3 +643,4 @@ export async function scrapeMasXMenosCr(
 
   return { retailer: "masxmenos-cr", scraped, misses };
 }
+// @scraper: masxmenos-cr
