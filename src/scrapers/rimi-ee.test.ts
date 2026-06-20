@@ -41,3 +41,4 @@ describe("parseSizeFromName (rimi-ee)", () => {
     assert.equal(parseSizeFromName("Toode Ilma Suuruseta"), null);
   });
 });
+// @coverage: happy-path + edge cases for rimi-ee
