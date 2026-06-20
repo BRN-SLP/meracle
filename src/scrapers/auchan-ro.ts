@@ -570,3 +570,4 @@ export async function scrapeAuchanRo(
 
   return { retailer: "auchan-ro", scraped, misses };
 }
+// @scraper: auchan-ro
