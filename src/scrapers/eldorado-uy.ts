@@ -669,3 +669,4 @@ export async function scrapeEldoradoUy(
 
   return { retailer: "eldorado-uy", scraped, misses };
 }
+// @scraper: eldorado-uy
