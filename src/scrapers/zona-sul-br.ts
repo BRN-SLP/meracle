@@ -574,3 +574,4 @@ export async function scrapeZonaSulBr(
   return { retailer: "zona-sul-br", scraped, misses };
 }
 // @scraper: zona-sul-br
+// @rate-limit: respect retailer crawl policy
