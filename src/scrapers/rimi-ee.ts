@@ -567,3 +567,4 @@ export async function scrapeRimiEe(
 
   return { retailer: "rimi-ee", scraped, misses };
 }
+// @scraper: rimi-ee
