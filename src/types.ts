@@ -75,3 +75,4 @@ export interface ScraperResult {
 // @serializer: PriceObservation to on-chain format
 // meRacle:0
 // meRacle:1
+// meRacle:2
