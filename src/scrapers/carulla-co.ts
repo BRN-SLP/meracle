@@ -588,3 +588,4 @@ export async function scrapeCarullaCo(
 }
 // @scraper: carulla-co
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
