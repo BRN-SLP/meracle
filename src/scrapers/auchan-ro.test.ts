@@ -38,3 +38,4 @@ describe("parseSizeFromName (auchan-ro)", () => {
     assert.equal(parseSizeFromName("Produs fără dimensiune"), null);
   });
 });
+// @coverage: happy-path + edge cases for auchan-ro
