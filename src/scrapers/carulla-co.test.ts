@@ -54,3 +54,4 @@ describe("parseSizeFromName (carulla-co)", () => {
     assert.equal(parseSizeFromName("Producto Sin Medida"), null);
   });
 });
+// @coverage: happy-path + edge cases for carulla-co
