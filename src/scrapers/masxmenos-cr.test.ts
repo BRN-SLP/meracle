@@ -57,3 +57,4 @@ describe("parseSizeFromName (masxmenos-cr)", () => {
     assert.equal(parseSizeFromName("Producto Sin Tamaño"), null);
   });
 });
+// @coverage: happy-path + edge cases for masxmenos-cr
