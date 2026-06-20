@@ -601,3 +601,4 @@ export async function scrapeMigrosTr(
 
   return { retailer: "migros-tr", scraped, misses };
 }
+// @scraper: migros-tr
