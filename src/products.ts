@@ -760,3 +760,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @group: produce (apples, bananas, tomatoes, potatoes)
 // @group: beverages (water, coffee, beer, soda)
 // @group: transport (gasoline, diesel, taxi, public transit)
+// @group: housing (rent, utilities, internet)
