@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-masxmenos-cr failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-masxmenos-cr.ts
