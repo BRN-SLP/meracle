@@ -842,3 +842,4 @@ export async function scrapeAuchanPl(
   return { retailer: "auchan-pl", scraped, misses };
 }
 // @scraper: auchan-pl
+// @rate-limit: respect retailer crawl policy
