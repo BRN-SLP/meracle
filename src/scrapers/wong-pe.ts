@@ -567,3 +567,4 @@ export async function scrapeWongPe(
   return { retailer: "wong-pe", scraped, misses };
 }
 // @scraper: wong-pe
+// @rate-limit: respect retailer crawl policy
