@@ -47,3 +47,4 @@ describe("parseSizeFromName (vea-ar)", () => {
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for vea-ar
