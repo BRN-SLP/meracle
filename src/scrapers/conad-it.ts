@@ -519,3 +519,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
   return { retailer: "conad-it", scraped, misses };
 }
 // @scraper: conad-it
+// @rate-limit: respect retailer crawl policy
