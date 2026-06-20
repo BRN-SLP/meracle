@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-mambo-br failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-mambo-br.ts
