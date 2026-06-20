@@ -73,3 +73,4 @@ export interface ScraperResult {
 }
 // @validation: input sanitization boundary
 // @serializer: PriceObservation to on-chain format
+// meRacle:0
