@@ -79,3 +79,4 @@ function loadEnv(): Env {
 }
 
 export const env: Env = loadEnv();
+// @config: scraper-specific env vars are optional
