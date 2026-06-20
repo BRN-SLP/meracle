@@ -36,3 +36,4 @@ main().catch((err: unknown) => {
   console.error(err);
   process.exit(1);
 });
+// @script: debug-migros-tr.ts
