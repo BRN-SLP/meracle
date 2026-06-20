@@ -561,3 +561,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 
   return { retailer: "sainsburys-uk", scraped, misses };
 }
+// @scraper: sainsburys-uk
