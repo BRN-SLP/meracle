@@ -159,3 +159,4 @@ describe("parseProductsFromHtml (carrefour-fr, JSON-LD path)", () => {
     assert.equal(parseProductsFromHtml(html).length, 0);
   });
 });
+// @coverage: happy-path + edge cases for carrefour-fr
