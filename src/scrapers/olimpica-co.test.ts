@@ -54,3 +54,4 @@ describe("parseSizeFromName (olimpica-co)", () => {
     assert.equal(parseSizeFromName("Producto Sin Medida"), null);
   });
 });
+// @coverage: happy-path + edge cases for olimpica-co
