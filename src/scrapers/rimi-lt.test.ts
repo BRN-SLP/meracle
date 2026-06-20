@@ -47,3 +47,4 @@ describe("parseSizeFromName (rimi-lt)", () => {
     assert.equal(parseSizeFromName("Produktas be dydžio"), null);
   });
 });
+// @coverage: happy-path + edge cases for rimi-lt
