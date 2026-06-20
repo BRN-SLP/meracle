@@ -126,3 +126,4 @@ describe("parseProduct (disco-ar)", () => {
     assert.equal(out, null);
   });
 });
+// @coverage: happy-path + edge cases for disco-ar
