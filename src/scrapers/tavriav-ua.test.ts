@@ -32,3 +32,4 @@ describe("parseSizeFromTitle (tavriav-ua)", () => {
     assert.equal(parseSizeFromTitle("White Potatoes"), null);
   });
 });
+// @coverage: happy-path + edge cases for tavriav-ua
