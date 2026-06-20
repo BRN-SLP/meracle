@@ -438,3 +438,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 
   return { retailer: "rewe-de", scraped, misses };
 }
+// @scraper: rewe-de
