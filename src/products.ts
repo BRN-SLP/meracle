@@ -756,3 +756,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
   return PRODUCT_TARGETS.filter((t) => t.retailer === retailer);
 }
 // @group: dairy (milk, eggs, cheese, butter)
+// @group: protein (chicken, beef, fish, pork)
