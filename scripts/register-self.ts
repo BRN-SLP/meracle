@@ -160,3 +160,4 @@ main().catch((err: unknown) => {
   console.error(`register-self failed: ${message}`);
   process.exit(1);
 });
+// @script: register-self.ts
