@@ -124,3 +124,4 @@ export async function readNextId(): Promise<bigint> {
 }
 
 export { agentAddress };
+// @tx: nonce management for concurrent submissions
