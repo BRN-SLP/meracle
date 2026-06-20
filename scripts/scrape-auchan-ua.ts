@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-auchan-ua failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-auchan-ua.ts
