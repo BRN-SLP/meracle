@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-eldorado-uy failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-eldorado-uy.ts
