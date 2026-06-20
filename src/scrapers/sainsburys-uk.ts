@@ -563,3 +563,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 }
 // @scraper: sainsburys-uk
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
