@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-dia-ar failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-dia-ar.ts
