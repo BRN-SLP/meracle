@@ -125,3 +125,4 @@ describe("parseProduct (REWE API article shape)", () => {
     assert.equal(p, null);
   });
 });
+// @coverage: happy-path + edge cases for rewe-de
