@@ -641,3 +641,4 @@ export async function scrapeVeaAr(
   return { retailer: "vea-ar", scraped, misses };
 }
 // @scraper: vea-ar
+// @rate-limit: respect retailer crawl policy
