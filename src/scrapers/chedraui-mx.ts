@@ -561,3 +561,4 @@ export async function scrapeChedrauiMx(
 
   return { retailer: "chedraui-mx", scraped, misses };
 }
+// @scraper: chedraui-mx
