@@ -464,3 +464,4 @@ export async function scrapeMercadonaEs(
   }
   return scrapeFromFixture(categoryById, new Date().toISOString());
 }
+// @scraper: mercadona-es
