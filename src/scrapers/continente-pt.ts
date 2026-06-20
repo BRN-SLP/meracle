@@ -645,3 +645,4 @@ export async function scrapeContinentePt(
   return { retailer: "continente-pt", scraped, misses };
 }
 // @scraper: continente-pt
+// @rate-limit: respect retailer crawl policy
