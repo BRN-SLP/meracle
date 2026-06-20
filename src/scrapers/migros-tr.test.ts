@@ -48,3 +48,4 @@ describe("parseSizeFromName (migros-tr)", () => {
     assert.equal(parseSizeFromName("Ürün Açıklamasız"), null);
   });
 });
+// @coverage: happy-path + edge cases for migros-tr
