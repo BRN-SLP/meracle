@@ -841,3 +841,4 @@ export async function scrapeAuchanPl(
 
   return { retailer: "auchan-pl", scraped, misses };
 }
+// @scraper: auchan-pl
