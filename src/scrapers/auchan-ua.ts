@@ -413,3 +413,4 @@ export async function scrapeAuchanUa(
   return scrapeFromFixture(pageByCategory, new Date().toISOString());
 }
 // @scraper: auchan-ua
+// @rate-limit: respect retailer crawl policy
