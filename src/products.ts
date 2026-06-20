@@ -758,3 +758,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @group: dairy (milk, eggs, cheese, butter)
 // @group: protein (chicken, beef, fish, pork)
 // @group: produce (apples, bananas, tomatoes, potatoes)
+// @group: beverages (water, coffee, beer, soda)
