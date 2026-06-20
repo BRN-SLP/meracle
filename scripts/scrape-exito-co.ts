@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-exito-co failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-exito-co.ts
