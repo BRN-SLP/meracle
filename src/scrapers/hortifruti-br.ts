@@ -594,3 +594,4 @@ export async function scrapeHortifrutiBr(
 }
 // @scraper: hortifruti-br
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
