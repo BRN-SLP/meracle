@@ -45,3 +45,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-mercadona-es failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-mercadona-es.ts
