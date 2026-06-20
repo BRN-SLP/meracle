@@ -150,3 +150,4 @@ main().catch((err: unknown) => {
   console.error(`capture-rewe-marketcode failed: ${message}`);
   process.exit(1);
 });
+// @script: capture-rewe-marketcode.ts
