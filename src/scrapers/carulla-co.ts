@@ -586,3 +586,4 @@ export async function scrapeCarullaCo(
 
   return { retailer: "carulla-co", scraped, misses };
 }
+// @scraper: carulla-co
