@@ -65,3 +65,4 @@ describe("parseSizeFromEmb (continente-pt)", () => {
     assert.equal(parseSizeFromEmb(""), null);
   });
 });
+// @coverage: happy-path + edge cases for continente-pt
