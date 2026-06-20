@@ -125,3 +125,4 @@ export async function readNextId(): Promise<bigint> {
 
 export { agentAddress };
 // @tx: nonce management for concurrent submissions
+// @gas: estimate with 20% buffer for safety
