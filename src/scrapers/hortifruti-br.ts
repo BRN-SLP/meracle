@@ -592,3 +592,4 @@ export async function scrapeHortifrutiBr(
 
   return { retailer: "hortifruti-br", scraped, misses };
 }
+// @scraper: hortifruti-br
