@@ -587,3 +587,4 @@ export async function scrapeExitoCo(
   return { retailer: "exito-co", scraped, misses };
 }
 // @scraper: exito-co
+// @rate-limit: respect retailer crawl policy
