@@ -50,3 +50,4 @@ describe("parseSizeFromName (zona-sul-br)", () => {
     assert.equal(parseSizeFromName("Banana Prata Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for zona-sul-br
