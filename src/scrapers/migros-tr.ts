@@ -602,3 +602,4 @@ export async function scrapeMigrosTr(
   return { retailer: "migros-tr", scraped, misses };
 }
 // @scraper: migros-tr
+// @rate-limit: respect retailer crawl policy
