@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-rimi-lv failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-rimi-lv.ts
