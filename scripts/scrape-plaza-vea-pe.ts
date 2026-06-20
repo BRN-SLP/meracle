@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-plaza-vea-pe failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-plaza-vea-pe.ts
