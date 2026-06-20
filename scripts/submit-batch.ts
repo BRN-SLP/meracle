@@ -611,3 +611,4 @@ main().catch((err: unknown) => {
   console.error(`submit-batch failed: ${message}`);
   process.exit(1);
 });
+// @script: submit-batch.ts
