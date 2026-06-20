@@ -641,3 +641,4 @@ export async function scrapeDiscoAr(
   return { retailer: "disco-ar", scraped, misses };
 }
 // @scraper: disco-ar
+// @rate-limit: respect retailer crawl policy
