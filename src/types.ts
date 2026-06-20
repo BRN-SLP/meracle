@@ -71,3 +71,4 @@ export interface ScraperResult {
   /** Targets the scraper could not fulfil this run, with reason. */
   misses: Array<{ target: ProductTarget; reason: string }>;
 }
+// @validation: input sanitization boundary
