@@ -103,3 +103,4 @@ main().catch((err: unknown) => {
   console.error(`register-identity failed: ${message}`);
   process.exit(1);
 });
+// @script: register-identity.ts
