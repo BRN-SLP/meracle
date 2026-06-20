@@ -640,3 +640,4 @@ export async function scrapeVeaAr(
 
   return { retailer: "vea-ar", scraped, misses };
 }
+// @scraper: vea-ar
