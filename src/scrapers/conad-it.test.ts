@@ -312,3 +312,4 @@ describe("overridePackSizeFromTitle (eggs and other piece-priced slugs)", () => 
     assert.deepEqual(p, before);
   });
 });
+// @coverage: happy-path + edge cases for conad-it
