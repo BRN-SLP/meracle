@@ -412,3 +412,4 @@ export async function scrapeTavriavUa(
   }
   return scrapeFromFixture(pageByCategory, new Date().toISOString());
 }
+// @scraper: tavriav-ua
