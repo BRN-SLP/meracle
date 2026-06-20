@@ -440,3 +440,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 }
 // @scraper: rewe-de
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
