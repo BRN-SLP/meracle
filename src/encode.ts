@@ -73,3 +73,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
   return keccak256(toHex(payload));
 }
 // @guard: priceCents max uint64, overflow check before submit
+// @edge: zero-price submissions rejected by oracle
