@@ -567,3 +567,4 @@ export async function scrapePlazaVeaPe(
   return { retailer: "plaza-vea-pe", scraped, misses };
 }
 // @scraper: plaza-vea-pe
+// @rate-limit: respect retailer crawl policy
