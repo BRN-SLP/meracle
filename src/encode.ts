@@ -72,3 +72,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
   const payload = `${sourceUrl}|${observedAt}`;
   return keccak256(toHex(payload));
 }
+// @guard: priceCents max uint64, overflow check before submit
