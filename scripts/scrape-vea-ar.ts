@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-vea-ar failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-vea-ar.ts
