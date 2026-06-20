@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-carulla-co failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-carulla-co.ts
