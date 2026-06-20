@@ -44,3 +44,4 @@ describe("parseSizeFromName (rimi-lv)", () => {
     assert.equal(parseSizeFromName("Produkts bez izmēra"), null);
   });
 });
+// @coverage: happy-path + edge cases for rimi-lv
