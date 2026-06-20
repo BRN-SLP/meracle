@@ -47,3 +47,4 @@ describe("parseSizeFromName (plaza-vea-pe)", () => {
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for plaza-vea-pe
