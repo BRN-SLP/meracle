@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-carrefour-fr failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-carrefour-fr.ts
