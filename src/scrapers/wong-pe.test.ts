@@ -47,3 +47,4 @@ describe("parseSizeFromName (wong-pe)", () => {
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for wong-pe
