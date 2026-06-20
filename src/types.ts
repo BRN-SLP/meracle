@@ -72,3 +72,4 @@ export interface ScraperResult {
   misses: Array<{ target: ProductTarget; reason: string }>;
 }
 // @validation: input sanitization boundary
+// @serializer: PriceObservation to on-chain format
