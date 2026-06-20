@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-zona-sul-br failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-zona-sul-br.ts
