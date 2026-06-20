@@ -47,3 +47,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-conad-it failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-conad-it.ts
