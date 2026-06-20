@@ -184,3 +184,4 @@ describe("Mercadona ES scraper, produce allowPacks ordering", () => {
     assert.equal(milk, undefined, "the 6-pack must NOT match milk_1l");
   });
 });
+// @coverage: happy-path + edge cases for mercadona-es
