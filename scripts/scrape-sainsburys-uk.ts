@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-sainsburys-uk failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-sainsburys-uk.ts
