@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-disco-ar failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-disco-ar.ts
