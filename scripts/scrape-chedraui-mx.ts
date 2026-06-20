@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-chedraui-mx failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-chedraui-mx.ts
