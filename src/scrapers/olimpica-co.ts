@@ -567,3 +567,4 @@ export async function scrapeOlimpicaCo(
   return { retailer: "olimpica-co", scraped, misses };
 }
 // @scraper: olimpica-co
+// @rate-limit: respect retailer crawl policy
