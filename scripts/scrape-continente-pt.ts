@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-continente-pt failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-continente-pt.ts
