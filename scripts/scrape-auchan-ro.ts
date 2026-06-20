@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-auchan-ro failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-auchan-ro.ts
