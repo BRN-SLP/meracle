@@ -677,3 +677,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 
   return { retailer: "carrefour-fr", scraped, misses };
 }
+// @scraper: carrefour-fr
