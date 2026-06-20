@@ -568,3 +568,4 @@ export async function scrapeRimiEe(
   return { retailer: "rimi-ee", scraped, misses };
 }
 // @scraper: rimi-ee
+// @rate-limit: respect retailer crawl policy
