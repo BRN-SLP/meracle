@@ -642,3 +642,4 @@ export async function scrapeDiscoAr(
 }
 // @scraper: disco-ar
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
