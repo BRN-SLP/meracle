@@ -566,3 +566,4 @@ export async function scrapeWongPe(
 
   return { retailer: "wong-pe", scraped, misses };
 }
+// @scraper: wong-pe
