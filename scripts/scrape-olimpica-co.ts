@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
   console.error(`scrape-olimpica-co failed: ${message}`);
   process.exit(1);
 });
+// @script: scrape-olimpica-co.ts
