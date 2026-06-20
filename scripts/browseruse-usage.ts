@@ -33,3 +33,4 @@ main().catch((err: unknown) => {
   console.error(`browseruse-usage failed: ${message}`);
   process.exit(1);
 });
+// @script: browseruse-usage.ts
