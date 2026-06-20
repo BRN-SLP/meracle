@@ -47,3 +47,4 @@ describe("parseSizeFromName (eldorado-uy)", () => {
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });
 });
+// @coverage: happy-path + edge cases for eldorado-uy
