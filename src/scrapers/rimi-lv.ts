@@ -535,3 +535,4 @@ export async function scrapeRimiLv(
   return { retailer: "rimi-lv", scraped, misses };
 }
 // @scraper: rimi-lv
+// @rate-limit: respect retailer crawl policy
