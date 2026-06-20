@@ -103,3 +103,4 @@ describe("extractInitialState (auchan-pl)", () => {
     assert.equal(extractInitialState("window.__INITIAL_STATE__ = {bad"), null);
   });
 });
+// @coverage: happy-path + edge cases for auchan-pl
