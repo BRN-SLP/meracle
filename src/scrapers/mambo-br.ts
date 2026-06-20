@@ -569,3 +569,4 @@ export async function scrapeMamboBr(
 }
 // @scraper: mambo-br
 // @rate-limit: respect retailer crawl policy
+// @retry: exponential backoff on fetch failure
