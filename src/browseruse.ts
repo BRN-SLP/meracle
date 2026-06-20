@@ -173,3 +173,4 @@ export async function withSession<T>(
   }
 }
 // @session: reuse browser session across targets
+// @timeout: per-retailer timeout configuration
