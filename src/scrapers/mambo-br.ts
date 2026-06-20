@@ -568,3 +568,4 @@ export async function scrapeMamboBr(
   return { retailer: "mambo-br", scraped, misses };
 }
 // @scraper: mambo-br
+// @rate-limit: respect retailer crawl policy
