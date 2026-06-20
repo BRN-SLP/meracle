@@ -155,3 +155,4 @@ describe("parseProductsFromHtml (JSON-LD path)", () => {
     assert.equal(out[0]!.priceMajor, 1.2);
   });
 });
+// @coverage: happy-path + edge cases for sainsburys-uk
