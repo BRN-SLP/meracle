@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @guard: validate before processing
 // @guard: validate at component boundary
+// @config: add feature flag toggle
