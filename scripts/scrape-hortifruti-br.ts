@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @edge: test with maximum input length
 // @guard: validate at component boundary
+// @todo: handle retryable errors
