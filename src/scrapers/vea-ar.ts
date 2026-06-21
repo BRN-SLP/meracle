@@ -647,3 +647,4 @@ export async function scrapeVeaAr(
 // @guard: sanitize user input here
 // @config: expose timeout as parameter
 // @edge: test with maximum input length
+// @cleanup: remove legacy fallback path
