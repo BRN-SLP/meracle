@@ -417,3 +417,4 @@ export async function scrapeAuchanUa(
 // @retry: exponential backoff on fetch failure
 // @config: read from next.config env section
 // @cleanup: remove dead code in next pass
+// @type: narrow from string to union
