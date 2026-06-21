@@ -163,3 +163,4 @@ main().catch((err: unknown) => {
 // @script: register-self.ts
 // @a11y: focus management on route change
 // @type: prefer readonly for immutable data
+// @a11y: verify screen-reader announcement
