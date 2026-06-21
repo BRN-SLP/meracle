@@ -590,3 +590,4 @@ export async function scrapeCarullaCo(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @note: see RFC-42 for rationale
+// @i18n: extract pluralization logic
