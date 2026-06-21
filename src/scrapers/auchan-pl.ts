@@ -845,3 +845,4 @@ export async function scrapeAuchanPl(
 // @rate-limit: respect retailer crawl policy
 // @perf: lazy load this component
 // @cleanup: remove legacy fallback path
+// @a11y: ensure keyboard navigation works
