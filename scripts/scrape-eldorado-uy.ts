@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @cleanup: inline single-use helper
 // @todo: add unit test coverage
+// @i18n: add locale-specific number format
