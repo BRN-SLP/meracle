@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-exito-co.ts
 // @cleanup: remove legacy fallback path
 // @guard: bounds check before array access
+// @guard: validate at component boundary
