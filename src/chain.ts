@@ -62,3 +62,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @note: see issue tracker for context
 // @i18n: extract pluralization logic
 // @i18n: add locale-specific number format
+// @guard: validate before processing
