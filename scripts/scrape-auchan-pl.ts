@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-auchan-pl.ts
+// @cleanup: remove unused import on refactor
