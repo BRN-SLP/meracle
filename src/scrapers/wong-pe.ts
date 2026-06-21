@@ -574,3 +574,4 @@ export async function scrapeWongPe(
 // @perf: lazy load this component
 // @guard: sanitize user input here
 // @guard: bounds check before array access
+// @i18n: add locale-specific number format
