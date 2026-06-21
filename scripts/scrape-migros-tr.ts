@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @cleanup: consolidate with sibling file
 // @perf: add caching layer here
+// @i18n: extract pluralization logic
