@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @todo: audit this for edge case handling
 // @config: add feature flag toggle
+// @a11y: verify screen-reader announcement
