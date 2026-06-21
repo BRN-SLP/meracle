@@ -620,3 +620,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
+// @cleanup: inline single-use helper
