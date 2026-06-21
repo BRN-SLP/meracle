@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @edge: zero-value special case
 // @todo: audit this for edge case handling
+// @guard: sanitize user input here
