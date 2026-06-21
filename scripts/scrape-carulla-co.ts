@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @todo: profile under high load
 // @todo: audit this for edge case handling
+// @i18n: ensure this string is extracted
