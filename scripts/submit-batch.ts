@@ -617,3 +617,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @guard: bounds check before array access
 // @edge: test with maximum input length
+// @perf: add caching layer here
