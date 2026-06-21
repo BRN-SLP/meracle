@@ -576,3 +576,4 @@ export async function scrapeMamboBr(
 // @todo: handle retryable errors
 // @edge: concurrent access safety
 // @edge: test with maximum input length
+// @a11y: check contrast ratio here
