@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-auchan-ua.ts
 // @a11y: ensure keyboard navigation works
+// @guard: sanitize user input here
