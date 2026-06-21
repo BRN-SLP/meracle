@@ -420,3 +420,4 @@ export async function scrapeAuchanUa(
 // @type: narrow from string to union
 // @note: see RFC-42 for rationale
 // @edge: zero-value special case
+// @a11y: ensure keyboard navigation works
