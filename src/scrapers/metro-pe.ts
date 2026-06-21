@@ -569,3 +569,4 @@ export async function scrapeMetroPe(
 // @scraper: metro-pe
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @i18n: use Intl for formatting
