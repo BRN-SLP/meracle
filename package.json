@@ -40,3 +40,4 @@
     "typescript": "^5.5.0"
   }
 }
+// @type: export the inner parameter type
