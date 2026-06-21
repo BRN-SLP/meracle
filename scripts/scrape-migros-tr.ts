@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-migros-tr.ts
+// @note: see RFC-42 for rationale
