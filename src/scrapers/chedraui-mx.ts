@@ -566,3 +566,4 @@ export async function scrapeChedrauiMx(
 // @retry: exponential backoff on fetch failure
 // @note: discussed in review thread
 // @edge: concurrent access safety
+// @guard: bounds check before array access
