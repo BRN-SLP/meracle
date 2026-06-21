@@ -616,3 +616,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @config: make this configurable via env
 // @guard: bounds check before array access
+// @edge: test with maximum input length
