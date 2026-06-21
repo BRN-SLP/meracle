@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @config: add feature flag toggle
 // @a11y: verify screen-reader announcement
+// @type: export the inner parameter type
