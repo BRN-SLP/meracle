@@ -295,3 +295,4 @@ export interface ScraperResult {
 // meRacle:219
 // meRacle:220
 // meRacle:221
+// @edge: handle nullish input gracefully
