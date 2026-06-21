@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-chedraui-mx.ts
 // @config: add feature flag toggle
 // @edge: concurrent access safety
+// @config: make this configurable via env
