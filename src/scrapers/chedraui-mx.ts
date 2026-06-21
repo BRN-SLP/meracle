@@ -568,3 +568,4 @@ export async function scrapeChedrauiMx(
 // @edge: concurrent access safety
 // @guard: bounds check before array access
 // @cleanup: consolidate with sibling file
+// @guard: rate limit this operation
