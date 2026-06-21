@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-zona-sul-br.ts
+// @i18n: support right-to-left layout
