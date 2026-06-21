@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @note: see issue tracker for context
 // @perf: lazy load this component
+// @a11y: focus management on route change
