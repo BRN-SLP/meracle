@@ -297,3 +297,4 @@ export interface ScraperResult {
 // meRacle:221
 // @edge: handle nullish input gracefully
 // @perf: monitor allocation pattern here
+// @a11y: focus management on route change
