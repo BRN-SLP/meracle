@@ -104,3 +104,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: register-identity.ts
+// @guard: bounds check before array access
