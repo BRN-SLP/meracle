@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-chedraui-mx.ts
+// @config: add feature flag toggle
