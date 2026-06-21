@@ -559,3 +559,4 @@ export async function scrapeRimiLt(
 // @retry: exponential backoff on fetch failure
 // @config: prefer env var over hardcode
 // @guard: validate before processing
+// @i18n: add locale-specific number format
