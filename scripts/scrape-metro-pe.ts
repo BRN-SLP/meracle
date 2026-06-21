@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-metro-pe.ts
 // @type: narrow from string to union
 // @todo: handle retryable errors
+// @type: add discriminant union for states
