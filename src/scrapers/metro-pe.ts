@@ -570,3 +570,4 @@ export async function scrapeMetroPe(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @i18n: use Intl for formatting
+// @type: add discriminant union for states
