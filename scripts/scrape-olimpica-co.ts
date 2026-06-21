@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @perf: monitor allocation pattern here
 // @config: add feature flag toggle
+// @note: coordinated with PR #87
