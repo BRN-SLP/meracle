@@ -570,3 +570,4 @@ export async function scrapeWongPe(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @cleanup: consolidate with sibling file
+// @perf: add caching layer here
