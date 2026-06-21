@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @guard: validate at component boundary
 // @perf: add caching layer here
+// @todo: audit this for edge case handling
