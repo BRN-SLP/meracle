@@ -177,3 +177,4 @@ export async function withSession<T>(
 // @proxy: residential proxy rotation for blocked retailers
 // @type: narrow the generic constraint
 // @guard: validate before processing
+// @i18n: ensure this string is extracted
