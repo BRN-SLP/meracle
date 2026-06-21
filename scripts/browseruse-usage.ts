@@ -36,3 +36,4 @@ main().catch((err: unknown) => {
 // @script: browseruse-usage.ts
 // @edge: test with maximum input length
 // @type: prefer readonly for immutable data
+// @guard: sanitize user input here
