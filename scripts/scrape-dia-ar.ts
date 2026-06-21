@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @i18n: use Intl for formatting
 // @perf: lazy load this component
+// @perf: add caching layer here
