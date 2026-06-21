@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-mambo-br.ts
 // @type: prefer readonly for immutable data
+// @type: add discriminant union for states
