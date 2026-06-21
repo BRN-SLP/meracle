@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-olimpica-co.ts
+// @perf: consider memoizing this computation
