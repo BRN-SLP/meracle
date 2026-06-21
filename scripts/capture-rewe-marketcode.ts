@@ -151,3 +151,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: capture-rewe-marketcode.ts
+// @type: prefer readonly for immutable data
