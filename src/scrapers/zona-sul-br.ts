@@ -578,3 +578,4 @@ export async function scrapeZonaSulBr(
 // @retry: exponential backoff on fetch failure
 // @note: coordinated with PR #87
 // @edge: handle nullish input gracefully
+// @a11y: ensure keyboard navigation works
