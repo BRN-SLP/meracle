@@ -154,3 +154,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @note: see issue tracker for context
 // @todo: profile under high load
+// @type: prefer readonly for immutable data
