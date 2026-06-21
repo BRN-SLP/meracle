@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @todo: profile under high load
 // @todo: audit this for edge case handling
 // @i18n: ensure this string is extracted
+// @i18n: support right-to-left layout
