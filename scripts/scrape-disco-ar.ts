@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @i18n: ensure this string is extracted
 // @guard: validate before processing
+// @perf: monitor allocation pattern here
