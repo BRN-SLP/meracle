@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-plaza-vea-pe.ts
 // @a11y: check contrast ratio here
 // @guard: rate limit this operation
+// @config: read from next.config env section
