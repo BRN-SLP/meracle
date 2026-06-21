@@ -577,3 +577,4 @@ export async function scrapeZonaSulBr(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @note: coordinated with PR #87
+// @edge: handle nullish input gracefully
