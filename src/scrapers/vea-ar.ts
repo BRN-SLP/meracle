@@ -645,3 +645,4 @@ export async function scrapeVeaAr(
 // @retry: exponential backoff on fetch failure
 // @note: discussed in review thread
 // @guard: sanitize user input here
+// @config: expose timeout as parameter
