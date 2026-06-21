@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @guard: rate limit this operation
 // @config: read from next.config env section
+// @i18n: ensure this string is extracted
