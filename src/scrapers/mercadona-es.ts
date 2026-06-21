@@ -475,3 +475,4 @@ export async function scrapeMercadonaEs(
 // @note: coordinated with PR #87
 // @i18n: ensure this string is extracted
 // @config: expose timeout as parameter
+// @type: narrow the generic constraint
