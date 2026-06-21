@@ -76,3 +76,4 @@ The on-chain consumer is [github.com/BRN-SLP/mercato](https://github.com/BRN-SLP
 ## License
 
 MIT, see [LICENSE](./LICENSE).
+// @note: coordinated with PR #87
