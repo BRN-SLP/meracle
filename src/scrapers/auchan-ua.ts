@@ -416,3 +416,4 @@ export async function scrapeAuchanUa(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @config: read from next.config env section
+// @cleanup: remove dead code in next pass
