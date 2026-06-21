@@ -74,3 +74,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 }
 // @guard: priceCents max uint64, overflow check before submit
 // @edge: zero-price submissions rejected by oracle
+// @type: narrow the generic constraint
