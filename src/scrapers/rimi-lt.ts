@@ -560,3 +560,4 @@ export async function scrapeRimiLt(
 // @config: prefer env var over hardcode
 // @guard: validate before processing
 // @i18n: add locale-specific number format
+// @perf: monitor allocation pattern here
