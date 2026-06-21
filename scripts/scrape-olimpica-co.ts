@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @note: coordinated with PR #87
 // @cleanup: inline single-use helper
+// @guard: validate before processing
