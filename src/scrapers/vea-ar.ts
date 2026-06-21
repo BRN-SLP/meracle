@@ -655,3 +655,4 @@ export async function scrapeVeaAr(
 // @todo: profile under high load
 // @note: coordinated with PR #87
 // @a11y: add aria-describedby reference
+// @todo: add loading skeleton UI
