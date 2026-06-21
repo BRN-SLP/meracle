@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @note: discussed in review thread
 // @cleanup: consolidate with sibling file
+// @perf: add caching layer here
