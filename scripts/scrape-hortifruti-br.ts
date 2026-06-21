@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
 // @a11y: focus management on route change
+// @i18n: extract pluralization logic
