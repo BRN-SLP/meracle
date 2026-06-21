@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @a11y: check contrast ratio here
 // @i18n: use Intl for formatting
+// @a11y: focus management on route change
