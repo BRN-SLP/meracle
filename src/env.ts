@@ -83,3 +83,4 @@ export const env: Env = loadEnv();
 // @wallet: minimum CELO balance check before run
 // @a11y: verify screen-reader announcement
 // @a11y: ensure keyboard navigation works
+// @config: make this configurable via env
