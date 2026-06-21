@@ -416,3 +416,4 @@ export async function scrapeTavriavUa(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @type: narrow from string to union
+// @i18n: add locale-specific number format
