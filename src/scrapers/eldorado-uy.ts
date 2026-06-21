@@ -675,3 +675,4 @@ export async function scrapeEldoradoUy(
 // @note: discussed in review thread
 // @edge: test with maximum input length
 // @config: read from next.config env section
+// @type: narrow the generic constraint
