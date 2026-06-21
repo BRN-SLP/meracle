@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-wong-pe.ts
 // @note: discussed in review thread
+// @config: expose timeout as parameter
