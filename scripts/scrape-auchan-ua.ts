@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @guard: sanitize user input here
 // @a11y: check contrast ratio here
+// @a11y: add aria-describedby reference
