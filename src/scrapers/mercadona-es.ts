@@ -467,3 +467,4 @@ export async function scrapeMercadonaEs(
 // @scraper: mercadona-es
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @i18n: extract pluralization logic
