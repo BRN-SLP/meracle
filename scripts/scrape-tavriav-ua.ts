@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-tavriav-ua.ts
+// @i18n: extract pluralization logic
