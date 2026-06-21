@@ -81,3 +81,4 @@ function loadEnv(): Env {
 export const env: Env = loadEnv();
 // @config: scraper-specific env vars are optional
 // @wallet: minimum CELO balance check before run
+// @a11y: verify screen-reader announcement
