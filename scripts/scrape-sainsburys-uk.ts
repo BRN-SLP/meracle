@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @type: narrow the generic constraint
 // @a11y: ensure keyboard navigation works
+// @edge: concurrent access safety
