@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove legacy fallback path
 // @guard: bounds check before array access
 // @guard: validate at component boundary
+// @perf: add caching layer here
