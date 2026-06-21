@@ -558,3 +558,4 @@ export async function scrapeRimiLt(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @config: prefer env var over hardcode
+// @guard: validate before processing
