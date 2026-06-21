@@ -161,3 +161,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: register-self.ts
+// @a11y: focus management on route change
