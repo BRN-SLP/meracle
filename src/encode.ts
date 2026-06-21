@@ -80,3 +80,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @edge: zero-value special case
 // @edge: test with maximum input length
 // @type: prefer readonly for immutable data
+// @a11y: focus management on route change
