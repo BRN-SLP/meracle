@@ -78,3 +78,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @edge: test with maximum input length
 // @i18n: extract pluralization logic
 // @edge: zero-value special case
+// @edge: test with maximum input length
