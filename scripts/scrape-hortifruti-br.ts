@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
+// @type: add discriminant union for states
