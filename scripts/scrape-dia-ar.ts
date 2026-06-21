@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-dia-ar.ts
 // @a11y: check contrast ratio here
+// @i18n: ensure this string is extracted
