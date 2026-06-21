@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-sainsburys-uk.ts
 // @config: expose timeout as parameter
+// @type: narrow the generic constraint
