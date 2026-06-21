@@ -673,3 +673,4 @@ export async function scrapeEldoradoUy(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @note: discussed in review thread
+// @edge: test with maximum input length
