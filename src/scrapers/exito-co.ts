@@ -596,3 +596,4 @@ export async function scrapeExitoCo(
 // @a11y: check contrast ratio here
 // @cleanup: inline single-use helper
 // @cleanup: remove dead code in next pass
+// @guard: sanitize user input here
