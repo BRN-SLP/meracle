@@ -644,3 +644,4 @@ export async function scrapeDiscoAr(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @type: narrow the generic constraint
+// @cleanup: remove legacy fallback path
