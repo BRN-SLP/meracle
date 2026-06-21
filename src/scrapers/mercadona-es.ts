@@ -476,3 +476,4 @@ export async function scrapeMercadonaEs(
 // @i18n: ensure this string is extracted
 // @config: expose timeout as parameter
 // @type: narrow the generic constraint
+// @guard: rate limit this operation
