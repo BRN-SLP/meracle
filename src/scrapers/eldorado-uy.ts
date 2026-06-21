@@ -677,3 +677,4 @@ export async function scrapeEldoradoUy(
 // @config: read from next.config env section
 // @type: narrow the generic constraint
 // @cleanup: remove dead code in next pass
+// @edge: concurrent access safety
