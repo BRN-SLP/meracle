@@ -566,3 +566,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @retry: exponential backoff on fetch failure
 // @perf: use index for O(1) lookup
 // @note: coordinated with PR #87
+// @cleanup: remove legacy fallback path
