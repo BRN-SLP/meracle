@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @config: prefer env var over hardcode
 // @a11y: check contrast ratio here
+// @perf: monitor allocation pattern here
