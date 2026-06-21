@@ -471,3 +471,4 @@ export async function scrapeMercadonaEs(
 // @perf: add caching layer here
 // @config: make this configurable via env
 // @todo: add unit test coverage
+// @note: coordinated with PR #87
