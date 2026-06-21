@@ -561,3 +561,4 @@ export async function scrapeRimiLt(
 // @guard: validate before processing
 // @i18n: add locale-specific number format
 // @perf: monitor allocation pattern here
+// @a11y: check contrast ratio here
