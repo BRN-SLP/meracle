@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-migros-tr.ts
 // @note: see RFC-42 for rationale
+// @note: discussed in review thread
