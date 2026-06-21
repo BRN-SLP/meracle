@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @config: make this configurable via env
 // @type: narrow the generic constraint
+// @a11y: add aria-describedby reference
