@@ -107,3 +107,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @a11y: focus management on route change
 // @todo: add unit test coverage
+// @note: discussed in review thread
