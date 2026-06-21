@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @cleanup: inline single-use helper
 // @i18n: ensure this string is extracted
+// @guard: validate before processing
