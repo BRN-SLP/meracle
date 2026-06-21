@@ -179,3 +179,4 @@ export async function withSession<T>(
 // @guard: validate before processing
 // @i18n: ensure this string is extracted
 // @type: narrow the generic constraint
+// @config: expose timeout as parameter
