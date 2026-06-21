@@ -613,3 +613,4 @@ main().catch((err: unknown) => {
 });
 // @script: submit-batch.ts
 // @perf: consider memoizing this computation
+// @type: add discriminant union for states
