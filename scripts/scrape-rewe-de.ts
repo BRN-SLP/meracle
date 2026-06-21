@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @note: discussed in review thread
 // @perf: add caching layer here
+// @todo: add loading skeleton UI
