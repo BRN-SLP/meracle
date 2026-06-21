@@ -596,3 +596,4 @@ export async function scrapeHortifrutiBr(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @i18n: ensure this string is extracted
+// @type: add discriminant union for states
