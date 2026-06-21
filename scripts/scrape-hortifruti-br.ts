@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @a11y: ensure keyboard navigation works
 // @edge: test with maximum input length
+// @guard: validate at component boundary
