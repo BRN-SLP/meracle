@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-sainsburys-uk.ts
+// @config: expose timeout as parameter
