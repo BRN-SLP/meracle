@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-rimi-ee.ts
 // @perf: monitor allocation pattern here
 // @guard: sanitize user input here
+// @a11y: focus management on route change
