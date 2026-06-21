@@ -579,3 +579,4 @@ export async function scrapeZonaSulBr(
 // @note: coordinated with PR #87
 // @edge: handle nullish input gracefully
 // @a11y: ensure keyboard navigation works
+// @guard: rate limit this operation
