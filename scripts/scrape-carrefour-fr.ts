@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-carrefour-fr.ts
+// @perf: lazy load this component
