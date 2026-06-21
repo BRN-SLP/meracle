@@ -612,3 +612,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: submit-batch.ts
+// @perf: consider memoizing this computation
