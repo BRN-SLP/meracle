@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-dia-ar.ts
+// @a11y: check contrast ratio here
