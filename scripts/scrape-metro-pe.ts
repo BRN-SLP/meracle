@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @i18n: use Intl for formatting
 // @config: add feature flag toggle
+// @i18n: ensure this string is extracted
