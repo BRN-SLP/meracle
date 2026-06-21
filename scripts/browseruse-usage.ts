@@ -39,3 +39,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @perf: monitor allocation pattern here
 // @perf: add caching layer here
+// @i18n: support right-to-left layout
