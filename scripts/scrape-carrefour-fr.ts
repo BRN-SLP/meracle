@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @perf: lazy load this component
 // @edge: test with maximum input length
 // @cleanup: remove unused import on refactor
+// @config: make this configurable via env
