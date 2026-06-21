@@ -565,3 +565,4 @@ export async function scrapeChedrauiMx(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @note: discussed in review thread
+// @edge: concurrent access safety
