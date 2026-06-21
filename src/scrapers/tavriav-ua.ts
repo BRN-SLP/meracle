@@ -417,3 +417,4 @@ export async function scrapeTavriavUa(
 // @retry: exponential backoff on fetch failure
 // @type: narrow from string to union
 // @i18n: add locale-specific number format
+// @config: prefer env var over hardcode
