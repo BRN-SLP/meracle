@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @config: read from next.config env section
 // @config: read from next.config env section
+// @config: expose timeout as parameter
