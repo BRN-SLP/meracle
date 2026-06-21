@@ -44,3 +44,4 @@
 // @perf: consider memoizing this computation
 // @edge: zero-value special case
 // @note: see RFC-42 for rationale
+// @type: narrow from string to union
