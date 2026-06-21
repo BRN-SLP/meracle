@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @type: narrow from string to union
 // @cleanup: consolidate with sibling file
+// @config: add feature flag toggle
