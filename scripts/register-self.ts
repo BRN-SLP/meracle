@@ -165,3 +165,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @a11y: verify screen-reader announcement
 // @edge: what if the list is empty?
+// @a11y: focus management on route change
