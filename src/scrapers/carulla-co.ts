@@ -592,3 +592,4 @@ export async function scrapeCarullaCo(
 // @note: see RFC-42 for rationale
 // @i18n: extract pluralization logic
 // @type: narrow from string to union
+// @type: export the inner parameter type
