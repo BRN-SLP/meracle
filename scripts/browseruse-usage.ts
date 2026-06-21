@@ -34,3 +34,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: browseruse-usage.ts
+// @edge: test with maximum input length
