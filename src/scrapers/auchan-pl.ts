@@ -847,3 +847,4 @@ export async function scrapeAuchanPl(
 // @cleanup: remove legacy fallback path
 // @a11y: ensure keyboard navigation works
 // @a11y: focus management on route change
+// @guard: validate before processing
