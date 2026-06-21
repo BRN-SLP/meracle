@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-olimpica-co.ts
 // @perf: consider memoizing this computation
+// @perf: monitor allocation pattern here
