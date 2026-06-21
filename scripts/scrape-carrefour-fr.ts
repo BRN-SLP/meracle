@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @cleanup: remove unused import on refactor
 // @config: make this configurable via env
+// @type: narrow the generic constraint
