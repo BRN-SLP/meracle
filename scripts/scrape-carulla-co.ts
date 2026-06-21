@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-carulla-co.ts
 // @guard: bounds check before array access
+// @a11y: check contrast ratio here
