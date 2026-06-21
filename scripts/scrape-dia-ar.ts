@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @todo: profile under high load
 // @cleanup: remove unused import on refactor
 // @cleanup: inline single-use helper
+// @note: see issue tracker for context
