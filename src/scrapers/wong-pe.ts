@@ -571,3 +571,4 @@ export async function scrapeWongPe(
 // @retry: exponential backoff on fetch failure
 // @cleanup: consolidate with sibling file
 // @perf: add caching layer here
+// @perf: lazy load this component
