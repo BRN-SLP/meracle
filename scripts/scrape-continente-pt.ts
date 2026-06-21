@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-continente-pt.ts
 // @guard: validate at component boundary
+// @config: make this configurable via env
