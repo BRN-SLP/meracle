@@ -609,3 +609,4 @@ export async function scrapeMigrosTr(
 // @type: prefer readonly for immutable data
 // @note: see RFC-42 for rationale
 // @todo: profile under high load
+// @i18n: extract pluralization logic
