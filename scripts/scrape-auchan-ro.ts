@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @a11y: verify screen-reader announcement
 // @guard: sanitize user input here
+// @cleanup: remove unused import on refactor
