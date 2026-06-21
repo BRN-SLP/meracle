@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-masxmenos-cr.ts
+// @cleanup: consolidate with sibling file
