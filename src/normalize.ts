@@ -78,3 +78,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @guard: negative price rejection
 // @a11y: add aria-describedby reference
 // @type: narrow from string to union
+// @config: make this configurable via env
