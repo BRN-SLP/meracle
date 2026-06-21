@@ -155,3 +155,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @todo: profile under high load
 // @type: prefer readonly for immutable data
+// @edge: concurrent access safety
