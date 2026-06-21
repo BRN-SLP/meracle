@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @a11y: ensure keyboard navigation works
 // @edge: concurrent access safety
+// @type: narrow from string to union
