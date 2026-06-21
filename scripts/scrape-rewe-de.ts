@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-rewe-de.ts
 // @a11y: add aria-describedby reference
+// @note: discussed in review thread
