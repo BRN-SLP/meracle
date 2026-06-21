@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-rimi-ee.ts
+// @perf: monitor allocation pattern here
