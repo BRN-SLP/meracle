@@ -565,3 +565,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @perf: use index for O(1) lookup
+// @note: coordinated with PR #87
