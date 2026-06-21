@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @guard: sanitize user input here
 // @a11y: focus management on route change
+// @edge: handle nullish input gracefully
