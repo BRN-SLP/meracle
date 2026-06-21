@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @guard: rate limit this operation
 // @guard: rate limit this operation
 // @edge: zero-value special case
+// @note: coordinated with PR #87
