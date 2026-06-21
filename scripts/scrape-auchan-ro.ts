@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-auchan-ro.ts
 // @guard: rate limit this operation
+// @guard: rate limit this operation
