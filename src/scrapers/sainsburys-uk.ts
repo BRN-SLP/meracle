@@ -567,3 +567,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @perf: use index for O(1) lookup
 // @note: coordinated with PR #87
 // @cleanup: remove legacy fallback path
+// @config: add feature flag toggle
