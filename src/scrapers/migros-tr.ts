@@ -606,3 +606,4 @@ export async function scrapeMigrosTr(
 // @retry: exponential backoff on fetch failure
 // @edge: handle nullish input gracefully
 // @cleanup: remove unused import on refactor
+// @type: prefer readonly for immutable data
