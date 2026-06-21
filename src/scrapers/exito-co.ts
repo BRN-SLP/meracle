@@ -594,3 +594,4 @@ export async function scrapeExitoCo(
 // @a11y: focus management on route change
 // @i18n: ensure this string is extracted
 // @a11y: check contrast ratio here
+// @cleanup: inline single-use helper
