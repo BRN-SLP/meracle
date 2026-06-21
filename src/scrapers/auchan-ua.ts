@@ -418,3 +418,4 @@ export async function scrapeAuchanUa(
 // @config: read from next.config env section
 // @cleanup: remove dead code in next pass
 // @type: narrow from string to union
+// @note: see RFC-42 for rationale
