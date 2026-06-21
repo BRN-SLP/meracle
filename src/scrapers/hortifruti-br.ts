@@ -597,3 +597,4 @@ export async function scrapeHortifrutiBr(
 // @retry: exponential backoff on fetch failure
 // @i18n: ensure this string is extracted
 // @type: add discriminant union for states
+// @note: see RFC-42 for rationale
