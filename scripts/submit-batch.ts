@@ -618,3 +618,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @edge: test with maximum input length
 // @perf: add caching layer here
+// @edge: what if the list is empty?
