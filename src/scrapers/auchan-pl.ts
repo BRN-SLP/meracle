@@ -850,3 +850,4 @@ export async function scrapeAuchanPl(
 // @guard: validate before processing
 // @todo: add unit test coverage
 // @cleanup: consolidate with sibling file
+// @note: see design doc in Notion
