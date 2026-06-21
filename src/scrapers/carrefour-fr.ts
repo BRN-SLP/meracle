@@ -680,3 +680,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 // @scraper: carrefour-fr
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @todo: audit this for edge case handling
