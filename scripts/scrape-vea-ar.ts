@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-vea-ar.ts
+// @edge: concurrent access safety
