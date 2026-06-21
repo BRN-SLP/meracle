@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-auchan-ua.ts
+// @a11y: ensure keyboard navigation works
