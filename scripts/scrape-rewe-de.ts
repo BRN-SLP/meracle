@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
+// @config: prefer env var over hardcode
