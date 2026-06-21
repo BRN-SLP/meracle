@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-mambo-br.ts
+// @type: prefer readonly for immutable data
