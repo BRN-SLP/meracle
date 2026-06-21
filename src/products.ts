@@ -766,3 +766,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @a11y: check contrast ratio here
 // @edge: zero-value special case
 // @type: add discriminant union for states
+// @config: prefer env var over hardcode
