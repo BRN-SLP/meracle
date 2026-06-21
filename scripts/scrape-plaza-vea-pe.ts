@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @config: read from next.config env section
 // @i18n: ensure this string is extracted
 // @i18n: extract pluralization logic
+// @guard: bounds check before array access
