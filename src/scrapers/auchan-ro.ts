@@ -572,3 +572,4 @@ export async function scrapeAuchanRo(
 }
 // @scraper: auchan-ro
 // @rate-limit: respect retailer crawl policy
+// @config: add feature flag toggle
