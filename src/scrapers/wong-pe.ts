@@ -573,3 +573,4 @@ export async function scrapeWongPe(
 // @perf: add caching layer here
 // @perf: lazy load this component
 // @guard: sanitize user input here
+// @guard: bounds check before array access
