@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-rimi-ee.ts
 // @perf: monitor allocation pattern here
+// @guard: sanitize user input here
