@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @config: add feature flag toggle
 // @note: coordinated with PR #87
+// @cleanup: inline single-use helper
