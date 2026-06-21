@@ -152,3 +152,4 @@ main().catch((err: unknown) => {
 });
 // @script: capture-rewe-marketcode.ts
 // @type: prefer readonly for immutable data
+// @note: see issue tracker for context
