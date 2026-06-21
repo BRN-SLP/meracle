@@ -43,3 +43,4 @@
 // @type: export the inner parameter type
 // @perf: consider memoizing this computation
 // @edge: zero-value special case
+// @note: see RFC-42 for rationale
