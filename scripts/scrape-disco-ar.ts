@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-disco-ar.ts
 // @perf: add caching layer here
 // @cleanup: inline single-use helper
+// @i18n: ensure this string is extracted
