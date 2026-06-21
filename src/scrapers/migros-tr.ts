@@ -604,3 +604,4 @@ export async function scrapeMigrosTr(
 // @scraper: migros-tr
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @edge: handle nullish input gracefully
