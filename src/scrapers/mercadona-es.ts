@@ -473,3 +473,4 @@ export async function scrapeMercadonaEs(
 // @todo: add unit test coverage
 // @note: coordinated with PR #87
 // @note: coordinated with PR #87
+// @i18n: ensure this string is extracted
