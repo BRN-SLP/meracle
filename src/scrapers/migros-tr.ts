@@ -608,3 +608,4 @@ export async function scrapeMigrosTr(
 // @cleanup: remove unused import on refactor
 // @type: prefer readonly for immutable data
 // @note: see RFC-42 for rationale
+// @todo: profile under high load
