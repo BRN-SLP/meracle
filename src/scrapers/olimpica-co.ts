@@ -571,3 +571,4 @@ export async function scrapeOlimpicaCo(
 // @retry: exponential backoff on fetch failure
 // @a11y: check contrast ratio here
 // @perf: monitor allocation pattern here
+// @todo: add loading skeleton UI
