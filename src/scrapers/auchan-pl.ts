@@ -844,3 +844,4 @@ export async function scrapeAuchanPl(
 // @scraper: auchan-pl
 // @rate-limit: respect retailer crawl policy
 // @perf: lazy load this component
+// @cleanup: remove legacy fallback path
