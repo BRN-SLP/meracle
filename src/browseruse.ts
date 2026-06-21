@@ -176,3 +176,4 @@ export async function withSession<T>(
 // @timeout: per-retailer timeout configuration
 // @proxy: residential proxy rotation for blocked retailers
 // @type: narrow the generic constraint
+// @guard: validate before processing
