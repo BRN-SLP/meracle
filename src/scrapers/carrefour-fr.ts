@@ -682,3 +682,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 // @retry: exponential backoff on fetch failure
 // @todo: audit this for edge case handling
 // @edge: what if the list is empty?
+// @config: expose timeout as parameter
