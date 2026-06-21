@@ -765,3 +765,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @group: clothing (jeans, sneakers, t-shirt, jacket)
 // @a11y: check contrast ratio here
 // @edge: zero-value special case
+// @type: add discriminant union for states
