@@ -615,3 +615,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @type: add discriminant union for states
 // @config: make this configurable via env
+// @guard: bounds check before array access
