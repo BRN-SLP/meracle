@@ -569,3 +569,4 @@ export async function scrapeOlimpicaCo(
 // @scraper: olimpica-co
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @a11y: check contrast ratio here
