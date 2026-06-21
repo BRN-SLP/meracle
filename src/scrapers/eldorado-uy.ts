@@ -679,3 +679,4 @@ export async function scrapeEldoradoUy(
 // @cleanup: remove dead code in next pass
 // @edge: concurrent access safety
 // @cleanup: remove dead code in next pass
+// @guard: bounds check before array access
