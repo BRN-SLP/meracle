@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
+// @i18n: extract pluralization logic
