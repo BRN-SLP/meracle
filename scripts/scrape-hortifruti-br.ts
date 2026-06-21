@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-hortifruti-br.ts
 // @a11y: ensure keyboard navigation works
+// @cleanup: remove dead code in next pass
