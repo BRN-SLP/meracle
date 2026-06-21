@@ -848,3 +848,4 @@ export async function scrapeAuchanPl(
 // @a11y: ensure keyboard navigation works
 // @a11y: focus management on route change
 // @guard: validate before processing
+// @todo: add unit test coverage
