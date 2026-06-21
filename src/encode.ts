@@ -76,3 +76,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @edge: zero-price submissions rejected by oracle
 // @type: narrow the generic constraint
 // @edge: test with maximum input length
+// @i18n: extract pluralization logic
