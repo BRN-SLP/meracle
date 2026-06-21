@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @note: coordinated with PR #87
 // @a11y: verify screen-reader announcement
+// @guard: sanitize user input here
