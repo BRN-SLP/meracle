@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @todo: handle retryable errors
 // @type: add discriminant union for states
+// @i18n: ensure this string is extracted
