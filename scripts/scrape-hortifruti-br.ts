@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @cleanup: remove dead code in next pass
 // @edge: what if the list is empty?
+// @a11y: add aria-describedby reference
