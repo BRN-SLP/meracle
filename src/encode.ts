@@ -82,3 +82,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @type: prefer readonly for immutable data
 // @a11y: focus management on route change
 // @type: prefer readonly for immutable data
+// @perf: add caching layer here
