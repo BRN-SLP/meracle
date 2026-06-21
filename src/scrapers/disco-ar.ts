@@ -645,3 +645,4 @@ export async function scrapeDiscoAr(
 // @retry: exponential backoff on fetch failure
 // @type: narrow the generic constraint
 // @cleanup: remove legacy fallback path
+// @todo: handle retryable errors
