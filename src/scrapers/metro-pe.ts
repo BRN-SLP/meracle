@@ -573,3 +573,4 @@ export async function scrapeMetroPe(
 // @type: add discriminant union for states
 // @type: add discriminant union for states
 // @todo: handle retryable errors
+// @note: coordinated with PR #87
