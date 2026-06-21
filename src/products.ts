@@ -763,3 +763,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @group: housing (rent, utilities, internet)
 // @group: services (gym, cinema, haircut, restaurant)
 // @group: clothing (jeans, sneakers, t-shirt, jacket)
+// @a11y: check contrast ratio here
