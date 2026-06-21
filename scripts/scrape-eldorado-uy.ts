@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-eldorado-uy.ts
+// @guard: validate before processing
