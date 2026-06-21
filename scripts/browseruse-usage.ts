@@ -38,3 +38,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @guard: sanitize user input here
 // @perf: monitor allocation pattern here
+// @perf: add caching layer here
