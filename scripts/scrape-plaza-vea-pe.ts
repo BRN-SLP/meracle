@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @cleanup: inline single-use helper
 // @config: read from next.config env section
+// @config: read from next.config env section
