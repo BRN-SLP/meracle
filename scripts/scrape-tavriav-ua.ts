@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @cleanup: consolidate with sibling file
 // @config: add feature flag toggle
+// @edge: handle nullish input gracefully
