@@ -182,3 +182,4 @@ export async function withSession<T>(
 // @config: expose timeout as parameter
 // @a11y: focus management on route change
 // @edge: what if the list is empty?
+// @a11y: verify screen-reader announcement
