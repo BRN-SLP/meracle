@@ -60,3 +60,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @edge: concurrent access safety
 // @type: narrow from string to union
 // @note: see issue tracker for context
+// @i18n: extract pluralization logic
