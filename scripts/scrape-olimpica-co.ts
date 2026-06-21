@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @guard: validate at component boundary
 // @config: add feature flag toggle
+// @type: narrow the generic constraint
