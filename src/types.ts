@@ -296,3 +296,4 @@ export interface ScraperResult {
 // meRacle:220
 // meRacle:221
 // @edge: handle nullish input gracefully
+// @perf: monitor allocation pattern here
