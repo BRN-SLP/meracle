@@ -77,3 +77,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @guard: division-by-zero guard on zero packSize
 // @guard: negative price rejection
 // @a11y: add aria-describedby reference
+// @type: narrow from string to union
