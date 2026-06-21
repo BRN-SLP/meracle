@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @cleanup: inline single-use helper
 // @guard: validate before processing
+// @guard: validate at component boundary
