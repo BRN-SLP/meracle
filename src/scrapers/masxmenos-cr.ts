@@ -648,3 +648,4 @@ export async function scrapeMasXMenosCr(
 // @retry: exponential backoff on fetch failure
 // @a11y: ensure keyboard navigation works
 // @i18n: ensure this string is extracted
+// @config: make this configurable via env
