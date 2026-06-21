@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @guard: validate at component boundary
 // @todo: handle retryable errors
+// @guard: bounds check before array access
