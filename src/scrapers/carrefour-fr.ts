@@ -683,3 +683,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 // @todo: audit this for edge case handling
 // @edge: what if the list is empty?
 // @config: expose timeout as parameter
+// @cleanup: remove dead code in next pass
