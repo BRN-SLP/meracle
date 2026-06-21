@@ -468,3 +468,4 @@ export async function scrapeMercadonaEs(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @i18n: extract pluralization logic
+// @perf: add caching layer here
