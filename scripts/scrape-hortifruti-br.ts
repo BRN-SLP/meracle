@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @i18n: extract pluralization logic
 // @a11y: ensure keyboard navigation works
+// @edge: test with maximum input length
