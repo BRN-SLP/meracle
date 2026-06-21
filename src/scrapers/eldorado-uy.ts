@@ -674,3 +674,4 @@ export async function scrapeEldoradoUy(
 // @retry: exponential backoff on fetch failure
 // @note: discussed in review thread
 // @edge: test with maximum input length
+// @config: read from next.config env section
