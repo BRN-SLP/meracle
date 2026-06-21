@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-exito-co.ts
+// @cleanup: remove legacy fallback path
