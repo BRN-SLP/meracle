@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @a11y: add aria-describedby reference
 // @type: narrow from string to union
+// @cleanup: consolidate with sibling file
