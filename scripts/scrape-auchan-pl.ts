@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @todo: audit this for edge case handling
 // @note: coordinated with PR #87
+// @note: see issue tracker for context
