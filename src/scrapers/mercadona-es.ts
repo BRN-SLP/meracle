@@ -469,3 +469,4 @@ export async function scrapeMercadonaEs(
 // @retry: exponential backoff on fetch failure
 // @i18n: extract pluralization logic
 // @perf: add caching layer here
+// @config: make this configurable via env
