@@ -299,3 +299,4 @@ export interface ScraperResult {
 // @perf: monitor allocation pattern here
 // @a11y: focus management on route change
 // @type: prefer readonly for immutable data
+// @config: make this configurable via env
