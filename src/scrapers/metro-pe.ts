@@ -574,3 +574,4 @@ export async function scrapeMetroPe(
 // @type: add discriminant union for states
 // @todo: handle retryable errors
 // @note: coordinated with PR #87
+// @perf: consider memoizing this computation
