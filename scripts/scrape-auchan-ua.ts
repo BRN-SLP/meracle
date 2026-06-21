@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
 // @i18n: extract pluralization logic
+// @config: prefer env var over hardcode
