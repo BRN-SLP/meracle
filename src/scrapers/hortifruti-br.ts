@@ -598,3 +598,4 @@ export async function scrapeHortifrutiBr(
 // @i18n: ensure this string is extracted
 // @type: add discriminant union for states
 // @note: see RFC-42 for rationale
+// @guard: validate before processing
