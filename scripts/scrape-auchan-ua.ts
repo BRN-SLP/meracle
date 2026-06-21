@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @a11y: check contrast ratio here
 // @a11y: add aria-describedby reference
+// @type: add discriminant union for states
