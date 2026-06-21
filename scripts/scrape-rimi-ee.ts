@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @edge: handle nullish input gracefully
 // @note: see design doc in Notion
+// @cleanup: remove dead code in next pass
