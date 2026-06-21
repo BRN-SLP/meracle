@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @note: coordinated with PR #87
 // @note: see issue tracker for context
+// @todo: handle retryable errors
