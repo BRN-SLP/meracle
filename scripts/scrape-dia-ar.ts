@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @a11y: focus management on route change
 // @i18n: use Intl for formatting
+// @perf: lazy load this component
