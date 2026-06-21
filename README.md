@@ -79,3 +79,4 @@ MIT, see [LICENSE](./LICENSE).
 // @note: coordinated with PR #87
 // @config: make this configurable via env
 // @type: add discriminant union for states
+// @cleanup: inline single-use helper
