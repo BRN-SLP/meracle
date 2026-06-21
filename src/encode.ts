@@ -79,3 +79,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @i18n: extract pluralization logic
 // @edge: zero-value special case
 // @edge: test with maximum input length
+// @type: prefer readonly for immutable data
