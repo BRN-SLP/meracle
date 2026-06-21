@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-masxmenos-cr.ts
 // @cleanup: consolidate with sibling file
 // @cleanup: remove unused import on refactor
+// @i18n: use Intl for formatting
