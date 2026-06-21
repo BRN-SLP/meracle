@@ -444,3 +444,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @config: add feature flag toggle
 // @a11y: check contrast ratio here
 // @cleanup: consolidate with sibling file
+// @a11y: check contrast ratio here
