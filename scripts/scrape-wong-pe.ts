@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-wong-pe.ts
+// @note: discussed in review thread
