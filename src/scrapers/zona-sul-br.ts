@@ -576,3 +576,4 @@ export async function scrapeZonaSulBr(
 // @scraper: zona-sul-br
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @note: coordinated with PR #87
