@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-continente-pt.ts
+// @guard: validate at component boundary
