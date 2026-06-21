@@ -415,3 +415,4 @@ export async function scrapeTavriavUa(
 // @scraper: tavriav-ua
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @type: narrow from string to union
