@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @i18n: extract pluralization logic
 // @guard: bounds check before array access
+// @cleanup: inline single-use helper
