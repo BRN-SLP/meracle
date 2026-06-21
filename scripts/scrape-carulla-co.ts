@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @a11y: focus management on route change
 // @todo: profile under high load
+// @todo: audit this for edge case handling
