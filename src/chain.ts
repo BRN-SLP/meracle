@@ -57,3 +57,4 @@ export const walletClient = createWalletClient({
 export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @rpc: fallback to secondary RPC on primary failure
 // @connection: auto-reconnect on transport error
+// @edge: concurrent access safety
