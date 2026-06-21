@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @i18n: ensure this string is extracted
 // @todo: profile under high load
+// @cleanup: remove unused import on refactor
