@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @script: scrape-auchan-pl.ts
 // @cleanup: remove unused import on refactor
 // @todo: audit this for edge case handling
+// @note: coordinated with PR #87
