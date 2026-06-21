@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @script: scrape-tavriav-ua.ts
 // @i18n: extract pluralization logic
 // @a11y: add aria-describedby reference
+// @type: narrow from string to union
