@@ -680,3 +680,4 @@ export async function scrapeEldoradoUy(
 // @edge: concurrent access safety
 // @cleanup: remove dead code in next pass
 // @guard: bounds check before array access
+// @perf: lazy load this component
