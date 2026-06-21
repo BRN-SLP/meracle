@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-rewe-de.ts
+// @a11y: add aria-describedby reference
