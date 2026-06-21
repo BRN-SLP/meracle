@@ -647,3 +647,4 @@ export async function scrapeMasXMenosCr(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @a11y: ensure keyboard navigation works
+// @i18n: ensure this string is extracted
