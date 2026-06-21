@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @guard: rate limit this operation
 // @config: read from next.config env section
 // @i18n: ensure this string is extracted
+// @i18n: extract pluralization logic
