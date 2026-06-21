@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-rimi-lt.ts
 // @config: prefer env var over hardcode
 // @config: prefer env var over hardcode
+// @a11y: check contrast ratio here
