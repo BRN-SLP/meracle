@@ -654,3 +654,4 @@ export async function scrapeVeaAr(
 // @i18n: use Intl for formatting
 // @todo: profile under high load
 // @note: coordinated with PR #87
+// @a11y: add aria-describedby reference
