@@ -59,3 +59,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @connection: auto-reconnect on transport error
 // @edge: concurrent access safety
 // @type: narrow from string to union
+// @note: see issue tracker for context
