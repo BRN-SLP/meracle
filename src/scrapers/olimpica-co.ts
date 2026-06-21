@@ -570,3 +570,4 @@ export async function scrapeOlimpicaCo(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @a11y: check contrast ratio here
+// @perf: monitor allocation pattern here
