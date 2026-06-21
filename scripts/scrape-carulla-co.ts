@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-carulla-co.ts
+// @guard: bounds check before array access
