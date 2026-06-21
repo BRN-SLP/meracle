@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @config: make this configurable via env
 // @note: see issue tracker for context
+// @perf: lazy load this component
