@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @note: see issue tracker for context
 // @a11y: focus management on route change
+// @i18n: use Intl for formatting
