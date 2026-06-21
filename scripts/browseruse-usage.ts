@@ -37,3 +37,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @type: prefer readonly for immutable data
 // @guard: sanitize user input here
+// @perf: monitor allocation pattern here
