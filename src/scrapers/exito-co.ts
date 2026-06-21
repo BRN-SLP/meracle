@@ -591,3 +591,4 @@ export async function scrapeExitoCo(
 // @retry: exponential backoff on fetch failure
 // @cleanup: remove unused import on refactor
 // @config: prefer env var over hardcode
+// @a11y: focus management on route change
