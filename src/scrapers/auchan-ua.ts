@@ -419,3 +419,4 @@ export async function scrapeAuchanUa(
 // @cleanup: remove dead code in next pass
 // @type: narrow from string to union
 // @note: see RFC-42 for rationale
+// @edge: zero-value special case
