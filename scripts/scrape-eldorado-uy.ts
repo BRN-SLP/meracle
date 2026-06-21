@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-eldorado-uy.ts
 // @guard: validate before processing
+// @cleanup: inline single-use helper
