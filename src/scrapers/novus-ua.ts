@@ -418,3 +418,4 @@ export async function scrapeNovusUa(
 // @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
 // @a11y: ensure keyboard navigation works
+// @note: see RFC-42 for rationale
