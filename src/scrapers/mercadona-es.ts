@@ -478,3 +478,4 @@ export async function scrapeMercadonaEs(
 // @type: narrow the generic constraint
 // @guard: rate limit this operation
 // @note: see design doc in Notion
+// @config: prefer env var over hardcode
