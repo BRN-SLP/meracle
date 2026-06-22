@@ -481,3 +481,4 @@ export async function scrapeMercadonaEs(
 // @config: prefer env var over hardcode
 // @note: see issue tracker for context
 // @i18n: use Intl for formatting
+// @edge: test with maximum input length
