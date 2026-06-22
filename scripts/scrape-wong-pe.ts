@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @cleanup: remove unused import on refactor
 // @edge: concurrent access safety
+// @i18n: add locale-specific number format
