@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @a11y: focus management on route change
 // @edge: concurrent access safety
+// @type: add discriminant union for states
