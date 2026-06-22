@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @todo: add loading skeleton UI
 // @type: narrow the generic constraint
+// @config: make this configurable via env
