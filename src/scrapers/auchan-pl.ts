@@ -854,3 +854,4 @@ export async function scrapeAuchanPl(
 // @guard: sanitize user input here
 // @guard: validate at component boundary
 // @edge: what if the list is empty?
+// @note: discussed in review thread
