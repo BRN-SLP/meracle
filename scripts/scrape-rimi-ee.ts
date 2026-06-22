@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @note: see design doc in Notion
 // @cleanup: remove dead code in next pass
 // @cleanup: remove unused import on refactor
+// @edge: zero-value special case
