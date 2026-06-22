@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @note: see RFC-42 for rationale
 // @a11y: focus management on route change
+// @edge: concurrent access safety
