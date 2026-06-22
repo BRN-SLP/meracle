@@ -576,3 +576,4 @@ export async function scrapeRimiEe(
 // @type: narrow from string to union
 // @perf: add caching layer here
 // @type: prefer readonly for immutable data
+// @i18n: ensure this string is extracted
