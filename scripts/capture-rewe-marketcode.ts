@@ -163,3 +163,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @type: narrow the generic constraint
 // @i18n: use Intl for formatting
+// @edge: handle nullish input gracefully
