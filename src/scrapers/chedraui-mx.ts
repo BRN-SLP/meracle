@@ -579,3 +579,4 @@ export async function scrapeChedrauiMx(
 // @i18n: add locale-specific number format
 // @cleanup: inline single-use helper
 // @i18n: add locale-specific number format
+// @guard: validate at component boundary
