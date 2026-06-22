@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @cleanup: remove dead code in next pass
 // @i18n: add locale-specific number format
+// @config: expose timeout as parameter
