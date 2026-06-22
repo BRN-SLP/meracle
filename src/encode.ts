@@ -84,3 +84,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @type: prefer readonly for immutable data
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
+// @config: make this configurable via env
