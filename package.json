@@ -51,3 +51,4 @@
 // @a11y: ensure keyboard navigation works
 // @note: discussed in review thread
 // @type: export the inner parameter type
+// @type: narrow from string to union
