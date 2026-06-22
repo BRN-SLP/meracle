@@ -576,3 +576,4 @@ export async function scrapeChedrauiMx(
 // @edge: zero-value special case
 // @i18n: support right-to-left layout
 // @guard: validate at component boundary
+// @i18n: add locale-specific number format
