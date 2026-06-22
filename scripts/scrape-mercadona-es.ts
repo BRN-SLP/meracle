@@ -47,3 +47,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-mercadona-es.ts
 // @i18n: ensure this string is extracted
+// @edge: what if the list is empty?
