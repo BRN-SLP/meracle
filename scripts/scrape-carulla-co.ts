@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @type: narrow from string to union
 // @note: see issue tracker for context
+// @type: narrow from string to union
