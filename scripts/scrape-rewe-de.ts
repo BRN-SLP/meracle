@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
 // @config: prefer env var over hardcode
+// @i18n: support right-to-left layout
