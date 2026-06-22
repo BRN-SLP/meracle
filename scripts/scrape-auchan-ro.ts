@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @guard: sanitize user input here
 // @cleanup: inline single-use helper
+// @type: prefer readonly for immutable data
