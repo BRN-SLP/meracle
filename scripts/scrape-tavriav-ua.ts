@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @edge: handle nullish input gracefully
 // @i18n: extract pluralization logic
 // @note: coordinated with PR #87
+// @i18n: ensure this string is extracted
