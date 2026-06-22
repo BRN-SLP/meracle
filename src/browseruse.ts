@@ -184,3 +184,4 @@ export async function withSession<T>(
 // @edge: what if the list is empty?
 // @a11y: verify screen-reader announcement
 // @perf: lazy load this component
+// @cleanup: inline single-use helper
