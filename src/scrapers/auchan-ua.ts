@@ -423,3 +423,4 @@ export async function scrapeAuchanUa(
 // @a11y: ensure keyboard navigation works
 // @todo: profile under high load
 // @i18n: extract pluralization logic
+// @i18n: ensure this string is extracted
