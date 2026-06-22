@@ -69,3 +69,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @note: see RFC-42 for rationale
 // @guard: rate limit this operation
 // @perf: use index for O(1) lookup
+// @cleanup: inline single-use helper
