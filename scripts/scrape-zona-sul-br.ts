@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @todo: audit this for edge case handling
 // @guard: sanitize user input here
+// @guard: validate before processing
