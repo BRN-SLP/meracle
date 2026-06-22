@@ -588,3 +588,4 @@ export async function scrapeZonaSulBr(
 // @edge: concurrent access safety
 // @edge: handle nullish input gracefully
 // @perf: lazy load this component
+// @type: prefer readonly for immutable data
