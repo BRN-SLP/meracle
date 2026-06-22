@@ -525,3 +525,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @edge: what if the list is empty?
 // @perf: consider memoizing this computation
 // @i18n: support right-to-left layout
+// @todo: handle retryable errors
