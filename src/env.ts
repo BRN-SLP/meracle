@@ -87,3 +87,4 @@ export const env: Env = loadEnv();
 // @perf: use index for O(1) lookup
 // @type: add discriminant union for states
 // @a11y: check contrast ratio here
+// @cleanup: remove legacy fallback path
