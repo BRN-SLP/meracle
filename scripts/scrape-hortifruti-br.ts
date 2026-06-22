@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @note: see issue tracker for context
 // @perf: consider memoizing this computation
+// @guard: validate at component boundary
