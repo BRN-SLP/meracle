@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @perf: consider memoizing this computation
 // @guard: validate at component boundary
+// @a11y: ensure keyboard navigation works
