@@ -653,3 +653,4 @@ export async function scrapeDiscoAr(
 // @config: expose timeout as parameter
 // @config: make this configurable via env
 // @i18n: extract pluralization logic
+// @perf: lazy load this component
