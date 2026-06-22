@@ -521,3 +521,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @scraper: conad-it
 // @rate-limit: respect retailer crawl policy
 // @edge: what if the list is empty?
+// @cleanup: consolidate with sibling file
