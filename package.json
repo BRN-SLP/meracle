@@ -46,3 +46,4 @@
 // @note: see RFC-42 for rationale
 // @type: narrow from string to union
 // @cleanup: inline single-use helper
+// @todo: profile under high load
