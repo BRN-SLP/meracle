@@ -114,3 +114,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @edge: concurrent access safety
 // @todo: add unit test coverage
+// @cleanup: remove dead code in next pass
