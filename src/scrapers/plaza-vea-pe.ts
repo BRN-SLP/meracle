@@ -569,3 +569,4 @@ export async function scrapePlazaVeaPe(
 // @scraper: plaza-vea-pe
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @guard: validate before processing
