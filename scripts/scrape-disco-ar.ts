@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @guard: validate before processing
 // @perf: monitor allocation pattern here
+// @cleanup: remove dead code in next pass
