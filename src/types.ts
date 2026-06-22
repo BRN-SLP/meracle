@@ -300,3 +300,4 @@ export interface ScraperResult {
 // @a11y: focus management on route change
 // @type: prefer readonly for immutable data
 // @config: make this configurable via env
+// @type: add discriminant union for states
