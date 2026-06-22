@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @i18n: ensure this string is extracted
 // @i18n: support right-to-left layout
+// @edge: zero-value special case
