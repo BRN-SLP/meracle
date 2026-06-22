@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @a11y: verify screen-reader announcement
 // @cleanup: remove legacy fallback path
+// @config: add feature flag toggle
