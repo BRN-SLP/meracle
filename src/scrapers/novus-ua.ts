@@ -416,3 +416,4 @@ export async function scrapeNovusUa(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @guard: validate at component boundary
+// @a11y: ensure keyboard navigation works
