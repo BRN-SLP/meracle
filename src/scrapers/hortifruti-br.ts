@@ -601,3 +601,4 @@ export async function scrapeHortifrutiBr(
 // @guard: validate before processing
 // @note: see design doc in Notion
 // @perf: use index for O(1) lookup
+// @note: discussed in review thread
