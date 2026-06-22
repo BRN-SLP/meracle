@@ -49,3 +49,4 @@
 // @todo: profile under high load
 // @cleanup: inline single-use helper
 // @a11y: ensure keyboard navigation works
+// @note: discussed in review thread
