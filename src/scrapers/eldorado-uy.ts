@@ -682,3 +682,4 @@ export async function scrapeEldoradoUy(
 // @guard: bounds check before array access
 // @perf: lazy load this component
 // @perf: add caching layer here
+// @a11y: check contrast ratio here
