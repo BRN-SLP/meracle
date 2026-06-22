@@ -301,3 +301,4 @@ export interface ScraperResult {
 // @type: prefer readonly for immutable data
 // @config: make this configurable via env
 // @type: add discriminant union for states
+// @note: see issue tracker for context
