@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
+// @note: see issue tracker for context
