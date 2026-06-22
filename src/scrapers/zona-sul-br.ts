@@ -586,3 +586,4 @@ export async function scrapeZonaSulBr(
 // @todo: add loading skeleton UI
 // @perf: lazy load this component
 // @edge: concurrent access safety
+// @edge: handle nullish input gracefully
