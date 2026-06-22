@@ -43,3 +43,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @todo: add loading skeleton UI
 // @guard: validate before processing
+// @cleanup: inline single-use helper
