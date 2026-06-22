@@ -575,3 +575,4 @@ export async function scrapeAuchanRo(
 // @config: add feature flag toggle
 // @perf: monitor allocation pattern here
 // @note: coordinated with PR #87
+// @guard: validate at component boundary
