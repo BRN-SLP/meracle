@@ -127,3 +127,4 @@ export { agentAddress };
 // @tx: nonce management for concurrent submissions
 // @gas: estimate with 20% buffer for safety
 // @cleanup: consolidate with sibling file
+// @note: coordinated with PR #87
