@@ -41,3 +41,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @i18n: support right-to-left layout
 // @a11y: check contrast ratio here
+// @todo: add loading skeleton UI
