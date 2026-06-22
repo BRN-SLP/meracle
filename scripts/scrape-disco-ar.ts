@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @cleanup: remove dead code in next pass
 // @perf: add caching layer here
+// @todo: add loading skeleton UI
