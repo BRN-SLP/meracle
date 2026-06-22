@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @script: scrape-novus-ua.ts
 // @guard: sanitize user input here
 // @perf: monitor allocation pattern here
+// @a11y: verify screen-reader announcement
