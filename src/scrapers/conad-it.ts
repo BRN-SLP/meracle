@@ -529,3 +529,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @i18n: extract pluralization logic
 // @note: discussed in review thread
 // @perf: consider memoizing this computation
+// @config: make this configurable via env
