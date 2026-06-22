@@ -574,3 +574,4 @@ export async function scrapeAuchanRo(
 // @rate-limit: respect retailer crawl policy
 // @config: add feature flag toggle
 // @perf: monitor allocation pattern here
+// @note: coordinated with PR #87
