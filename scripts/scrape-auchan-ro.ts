@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @cleanup: inline single-use helper
 // @type: prefer readonly for immutable data
+// @edge: zero-value special case
