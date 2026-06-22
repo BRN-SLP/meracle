@@ -530,3 +530,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @note: discussed in review thread
 // @perf: consider memoizing this computation
 // @config: make this configurable via env
+// @a11y: add aria-describedby reference
