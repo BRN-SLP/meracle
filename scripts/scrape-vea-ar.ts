@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-vea-ar.ts
 // @edge: concurrent access safety
+// @a11y: focus management on route change
