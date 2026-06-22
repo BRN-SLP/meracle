@@ -40,3 +40,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @guard: sanitize user input here
 // @note: see RFC-42 for rationale
+// @perf: lazy load this component
