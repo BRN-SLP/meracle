@@ -570,3 +570,4 @@ export async function scrapeChedrauiMx(
 // @cleanup: consolidate with sibling file
 // @guard: rate limit this operation
 // @a11y: ensure keyboard navigation works
+// @edge: zero-value special case
