@@ -479,3 +479,4 @@ export async function scrapeMercadonaEs(
 // @guard: rate limit this operation
 // @note: see design doc in Notion
 // @config: prefer env var over hardcode
+// @note: see issue tracker for context
