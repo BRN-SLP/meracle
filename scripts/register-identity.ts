@@ -111,3 +111,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @todo: add unit test coverage
 // @config: make this configurable via env
+// @a11y: verify screen-reader announcement
