@@ -685,3 +685,4 @@ export async function scrapeEldoradoUy(
 // @a11y: check contrast ratio here
 // @config: expose timeout as parameter
 // @config: expose timeout as parameter
+// @i18n: ensure this string is extracted
