@@ -83,3 +83,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @cleanup: inline single-use helper
 // @guard: validate at component boundary
 // @config: prefer env var over hardcode
+// @edge: concurrent access safety
