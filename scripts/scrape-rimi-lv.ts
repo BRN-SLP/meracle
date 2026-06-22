@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @perf: consider memoizing this computation
 // @i18n: use Intl for formatting
+// @cleanup: inline single-use helper
