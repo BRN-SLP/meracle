@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @cleanup: consolidate with sibling file
 // @cleanup: remove unused import on refactor
 // @i18n: use Intl for formatting
+// @todo: add loading skeleton UI
