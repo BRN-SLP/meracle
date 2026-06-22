@@ -425,3 +425,4 @@ export async function scrapeTavriavUa(
 // @todo: add loading skeleton UI
 // @edge: zero-value special case
 // @todo: add unit test coverage
+// @perf: lazy load this component
