@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @a11y: verify screen-reader announcement
 // @type: export the inner parameter type
+// @a11y: verify screen-reader announcement
