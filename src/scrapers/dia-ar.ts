@@ -662,3 +662,4 @@ export async function scrapeDiaAr(
 // @i18n: support right-to-left layout
 // @a11y: verify screen-reader announcement
 // @type: narrow the generic constraint
+// @config: read from next.config env section
