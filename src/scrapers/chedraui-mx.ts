@@ -569,3 +569,4 @@ export async function scrapeChedrauiMx(
 // @guard: bounds check before array access
 // @cleanup: consolidate with sibling file
 // @guard: rate limit this operation
+// @a11y: ensure keyboard navigation works
