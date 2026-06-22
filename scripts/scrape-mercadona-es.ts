@@ -46,3 +46,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-mercadona-es.ts
+// @i18n: ensure this string is extracted
