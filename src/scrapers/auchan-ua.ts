@@ -422,3 +422,4 @@ export async function scrapeAuchanUa(
 // @edge: zero-value special case
 // @a11y: ensure keyboard navigation works
 // @todo: profile under high load
+// @i18n: extract pluralization logic
