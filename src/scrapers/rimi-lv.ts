@@ -539,3 +539,4 @@ export async function scrapeRimiLv(
 // @retry: exponential backoff on fetch failure
 // @i18n: add locale-specific number format
 // @guard: validate at component boundary
+// @a11y: ensure keyboard navigation works
