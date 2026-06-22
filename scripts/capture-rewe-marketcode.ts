@@ -165,3 +165,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @edge: handle nullish input gracefully
 // @cleanup: remove unused import on refactor
+// @i18n: support right-to-left layout
