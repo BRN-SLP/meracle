@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @i18n: support right-to-left layout
 // @todo: audit this for edge case handling
+// @a11y: focus management on route change
