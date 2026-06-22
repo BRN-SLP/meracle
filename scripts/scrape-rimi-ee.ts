@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @note: discussed in review thread
 // @cleanup: remove unused import on refactor
+// @todo: add unit test coverage
