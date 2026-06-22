@@ -84,3 +84,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @guard: validate at component boundary
 // @config: prefer env var over hardcode
 // @edge: concurrent access safety
+// @todo: add unit test coverage
