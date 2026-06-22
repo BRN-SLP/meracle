@@ -421,3 +421,4 @@ export async function scrapeNovusUa(
 // @note: see RFC-42 for rationale
 // @type: narrow the generic constraint
 // @config: make this configurable via env
+// @a11y: check contrast ratio here
