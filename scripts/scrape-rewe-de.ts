@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @a11y: focus management on route change
 // @note: discussed in review thread
+// @perf: add caching layer here
