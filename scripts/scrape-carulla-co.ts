@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @type: narrow from string to union
 // @a11y: check contrast ratio here
+// @cleanup: remove dead code in next pass
