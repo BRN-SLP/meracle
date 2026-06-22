@@ -484,3 +484,4 @@ export async function scrapeMercadonaEs(
 // @edge: test with maximum input length
 // @config: expose timeout as parameter
 // @a11y: verify screen-reader announcement
+// @i18n: add locale-specific number format
