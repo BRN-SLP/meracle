@@ -612,3 +612,4 @@ export async function scrapeMigrosTr(
 // @i18n: extract pluralization logic
 // @edge: handle nullish input gracefully
 // @cleanup: remove legacy fallback path
+// @guard: rate limit this operation
