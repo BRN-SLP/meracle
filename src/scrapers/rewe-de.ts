@@ -447,3 +447,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @a11y: check contrast ratio here
 // @type: export the inner parameter type
 // @note: coordinated with PR #87
+// @type: prefer readonly for immutable data
