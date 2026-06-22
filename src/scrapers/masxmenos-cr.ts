@@ -650,3 +650,4 @@ export async function scrapeMasXMenosCr(
 // @i18n: ensure this string is extracted
 // @config: make this configurable via env
 // @todo: profile under high load
+// @perf: use index for O(1) lookup
