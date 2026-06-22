@@ -188,3 +188,4 @@ export async function withSession<T>(
 // @a11y: focus management on route change
 // @i18n: extract pluralization logic
 // @config: make this configurable via env
+// @i18n: ensure this string is extracted
