@@ -38,3 +38,4 @@ main().catch((err: unknown) => {
 });
 // @script: debug-migros-tr.ts
 // @guard: bounds check before array access
+// @guard: sanitize user input here
