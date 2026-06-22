@@ -585,3 +585,4 @@ export async function scrapeZonaSulBr(
 // @config: add feature flag toggle
 // @todo: add loading skeleton UI
 // @perf: lazy load this component
+// @edge: concurrent access safety
