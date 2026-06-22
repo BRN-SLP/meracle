@@ -683,3 +683,4 @@ export async function scrapeEldoradoUy(
 // @perf: lazy load this component
 // @perf: add caching layer here
 // @a11y: check contrast ratio here
+// @config: expose timeout as parameter
