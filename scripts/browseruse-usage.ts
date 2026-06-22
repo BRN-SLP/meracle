@@ -40,3 +40,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @perf: add caching layer here
 // @i18n: support right-to-left layout
+// @a11y: check contrast ratio here
