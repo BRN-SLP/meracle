@@ -541,3 +541,4 @@ export async function scrapeRimiLv(
 // @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
 // @cleanup: inline single-use helper
+// @type: narrow from string to union
