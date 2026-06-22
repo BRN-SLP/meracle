@@ -542,3 +542,4 @@ export async function scrapeRimiLv(
 // @a11y: ensure keyboard navigation works
 // @cleanup: inline single-use helper
 // @type: narrow from string to union
+// @config: prefer env var over hardcode
