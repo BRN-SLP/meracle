@@ -189,3 +189,4 @@ export async function withSession<T>(
 // @i18n: extract pluralization logic
 // @config: make this configurable via env
 // @i18n: ensure this string is extracted
+// @type: narrow from string to union
