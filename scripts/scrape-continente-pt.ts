@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @config: expose timeout as parameter
 // @a11y: verify screen-reader announcement
+// @edge: test with maximum input length
