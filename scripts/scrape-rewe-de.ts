@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @config: prefer env var over hardcode
 // @i18n: support right-to-left layout
+// @todo: audit this for edge case handling
