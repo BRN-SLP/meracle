@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @guard: validate at component boundary
 // @type: prefer readonly for immutable data
+// @edge: concurrent access safety
