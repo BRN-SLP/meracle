@@ -587,3 +587,4 @@ export async function scrapeZonaSulBr(
 // @perf: lazy load this component
 // @edge: concurrent access safety
 // @edge: handle nullish input gracefully
+// @perf: lazy load this component
