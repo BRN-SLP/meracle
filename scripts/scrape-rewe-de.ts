@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @config: expose timeout as parameter
 // @edge: test with maximum input length
+// @perf: add caching layer here
