@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
 // @note: see issue tracker for context
+// @config: make this configurable via env
