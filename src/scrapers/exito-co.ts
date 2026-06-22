@@ -601,3 +601,4 @@ export async function scrapeExitoCo(
 // @perf: lazy load this component
 // @edge: test with maximum input length
 // @todo: profile under high load
+// @note: coordinated with PR #87
