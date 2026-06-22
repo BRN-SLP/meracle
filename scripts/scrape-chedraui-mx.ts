@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @type: export the inner parameter type
 // @i18n: add locale-specific number format
+// @type: prefer readonly for immutable data
