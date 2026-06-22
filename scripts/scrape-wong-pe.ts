@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @config: expose timeout as parameter
 // @cleanup: remove legacy fallback path
+// @guard: sanitize user input here
