@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @perf: monitor allocation pattern here
 // @guard: validate at component boundary
+// @type: prefer readonly for immutable data
