@@ -681,3 +681,4 @@ export async function scrapeEldoradoUy(
 // @cleanup: remove dead code in next pass
 // @guard: bounds check before array access
 // @perf: lazy load this component
+// @perf: add caching layer here
