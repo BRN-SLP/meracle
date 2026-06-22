@@ -302,3 +302,4 @@ export interface ScraperResult {
 // @config: make this configurable via env
 // @type: add discriminant union for states
 // @note: see issue tracker for context
+// @type: narrow the generic constraint
