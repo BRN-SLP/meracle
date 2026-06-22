@@ -37,3 +37,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: debug-migros-tr.ts
+// @guard: bounds check before array access
