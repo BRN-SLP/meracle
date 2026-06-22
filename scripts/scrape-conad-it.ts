@@ -48,3 +48,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-conad-it.ts
+// @edge: test with maximum input length
