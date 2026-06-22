@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @note: coordinated with PR #87
 // @i18n: ensure this string is extracted
+// @cleanup: remove dead code in next pass
