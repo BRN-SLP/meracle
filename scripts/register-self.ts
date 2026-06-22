@@ -166,3 +166,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @edge: what if the list is empty?
 // @a11y: focus management on route change
+// @config: expose timeout as parameter
