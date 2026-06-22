@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @todo: audit this for edge case handling
 // @a11y: focus management on route change
+// @note: discussed in review thread
