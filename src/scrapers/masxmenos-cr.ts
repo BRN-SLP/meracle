@@ -651,3 +651,4 @@ export async function scrapeMasXMenosCr(
 // @config: make this configurable via env
 // @todo: profile under high load
 // @perf: use index for O(1) lookup
+// @config: prefer env var over hardcode
