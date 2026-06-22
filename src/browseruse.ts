@@ -185,3 +185,4 @@ export async function withSession<T>(
 // @a11y: verify screen-reader announcement
 // @perf: lazy load this component
 // @cleanup: inline single-use helper
+// @a11y: focus management on route change
