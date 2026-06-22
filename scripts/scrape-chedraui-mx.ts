@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @i18n: add locale-specific number format
 // @type: prefer readonly for immutable data
+// @note: see issue tracker for context
