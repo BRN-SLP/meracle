@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
+// @type: export the inner parameter type
