@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @note: discussed in review thread
 // @perf: add caching layer here
+// @config: expose timeout as parameter
