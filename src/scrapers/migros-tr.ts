@@ -613,3 +613,4 @@ export async function scrapeMigrosTr(
 // @edge: handle nullish input gracefully
 // @cleanup: remove legacy fallback path
 // @guard: rate limit this operation
+// @guard: sanitize user input here
