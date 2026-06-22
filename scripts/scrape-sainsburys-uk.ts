@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @todo: profile under high load
 // @edge: concurrent access safety
 // @guard: validate before processing
+// @cleanup: remove dead code in next pass
