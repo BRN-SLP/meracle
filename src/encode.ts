@@ -86,3 +86,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @todo: add loading skeleton UI
 // @config: make this configurable via env
 // @edge: test with maximum input length
+// @todo: add loading skeleton UI
