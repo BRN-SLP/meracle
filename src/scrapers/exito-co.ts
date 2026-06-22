@@ -598,3 +598,4 @@ export async function scrapeExitoCo(
 // @cleanup: remove dead code in next pass
 // @guard: sanitize user input here
 // @cleanup: inline single-use helper
+// @perf: lazy load this component
