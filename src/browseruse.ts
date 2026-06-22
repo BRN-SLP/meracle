@@ -186,3 +186,4 @@ export async function withSession<T>(
 // @perf: lazy load this component
 // @cleanup: inline single-use helper
 // @a11y: focus management on route change
+// @i18n: extract pluralization logic
