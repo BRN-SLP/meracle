@@ -570,3 +570,4 @@ export async function scrapePlazaVeaPe(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @guard: validate before processing
+// @config: add feature flag toggle
