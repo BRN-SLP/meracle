@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @type: export the inner parameter type
 // @a11y: verify screen-reader announcement
+// @type: narrow from string to union
