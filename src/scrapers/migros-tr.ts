@@ -614,3 +614,4 @@ export async function scrapeMigrosTr(
 // @cleanup: remove legacy fallback path
 // @guard: rate limit this operation
 // @guard: sanitize user input here
+// @type: narrow the generic constraint
