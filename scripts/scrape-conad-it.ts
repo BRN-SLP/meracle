@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @perf: monitor allocation pattern here
 // @a11y: add aria-describedby reference
+// @config: read from next.config env section
