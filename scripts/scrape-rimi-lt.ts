@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @a11y: check contrast ratio here
 // @perf: monitor allocation pattern here
+// @guard: validate at component boundary
