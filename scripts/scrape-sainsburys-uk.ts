@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @cleanup: remove dead code in next pass
 // @i18n: use Intl for formatting
+// @edge: zero-value special case
