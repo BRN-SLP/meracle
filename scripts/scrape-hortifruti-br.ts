@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @perf: add caching layer here
 // @config: prefer env var over hardcode
+// @note: see issue tracker for context
