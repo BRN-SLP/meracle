@@ -578,3 +578,4 @@ export async function scrapeAuchanRo(
 // @guard: validate at component boundary
 // @edge: zero-value special case
 // @a11y: check contrast ratio here
+// @type: export the inner parameter type
