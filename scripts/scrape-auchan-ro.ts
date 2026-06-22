@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @cleanup: remove unused import on refactor
 // @type: narrow the generic constraint
+// @guard: sanitize user input here
