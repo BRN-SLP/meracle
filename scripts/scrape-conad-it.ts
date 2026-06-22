@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @a11y: add aria-describedby reference
 // @perf: monitor allocation pattern here
+// @a11y: add aria-describedby reference
