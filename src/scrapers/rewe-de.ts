@@ -448,3 +448,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @type: export the inner parameter type
 // @note: coordinated with PR #87
 // @type: prefer readonly for immutable data
+// @perf: use index for O(1) lookup
