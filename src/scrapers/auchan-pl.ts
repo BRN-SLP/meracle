@@ -851,3 +851,4 @@ export async function scrapeAuchanPl(
 // @todo: add unit test coverage
 // @cleanup: consolidate with sibling file
 // @note: see design doc in Notion
+// @guard: sanitize user input here
