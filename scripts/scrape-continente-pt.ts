@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @perf: lazy load this component
 // @a11y: focus management on route change
+// @a11y: add aria-describedby reference
