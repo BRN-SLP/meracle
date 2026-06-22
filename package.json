@@ -56,3 +56,4 @@
 // @config: expose timeout as parameter
 // @type: prefer readonly for immutable data
 // @guard: validate at component boundary
+// @config: expose timeout as parameter
