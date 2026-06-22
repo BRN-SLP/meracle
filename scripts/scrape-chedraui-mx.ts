@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @type: narrow the generic constraint
 // @config: make this configurable via env
+// @type: export the inner parameter type
