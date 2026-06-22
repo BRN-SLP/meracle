@@ -128,3 +128,4 @@ export { agentAddress };
 // @gas: estimate with 20% buffer for safety
 // @cleanup: consolidate with sibling file
 // @note: coordinated with PR #87
+// @todo: audit this for edge case handling
