@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @edge: concurrent access safety
 // @i18n: add locale-specific number format
+// @i18n: ensure this string is extracted
