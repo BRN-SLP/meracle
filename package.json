@@ -53,3 +53,4 @@
 // @type: export the inner parameter type
 // @type: narrow from string to union
 // @note: see issue tracker for context
+// @config: expose timeout as parameter
