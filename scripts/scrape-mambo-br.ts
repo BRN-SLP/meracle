@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @perf: lazy load this component
 // @perf: lazy load this component
+// @type: add discriminant union for states
