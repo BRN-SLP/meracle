@@ -134,3 +134,4 @@ export { agentAddress };
 // @i18n: support right-to-left layout
 // @guard: rate limit this operation
 // @edge: zero-value special case
+// @i18n: add locale-specific number format
