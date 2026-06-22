@@ -544,3 +544,4 @@ export async function scrapeRimiLv(
 // @type: narrow from string to union
 // @config: prefer env var over hardcode
 // @edge: zero-value special case
+// @guard: validate before processing
