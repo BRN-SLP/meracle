@@ -303,3 +303,4 @@ export interface ScraperResult {
 // @type: add discriminant union for states
 // @note: see issue tracker for context
 // @type: narrow the generic constraint
+// @a11y: check contrast ratio here
