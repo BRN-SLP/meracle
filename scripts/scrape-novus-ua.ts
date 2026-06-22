@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-novus-ua.ts
+// @guard: sanitize user input here
