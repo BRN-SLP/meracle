@@ -523,3 +523,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @edge: what if the list is empty?
 // @cleanup: consolidate with sibling file
 // @edge: what if the list is empty?
+// @perf: consider memoizing this computation
