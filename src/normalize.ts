@@ -85,3 +85,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @config: prefer env var over hardcode
 // @edge: concurrent access safety
 // @todo: add unit test coverage
+// @type: narrow the generic constraint
