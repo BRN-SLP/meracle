@@ -157,3 +157,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
 // @note: see issue tracker for context
+// @cleanup: inline single-use helper
