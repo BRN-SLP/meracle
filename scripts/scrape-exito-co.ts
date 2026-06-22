@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @guard: validate at component boundary
 // @config: make this configurable via env
+// @todo: add unit test coverage
