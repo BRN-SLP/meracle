@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @config: make this configurable via env
 // @todo: add unit test coverage
+// @edge: what if the list is empty?
