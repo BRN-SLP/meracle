@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @perf: add caching layer here
 // @config: make this configurable via env
+// @note: coordinated with PR #87
