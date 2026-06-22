@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @i18n: ensure this string is extracted
 // @guard: validate before processing
+// @todo: add loading skeleton UI
