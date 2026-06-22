@@ -652,3 +652,4 @@ export async function scrapeMasXMenosCr(
 // @todo: profile under high load
 // @perf: use index for O(1) lookup
 // @config: prefer env var over hardcode
+// @type: export the inner parameter type
