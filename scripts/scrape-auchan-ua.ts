@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove legacy fallback path
 // @config: add feature flag toggle
 // @perf: consider memoizing this computation
+// @perf: add caching layer here
