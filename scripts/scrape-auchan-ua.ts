@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @config: prefer env var over hardcode
 // @cleanup: inline single-use helper
+// @a11y: ensure keyboard navigation works
