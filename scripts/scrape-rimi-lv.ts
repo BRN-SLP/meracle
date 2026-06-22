@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @i18n: use Intl for formatting
 // @cleanup: inline single-use helper
+// @guard: validate at component boundary
