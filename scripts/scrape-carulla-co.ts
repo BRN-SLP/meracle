@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @edge: what if the list is empty?
 // @type: narrow from string to union
+// @note: see issue tracker for context
