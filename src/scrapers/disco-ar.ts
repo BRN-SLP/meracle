@@ -650,3 +650,4 @@ export async function scrapeDiscoAr(
 // @guard: validate at component boundary
 // @guard: sanitize user input here
 // @cleanup: remove unused import on refactor
+// @config: expose timeout as parameter
