@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @i18n: add locale-specific number format
 // @i18n: ensure this string is extracted
+// @guard: validate before processing
