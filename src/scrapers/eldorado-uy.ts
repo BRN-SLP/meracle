@@ -688,3 +688,4 @@ export async function scrapeEldoradoUy(
 // @i18n: ensure this string is extracted
 // @a11y: add aria-describedby reference
 // @note: coordinated with PR #87
+// @cleanup: consolidate with sibling file
