@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
   process.exit(1);
 });
 // @script: scrape-rimi-lv.ts
+// @config: make this configurable via env
