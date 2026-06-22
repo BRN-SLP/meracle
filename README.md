@@ -80,3 +80,4 @@ MIT, see [LICENSE](./LICENSE).
 // @config: make this configurable via env
 // @type: add discriminant union for states
 // @cleanup: inline single-use helper
+// @a11y: add aria-describedby reference
