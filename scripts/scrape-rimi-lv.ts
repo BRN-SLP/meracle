@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @type: narrow the generic constraint
 // @perf: consider memoizing this computation
+// @i18n: use Intl for formatting
