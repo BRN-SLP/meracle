@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @i18n: extract pluralization logic
 // @config: prefer env var over hardcode
+// @cleanup: inline single-use helper
