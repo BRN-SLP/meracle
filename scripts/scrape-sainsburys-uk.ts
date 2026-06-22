@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @i18n: use Intl for formatting
 // @todo: profile under high load
+// @edge: concurrent access safety
