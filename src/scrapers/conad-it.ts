@@ -524,3 +524,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @cleanup: consolidate with sibling file
 // @edge: what if the list is empty?
 // @perf: consider memoizing this computation
+// @i18n: support right-to-left layout
