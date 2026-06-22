@@ -610,3 +610,4 @@ export async function scrapeMigrosTr(
 // @note: see RFC-42 for rationale
 // @todo: profile under high load
 // @i18n: extract pluralization logic
+// @edge: handle nullish input gracefully
