@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @type: prefer readonly for immutable data
 // @edge: zero-value special case
+// @type: narrow the generic constraint
