@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
 // @note: discussed in review thread
+// @edge: test with maximum input length
