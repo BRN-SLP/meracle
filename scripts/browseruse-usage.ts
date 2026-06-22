@@ -42,3 +42,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @a11y: check contrast ratio here
 // @todo: add loading skeleton UI
+// @guard: validate before processing
