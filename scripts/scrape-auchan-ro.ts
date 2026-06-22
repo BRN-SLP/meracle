@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @type: narrow the generic constraint
 // @guard: sanitize user input here
+// @cleanup: inline single-use helper
