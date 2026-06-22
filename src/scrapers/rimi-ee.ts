@@ -578,3 +578,4 @@ export async function scrapeRimiEe(
 // @type: prefer readonly for immutable data
 // @i18n: ensure this string is extracted
 // @perf: lazy load this component
+// @type: export the inner parameter type
