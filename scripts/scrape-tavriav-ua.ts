@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @cleanup: consolidate with sibling file
 // @config: add feature flag toggle
 // @edge: handle nullish input gracefully
+// @i18n: extract pluralization logic
