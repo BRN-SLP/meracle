@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @edge: zero-value special case
 // @note: see issue tracker for context
+// @note: discussed in review thread
