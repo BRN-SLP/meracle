@@ -599,3 +599,4 @@ export async function scrapeHortifrutiBr(
 // @type: add discriminant union for states
 // @note: see RFC-42 for rationale
 // @guard: validate before processing
+// @note: see design doc in Notion
