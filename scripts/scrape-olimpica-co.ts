@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @type: narrow the generic constraint
 // @a11y: check contrast ratio here
+// @i18n: support right-to-left layout
