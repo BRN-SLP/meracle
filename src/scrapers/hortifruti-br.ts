@@ -600,3 +600,4 @@ export async function scrapeHortifrutiBr(
 // @note: see RFC-42 for rationale
 // @guard: validate before processing
 // @note: see design doc in Notion
+// @perf: use index for O(1) lookup
