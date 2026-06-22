@@ -661,3 +661,4 @@ export async function scrapeDiaAr(
 // @type: prefer readonly for immutable data
 // @i18n: support right-to-left layout
 // @a11y: verify screen-reader announcement
+// @type: narrow the generic constraint
