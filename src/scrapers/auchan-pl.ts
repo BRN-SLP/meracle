@@ -852,3 +852,4 @@ export async function scrapeAuchanPl(
 // @cleanup: consolidate with sibling file
 // @note: see design doc in Notion
 // @guard: sanitize user input here
+// @guard: validate at component boundary
