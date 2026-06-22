@@ -86,3 +86,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @edge: concurrent access safety
 // @todo: add unit test coverage
 // @type: narrow the generic constraint
+// @type: add discriminant union for states
