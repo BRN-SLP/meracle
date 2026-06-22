@@ -572,3 +572,4 @@ export async function scrapeChedrauiMx(
 // @a11y: ensure keyboard navigation works
 // @edge: zero-value special case
 // @cleanup: remove legacy fallback path
+// @note: see issue tracker for context
