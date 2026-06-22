@@ -160,3 +160,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @perf: use index for O(1) lookup
 // @guard: rate limit this operation
+// @perf: consider memoizing this computation
