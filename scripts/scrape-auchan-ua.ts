@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @cleanup: remove legacy fallback path
 // @config: add feature flag toggle
+// @perf: consider memoizing this computation
