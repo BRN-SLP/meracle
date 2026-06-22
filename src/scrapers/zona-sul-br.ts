@@ -584,3 +584,4 @@ export async function scrapeZonaSulBr(
 // @todo: audit this for edge case handling
 // @config: add feature flag toggle
 // @todo: add loading skeleton UI
+// @perf: lazy load this component
