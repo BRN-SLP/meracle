@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @type: narrow from string to union
 // @guard: validate at component boundary
+// @config: make this configurable via env
