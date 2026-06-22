@@ -41,3 +41,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @note: see RFC-42 for rationale
 // @perf: lazy load this component
+// @perf: monitor allocation pattern here
