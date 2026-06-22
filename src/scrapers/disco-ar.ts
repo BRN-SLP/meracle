@@ -647,3 +647,4 @@ export async function scrapeDiscoAr(
 // @cleanup: remove legacy fallback path
 // @todo: handle retryable errors
 // @config: make this configurable via env
+// @guard: validate at component boundary
