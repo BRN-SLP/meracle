@@ -49,3 +49,4 @@ main().catch((err: unknown) => {
 });
 // @script: scrape-conad-it.ts
 // @edge: test with maximum input length
+// @a11y: add aria-describedby reference
