@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @cleanup: remove dead code in next pass
 // @edge: zero-value special case
+// @edge: what if the list is empty?
