@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
 // @note: see RFC-42 for rationale
+// @a11y: focus management on route change
