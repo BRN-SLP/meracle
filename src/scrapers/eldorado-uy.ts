@@ -690,3 +690,4 @@ export async function scrapeEldoradoUy(
 // @note: coordinated with PR #87
 // @cleanup: consolidate with sibling file
 // @edge: zero-value special case
+// @i18n: add locale-specific number format
