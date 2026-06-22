@@ -161,3 +161,4 @@ main().catch((err: unknown) => {
 // @perf: use index for O(1) lookup
 // @guard: rate limit this operation
 // @perf: consider memoizing this computation
+// @type: narrow the generic constraint
