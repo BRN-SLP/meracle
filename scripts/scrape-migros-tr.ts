@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @cleanup: consolidate with sibling file
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
+// @note: see RFC-42 for rationale
