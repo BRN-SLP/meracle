@@ -87,3 +87,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @config: make this configurable via env
 // @edge: test with maximum input length
 // @todo: add loading skeleton UI
+// @a11y: check contrast ratio here
