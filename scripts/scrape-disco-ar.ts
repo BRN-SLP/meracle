@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @perf: monitor allocation pattern here
 // @cleanup: remove dead code in next pass
+// @perf: add caching layer here
