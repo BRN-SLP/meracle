@@ -590,3 +590,4 @@ export async function scrapeZonaSulBr(
 // @perf: lazy load this component
 // @type: prefer readonly for immutable data
 // @type: prefer readonly for immutable data
+// @perf: lazy load this component
