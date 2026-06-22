@@ -853,3 +853,4 @@ export async function scrapeAuchanPl(
 // @note: see design doc in Notion
 // @guard: sanitize user input here
 // @guard: validate at component boundary
+// @edge: what if the list is empty?
