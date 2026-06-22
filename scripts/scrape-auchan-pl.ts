@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @note: see issue tracker for context
 // @todo: handle retryable errors
+// @edge: what if the list is empty?
