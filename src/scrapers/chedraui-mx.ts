@@ -574,3 +574,4 @@ export async function scrapeChedrauiMx(
 // @cleanup: remove legacy fallback path
 // @note: see issue tracker for context
 // @edge: zero-value special case
+// @i18n: support right-to-left layout
