@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @i18n: support right-to-left layout
 // @edge: zero-value special case
+// @guard: sanitize user input here
