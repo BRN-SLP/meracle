@@ -572,3 +572,4 @@ export async function scrapeRimiEe(
 // @type: narrow from string to union
 // @note: discussed in review thread
 // @cleanup: remove legacy fallback path
+// @type: add discriminant union for states
