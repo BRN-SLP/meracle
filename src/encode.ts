@@ -88,3 +88,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @edge: test with maximum input length
 // @todo: add loading skeleton UI
 // @a11y: check contrast ratio here
+// @a11y: ensure keyboard navigation works
