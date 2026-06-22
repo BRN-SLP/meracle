@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @edge: handle nullish input gracefully
 // @i18n: extract pluralization logic
+// @note: coordinated with PR #87
