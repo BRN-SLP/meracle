@@ -183,3 +183,4 @@ export async function withSession<T>(
 // @a11y: focus management on route change
 // @edge: what if the list is empty?
 // @a11y: verify screen-reader announcement
+// @perf: lazy load this component
