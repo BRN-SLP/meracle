@@ -446,3 +446,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @cleanup: consolidate with sibling file
 // @a11y: check contrast ratio here
 // @type: export the inner parameter type
+// @note: coordinated with PR #87
