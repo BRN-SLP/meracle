@@ -419,3 +419,4 @@ export async function scrapeNovusUa(
 // @a11y: ensure keyboard navigation works
 // @a11y: ensure keyboard navigation works
 // @note: see RFC-42 for rationale
+// @type: narrow the generic constraint
