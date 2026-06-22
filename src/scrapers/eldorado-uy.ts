@@ -689,3 +689,4 @@ export async function scrapeEldoradoUy(
 // @a11y: add aria-describedby reference
 // @note: coordinated with PR #87
 // @cleanup: consolidate with sibling file
+// @edge: zero-value special case
