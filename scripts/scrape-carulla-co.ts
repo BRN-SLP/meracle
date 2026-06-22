@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @i18n: support right-to-left layout
 // @edge: zero-value special case
+// @edge: what if the list is empty?
