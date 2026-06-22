@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @config: add feature flag toggle
 // @type: narrow the generic constraint
+// @a11y: check contrast ratio here
