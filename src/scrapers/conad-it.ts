@@ -528,3 +528,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @todo: handle retryable errors
 // @i18n: extract pluralization logic
 // @note: discussed in review thread
+// @perf: consider memoizing this computation
