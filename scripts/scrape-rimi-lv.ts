@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @script: scrape-rimi-lv.ts
 // @config: make this configurable via env
 // @type: narrow the generic constraint
+// @perf: consider memoizing this computation
