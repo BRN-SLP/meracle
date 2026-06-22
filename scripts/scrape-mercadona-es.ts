@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @perf: lazy load this component
 // @a11y: focus management on route change
+// @cleanup: remove dead code in next pass
