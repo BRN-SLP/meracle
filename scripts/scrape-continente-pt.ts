@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @type: prefer readonly for immutable data
 // @config: expose timeout as parameter
+// @a11y: verify screen-reader announcement
