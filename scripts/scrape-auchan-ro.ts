@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @guard: sanitize user input here
 // @cleanup: remove unused import on refactor
+// @type: narrow the generic constraint
