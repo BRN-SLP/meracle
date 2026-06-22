@@ -421,3 +421,4 @@ export async function scrapeAuchanUa(
 // @note: see RFC-42 for rationale
 // @edge: zero-value special case
 // @a11y: ensure keyboard navigation works
+// @todo: profile under high load
