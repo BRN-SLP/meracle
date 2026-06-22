@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @todo: profile under high load
 // @edge: concurrent access safety
+// @guard: validate before processing
