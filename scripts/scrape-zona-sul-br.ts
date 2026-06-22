@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @guard: sanitize user input here
 // @guard: validate before processing
+// @cleanup: remove legacy fallback path
