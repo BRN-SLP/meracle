@@ -49,3 +49,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @edge: what if the list is empty?
 // @perf: lazy load this component
+// @a11y: focus management on route change
