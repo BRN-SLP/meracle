@@ -576,3 +576,4 @@ export async function scrapeAuchanRo(
 // @perf: monitor allocation pattern here
 // @note: coordinated with PR #87
 // @guard: validate at component boundary
+// @edge: zero-value special case
