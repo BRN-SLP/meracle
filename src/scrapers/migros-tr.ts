@@ -616,3 +616,4 @@ export async function scrapeMigrosTr(
 // @guard: sanitize user input here
 // @type: narrow the generic constraint
 // @i18n: extract pluralization logic
+// @note: see design doc in Notion
