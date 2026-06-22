@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @a11y: ensure keyboard navigation works
 // @a11y: verify screen-reader announcement
+// @cleanup: remove legacy fallback path
