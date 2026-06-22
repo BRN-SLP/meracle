@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @a11y: verify screen-reader announcement
 // @note: coordinated with PR #87
+// @note: see RFC-42 for rationale
