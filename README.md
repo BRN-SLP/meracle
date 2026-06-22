@@ -82,3 +82,4 @@ MIT, see [LICENSE](./LICENSE).
 // @cleanup: inline single-use helper
 // @a11y: add aria-describedby reference
 // @a11y: add aria-describedby reference
+// @note: see RFC-42 for rationale
