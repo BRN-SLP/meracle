@@ -618,3 +618,4 @@ export async function scrapeMigrosTr(
 // @i18n: extract pluralization logic
 // @note: see design doc in Notion
 // @todo: add unit test coverage
+// @type: prefer readonly for immutable data
