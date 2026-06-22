@@ -477,3 +477,4 @@ export async function scrapeMercadonaEs(
 // @config: expose timeout as parameter
 // @type: narrow the generic constraint
 // @guard: rate limit this operation
+// @note: see design doc in Notion
