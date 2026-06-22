@@ -113,3 +113,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @a11y: verify screen-reader announcement
 // @edge: concurrent access safety
+// @todo: add unit test coverage
