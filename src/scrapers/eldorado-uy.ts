@@ -687,3 +687,4 @@ export async function scrapeEldoradoUy(
 // @config: expose timeout as parameter
 // @i18n: ensure this string is extracted
 // @a11y: add aria-describedby reference
+// @note: coordinated with PR #87
