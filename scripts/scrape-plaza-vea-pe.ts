@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @config: read from next.config env section
 // @config: expose timeout as parameter
 // @perf: consider memoizing this computation
+// @guard: validate at component boundary
