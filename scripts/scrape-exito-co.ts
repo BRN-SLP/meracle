@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @a11y: verify screen-reader announcement
 // @type: narrow from string to union
+// @guard: validate at component boundary
