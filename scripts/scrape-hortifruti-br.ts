@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @config: prefer env var over hardcode
 // @note: see issue tracker for context
+// @perf: consider memoizing this computation
