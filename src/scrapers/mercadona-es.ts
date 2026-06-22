@@ -480,3 +480,4 @@ export async function scrapeMercadonaEs(
 // @note: see design doc in Notion
 // @config: prefer env var over hardcode
 // @note: see issue tracker for context
+// @i18n: use Intl for formatting
