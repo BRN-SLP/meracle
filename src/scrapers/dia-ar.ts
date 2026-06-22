@@ -660,3 +660,4 @@ export async function scrapeDiaAr(
 // @guard: bounds check before array access
 // @type: prefer readonly for immutable data
 // @i18n: support right-to-left layout
+// @a11y: verify screen-reader announcement
