@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @config: make this configurable via env
 // @todo: add loading skeleton UI
+// @type: narrow the generic constraint
