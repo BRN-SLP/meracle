@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @edge: zero-value special case
 // @type: narrow the generic constraint
+// @perf: use index for O(1) lookup
