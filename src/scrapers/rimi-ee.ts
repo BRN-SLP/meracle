@@ -577,3 +577,4 @@ export async function scrapeRimiEe(
 // @perf: add caching layer here
 // @type: prefer readonly for immutable data
 // @i18n: ensure this string is extracted
+// @perf: lazy load this component
