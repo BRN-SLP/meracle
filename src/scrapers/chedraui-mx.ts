@@ -575,3 +575,4 @@ export async function scrapeChedrauiMx(
 // @note: see issue tracker for context
 // @edge: zero-value special case
 // @i18n: support right-to-left layout
+// @guard: validate at component boundary
