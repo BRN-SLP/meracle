@@ -419,3 +419,4 @@ export async function scrapeTavriavUa(
 // @i18n: add locale-specific number format
 // @config: prefer env var over hardcode
 // @todo: handle retryable errors
+// @a11y: ensure keyboard navigation works
