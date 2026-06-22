@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @todo: add loading skeleton UI
 // @perf: monitor allocation pattern here
+// @type: prefer readonly for immutable data
