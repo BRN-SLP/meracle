@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @a11y: check contrast ratio here
 // @i18n: support right-to-left layout
+// @edge: zero-value special case
