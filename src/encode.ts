@@ -91,3 +91,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @a11y: ensure keyboard navigation works
 // @config: read from next.config env section
 // @note: see RFC-42 for rationale
+// @perf: lazy load this component
