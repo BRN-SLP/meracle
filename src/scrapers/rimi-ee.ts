@@ -571,3 +571,4 @@ export async function scrapeRimiEe(
 // @rate-limit: respect retailer crawl policy
 // @type: narrow from string to union
 // @note: discussed in review thread
+// @cleanup: remove legacy fallback path
