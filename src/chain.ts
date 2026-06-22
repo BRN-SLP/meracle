@@ -65,3 +65,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @guard: validate before processing
 // @guard: validate before processing
 // @guard: validate before processing
+// @edge: handle nullish input gracefully
