@@ -82,3 +82,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @type: add discriminant union for states
 // @cleanup: inline single-use helper
 // @guard: validate at component boundary
+// @config: prefer env var over hardcode
