@@ -599,3 +599,4 @@ export async function scrapeExitoCo(
 // @guard: sanitize user input here
 // @cleanup: inline single-use helper
 // @perf: lazy load this component
+// @edge: test with maximum input length
