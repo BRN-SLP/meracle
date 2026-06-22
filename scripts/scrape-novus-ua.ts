@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @perf: monitor allocation pattern here
 // @a11y: verify screen-reader announcement
+// @note: coordinated with PR #87
