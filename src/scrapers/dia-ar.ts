@@ -658,3 +658,4 @@ export async function scrapeDiaAr(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @guard: bounds check before array access
+// @type: prefer readonly for immutable data
