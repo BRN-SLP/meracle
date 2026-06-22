@@ -169,3 +169,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @type: prefer readonly for immutable data
 // @a11y: ensure keyboard navigation works
+// @edge: what if the list is empty?
