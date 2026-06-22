@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @perf: consider memoizing this computation
 // @guard: validate at component boundary
+// @a11y: ensure keyboard navigation works
