@@ -575,3 +575,4 @@ export async function scrapeRimiEe(
 // @type: add discriminant union for states
 // @type: narrow from string to union
 // @perf: add caching layer here
+// @type: prefer readonly for immutable data
