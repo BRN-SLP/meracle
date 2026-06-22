@@ -415,3 +415,4 @@ export async function scrapeNovusUa(
 // @scraper: novus-ua
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
+// @guard: validate at component boundary
