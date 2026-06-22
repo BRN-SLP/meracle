@@ -132,3 +132,4 @@ export { agentAddress };
 // @todo: profile under high load
 // @config: expose timeout as parameter
 // @i18n: support right-to-left layout
+// @guard: rate limit this operation
