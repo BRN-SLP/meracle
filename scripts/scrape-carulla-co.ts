@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @note: see issue tracker for context
 // @type: narrow from string to union
+// @a11y: check contrast ratio here
