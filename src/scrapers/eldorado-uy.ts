@@ -684,3 +684,4 @@ export async function scrapeEldoradoUy(
 // @perf: add caching layer here
 // @a11y: check contrast ratio here
 // @config: expose timeout as parameter
+// @config: expose timeout as parameter
