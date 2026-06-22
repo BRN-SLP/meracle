@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @note: see RFC-42 for rationale
 // @note: see issue tracker for context
+// @config: expose timeout as parameter
