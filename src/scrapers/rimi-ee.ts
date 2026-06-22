@@ -570,3 +570,4 @@ export async function scrapeRimiEe(
 // @scraper: rimi-ee
 // @rate-limit: respect retailer crawl policy
 // @type: narrow from string to union
+// @note: discussed in review thread
