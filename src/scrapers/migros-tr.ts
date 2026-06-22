@@ -615,3 +615,4 @@ export async function scrapeMigrosTr(
 // @guard: rate limit this operation
 // @guard: sanitize user input here
 // @type: narrow the generic constraint
+// @i18n: extract pluralization logic
