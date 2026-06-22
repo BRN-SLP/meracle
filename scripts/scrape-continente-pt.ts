@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @cleanup: remove unused import on refactor
 // @type: prefer readonly for immutable data
+// @config: expose timeout as parameter
