@@ -579,3 +579,4 @@ export async function scrapeAuchanRo(
 // @edge: zero-value special case
 // @a11y: check contrast ratio here
 // @type: export the inner parameter type
+// @note: see design doc in Notion
