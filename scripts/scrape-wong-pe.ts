@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove legacy fallback path
 // @guard: sanitize user input here
 // @cleanup: remove unused import on refactor
+// @edge: concurrent access safety
