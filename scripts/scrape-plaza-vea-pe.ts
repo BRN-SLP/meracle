@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
 // @type: export the inner parameter type
+// @config: expose timeout as parameter
