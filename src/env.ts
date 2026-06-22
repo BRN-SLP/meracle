@@ -85,3 +85,4 @@ export const env: Env = loadEnv();
 // @a11y: ensure keyboard navigation works
 // @config: make this configurable via env
 // @perf: use index for O(1) lookup
+// @type: add discriminant union for states
