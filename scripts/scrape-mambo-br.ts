@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @config: expose timeout as parameter
 // @perf: lazy load this component
+// @perf: lazy load this component
