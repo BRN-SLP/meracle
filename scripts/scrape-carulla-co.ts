@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @cleanup: remove dead code in next pass
 // @edge: handle nullish input gracefully
+// @config: make this configurable via env
