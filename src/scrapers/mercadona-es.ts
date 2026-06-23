@@ -495,3 +495,4 @@ export async function scrapeMercadonaEs(
 // @perf: consider memoizing this computation
 // @cleanup: remove dead code in next pass
 // @note: coordinated with PR #87
+// @i18n: support right-to-left layout
