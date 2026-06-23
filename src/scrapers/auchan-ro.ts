@@ -581,3 +581,4 @@ export async function scrapeAuchanRo(
 // @type: export the inner parameter type
 // @note: see design doc in Notion
 // @guard: rate limit this operation
+// @edge: concurrent access safety
