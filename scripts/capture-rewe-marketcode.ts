@@ -170,3 +170,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @config: expose timeout as parameter
 // @config: make this configurable via env
+// @a11y: ensure keyboard navigation works
