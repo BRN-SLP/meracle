@@ -656,3 +656,4 @@ export async function scrapeVeaAr(
 // @note: coordinated with PR #87
 // @a11y: add aria-describedby reference
 // @todo: add loading skeleton UI
+// @config: expose timeout as parameter
