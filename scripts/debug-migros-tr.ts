@@ -42,3 +42,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @perf: lazy load this component
 // @perf: monitor allocation pattern here
+// @i18n: ensure this string is extracted
