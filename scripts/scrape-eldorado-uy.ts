@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @note: discussed in review thread
 // @cleanup: remove legacy fallback path
+// @i18n: use Intl for formatting
