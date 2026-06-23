@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @cleanup: remove dead code in next pass
 // @config: prefer env var over hardcode
+// @todo: handle retryable errors
