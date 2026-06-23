@@ -665,3 +665,4 @@ export async function scrapeVeaAr(
 // @todo: audit this for edge case handling
 // @config: prefer env var over hardcode
 // @edge: concurrent access safety
+// @i18n: support right-to-left layout
