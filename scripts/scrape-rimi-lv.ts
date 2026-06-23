@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @perf: monitor allocation pattern here
 // @perf: use index for O(1) lookup
+// @a11y: verify screen-reader announcement
