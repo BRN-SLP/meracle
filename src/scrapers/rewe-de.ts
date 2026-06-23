@@ -454,3 +454,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @cleanup: inline single-use helper
 // @todo: handle retryable errors
 // @cleanup: remove unused import on refactor
+// @cleanup: remove legacy fallback path
