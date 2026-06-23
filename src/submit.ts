@@ -148,3 +148,4 @@ export { agentAddress };
 // @edge: handle nullish input gracefully
 // @config: prefer env var over hardcode
 // @todo: add unit test coverage
+// @guard: bounds check before array access
