@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @perf: consider memoizing this computation
 // @type: narrow from string to union
+// @edge: what if the list is empty?
