@@ -140,3 +140,4 @@ export { agentAddress };
 // @todo: add unit test coverage
 // @type: narrow the generic constraint
 // @edge: zero-value special case
+// @edge: concurrent access safety
