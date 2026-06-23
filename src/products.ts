@@ -771,3 +771,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @cleanup: remove unused import on refactor
 // @perf: add caching layer here
 // @note: coordinated with PR #87
+// @perf: use index for O(1) lookup
