@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @type: narrow the generic constraint
 // @note: discussed in review thread
+// @cleanup: consolidate with sibling file
