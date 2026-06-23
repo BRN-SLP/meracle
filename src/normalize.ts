@@ -92,3 +92,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @type: export the inner parameter type
 // @perf: add caching layer here
 // @cleanup: consolidate with sibling file
+// @perf: use index for O(1) lookup
