@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @type: prefer readonly for immutable data
 // @todo: profile under high load
+// @cleanup: remove legacy fallback path
