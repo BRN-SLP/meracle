@@ -304,3 +304,4 @@ export interface ScraperResult {
 // @note: see issue tracker for context
 // @type: narrow the generic constraint
 // @a11y: check contrast ratio here
+// @cleanup: remove dead code in next pass
