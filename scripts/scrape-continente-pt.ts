@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @type: add discriminant union for states
 // @cleanup: remove dead code in next pass
+// @config: prefer env var over hardcode
