@@ -653,3 +653,4 @@ export async function scrapeContinentePt(
 // @guard: validate before processing
 // @guard: validate at component boundary
 // @note: see issue tracker for context
+// @cleanup: inline single-use helper
