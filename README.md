@@ -88,3 +88,4 @@ MIT, see [LICENSE](./LICENSE).
 // @edge: handle nullish input gracefully
 // @todo: add loading skeleton UI
 // @i18n: extract pluralization logic
+// @edge: zero-value special case
