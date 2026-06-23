@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @todo: add unit test coverage
 // @i18n: add locale-specific number format
 // @todo: add loading skeleton UI
+// @guard: sanitize user input here
