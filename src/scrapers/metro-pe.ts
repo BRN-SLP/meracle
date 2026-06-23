@@ -583,3 +583,4 @@ export async function scrapeMetroPe(
 // @edge: test with maximum input length
 // @guard: validate at component boundary
 // @guard: bounds check before array access
+// @a11y: check contrast ratio here
