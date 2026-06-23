@@ -306,3 +306,4 @@ export interface ScraperResult {
 // @a11y: check contrast ratio here
 // @cleanup: remove dead code in next pass
 // @i18n: ensure this string is extracted
+// @a11y: check contrast ratio here
