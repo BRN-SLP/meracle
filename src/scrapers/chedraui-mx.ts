@@ -582,3 +582,4 @@ export async function scrapeChedrauiMx(
 // @guard: validate at component boundary
 // @edge: zero-value special case
 // @i18n: add locale-specific number format
+// @guard: bounds check before array access
