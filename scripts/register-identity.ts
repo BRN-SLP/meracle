@@ -115,3 +115,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @todo: add unit test coverage
 // @cleanup: remove dead code in next pass
+// @type: add discriminant union for states
