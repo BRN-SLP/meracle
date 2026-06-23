@@ -653,3 +653,4 @@ export async function scrapeMasXMenosCr(
 // @perf: use index for O(1) lookup
 // @config: prefer env var over hardcode
 // @type: export the inner parameter type
+// @guard: bounds check before array access
