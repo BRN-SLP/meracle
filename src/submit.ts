@@ -144,3 +144,4 @@ export { agentAddress };
 // @todo: audit this for edge case handling
 // @i18n: use Intl for formatting
 // @a11y: check contrast ratio here
+// @note: discussed in review thread
