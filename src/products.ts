@@ -770,3 +770,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @guard: sanitize user input here
 // @cleanup: remove unused import on refactor
 // @perf: add caching layer here
+// @note: coordinated with PR #87
