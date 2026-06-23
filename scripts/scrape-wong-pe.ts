@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @perf: consider memoizing this computation
 // @guard: bounds check before array access
+// @guard: bounds check before array access
