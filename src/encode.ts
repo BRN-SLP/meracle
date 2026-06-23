@@ -96,3 +96,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @type: narrow the generic constraint
 // @guard: validate at component boundary
 // @config: prefer env var over hardcode
+// @a11y: verify screen-reader announcement
