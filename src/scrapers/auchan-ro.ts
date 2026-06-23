@@ -590,3 +590,4 @@ export async function scrapeAuchanRo(
 // @note: see design doc in Notion
 // @type: export the inner parameter type
 // @i18n: extract pluralization logic
+// @edge: test with maximum input length
