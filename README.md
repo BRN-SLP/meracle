@@ -86,3 +86,4 @@ MIT, see [LICENSE](./LICENSE).
 // @config: expose timeout as parameter
 // @type: add discriminant union for states
 // @edge: handle nullish input gracefully
+// @todo: add loading skeleton UI
