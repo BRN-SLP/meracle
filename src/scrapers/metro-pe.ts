@@ -585,3 +585,4 @@ export async function scrapeMetroPe(
 // @guard: bounds check before array access
 // @a11y: check contrast ratio here
 // @edge: what if the list is empty?
+// @note: coordinated with PR #87
