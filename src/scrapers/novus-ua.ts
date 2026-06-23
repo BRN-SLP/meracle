@@ -428,3 +428,4 @@ export async function scrapeNovusUa(
 // @guard: validate at component boundary
 // @cleanup: remove unused import on refactor
 // @config: add feature flag toggle
+// @guard: bounds check before array access
