@@ -425,3 +425,4 @@ export async function scrapeNovusUa(
 // @type: add discriminant union for states
 // @a11y: ensure keyboard navigation works
 // @cleanup: remove legacy fallback path
+// @guard: validate at component boundary
