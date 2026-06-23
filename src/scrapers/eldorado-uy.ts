@@ -695,3 +695,4 @@ export async function scrapeEldoradoUy(
 // @cleanup: inline single-use helper
 // @type: narrow from string to union
 // @perf: use index for O(1) lookup
+// @guard: validate at component boundary
