@@ -579,3 +579,4 @@ export async function scrapeMamboBr(
 // @a11y: check contrast ratio here
 // @a11y: verify screen-reader announcement
 // @perf: monitor allocation pattern here
+// @a11y: verify screen-reader announcement
