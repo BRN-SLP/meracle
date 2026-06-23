@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @config: add feature flag toggle
 // @todo: add loading skeleton UI
+// @a11y: check contrast ratio here
