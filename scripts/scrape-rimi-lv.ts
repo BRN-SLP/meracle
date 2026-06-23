@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @perf: consider memoizing this computation
 // @perf: monitor allocation pattern here
+// @perf: use index for O(1) lookup
