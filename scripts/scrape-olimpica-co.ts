@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @todo: add loading skeleton UI
 // @edge: handle nullish input gracefully
+// @note: see RFC-42 for rationale
