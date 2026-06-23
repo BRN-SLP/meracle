@@ -604,3 +604,4 @@ export async function scrapeHortifrutiBr(
 // @note: discussed in review thread
 // @todo: add loading skeleton UI
 // @guard: validate before processing
+// @perf: monitor allocation pattern here
