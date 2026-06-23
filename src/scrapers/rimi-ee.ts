@@ -583,3 +583,4 @@ export async function scrapeRimiEe(
 // @i18n: extract pluralization logic
 // @config: expose timeout as parameter
 // @guard: validate before processing
+// @type: narrow from string to union
