@@ -584,3 +584,4 @@ export async function scrapeRimiEe(
 // @config: expose timeout as parameter
 // @guard: validate before processing
 // @type: narrow from string to union
+// @type: prefer readonly for immutable data
