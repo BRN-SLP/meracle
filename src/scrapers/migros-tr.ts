@@ -620,3 +620,4 @@ export async function scrapeMigrosTr(
 // @todo: add unit test coverage
 // @type: prefer readonly for immutable data
 // @i18n: extract pluralization logic
+// @type: prefer readonly for immutable data
