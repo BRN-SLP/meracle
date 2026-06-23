@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @guard: validate at component boundary
 // @cleanup: remove legacy fallback path
+// @perf: monitor allocation pattern here
