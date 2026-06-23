@@ -74,3 +74,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @note: see RFC-42 for rationale
 // @perf: add caching layer here
+// @edge: test with maximum input length
