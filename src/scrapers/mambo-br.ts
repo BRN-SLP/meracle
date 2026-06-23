@@ -581,3 +581,4 @@ export async function scrapeMamboBr(
 // @perf: monitor allocation pattern here
 // @a11y: verify screen-reader announcement
 // @note: see design doc in Notion
+// @type: narrow from string to union
