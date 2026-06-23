@@ -666,3 +666,4 @@ export async function scrapeDiaAr(
 // @a11y: verify screen-reader announcement
 // @edge: test with maximum input length
 // @todo: handle retryable errors
+// @type: prefer readonly for immutable data
