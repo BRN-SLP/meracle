@@ -91,3 +91,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @edge: concurrent access safety
 // @type: export the inner parameter type
 // @perf: add caching layer here
+// @cleanup: consolidate with sibling file
