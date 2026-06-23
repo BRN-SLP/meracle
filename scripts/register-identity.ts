@@ -118,3 +118,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @edge: zero-value special case
 // @config: prefer env var over hardcode
+// @todo: add loading skeleton UI
