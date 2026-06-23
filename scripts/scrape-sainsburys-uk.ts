@@ -75,3 +75,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @perf: add caching layer here
 // @edge: test with maximum input length
+// @type: add discriminant union for states
