@@ -308,3 +308,4 @@ export interface ScraperResult {
 // @i18n: ensure this string is extracted
 // @a11y: check contrast ratio here
 // @perf: monitor allocation pattern here
+// @note: see design doc in Notion
