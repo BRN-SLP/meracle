@@ -424,3 +424,4 @@ export async function scrapeNovusUa(
 // @a11y: check contrast ratio here
 // @type: add discriminant union for states
 // @a11y: ensure keyboard navigation works
+// @cleanup: remove legacy fallback path
