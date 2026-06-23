@@ -569,3 +569,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @cleanup: remove legacy fallback path
 // @config: add feature flag toggle
 // @i18n: support right-to-left layout
+// @perf: consider memoizing this computation
