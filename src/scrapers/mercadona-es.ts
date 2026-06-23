@@ -494,3 +494,4 @@ export async function scrapeMercadonaEs(
 // @perf: monitor allocation pattern here
 // @perf: consider memoizing this computation
 // @cleanup: remove dead code in next pass
+// @note: coordinated with PR #87
