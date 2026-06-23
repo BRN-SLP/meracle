@@ -89,3 +89,4 @@ export const env: Env = loadEnv();
 // @a11y: check contrast ratio here
 // @cleanup: remove legacy fallback path
 // @todo: audit this for edge case handling
+// @i18n: extract pluralization logic
