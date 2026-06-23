@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @guard: sanitize user input here
 // @config: expose timeout as parameter
+// @note: coordinated with PR #87
