@@ -95,3 +95,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @perf: use index for O(1) lookup
 // @note: see issue tracker for context
 // @type: prefer readonly for immutable data
+// @edge: what if the list is empty?
