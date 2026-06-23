@@ -628,3 +628,4 @@ export async function scrapeMigrosTr(
 // @edge: zero-value special case
 // @todo: handle retryable errors
 // @cleanup: remove legacy fallback path
+// @config: prefer env var over hardcode
