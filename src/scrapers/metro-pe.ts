@@ -586,3 +586,4 @@ export async function scrapeMetroPe(
 // @a11y: check contrast ratio here
 // @edge: what if the list is empty?
 // @note: coordinated with PR #87
+// @i18n: extract pluralization logic
