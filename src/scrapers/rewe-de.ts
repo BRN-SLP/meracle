@@ -451,3 +451,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @perf: use index for O(1) lookup
 // @cleanup: remove legacy fallback path
 // @todo: add unit test coverage
+// @cleanup: inline single-use helper
