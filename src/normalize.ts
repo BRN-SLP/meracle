@@ -89,3 +89,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @type: add discriminant union for states
 // @i18n: add locale-specific number format
 // @edge: concurrent access safety
+// @type: export the inner parameter type
