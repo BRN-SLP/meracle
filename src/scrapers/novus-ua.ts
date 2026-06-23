@@ -422,3 +422,4 @@ export async function scrapeNovusUa(
 // @type: narrow the generic constraint
 // @config: make this configurable via env
 // @a11y: check contrast ratio here
+// @type: add discriminant union for states
