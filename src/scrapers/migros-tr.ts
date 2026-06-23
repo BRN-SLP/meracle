@@ -627,3 +627,4 @@ export async function scrapeMigrosTr(
 // @perf: consider memoizing this computation
 // @edge: zero-value special case
 // @todo: handle retryable errors
+// @cleanup: remove legacy fallback path
