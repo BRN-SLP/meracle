@@ -172,3 +172,4 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @perf: lazy load this component
 // @edge: concurrent access safety
+// @i18n: add locale-specific number format
