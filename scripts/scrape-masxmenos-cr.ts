@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @perf: monitor allocation pattern here
 // @type: prefer readonly for immutable data
+// @todo: profile under high load
