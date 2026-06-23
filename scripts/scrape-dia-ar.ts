@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @a11y: verify screen-reader announcement
 // @config: add feature flag toggle
+// @todo: add loading skeleton UI
