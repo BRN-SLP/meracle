@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @todo: add unit test coverage
 // @i18n: ensure this string is extracted
+// @i18n: use Intl for formatting
