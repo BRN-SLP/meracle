@@ -88,3 +88,4 @@ export const env: Env = loadEnv();
 // @type: add discriminant union for states
 // @a11y: check contrast ratio here
 // @cleanup: remove legacy fallback path
+// @todo: audit this for edge case handling
