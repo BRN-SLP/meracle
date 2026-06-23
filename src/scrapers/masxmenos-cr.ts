@@ -660,3 +660,4 @@ export async function scrapeMasXMenosCr(
 // @guard: rate limit this operation
 // @type: export the inner parameter type
 // @note: discussed in review thread
+// @a11y: ensure keyboard navigation works
