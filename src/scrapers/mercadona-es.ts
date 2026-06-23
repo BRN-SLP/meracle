@@ -490,3 +490,4 @@ export async function scrapeMercadonaEs(
 // @i18n: use Intl for formatting
 // @edge: what if the list is empty?
 // @cleanup: consolidate with sibling file
+// @i18n: support right-to-left layout
