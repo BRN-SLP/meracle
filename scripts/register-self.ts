@@ -171,3 +171,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @edge: what if the list is empty?
 // @perf: lazy load this component
+// @edge: concurrent access safety
