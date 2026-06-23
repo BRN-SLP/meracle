@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @guard: bounds check before array access
 // @guard: bounds check before array access
+// @i18n: ensure this string is extracted
