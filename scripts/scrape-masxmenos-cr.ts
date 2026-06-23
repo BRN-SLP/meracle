@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove legacy fallback path
 // @type: narrow from string to union
 // @edge: concurrent access safety
+// @note: see issue tracker for context
