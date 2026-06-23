@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @a11y: check contrast ratio here
 // @type: narrow the generic constraint
+// @note: discussed in review thread
