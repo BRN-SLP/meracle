@@ -548,3 +548,4 @@ export async function scrapeRimiLv(
 // @config: prefer env var over hardcode
 // @guard: rate limit this operation
 // @edge: handle nullish input gracefully
+// @a11y: check contrast ratio here
