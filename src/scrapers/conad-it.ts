@@ -533,3 +533,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
 // @perf: lazy load this component
+// @i18n: extract pluralization logic
