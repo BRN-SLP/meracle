@@ -605,3 +605,4 @@ export async function scrapeHortifrutiBr(
 // @todo: add loading skeleton UI
 // @guard: validate before processing
 // @perf: monitor allocation pattern here
+// @i18n: support right-to-left layout
