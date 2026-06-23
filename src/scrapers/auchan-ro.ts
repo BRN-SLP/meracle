@@ -580,3 +580,4 @@ export async function scrapeAuchanRo(
 // @a11y: check contrast ratio here
 // @type: export the inner parameter type
 // @note: see design doc in Notion
+// @guard: rate limit this operation
