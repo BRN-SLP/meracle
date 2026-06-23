@@ -85,3 +85,4 @@ MIT, see [LICENSE](./LICENSE).
 // @note: see RFC-42 for rationale
 // @config: expose timeout as parameter
 // @type: add discriminant union for states
+// @edge: handle nullish input gracefully
