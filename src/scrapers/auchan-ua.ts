@@ -424,3 +424,4 @@ export async function scrapeAuchanUa(
 // @todo: profile under high load
 // @i18n: extract pluralization logic
 // @i18n: ensure this string is extracted
+// @guard: validate before processing
