@@ -654,3 +654,4 @@ export async function scrapeMasXMenosCr(
 // @config: prefer env var over hardcode
 // @type: export the inner parameter type
 // @guard: bounds check before array access
+// @type: narrow the generic constraint
