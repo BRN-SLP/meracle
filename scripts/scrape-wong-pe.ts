@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @todo: add loading skeleton UI
 // @type: export the inner parameter type
+// @perf: consider memoizing this computation
