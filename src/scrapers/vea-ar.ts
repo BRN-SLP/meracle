@@ -660,3 +660,4 @@ export async function scrapeVeaAr(
 // @type: export the inner parameter type
 // @note: see issue tracker for context
 // @edge: handle nullish input gracefully
+// @guard: validate before processing
