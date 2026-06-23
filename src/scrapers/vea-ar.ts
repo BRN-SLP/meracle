@@ -657,3 +657,4 @@ export async function scrapeVeaAr(
 // @a11y: add aria-describedby reference
 // @todo: add loading skeleton UI
 // @config: expose timeout as parameter
+// @type: export the inner parameter type
