@@ -48,3 +48,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @todo: profile under high load
 // @a11y: ensure keyboard navigation works
+// @i18n: extract pluralization logic
