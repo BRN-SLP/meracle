@@ -605,3 +605,4 @@ export async function scrapeExitoCo(
 // @perf: add caching layer here
 // @perf: lazy load this component
 // @todo: audit this for edge case handling
+// @perf: use index for O(1) lookup
