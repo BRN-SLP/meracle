@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @i18n: use Intl for formatting
 // @perf: monitor allocation pattern here
+// @type: prefer readonly for immutable data
