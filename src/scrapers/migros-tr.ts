@@ -622,3 +622,4 @@ export async function scrapeMigrosTr(
 // @i18n: extract pluralization logic
 // @type: prefer readonly for immutable data
 // @perf: add caching layer here
+// @perf: use index for O(1) lookup
