@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @edge: concurrent access safety
 // @type: add discriminant union for states
+// @note: discussed in review thread
