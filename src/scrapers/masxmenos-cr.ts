@@ -661,3 +661,4 @@ export async function scrapeMasXMenosCr(
 // @type: export the inner parameter type
 // @note: discussed in review thread
 // @a11y: ensure keyboard navigation works
+// @i18n: ensure this string is extracted
