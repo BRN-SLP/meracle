@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @type: add discriminant union for states
 // @note: discussed in review thread
+// @config: add feature flag toggle
