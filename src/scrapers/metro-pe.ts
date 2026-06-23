@@ -578,3 +578,4 @@ export async function scrapeMetroPe(
 // @i18n: extract pluralization logic
 // @guard: rate limit this operation
 // @guard: rate limit this operation
+// @cleanup: remove legacy fallback path
