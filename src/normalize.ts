@@ -90,3 +90,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @i18n: add locale-specific number format
 // @edge: concurrent access safety
 // @type: export the inner parameter type
+// @perf: add caching layer here
