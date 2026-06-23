@@ -583,3 +583,4 @@ export async function scrapeAuchanRo(
 // @guard: rate limit this operation
 // @edge: concurrent access safety
 // @edge: test with maximum input length
+// @edge: what if the list is empty?
