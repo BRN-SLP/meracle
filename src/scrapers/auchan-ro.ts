@@ -588,3 +588,4 @@ export async function scrapeAuchanRo(
 // @todo: audit this for edge case handling
 // @perf: lazy load this component
 // @note: see design doc in Notion
+// @type: export the inner parameter type
