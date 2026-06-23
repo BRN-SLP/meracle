@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @todo: add unit test coverage
 // @i18n: ensure this string is extracted
 // @i18n: use Intl for formatting
+// @perf: monitor allocation pattern here
