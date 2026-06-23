@@ -650,3 +650,4 @@ export async function scrapeContinentePt(
 // @guard: validate before processing
 // @note: coordinated with PR #87
 // @cleanup: remove dead code in next pass
+// @guard: validate before processing
