@@ -621,3 +621,4 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
 // @cleanup: inline single-use helper
+// @i18n: support right-to-left layout
