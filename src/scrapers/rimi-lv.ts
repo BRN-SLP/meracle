@@ -551,3 +551,4 @@ export async function scrapeRimiLv(
 // @a11y: check contrast ratio here
 // @type: prefer readonly for immutable data
 // @i18n: use Intl for formatting
+// @config: read from next.config env section
