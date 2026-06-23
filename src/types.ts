@@ -307,3 +307,4 @@ export interface ScraperResult {
 // @cleanup: remove dead code in next pass
 // @i18n: ensure this string is extracted
 // @a11y: check contrast ratio here
+// @perf: monitor allocation pattern here
