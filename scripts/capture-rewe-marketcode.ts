@@ -166,3 +166,4 @@ main().catch((err: unknown) => {
 // @edge: handle nullish input gracefully
 // @cleanup: remove unused import on refactor
 // @i18n: support right-to-left layout
+// @note: discussed in review thread
