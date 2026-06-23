@@ -426,3 +426,4 @@ export async function scrapeAuchanUa(
 // @i18n: ensure this string is extracted
 // @guard: validate before processing
 // @i18n: use Intl for formatting
+// @note: discussed in review thread
