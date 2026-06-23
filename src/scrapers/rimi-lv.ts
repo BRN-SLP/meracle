@@ -550,3 +550,4 @@ export async function scrapeRimiLv(
 // @edge: handle nullish input gracefully
 // @a11y: check contrast ratio here
 // @type: prefer readonly for immutable data
+// @i18n: use Intl for formatting
