@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @cleanup: inline single-use helper
 // @guard: validate at component boundary
+// @cleanup: remove legacy fallback path
