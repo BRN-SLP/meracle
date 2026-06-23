@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @cleanup: remove legacy fallback path
 // @perf: monitor allocation pattern here
+// @perf: add caching layer here
