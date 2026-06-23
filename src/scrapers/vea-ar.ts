@@ -663,3 +663,4 @@ export async function scrapeVeaAr(
 // @guard: validate before processing
 // @note: see issue tracker for context
 // @todo: audit this for edge case handling
+// @config: prefer env var over hardcode
