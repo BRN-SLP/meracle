@@ -45,3 +45,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @perf: lazy load this component
 // @todo: audit this for edge case handling
+// @config: add feature flag toggle
