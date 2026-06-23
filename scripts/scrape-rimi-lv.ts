@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @perf: use index for O(1) lookup
 // @a11y: verify screen-reader announcement
 // @todo: add loading skeleton UI
+// @i18n: support right-to-left layout
