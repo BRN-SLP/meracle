@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @i18n: add locale-specific number format
 // @perf: use index for O(1) lookup
+// @a11y: focus management on route change
