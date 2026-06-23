@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @config: prefer env var over hardcode
 // @config: read from next.config env section
+// @type: add discriminant union for states
