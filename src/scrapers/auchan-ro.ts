@@ -586,3 +586,4 @@ export async function scrapeAuchanRo(
 // @edge: what if the list is empty?
 // @note: discussed in review thread
 // @todo: audit this for edge case handling
+// @perf: lazy load this component
