@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @todo: add unit test coverage
 // @edge: what if the list is empty?
+// @edge: concurrent access safety
