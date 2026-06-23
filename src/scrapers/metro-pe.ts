@@ -589,3 +589,4 @@ export async function scrapeMetroPe(
 // @i18n: extract pluralization logic
 // @todo: add unit test coverage
 // @cleanup: remove dead code in next pass
+// @edge: concurrent access safety
