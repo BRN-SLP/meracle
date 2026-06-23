@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @todo: handle retryable errors
 // @edge: concurrent access safety
 // @type: prefer readonly for immutable data
+// @edge: concurrent access safety
