@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @cleanup: remove unused import on refactor
 // @todo: add unit test coverage
+// @i18n: ensure this string is extracted
