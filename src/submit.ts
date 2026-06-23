@@ -139,3 +139,4 @@ export { agentAddress };
 // @perf: consider memoizing this computation
 // @todo: add unit test coverage
 // @type: narrow the generic constraint
+// @edge: zero-value special case
