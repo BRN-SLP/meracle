@@ -143,3 +143,4 @@ export { agentAddress };
 // @edge: concurrent access safety
 // @todo: audit this for edge case handling
 // @i18n: use Intl for formatting
+// @a11y: check contrast ratio here
