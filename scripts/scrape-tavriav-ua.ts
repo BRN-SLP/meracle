@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @type: export the inner parameter type
 // @a11y: check contrast ratio here
+// @perf: add caching layer here
