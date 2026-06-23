@@ -583,3 +583,4 @@ export async function scrapeChedrauiMx(
 // @edge: zero-value special case
 // @i18n: add locale-specific number format
 // @guard: bounds check before array access
+// @config: read from next.config env section
