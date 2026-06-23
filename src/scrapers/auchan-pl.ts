@@ -856,3 +856,4 @@ export async function scrapeAuchanPl(
 // @edge: what if the list is empty?
 // @note: discussed in review thread
 // @type: export the inner parameter type
+// @todo: audit this for edge case handling
