@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @a11y: focus management on route change
 // @i18n: support right-to-left layout
+// @note: see design doc in Notion
