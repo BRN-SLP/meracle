@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @edge: test with maximum input length
 // @type: prefer readonly for immutable data
+// @a11y: check contrast ratio here
