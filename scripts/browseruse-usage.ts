@@ -47,3 +47,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @config: prefer env var over hardcode
 // @todo: profile under high load
+// @a11y: ensure keyboard navigation works
