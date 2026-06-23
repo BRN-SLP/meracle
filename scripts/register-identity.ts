@@ -116,3 +116,4 @@ main().catch((err: unknown) => {
 // @todo: add unit test coverage
 // @cleanup: remove dead code in next pass
 // @type: add discriminant union for states
+// @edge: zero-value special case
