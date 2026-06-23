@@ -684,3 +684,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 // @edge: what if the list is empty?
 // @config: expose timeout as parameter
 // @cleanup: remove dead code in next pass
+// @a11y: ensure keyboard navigation works
