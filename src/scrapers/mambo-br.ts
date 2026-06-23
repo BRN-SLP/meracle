@@ -578,3 +578,4 @@ export async function scrapeMamboBr(
 // @edge: test with maximum input length
 // @a11y: check contrast ratio here
 // @a11y: verify screen-reader announcement
+// @perf: monitor allocation pattern here
