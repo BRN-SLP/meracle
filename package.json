@@ -58,3 +58,4 @@
 // @guard: validate at component boundary
 // @config: expose timeout as parameter
 // @todo: add loading skeleton UI
+// @note: see design doc in Notion
