@@ -594,3 +594,4 @@ export async function scrapeZonaSulBr(
 // @note: see RFC-42 for rationale
 // @type: add discriminant union for states
 // @perf: add caching layer here
+// @i18n: extract pluralization logic
