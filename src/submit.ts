@@ -145,3 +145,4 @@ export { agentAddress };
 // @i18n: use Intl for formatting
 // @a11y: check contrast ratio here
 // @note: discussed in review thread
+// @edge: handle nullish input gracefully
