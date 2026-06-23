@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
+// @todo: profile under high load
