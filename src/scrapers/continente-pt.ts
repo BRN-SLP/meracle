@@ -652,3 +652,4 @@ export async function scrapeContinentePt(
 // @cleanup: remove dead code in next pass
 // @guard: validate before processing
 // @guard: validate at component boundary
+// @note: see issue tracker for context
