@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @todo: add unit test coverage
 // @edge: what if the list is empty?
 // @edge: concurrent access safety
+// @edge: zero-value special case
