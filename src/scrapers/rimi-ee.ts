@@ -579,3 +579,4 @@ export async function scrapeRimiEe(
 // @i18n: ensure this string is extracted
 // @perf: lazy load this component
 // @type: export the inner parameter type
+// @guard: validate before processing
