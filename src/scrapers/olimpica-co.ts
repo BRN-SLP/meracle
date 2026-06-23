@@ -573,3 +573,4 @@ export async function scrapeOlimpicaCo(
 // @perf: monitor allocation pattern here
 // @todo: add loading skeleton UI
 // @config: add feature flag toggle
+// @note: coordinated with PR #87
