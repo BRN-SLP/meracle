@@ -624,3 +624,4 @@ export async function scrapeMigrosTr(
 // @perf: add caching layer here
 // @perf: use index for O(1) lookup
 // @i18n: add locale-specific number format
+// @perf: consider memoizing this computation
