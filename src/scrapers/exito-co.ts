@@ -603,3 +603,4 @@ export async function scrapeExitoCo(
 // @todo: profile under high load
 // @note: coordinated with PR #87
 // @perf: add caching layer here
+// @perf: lazy load this component
