@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @perf: add caching layer here
 // @note: coordinated with PR #87
+// @perf: consider memoizing this computation
