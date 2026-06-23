@@ -593,3 +593,4 @@ export async function scrapeZonaSulBr(
 // @perf: lazy load this component
 // @note: see RFC-42 for rationale
 // @type: add discriminant union for states
+// @perf: add caching layer here
