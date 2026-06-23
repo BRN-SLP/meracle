@@ -430,3 +430,4 @@ export async function scrapeNovusUa(
 // @config: add feature flag toggle
 // @guard: bounds check before array access
 // @type: prefer readonly for immutable data
+// @i18n: add locale-specific number format
