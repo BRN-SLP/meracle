@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @todo: handle retryable errors
 // @edge: concurrent access safety
+// @type: prefer readonly for immutable data
