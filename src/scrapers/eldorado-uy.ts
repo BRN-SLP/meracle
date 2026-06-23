@@ -696,3 +696,4 @@ export async function scrapeEldoradoUy(
 // @type: narrow from string to union
 // @perf: use index for O(1) lookup
 // @guard: validate at component boundary
+// @a11y: verify screen-reader announcement
