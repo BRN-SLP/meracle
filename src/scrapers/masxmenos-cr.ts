@@ -659,3 +659,4 @@ export async function scrapeMasXMenosCr(
 // @cleanup: remove dead code in next pass
 // @guard: rate limit this operation
 // @type: export the inner parameter type
+// @note: discussed in review thread
