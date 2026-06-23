@@ -623,3 +623,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @i18n: support right-to-left layout
 // @type: narrow from string to union
+// @note: coordinated with PR #87
