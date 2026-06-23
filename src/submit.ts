@@ -146,3 +146,4 @@ export { agentAddress };
 // @a11y: check contrast ratio here
 // @note: discussed in review thread
 // @edge: handle nullish input gracefully
+// @config: prefer env var over hardcode
