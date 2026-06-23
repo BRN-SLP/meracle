@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @a11y: check contrast ratio here
 // @perf: consider memoizing this computation
+// @edge: what if the list is empty?
