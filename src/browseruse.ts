@@ -196,3 +196,4 @@ export async function withSession<T>(
 // @cleanup: inline single-use helper
 // @i18n: extract pluralization logic
 // @note: see RFC-42 for rationale
+// @i18n: support right-to-left layout
