@@ -172,3 +172,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @a11y: ensure keyboard navigation works
 // @perf: add caching layer here
+// @type: add discriminant union for states
