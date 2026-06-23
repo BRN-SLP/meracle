@@ -169,3 +169,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @i18n: support right-to-left layout
 // @config: expose timeout as parameter
+// @config: make this configurable via env
