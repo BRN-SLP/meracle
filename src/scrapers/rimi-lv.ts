@@ -553,3 +553,4 @@ export async function scrapeRimiLv(
 // @i18n: use Intl for formatting
 // @config: read from next.config env section
 // @guard: validate at component boundary
+// @i18n: ensure this string is extracted
