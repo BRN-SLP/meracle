@@ -582,3 +582,4 @@ export async function scrapeWongPe(
 // @perf: consider memoizing this computation
 // @a11y: focus management on route change
 // @edge: concurrent access safety
+// @guard: sanitize user input here
