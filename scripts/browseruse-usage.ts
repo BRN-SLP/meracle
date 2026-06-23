@@ -44,3 +44,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @guard: validate before processing
 // @cleanup: inline single-use helper
+// @i18n: ensure this string is extracted
