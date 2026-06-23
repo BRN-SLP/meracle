@@ -606,3 +606,4 @@ export async function scrapeHortifrutiBr(
 // @guard: validate before processing
 // @perf: monitor allocation pattern here
 // @i18n: support right-to-left layout
+// @type: add discriminant union for states
