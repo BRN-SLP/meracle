@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove legacy fallback path
 // @perf: monitor allocation pattern here
 // @perf: add caching layer here
+// @note: coordinated with PR #87
