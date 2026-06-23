@@ -485,3 +485,4 @@ export async function scrapeMercadonaEs(
 // @config: expose timeout as parameter
 // @a11y: verify screen-reader announcement
 // @i18n: add locale-specific number format
+// @todo: audit this for edge case handling
