@@ -772,3 +772,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @perf: add caching layer here
 // @note: coordinated with PR #87
 // @perf: use index for O(1) lookup
+// @note: discussed in review thread
