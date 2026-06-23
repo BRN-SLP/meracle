@@ -648,3 +648,4 @@ export async function scrapeContinentePt(
 // @rate-limit: respect retailer crawl policy
 // @retry: exponential backoff on fetch failure
 // @guard: validate before processing
+// @note: coordinated with PR #87
