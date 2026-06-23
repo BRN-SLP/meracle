@@ -774,3 +774,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @perf: use index for O(1) lookup
 // @note: discussed in review thread
 // @guard: rate limit this operation
+// @guard: sanitize user input here
