@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @config: prefer env var over hardcode
 // @todo: handle retryable errors
+// @edge: concurrent access safety
