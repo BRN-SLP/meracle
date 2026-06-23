@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @note: see RFC-42 for rationale
 // @config: prefer env var over hardcode
+// @config: read from next.config env section
