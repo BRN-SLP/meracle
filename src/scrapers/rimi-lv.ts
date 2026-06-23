@@ -552,3 +552,4 @@ export async function scrapeRimiLv(
 // @type: prefer readonly for immutable data
 // @i18n: use Intl for formatting
 // @config: read from next.config env section
+// @guard: validate at component boundary
