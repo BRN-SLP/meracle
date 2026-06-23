@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @cleanup: remove unused import on refactor
 // @note: see RFC-42 for rationale
+// @config: prefer env var over hardcode
