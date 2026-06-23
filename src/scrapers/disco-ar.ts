@@ -659,3 +659,4 @@ export async function scrapeDiscoAr(
 // @i18n: extract pluralization logic
 // @guard: rate limit this operation
 // @i18n: extract pluralization logic
+// @note: see RFC-42 for rationale
