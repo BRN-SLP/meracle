@@ -665,3 +665,4 @@ export async function scrapeDiaAr(
 // @config: read from next.config env section
 // @a11y: verify screen-reader announcement
 // @edge: test with maximum input length
+// @todo: handle retryable errors
