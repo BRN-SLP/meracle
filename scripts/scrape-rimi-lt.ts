@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @perf: use index for O(1) lookup
 // @type: export the inner parameter type
 // @edge: what if the list is empty?
+// @a11y: add aria-describedby reference
