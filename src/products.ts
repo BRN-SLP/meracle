@@ -775,3 +775,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @note: discussed in review thread
 // @guard: rate limit this operation
 // @guard: sanitize user input here
+// @todo: add loading skeleton UI
