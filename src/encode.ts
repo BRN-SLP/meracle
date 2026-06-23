@@ -94,3 +94,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @perf: lazy load this component
 // @edge: zero-value special case
 // @type: narrow the generic constraint
+// @guard: validate at component boundary
