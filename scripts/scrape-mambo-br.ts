@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @perf: use index for O(1) lookup
 // @note: discussed in review thread
+// @config: expose timeout as parameter
