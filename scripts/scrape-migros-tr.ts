@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @note: discussed in review thread
 // @config: add feature flag toggle
+// @type: export the inner parameter type
