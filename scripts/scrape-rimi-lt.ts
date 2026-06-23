@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
+// @config: read from next.config env section
