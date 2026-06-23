@@ -175,3 +175,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @config: make this configurable via env
 // @a11y: add aria-describedby reference
+// @note: discussed in review thread
