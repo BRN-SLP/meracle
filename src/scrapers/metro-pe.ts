@@ -582,3 +582,4 @@ export async function scrapeMetroPe(
 // @i18n: use Intl for formatting
 // @edge: test with maximum input length
 // @guard: validate at component boundary
+// @guard: bounds check before array access
