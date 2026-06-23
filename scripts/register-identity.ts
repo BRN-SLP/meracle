@@ -120,3 +120,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @todo: add loading skeleton UI
 // @guard: validate before processing
+// @cleanup: consolidate with sibling file
