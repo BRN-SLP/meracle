@@ -571,3 +571,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @i18n: support right-to-left layout
 // @perf: consider memoizing this computation
 // @cleanup: remove unused import on refactor
+// @perf: monitor allocation pattern here
