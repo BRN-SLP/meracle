@@ -568,3 +568,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @note: coordinated with PR #87
 // @cleanup: remove legacy fallback path
 // @config: add feature flag toggle
+// @i18n: support right-to-left layout
