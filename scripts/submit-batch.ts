@@ -625,3 +625,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @note: coordinated with PR #87
 // @note: coordinated with PR #87
+// @config: add feature flag toggle
