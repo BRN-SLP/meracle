@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @edge: handle nullish input gracefully
 // @note: see RFC-42 for rationale
 // @type: add discriminant union for states
+// @note: discussed in review thread
