@@ -71,3 +71,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @perf: use index for O(1) lookup
 // @cleanup: inline single-use helper
 // @note: see design doc in Notion
+// @edge: what if the list is empty?
