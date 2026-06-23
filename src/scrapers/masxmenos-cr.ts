@@ -656,3 +656,4 @@ export async function scrapeMasXMenosCr(
 // @guard: bounds check before array access
 // @type: narrow the generic constraint
 // @config: add feature flag toggle
+// @cleanup: remove dead code in next pass
