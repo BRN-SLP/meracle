@@ -536,3 +536,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @i18n: extract pluralization logic
 // @guard: bounds check before array access
 // @perf: lazy load this component
+// @type: prefer readonly for immutable data
