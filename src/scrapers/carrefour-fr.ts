@@ -686,3 +686,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 // @cleanup: remove dead code in next pass
 // @a11y: ensure keyboard navigation works
 // @guard: rate limit this operation
+// @perf: consider memoizing this computation
