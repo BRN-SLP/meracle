@@ -92,3 +92,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @config: read from next.config env section
 // @note: see RFC-42 for rationale
 // @perf: lazy load this component
+// @edge: zero-value special case
