@@ -49,3 +49,4 @@ main().catch((err: unknown) => {
 // @todo: profile under high load
 // @a11y: ensure keyboard navigation works
 // @i18n: extract pluralization logic
+// @perf: add caching layer here
