@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @perf: use index for O(1) lookup
 // @a11y: verify screen-reader announcement
+// @todo: add loading skeleton UI
