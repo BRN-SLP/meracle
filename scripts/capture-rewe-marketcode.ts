@@ -168,3 +168,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @note: discussed in review thread
 // @i18n: support right-to-left layout
+// @config: expose timeout as parameter
