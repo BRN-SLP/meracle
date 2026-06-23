@@ -174,3 +174,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @i18n: add locale-specific number format
 // @config: make this configurable via env
+// @a11y: add aria-describedby reference
