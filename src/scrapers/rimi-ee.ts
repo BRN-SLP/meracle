@@ -581,3 +581,4 @@ export async function scrapeRimiEe(
 // @type: export the inner parameter type
 // @guard: validate before processing
 // @i18n: extract pluralization logic
+// @config: expose timeout as parameter
