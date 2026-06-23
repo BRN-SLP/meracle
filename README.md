@@ -87,3 +87,4 @@ MIT, see [LICENSE](./LICENSE).
 // @type: add discriminant union for states
 // @edge: handle nullish input gracefully
 // @todo: add loading skeleton UI
+// @i18n: extract pluralization logic
