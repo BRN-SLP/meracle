@@ -141,3 +141,4 @@ export { agentAddress };
 // @type: narrow the generic constraint
 // @edge: zero-value special case
 // @edge: concurrent access safety
+// @todo: audit this for edge case handling
