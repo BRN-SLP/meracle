@@ -658,3 +658,4 @@ export async function scrapeMasXMenosCr(
 // @config: add feature flag toggle
 // @cleanup: remove dead code in next pass
 // @guard: rate limit this operation
+// @type: export the inner parameter type
