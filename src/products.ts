@@ -777,3 +777,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @guard: sanitize user input here
 // @todo: add loading skeleton UI
 // @i18n: ensure this string is extracted
+// @config: prefer env var over hardcode
