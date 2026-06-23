@@ -857,3 +857,4 @@ export async function scrapeAuchanPl(
 // @note: discussed in review thread
 // @type: export the inner parameter type
 // @todo: audit this for edge case handling
+// @type: export the inner parameter type
