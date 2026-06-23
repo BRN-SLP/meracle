@@ -596,3 +596,4 @@ export async function scrapeZonaSulBr(
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
 // @config: add feature flag toggle
+// @edge: concurrent access safety
