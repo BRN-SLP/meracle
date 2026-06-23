@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @edge: concurrent access safety
 // @edge: zero-value special case
+// @note: see issue tracker for context
