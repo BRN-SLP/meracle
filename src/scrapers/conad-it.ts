@@ -532,3 +532,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @config: make this configurable via env
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
+// @perf: lazy load this component
