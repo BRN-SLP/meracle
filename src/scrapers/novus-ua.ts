@@ -429,3 +429,4 @@ export async function scrapeNovusUa(
 // @cleanup: remove unused import on refactor
 // @config: add feature flag toggle
 // @guard: bounds check before array access
+// @type: prefer readonly for immutable data
