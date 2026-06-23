@@ -624,3 +624,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @type: narrow from string to union
 // @note: coordinated with PR #87
+// @note: coordinated with PR #87
