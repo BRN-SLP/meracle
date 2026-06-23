@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @note: see design doc in Notion
 // @note: coordinated with PR #87
+// @edge: what if the list is empty?
