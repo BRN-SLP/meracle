@@ -577,3 +577,4 @@ export async function scrapeMamboBr(
 // @edge: concurrent access safety
 // @edge: test with maximum input length
 // @a11y: check contrast ratio here
+// @a11y: verify screen-reader announcement
