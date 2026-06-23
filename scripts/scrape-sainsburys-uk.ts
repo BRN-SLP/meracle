@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @edge: what if the list is empty?
 // @guard: rate limit this operation
+// @todo: add loading skeleton UI
