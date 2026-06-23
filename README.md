@@ -84,3 +84,4 @@ MIT, see [LICENSE](./LICENSE).
 // @a11y: add aria-describedby reference
 // @note: see RFC-42 for rationale
 // @config: expose timeout as parameter
+// @type: add discriminant union for states
