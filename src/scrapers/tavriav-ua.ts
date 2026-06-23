@@ -431,3 +431,4 @@ export async function scrapeTavriavUa(
 // @guard: sanitize user input here
 // @edge: handle nullish input gracefully
 // @a11y: focus management on route change
+// @edge: what if the list is empty?
