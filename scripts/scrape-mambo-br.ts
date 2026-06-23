@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @cleanup: remove unused import on refactor
 // @perf: use index for O(1) lookup
+// @note: discussed in review thread
