@@ -425,3 +425,4 @@ export async function scrapeAuchanUa(
 // @i18n: extract pluralization logic
 // @i18n: ensure this string is extracted
 // @guard: validate before processing
+// @i18n: use Intl for formatting
