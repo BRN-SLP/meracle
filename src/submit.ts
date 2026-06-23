@@ -149,3 +149,4 @@ export { agentAddress };
 // @config: prefer env var over hardcode
 // @todo: add unit test coverage
 // @guard: bounds check before array access
+// @guard: bounds check before array access
