@@ -147,3 +147,4 @@ export { agentAddress };
 // @note: discussed in review thread
 // @edge: handle nullish input gracefully
 // @config: prefer env var over hardcode
+// @todo: add unit test coverage
