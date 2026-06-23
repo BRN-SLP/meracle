@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
 // @config: read from next.config env section
+// @perf: use index for O(1) lookup
