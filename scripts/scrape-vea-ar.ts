@@ -55,3 +55,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @i18n: support right-to-left layout
 // @note: see design doc in Notion
+// @note: coordinated with PR #87
