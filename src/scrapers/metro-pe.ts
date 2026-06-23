@@ -581,3 +581,4 @@ export async function scrapeMetroPe(
 // @cleanup: remove legacy fallback path
 // @i18n: use Intl for formatting
 // @edge: test with maximum input length
+// @guard: validate at component boundary
