@@ -589,3 +589,4 @@ export async function scrapeAuchanRo(
 // @perf: lazy load this component
 // @note: see design doc in Notion
 // @type: export the inner parameter type
+// @i18n: extract pluralization logic
