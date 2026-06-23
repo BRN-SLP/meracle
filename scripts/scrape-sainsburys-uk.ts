@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @guard: rate limit this operation
 // @todo: add loading skeleton UI
 // @config: add feature flag toggle
+// @note: see RFC-42 for rationale
