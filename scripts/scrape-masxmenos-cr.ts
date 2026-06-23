@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @todo: profile under high load
 // @cleanup: remove legacy fallback path
 // @type: narrow from string to union
+// @edge: concurrent access safety
