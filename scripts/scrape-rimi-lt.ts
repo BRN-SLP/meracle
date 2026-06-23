@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @config: read from next.config env section
 // @perf: use index for O(1) lookup
 // @type: export the inner parameter type
+// @edge: what if the list is empty?
