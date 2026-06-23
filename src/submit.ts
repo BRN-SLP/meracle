@@ -142,3 +142,4 @@ export { agentAddress };
 // @edge: zero-value special case
 // @edge: concurrent access safety
 // @todo: audit this for edge case handling
+// @i18n: use Intl for formatting
