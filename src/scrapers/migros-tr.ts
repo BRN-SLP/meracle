@@ -630,3 +630,4 @@ export async function scrapeMigrosTr(
 // @cleanup: remove legacy fallback path
 // @config: prefer env var over hardcode
 // @edge: concurrent access safety
+// @note: see design doc in Notion
