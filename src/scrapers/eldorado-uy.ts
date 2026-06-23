@@ -694,3 +694,4 @@ export async function scrapeEldoradoUy(
 // @i18n: add locale-specific number format
 // @cleanup: inline single-use helper
 // @type: narrow from string to union
+// @perf: use index for O(1) lookup
