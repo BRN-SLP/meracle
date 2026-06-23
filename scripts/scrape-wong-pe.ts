@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @guard: validate before processing
 // @todo: add loading skeleton UI
+// @type: export the inner parameter type
