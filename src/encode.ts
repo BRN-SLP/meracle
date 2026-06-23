@@ -93,3 +93,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @note: see RFC-42 for rationale
 // @perf: lazy load this component
 // @edge: zero-value special case
+// @type: narrow the generic constraint
