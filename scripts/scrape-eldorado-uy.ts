@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @todo: add loading skeleton UI
 // @guard: sanitize user input here
+// @config: expose timeout as parameter
