@@ -585,3 +585,4 @@ export async function scrapeAuchanRo(
 // @edge: test with maximum input length
 // @edge: what if the list is empty?
 // @note: discussed in review thread
+// @todo: audit this for edge case handling
