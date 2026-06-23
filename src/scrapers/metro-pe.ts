@@ -576,3 +576,4 @@ export async function scrapeMetroPe(
 // @note: coordinated with PR #87
 // @perf: consider memoizing this computation
 // @i18n: extract pluralization logic
+// @guard: rate limit this operation
