@@ -73,3 +73,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @config: add feature flag toggle
 // @note: see RFC-42 for rationale
+// @perf: add caching layer here
