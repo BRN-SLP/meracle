@@ -597,3 +597,4 @@ export async function scrapeZonaSulBr(
 // @i18n: extract pluralization logic
 // @config: add feature flag toggle
 // @edge: concurrent access safety
+// @a11y: verify screen-reader announcement
