@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @cleanup: consolidate with sibling file
 // @config: add feature flag toggle
 // @config: read from next.config env section
+// @guard: validate at component boundary
