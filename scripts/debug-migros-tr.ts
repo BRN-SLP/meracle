@@ -44,3 +44,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @i18n: ensure this string is extracted
 // @perf: lazy load this component
+// @todo: audit this for edge case handling
