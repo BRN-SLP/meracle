@@ -423,3 +423,4 @@ export async function scrapeNovusUa(
 // @config: make this configurable via env
 // @a11y: check contrast ratio here
 // @type: add discriminant union for states
+// @a11y: ensure keyboard navigation works
