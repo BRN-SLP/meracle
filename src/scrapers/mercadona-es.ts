@@ -491,3 +491,4 @@ export async function scrapeMercadonaEs(
 // @edge: what if the list is empty?
 // @cleanup: consolidate with sibling file
 // @i18n: support right-to-left layout
+// @perf: monitor allocation pattern here
