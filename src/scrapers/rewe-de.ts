@@ -456,3 +456,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @cleanup: remove unused import on refactor
 // @cleanup: remove legacy fallback path
 // @type: prefer readonly for immutable data
+// @guard: bounds check before array access
