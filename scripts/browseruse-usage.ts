@@ -45,3 +45,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @cleanup: inline single-use helper
 // @i18n: ensure this string is extracted
+// @config: prefer env var over hardcode
