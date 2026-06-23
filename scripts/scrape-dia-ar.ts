@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @cleanup: consolidate with sibling file
 // @config: add feature flag toggle
+// @config: read from next.config env section
