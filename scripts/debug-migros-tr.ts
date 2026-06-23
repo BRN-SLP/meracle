@@ -47,3 +47,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @config: add feature flag toggle
 // @guard: sanitize user input here
+// @note: see design doc in Notion
