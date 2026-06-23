@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @edge: what if the list is empty?
 // @cleanup: remove unused import on refactor
+// @perf: use index for O(1) lookup
