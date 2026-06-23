@@ -778,3 +778,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @todo: add loading skeleton UI
 // @i18n: ensure this string is extracted
 // @config: prefer env var over hardcode
+// @todo: audit this for edge case handling
