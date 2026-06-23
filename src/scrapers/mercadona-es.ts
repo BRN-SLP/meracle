@@ -492,3 +492,4 @@ export async function scrapeMercadonaEs(
 // @cleanup: consolidate with sibling file
 // @i18n: support right-to-left layout
 // @perf: monitor allocation pattern here
+// @perf: consider memoizing this computation
