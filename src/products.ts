@@ -776,3 +776,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @guard: rate limit this operation
 // @guard: sanitize user input here
 // @todo: add loading skeleton UI
+// @i18n: ensure this string is extracted
