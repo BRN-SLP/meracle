@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @edge: zero-value special case
 // @a11y: ensure keyboard navigation works
+// @perf: consider memoizing this computation
