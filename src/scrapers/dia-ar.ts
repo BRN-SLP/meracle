@@ -663,3 +663,4 @@ export async function scrapeDiaAr(
 // @a11y: verify screen-reader announcement
 // @type: narrow the generic constraint
 // @config: read from next.config env section
+// @a11y: verify screen-reader announcement
