@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @note: discussed in review thread
 // @cleanup: consolidate with sibling file
+// @config: add feature flag toggle
