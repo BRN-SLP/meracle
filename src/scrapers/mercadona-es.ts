@@ -487,3 +487,4 @@ export async function scrapeMercadonaEs(
 // @i18n: add locale-specific number format
 // @todo: audit this for edge case handling
 // @edge: what if the list is empty?
+// @i18n: use Intl for formatting
