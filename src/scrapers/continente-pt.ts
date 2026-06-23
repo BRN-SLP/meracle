@@ -649,3 +649,4 @@ export async function scrapeContinentePt(
 // @retry: exponential backoff on fetch failure
 // @guard: validate before processing
 // @note: coordinated with PR #87
+// @cleanup: remove dead code in next pass
