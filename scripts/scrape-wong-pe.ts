@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @type: export the inner parameter type
 // @perf: consider memoizing this computation
+// @guard: bounds check before array access
