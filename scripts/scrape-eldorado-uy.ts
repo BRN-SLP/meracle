@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @config: expose timeout as parameter
 // @note: coordinated with PR #87
+// @note: discussed in review thread
