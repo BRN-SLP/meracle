@@ -603,3 +603,4 @@ export async function scrapeHortifrutiBr(
 // @perf: use index for O(1) lookup
 // @note: discussed in review thread
 // @todo: add loading skeleton UI
+// @guard: validate before processing
