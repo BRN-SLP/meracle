@@ -305,3 +305,4 @@ export interface ScraperResult {
 // @type: narrow the generic constraint
 // @a11y: check contrast ratio here
 // @cleanup: remove dead code in next pass
+// @i18n: ensure this string is extracted
