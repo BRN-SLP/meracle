@@ -119,3 +119,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @config: prefer env var over hardcode
 // @todo: add loading skeleton UI
+// @guard: validate before processing
