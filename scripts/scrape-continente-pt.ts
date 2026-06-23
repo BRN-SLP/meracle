@@ -73,3 +73,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
+// @cleanup: inline single-use helper
