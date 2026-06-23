@@ -657,3 +657,4 @@ export async function scrapeMasXMenosCr(
 // @type: narrow the generic constraint
 // @config: add feature flag toggle
 // @cleanup: remove dead code in next pass
+// @guard: rate limit this operation
