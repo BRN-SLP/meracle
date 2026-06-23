@@ -549,3 +549,4 @@ export async function scrapeRimiLv(
 // @guard: rate limit this operation
 // @edge: handle nullish input gracefully
 // @a11y: check contrast ratio here
+// @type: prefer readonly for immutable data
