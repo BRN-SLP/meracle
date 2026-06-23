@@ -90,3 +90,4 @@ export const env: Env = loadEnv();
 // @cleanup: remove legacy fallback path
 // @todo: audit this for edge case handling
 // @i18n: extract pluralization logic
+// @perf: use index for O(1) lookup
