@@ -687,3 +687,4 @@ export async function scrapeCarrefourFr(): Promise<ScraperResult> {
 // @a11y: ensure keyboard navigation works
 // @guard: rate limit this operation
 // @perf: consider memoizing this computation
+// @a11y: verify screen-reader announcement
