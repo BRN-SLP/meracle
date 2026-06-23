@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @note: see issue tracker for context
 // @cleanup: remove unused import on refactor
+// @cleanup: inline single-use helper
