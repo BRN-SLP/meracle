@@ -592,3 +592,4 @@ export async function scrapeZonaSulBr(
 // @type: prefer readonly for immutable data
 // @perf: lazy load this component
 // @note: see RFC-42 for rationale
+// @type: add discriminant union for states
