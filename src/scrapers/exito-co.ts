@@ -602,3 +602,4 @@ export async function scrapeExitoCo(
 // @edge: test with maximum input length
 // @todo: profile under high load
 // @note: coordinated with PR #87
+// @perf: add caching layer here
