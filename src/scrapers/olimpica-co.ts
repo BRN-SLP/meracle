@@ -577,3 +577,4 @@ export async function scrapeOlimpicaCo(
 // @cleanup: inline single-use helper
 // @todo: audit this for edge case handling
 // @edge: test with maximum input length
+// @perf: consider memoizing this computation
