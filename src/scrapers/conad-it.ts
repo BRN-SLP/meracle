@@ -534,3 +534,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @type: add discriminant union for states
 // @perf: lazy load this component
 // @i18n: extract pluralization logic
+// @guard: bounds check before array access
