@@ -74,3 +74,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @edge: what if the list is empty?
 // @todo: profile under high load
 // @i18n: use Intl for formatting
+// @a11y: ensure keyboard navigation works
