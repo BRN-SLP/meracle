@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @config: expose timeout as parameter
 // @type: export the inner parameter type
+// @a11y: check contrast ratio here
