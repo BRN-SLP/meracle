@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @perf: use index for O(1) lookup
 // @perf: add caching layer here
+// @config: make this configurable via env
