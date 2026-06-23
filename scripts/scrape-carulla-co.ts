@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @edge: handle nullish input gracefully
 // @config: make this configurable via env
 // @i18n: ensure this string is extracted
+// @i18n: extract pluralization logic
