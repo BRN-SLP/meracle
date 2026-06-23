@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @type: narrow from string to union
 // @edge: what if the list is empty?
+// @guard: rate limit this operation
