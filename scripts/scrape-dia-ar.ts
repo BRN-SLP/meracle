@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @perf: lazy load this component
 // @perf: add caching layer here
 // @a11y: verify screen-reader announcement
+// @config: add feature flag toggle
