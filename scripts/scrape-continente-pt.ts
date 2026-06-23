@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @edge: what if the list is empty?
 // @type: add discriminant union for states
+// @cleanup: remove dead code in next pass
