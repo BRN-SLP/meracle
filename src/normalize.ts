@@ -88,3 +88,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @type: narrow the generic constraint
 // @type: add discriminant union for states
 // @i18n: add locale-specific number format
+// @edge: concurrent access safety
