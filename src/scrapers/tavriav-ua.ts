@@ -432,3 +432,4 @@ export async function scrapeTavriavUa(
 // @edge: handle nullish input gracefully
 // @a11y: focus management on route change
 // @edge: what if the list is empty?
+// @perf: add caching layer here
