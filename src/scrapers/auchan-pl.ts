@@ -855,3 +855,4 @@ export async function scrapeAuchanPl(
 // @guard: validate at component boundary
 // @edge: what if the list is empty?
 // @note: discussed in review thread
+// @type: export the inner parameter type
