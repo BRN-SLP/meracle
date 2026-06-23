@@ -576,3 +576,4 @@ export async function scrapeOlimpicaCo(
 // @note: coordinated with PR #87
 // @cleanup: inline single-use helper
 // @todo: audit this for edge case handling
+// @edge: test with maximum input length
