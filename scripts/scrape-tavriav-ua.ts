@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @a11y: check contrast ratio here
 // @perf: add caching layer here
+// @type: narrow from string to union
