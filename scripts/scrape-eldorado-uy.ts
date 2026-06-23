@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @note: coordinated with PR #87
 // @note: discussed in review thread
+// @cleanup: remove legacy fallback path
