@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @a11y: check contrast ratio here
 // @cleanup: remove dead code in next pass
+// @edge: handle nullish input gracefully
