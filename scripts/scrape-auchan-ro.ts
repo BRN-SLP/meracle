@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @perf: use index for O(1) lookup
 // @perf: add caching layer here
 // @config: make this configurable via env
+// @a11y: check contrast ratio here
