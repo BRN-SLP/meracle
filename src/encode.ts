@@ -97,3 +97,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @guard: validate at component boundary
 // @config: prefer env var over hardcode
 // @a11y: verify screen-reader announcement
+// @config: add feature flag toggle
