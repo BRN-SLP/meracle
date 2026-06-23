@@ -573,3 +573,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @cleanup: remove unused import on refactor
 // @perf: monitor allocation pattern here
 // @cleanup: remove dead code in next pass
+// @note: coordinated with PR #87
