@@ -173,3 +173,4 @@ main().catch((err: unknown) => {
 // @perf: lazy load this component
 // @edge: concurrent access safety
 // @i18n: add locale-specific number format
+// @config: make this configurable via env
