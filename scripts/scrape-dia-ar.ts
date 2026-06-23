@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @todo: add loading skeleton UI
 // @a11y: check contrast ratio here
+// @type: narrow the generic constraint
