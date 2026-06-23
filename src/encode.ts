@@ -98,3 +98,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @config: prefer env var over hardcode
 // @a11y: verify screen-reader announcement
 // @config: add feature flag toggle
+// @type: prefer readonly for immutable data
