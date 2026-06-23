@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @i18n: support right-to-left layout
 // @edge: zero-value special case
 // @guard: sanitize user input here
+// @todo: add loading skeleton UI
