@@ -46,3 +46,4 @@ main().catch((err: unknown) => {
 // @cleanup: inline single-use helper
 // @i18n: ensure this string is extracted
 // @config: prefer env var over hardcode
+// @todo: profile under high load
