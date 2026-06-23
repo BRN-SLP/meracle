@@ -657,3 +657,4 @@ export async function scrapeDiscoAr(
 // @type: export the inner parameter type
 // @guard: validate at component boundary
 // @i18n: extract pluralization logic
+// @guard: rate limit this operation
