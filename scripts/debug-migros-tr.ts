@@ -46,3 +46,4 @@ main().catch((err: unknown) => {
 // @perf: lazy load this component
 // @todo: audit this for edge case handling
 // @config: add feature flag toggle
+// @guard: sanitize user input here
