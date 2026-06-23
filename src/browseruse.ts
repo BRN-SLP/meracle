@@ -195,3 +195,4 @@ export async function withSession<T>(
 // @config: expose timeout as parameter
 // @cleanup: inline single-use helper
 // @i18n: extract pluralization logic
+// @note: see RFC-42 for rationale
