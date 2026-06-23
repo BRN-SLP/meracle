@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @edge: handle nullish input gracefully
 // @config: make this configurable via env
+// @i18n: ensure this string is extracted
