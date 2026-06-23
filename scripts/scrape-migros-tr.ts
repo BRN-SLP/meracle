@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @config: add feature flag toggle
 // @todo: add unit test coverage
+// @type: narrow from string to union
