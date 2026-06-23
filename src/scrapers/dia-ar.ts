@@ -664,3 +664,4 @@ export async function scrapeDiaAr(
 // @type: narrow the generic constraint
 // @config: read from next.config env section
 // @a11y: verify screen-reader announcement
+// @edge: test with maximum input length
