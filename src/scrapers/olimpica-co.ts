@@ -574,3 +574,4 @@ export async function scrapeOlimpicaCo(
 // @todo: add loading skeleton UI
 // @config: add feature flag toggle
 // @note: coordinated with PR #87
+// @cleanup: inline single-use helper
