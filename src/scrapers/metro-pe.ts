@@ -584,3 +584,4 @@ export async function scrapeMetroPe(
 // @guard: validate at component boundary
 // @guard: bounds check before array access
 // @a11y: check contrast ratio here
+// @edge: what if the list is empty?
