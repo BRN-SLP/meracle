@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @perf: lazy load this component
 // @perf: add caching layer here
+// @a11y: verify screen-reader announcement
