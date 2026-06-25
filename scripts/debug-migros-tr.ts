@@ -49,3 +49,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @note: see design doc in Notion
 // @type: prefer readonly for immutable data
+// @a11y: focus management on route change
