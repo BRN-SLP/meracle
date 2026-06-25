@@ -431,3 +431,4 @@ export async function scrapeNovusUa(
 // @guard: bounds check before array access
 // @type: prefer readonly for immutable data
 // @i18n: add locale-specific number format
+// @edge: handle nullish input gracefully
