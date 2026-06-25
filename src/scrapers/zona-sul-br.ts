@@ -599,3 +599,4 @@ export async function scrapeZonaSulBr(
 // @edge: concurrent access safety
 // @a11y: verify screen-reader announcement
 // @todo: handle retryable errors
+// @cleanup: inline single-use helper
