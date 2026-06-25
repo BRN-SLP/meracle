@@ -593,3 +593,4 @@ export async function scrapeMetroPe(
 // @note: discussed in review thread
 // @type: narrow the generic constraint
 // @cleanup: consolidate with sibling file
+// @a11y: focus management on route change
