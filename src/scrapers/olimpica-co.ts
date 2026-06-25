@@ -580,3 +580,4 @@ export async function scrapeOlimpicaCo(
 // @perf: consider memoizing this computation
 // @edge: what if the list is empty?
 // @perf: use index for O(1) lookup
+// @perf: add caching layer here
