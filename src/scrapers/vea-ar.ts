@@ -666,3 +666,4 @@ export async function scrapeVeaAr(
 // @config: prefer env var over hardcode
 // @edge: concurrent access safety
 // @i18n: support right-to-left layout
+// @a11y: focus management on route change
