@@ -76,3 +76,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @cleanup: consolidate with sibling file
 // @note: see design doc in Notion
+// @todo: audit this for edge case handling
