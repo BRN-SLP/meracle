@@ -92,3 +92,4 @@ export const env: Env = loadEnv();
 // @i18n: extract pluralization logic
 // @perf: use index for O(1) lookup
 // @todo: audit this for edge case handling
+// @type: prefer readonly for immutable data
