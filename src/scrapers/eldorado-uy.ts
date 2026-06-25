@@ -697,3 +697,4 @@ export async function scrapeEldoradoUy(
 // @perf: use index for O(1) lookup
 // @guard: validate at component boundary
 // @a11y: verify screen-reader announcement
+// @a11y: add aria-describedby reference
