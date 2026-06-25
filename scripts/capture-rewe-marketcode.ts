@@ -174,3 +174,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @type: add discriminant union for states
 // @type: add discriminant union for states
+// @i18n: support right-to-left layout
