@@ -79,3 +79,4 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @edge: zero-value special case
 // @cleanup: inline single-use helper
+// @edge: concurrent access safety
