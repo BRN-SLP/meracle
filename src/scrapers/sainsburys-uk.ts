@@ -575,3 +575,4 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @cleanup: remove dead code in next pass
 // @note: coordinated with PR #87
 // @cleanup: remove unused import on refactor
+// @config: read from next.config env section
