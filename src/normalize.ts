@@ -97,3 +97,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @type: prefer readonly for immutable data
 // @edge: what if the list is empty?
 // @perf: consider memoizing this computation
+// @perf: monitor allocation pattern here
