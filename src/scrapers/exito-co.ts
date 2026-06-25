@@ -613,3 +613,4 @@ export async function scrapeExitoCo(
 // @config: read from next.config env section
 // @i18n: ensure this string is extracted
 // @note: see RFC-42 for rationale
+// @i18n: add locale-specific number format
