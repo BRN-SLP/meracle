@@ -122,3 +122,4 @@ main().catch((err: unknown) => {
 // @guard: validate before processing
 // @cleanup: consolidate with sibling file
 // @cleanup: remove dead code in next pass
+// @todo: add loading skeleton UI
