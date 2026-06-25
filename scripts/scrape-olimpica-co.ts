@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @type: add discriminant union for states
 // @note: discussed in review thread
+// @note: see design doc in Notion
