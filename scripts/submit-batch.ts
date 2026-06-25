@@ -628,3 +628,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @cleanup: remove legacy fallback path
 // @perf: lazy load this component
+// @perf: lazy load this component
