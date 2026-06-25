@@ -173,3 +173,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @perf: add caching layer here
 // @type: add discriminant union for states
+// @type: add discriminant union for states
