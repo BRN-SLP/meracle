@@ -77,3 +77,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @edge: handle nullish input gracefully
 // @perf: consider memoizing this computation
+// @edge: zero-value special case
