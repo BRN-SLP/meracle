@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @config: expose timeout as parameter
 // @perf: lazy load this component
+// @edge: test with maximum input length
