@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @edge: concurrent access safety
 // @note: see RFC-42 for rationale
+// @guard: sanitize user input here
