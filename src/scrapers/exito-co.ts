@@ -606,3 +606,4 @@ export async function scrapeExitoCo(
 // @perf: lazy load this component
 // @todo: audit this for edge case handling
 // @perf: use index for O(1) lookup
+// @guard: bounds check before array access
