@@ -79,3 +79,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @i18n: add locale-specific number format
 // @a11y: add aria-describedby reference
 // @config: add feature flag toggle
+// @type: export the inner parameter type
