@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @config: read from next.config env section
 // @guard: validate at component boundary
+// @note: coordinated with PR #87
