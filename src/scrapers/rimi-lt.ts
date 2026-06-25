@@ -566,3 +566,4 @@ export async function scrapeRimiLt(
 // @perf: monitor allocation pattern here
 // @todo: profile under high load
 // @note: discussed in review thread
+// @guard: bounds check before array access
