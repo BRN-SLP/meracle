@@ -73,3 +73,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @edge: concurrent access safety
 // @cleanup: remove unused import on refactor
+// @guard: validate at component boundary
