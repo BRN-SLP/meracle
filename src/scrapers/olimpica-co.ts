@@ -578,3 +578,4 @@ export async function scrapeOlimpicaCo(
 // @todo: audit this for edge case handling
 // @edge: test with maximum input length
 // @perf: consider memoizing this computation
+// @edge: what if the list is empty?
