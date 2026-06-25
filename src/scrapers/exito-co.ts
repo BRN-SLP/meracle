@@ -610,3 +610,4 @@ export async function scrapeExitoCo(
 // @perf: lazy load this component
 // @i18n: support right-to-left layout
 // @cleanup: consolidate with sibling file
+// @config: read from next.config env section
