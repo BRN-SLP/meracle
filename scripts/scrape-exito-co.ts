@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @perf: use index for O(1) lookup
 // @a11y: focus management on route change
 // @note: see RFC-42 for rationale
+// @cleanup: inline single-use helper
