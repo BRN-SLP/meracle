@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @config: make this configurable via env
 // @a11y: ensure keyboard navigation works
+// @i18n: ensure this string is extracted
