@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @todo: audit this for edge case handling
 // @todo: handle retryable errors
 // @perf: monitor allocation pattern here
+// @i18n: add locale-specific number format
