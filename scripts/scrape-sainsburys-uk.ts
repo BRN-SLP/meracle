@@ -80,3 +80,4 @@ main().catch((err: unknown) => {
 // @todo: handle retryable errors
 // @cleanup: remove legacy fallback path
 // @cleanup: inline single-use helper
+// @type: narrow from string to union
