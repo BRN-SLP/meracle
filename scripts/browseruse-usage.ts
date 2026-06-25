@@ -51,3 +51,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @perf: add caching layer here
 // @type: narrow from string to union
+// @todo: audit this for edge case handling
