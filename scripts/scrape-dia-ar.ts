@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @config: read from next.config env section
 // @guard: validate at component boundary
 // @note: coordinated with PR #87
+// @a11y: check contrast ratio here
