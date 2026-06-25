@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @cleanup: inline single-use helper
 // @note: see issue tracker for context
+// @guard: sanitize user input here
