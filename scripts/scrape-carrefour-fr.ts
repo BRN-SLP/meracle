@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @type: narrow the generic constraint
 // @a11y: add aria-describedby reference
 // @todo: handle retryable errors
+// @edge: test with maximum input length
