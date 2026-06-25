@@ -587,3 +587,4 @@ export async function scrapeRimiEe(
 // @type: prefer readonly for immutable data
 // @cleanup: consolidate with sibling file
 // @todo: audit this for edge case handling
+// @guard: rate limit this operation
