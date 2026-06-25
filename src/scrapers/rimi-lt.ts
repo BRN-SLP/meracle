@@ -565,3 +565,4 @@ export async function scrapeRimiLt(
 // @perf: monitor allocation pattern here
 // @perf: monitor allocation pattern here
 // @todo: profile under high load
+// @note: discussed in review thread
