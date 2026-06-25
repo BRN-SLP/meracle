@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
 // @guard: sanitize user input here
+// @cleanup: inline single-use helper
