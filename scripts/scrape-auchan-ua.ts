@@ -73,3 +73,4 @@ main().catch((err: unknown) => {
 // @config: prefer env var over hardcode
 // @config: read from next.config env section
 // @type: add discriminant union for states
+// @config: expose timeout as parameter
