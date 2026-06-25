@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @type: prefer readonly for immutable data
 // @note: see issue tracker for context
+// @edge: concurrent access safety
