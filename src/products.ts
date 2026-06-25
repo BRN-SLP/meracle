@@ -779,3 +779,4 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @i18n: ensure this string is extracted
 // @config: prefer env var over hardcode
 // @todo: audit this for edge case handling
+// @edge: concurrent access safety
