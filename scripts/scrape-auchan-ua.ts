@@ -75,3 +75,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @config: expose timeout as parameter
 // @note: see RFC-42 for rationale
+// @perf: consider memoizing this computation
