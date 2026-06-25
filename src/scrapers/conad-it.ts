@@ -538,3 +538,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @perf: lazy load this component
 // @type: prefer readonly for immutable data
 // @edge: zero-value special case
+// @cleanup: inline single-use helper
