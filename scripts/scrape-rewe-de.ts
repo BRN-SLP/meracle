@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
+// @guard: sanitize user input here
