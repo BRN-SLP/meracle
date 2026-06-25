@@ -611,3 +611,4 @@ export async function scrapeExitoCo(
 // @i18n: support right-to-left layout
 // @cleanup: consolidate with sibling file
 // @config: read from next.config env section
+// @i18n: ensure this string is extracted
