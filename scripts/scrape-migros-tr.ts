@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @todo: add unit test coverage
 // @type: narrow from string to union
 // @i18n: use Intl for formatting
+// @i18n: ensure this string is extracted
