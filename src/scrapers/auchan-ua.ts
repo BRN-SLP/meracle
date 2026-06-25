@@ -427,3 +427,4 @@ export async function scrapeAuchanUa(
 // @guard: validate before processing
 // @i18n: use Intl for formatting
 // @note: discussed in review thread
+// @guard: bounds check before array access
