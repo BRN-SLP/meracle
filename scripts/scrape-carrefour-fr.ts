@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @todo: handle retryable errors
 // @edge: test with maximum input length
+// @i18n: ensure this string is extracted
