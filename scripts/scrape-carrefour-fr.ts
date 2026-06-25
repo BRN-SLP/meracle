@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @i18n: support right-to-left layout
 // @config: make this configurable via env
+// @config: read from next.config env section
