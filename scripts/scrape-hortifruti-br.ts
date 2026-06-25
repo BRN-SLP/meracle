@@ -76,3 +76,4 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @i18n: add locale-specific number format
 // @edge: handle nullish input gracefully
+// @perf: consider memoizing this computation
