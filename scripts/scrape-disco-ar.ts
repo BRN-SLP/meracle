@@ -61,3 +61,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @note: see issue tracker for context
 // @config: make this configurable via env
+// @a11y: ensure keyboard navigation works
