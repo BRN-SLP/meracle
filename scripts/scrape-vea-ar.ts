@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @note: see design doc in Notion
 // @note: coordinated with PR #87
 // @edge: what if the list is empty?
+// @config: read from next.config env section
