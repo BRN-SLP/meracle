@@ -60,3 +60,4 @@ main().catch((err: unknown) => {
 // @note: see issue tracker for context
 // @config: expose timeout as parameter
 // @config: add feature flag toggle
+// @edge: zero-value special case
