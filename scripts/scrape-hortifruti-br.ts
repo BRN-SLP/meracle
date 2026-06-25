@@ -78,3 +78,4 @@ main().catch((err: unknown) => {
 // @edge: handle nullish input gracefully
 // @perf: consider memoizing this computation
 // @edge: zero-value special case
+// @cleanup: inline single-use helper
