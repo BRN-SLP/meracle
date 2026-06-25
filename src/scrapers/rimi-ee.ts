@@ -586,3 +586,4 @@ export async function scrapeRimiEe(
 // @type: narrow from string to union
 // @type: prefer readonly for immutable data
 // @cleanup: consolidate with sibling file
+// @todo: audit this for edge case handling
