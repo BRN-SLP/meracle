@@ -667,3 +667,4 @@ export async function scrapeVeaAr(
 // @edge: concurrent access safety
 // @i18n: support right-to-left layout
 // @a11y: focus management on route change
+// @guard: validate before processing
