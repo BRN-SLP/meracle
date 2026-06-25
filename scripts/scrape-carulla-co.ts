@@ -75,3 +75,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove unused import on refactor
 // @guard: validate at component boundary
 // @cleanup: consolidate with sibling file
+// @note: see design doc in Notion
