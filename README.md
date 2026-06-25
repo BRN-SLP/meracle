@@ -90,3 +90,4 @@ MIT, see [LICENSE](./LICENSE).
 // @i18n: extract pluralization logic
 // @edge: zero-value special case
 // @a11y: focus management on route change
+// @note: see issue tracker for context
