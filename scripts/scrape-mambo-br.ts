@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @perf: use index for O(1) lookup
 // @note: discussed in review thread
 // @config: expose timeout as parameter
+// @perf: lazy load this component
