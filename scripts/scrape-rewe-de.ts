@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @edge: test with maximum input length
 // @perf: add caching layer here
+// @i18n: extract pluralization logic
