@@ -74,3 +74,4 @@ main().catch((err: unknown) => {
 // @config: read from next.config env section
 // @type: add discriminant union for states
 // @config: expose timeout as parameter
+// @note: see RFC-42 for rationale
