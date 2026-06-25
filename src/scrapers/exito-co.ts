@@ -608,3 +608,4 @@ export async function scrapeExitoCo(
 // @perf: use index for O(1) lookup
 // @guard: bounds check before array access
 // @perf: lazy load this component
+// @i18n: support right-to-left layout
