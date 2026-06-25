@@ -74,3 +74,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @a11y: check contrast ratio here
 // @edge: concurrent access safety
+// @guard: rate limit this operation
