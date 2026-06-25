@@ -429,3 +429,4 @@ export async function scrapeAuchanUa(
 // @note: discussed in review thread
 // @guard: bounds check before array access
 // @cleanup: inline single-use helper
+// @edge: what if the list is empty?
