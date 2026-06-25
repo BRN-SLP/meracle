@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @a11y: check contrast ratio here
 // @type: add discriminant union for states
+// @edge: what if the list is empty?
