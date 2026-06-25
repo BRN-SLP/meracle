@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @a11y: verify screen-reader announcement
 // @todo: add loading skeleton UI
 // @i18n: support right-to-left layout
+// @guard: validate before processing
