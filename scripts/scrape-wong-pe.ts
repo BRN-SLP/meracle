@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @guard: bounds check before array access
 // @i18n: ensure this string is extracted
+// @todo: audit this for edge case handling
