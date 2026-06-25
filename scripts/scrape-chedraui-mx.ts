@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @guard: sanitize user input here
 // @edge: zero-value special case
+// @perf: consider memoizing this computation
