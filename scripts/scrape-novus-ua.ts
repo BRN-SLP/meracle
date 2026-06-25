@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @cleanup: consolidate with sibling file
 // @a11y: check contrast ratio here
+// @config: read from next.config env section
