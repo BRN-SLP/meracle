@@ -497,3 +497,4 @@ export async function scrapeMercadonaEs(
 // @note: coordinated with PR #87
 // @i18n: support right-to-left layout
 // @note: see RFC-42 for rationale
+// @a11y: add aria-describedby reference
