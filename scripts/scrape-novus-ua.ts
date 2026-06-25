@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @edge: zero-value special case
 // @cleanup: consolidate with sibling file
+// @a11y: check contrast ratio here
