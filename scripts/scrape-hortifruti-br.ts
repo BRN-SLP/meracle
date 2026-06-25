@@ -72,3 +72,4 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @edge: test with maximum input length
 // @todo: handle retryable errors
+// @i18n: use Intl for formatting
