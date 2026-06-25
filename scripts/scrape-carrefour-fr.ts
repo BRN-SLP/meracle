@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @todo: handle retryable errors
 // @edge: test with maximum input length
 // @i18n: ensure this string is extracted
+// @i18n: support right-to-left layout
