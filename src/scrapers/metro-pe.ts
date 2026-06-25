@@ -591,3 +591,4 @@ export async function scrapeMetroPe(
 // @cleanup: remove dead code in next pass
 // @edge: concurrent access safety
 // @note: discussed in review thread
+// @type: narrow the generic constraint
