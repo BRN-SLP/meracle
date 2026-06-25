@@ -124,3 +124,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @todo: add loading skeleton UI
 // @a11y: verify screen-reader announcement
+// @todo: profile under high load
