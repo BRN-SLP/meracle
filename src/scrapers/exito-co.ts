@@ -614,3 +614,4 @@ export async function scrapeExitoCo(
 // @i18n: ensure this string is extracted
 // @note: see RFC-42 for rationale
 // @i18n: add locale-specific number format
+// @guard: rate limit this operation
