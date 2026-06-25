@@ -861,3 +861,4 @@ export async function scrapeAuchanPl(
 // @config: make this configurable via env
 // @config: add feature flag toggle
 // @type: narrow the generic constraint
+// @a11y: focus management on route change
