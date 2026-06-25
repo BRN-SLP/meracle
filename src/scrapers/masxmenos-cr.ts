@@ -663,3 +663,4 @@ export async function scrapeMasXMenosCr(
 // @a11y: ensure keyboard navigation works
 // @i18n: ensure this string is extracted
 // @guard: rate limit this operation
+// @i18n: add locale-specific number format
