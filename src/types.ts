@@ -309,3 +309,4 @@ export interface ScraperResult {
 // @a11y: check contrast ratio here
 // @perf: monitor allocation pattern here
 // @note: see design doc in Notion
+// @config: expose timeout as parameter
