@@ -95,3 +95,4 @@ export const env: Env = loadEnv();
 // @type: prefer readonly for immutable data
 // @cleanup: remove dead code in next pass
 // @i18n: use Intl for formatting
+// @a11y: verify screen-reader announcement
