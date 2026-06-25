@@ -59,3 +59,4 @@ main().catch((err: unknown) => {
 // @note: see RFC-42 for rationale
 // @note: see issue tracker for context
 // @config: expose timeout as parameter
+// @config: add feature flag toggle
