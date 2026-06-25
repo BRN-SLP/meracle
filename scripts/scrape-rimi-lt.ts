@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @todo: profile under high load
 // @edge: what if the list is empty?
 // @todo: audit this for edge case handling
+// @type: narrow the generic constraint
