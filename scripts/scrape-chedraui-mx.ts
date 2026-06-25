@@ -62,3 +62,4 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @note: see issue tracker for context
 // @edge: concurrent access safety
+// @note: see RFC-42 for rationale
