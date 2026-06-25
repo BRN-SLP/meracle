@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @i18n: ensure this string is extracted
 // @i18n: extract pluralization logic
 // @todo: audit this for edge case handling
+// @edge: concurrent access safety
