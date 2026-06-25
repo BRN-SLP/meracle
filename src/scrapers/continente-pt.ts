@@ -654,3 +654,4 @@ export async function scrapeContinentePt(
 // @guard: validate at component boundary
 // @note: see issue tracker for context
 // @cleanup: inline single-use helper
+// @edge: test with maximum input length
