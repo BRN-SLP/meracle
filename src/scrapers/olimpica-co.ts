@@ -579,3 +579,4 @@ export async function scrapeOlimpicaCo(
 // @edge: test with maximum input length
 // @perf: consider memoizing this computation
 // @edge: what if the list is empty?
+// @perf: use index for O(1) lookup
