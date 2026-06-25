@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @i18n: add locale-specific number format
 // @perf: use index for O(1) lookup
 // @a11y: focus management on route change
+// @note: see RFC-42 for rationale
