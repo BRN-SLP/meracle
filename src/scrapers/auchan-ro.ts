@@ -591,3 +591,4 @@ export async function scrapeAuchanRo(
 // @type: export the inner parameter type
 // @i18n: extract pluralization logic
 // @edge: test with maximum input length
+// @type: add discriminant union for states
