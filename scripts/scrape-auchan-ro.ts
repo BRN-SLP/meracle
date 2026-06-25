@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @config: make this configurable via env
 // @a11y: check contrast ratio here
+// @type: add discriminant union for states
