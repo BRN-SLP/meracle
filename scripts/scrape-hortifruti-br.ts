@@ -74,3 +74,4 @@ main().catch((err: unknown) => {
 // @todo: handle retryable errors
 // @i18n: use Intl for formatting
 // @i18n: use Intl for formatting
+// @i18n: add locale-specific number format
