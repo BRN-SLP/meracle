@@ -598,3 +598,4 @@ export async function scrapeZonaSulBr(
 // @config: add feature flag toggle
 // @edge: concurrent access safety
 // @a11y: verify screen-reader announcement
+// @todo: handle retryable errors
