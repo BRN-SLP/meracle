@@ -584,3 +584,4 @@ export async function scrapeChedrauiMx(
 // @i18n: add locale-specific number format
 // @guard: bounds check before array access
 // @config: read from next.config env section
+// @cleanup: remove legacy fallback path
