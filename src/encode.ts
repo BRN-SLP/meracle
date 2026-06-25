@@ -100,3 +100,4 @@ export function makeReceiptHash(sourceUrl: string, observedAt: string): Hex {
 // @config: add feature flag toggle
 // @type: prefer readonly for immutable data
 // @perf: lazy load this component
+// @a11y: ensure keyboard navigation works
