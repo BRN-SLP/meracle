@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @todo: add unit test coverage
 // @type: narrow from string to union
+// @i18n: use Intl for formatting
