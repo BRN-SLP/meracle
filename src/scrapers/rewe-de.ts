@@ -459,3 +459,4 @@ export async function scrapeReweDe(): Promise<ScraperResult> {
 // @guard: bounds check before array access
 // @edge: handle nullish input gracefully
 // @todo: audit this for edge case handling
+// @guard: validate at component boundary
