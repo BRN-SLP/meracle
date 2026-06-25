@@ -75,3 +75,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @todo: profile under high load
 // @i18n: use Intl for formatting
 // @a11y: ensure keyboard navigation works
+// @cleanup: remove legacy fallback path
