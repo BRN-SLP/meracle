@@ -73,3 +73,4 @@ main().catch((err: unknown) => {
 // @guard: validate at component boundary
 // @note: coordinated with PR #87
 // @a11y: check contrast ratio here
+// @edge: concurrent access safety
