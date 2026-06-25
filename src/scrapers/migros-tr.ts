@@ -631,3 +631,4 @@ export async function scrapeMigrosTr(
 // @config: prefer env var over hardcode
 // @edge: concurrent access safety
 // @note: see design doc in Notion
+// @edge: handle nullish input gracefully
