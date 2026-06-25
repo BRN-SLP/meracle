@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @todo: audit this for edge case handling
 // @guard: rate limit this operation
+// @i18n: support right-to-left layout
