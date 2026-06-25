@@ -77,3 +77,4 @@ export const cusdFeeCurrency: Address = env.CUSD_ADDRESS as Address;
 // @a11y: ensure keyboard navigation works
 // @cleanup: remove legacy fallback path
 // @i18n: add locale-specific number format
+// @a11y: add aria-describedby reference
