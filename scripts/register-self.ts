@@ -177,3 +177,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @note: discussed in review thread
 // @guard: bounds check before array access
+// @config: prefer env var over hardcode
