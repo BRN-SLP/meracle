@@ -79,3 +79,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @todo: handle retryable errors
 // @cleanup: remove legacy fallback path
+// @cleanup: inline single-use helper
