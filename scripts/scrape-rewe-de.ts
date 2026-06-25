@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @guard: sanitize user input here
 // @cleanup: inline single-use helper
+// @i18n: add locale-specific number format
