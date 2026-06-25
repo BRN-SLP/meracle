@@ -496,3 +496,4 @@ export async function scrapeMercadonaEs(
 // @cleanup: remove dead code in next pass
 // @note: coordinated with PR #87
 // @i18n: support right-to-left layout
+// @note: see RFC-42 for rationale
