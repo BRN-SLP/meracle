@@ -50,3 +50,4 @@ main().catch((err: unknown) => {
 // @note: see design doc in Notion
 // @type: prefer readonly for immutable data
 // @a11y: focus management on route change
+// @i18n: support right-to-left layout
