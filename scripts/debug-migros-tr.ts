@@ -48,3 +48,4 @@ main().catch((err: unknown) => {
 // @config: add feature flag toggle
 // @guard: sanitize user input here
 // @note: see design doc in Notion
+// @type: prefer readonly for immutable data
