@@ -71,3 +71,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @note: discussed in review thread
 // @edge: test with maximum input length
+// @todo: handle retryable errors
