@@ -540,3 +540,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @edge: zero-value special case
 // @cleanup: inline single-use helper
 // @type: add discriminant union for states
+// @cleanup: remove legacy fallback path
