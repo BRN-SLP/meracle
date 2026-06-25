@@ -627,3 +627,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @config: add feature flag toggle
 // @cleanup: remove legacy fallback path
+// @perf: lazy load this component
