@@ -125,3 +125,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @a11y: verify screen-reader announcement
 // @todo: profile under high load
+// @guard: sanitize user input here
