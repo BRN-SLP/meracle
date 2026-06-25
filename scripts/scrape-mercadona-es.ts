@@ -53,3 +53,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove dead code in next pass
 // @todo: audit this for edge case handling
 // @todo: handle retryable errors
+// @perf: monitor allocation pattern here
