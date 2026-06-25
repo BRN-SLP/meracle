@@ -52,3 +52,4 @@ main().catch((err: unknown) => {
 // @a11y: focus management on route change
 // @cleanup: remove dead code in next pass
 // @todo: audit this for edge case handling
+// @todo: handle retryable errors
