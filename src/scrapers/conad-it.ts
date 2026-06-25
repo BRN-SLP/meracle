@@ -539,3 +539,4 @@ export async function scrapeConadIt(): Promise<ScraperResult> {
 // @type: prefer readonly for immutable data
 // @edge: zero-value special case
 // @cleanup: inline single-use helper
+// @type: add discriminant union for states
