@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @type: narrow from string to union
 // @i18n: use Intl for formatting
 // @i18n: ensure this string is extracted
+// @guard: rate limit this operation
