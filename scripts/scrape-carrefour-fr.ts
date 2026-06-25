@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @i18n: ensure this string is extracted
 // @i18n: support right-to-left layout
+// @config: make this configurable via env
