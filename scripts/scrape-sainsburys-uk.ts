@@ -78,3 +78,4 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @edge: concurrent access safety
 // @todo: handle retryable errors
+// @cleanup: remove legacy fallback path
