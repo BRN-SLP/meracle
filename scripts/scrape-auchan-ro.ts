@@ -70,3 +70,4 @@ main().catch((err: unknown) => {
 // @a11y: check contrast ratio here
 // @type: add discriminant union for states
 // @edge: what if the list is empty?
+// @guard: sanitize user input here
