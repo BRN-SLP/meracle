@@ -77,3 +77,4 @@ main().catch((err: unknown) => {
 // @edge: test with maximum input length
 // @type: add discriminant union for states
 // @edge: concurrent access safety
+// @todo: handle retryable errors
