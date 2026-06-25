@@ -860,3 +860,4 @@ export async function scrapeAuchanPl(
 // @type: export the inner parameter type
 // @config: make this configurable via env
 // @config: add feature flag toggle
+// @type: narrow the generic constraint
