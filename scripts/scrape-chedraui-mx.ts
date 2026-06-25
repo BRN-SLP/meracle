@@ -64,3 +64,4 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @note: see RFC-42 for rationale
 // @guard: sanitize user input here
+// @edge: zero-value special case
