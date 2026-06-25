@@ -80,3 +80,4 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @cleanup: inline single-use helper
 // @edge: concurrent access safety
+// @note: see design doc in Notion
