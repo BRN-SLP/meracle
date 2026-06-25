@@ -582,3 +582,4 @@ export async function scrapeMamboBr(
 // @a11y: verify screen-reader announcement
 // @note: see design doc in Notion
 // @type: narrow from string to union
+// @a11y: check contrast ratio here
