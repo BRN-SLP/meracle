@@ -673,3 +673,4 @@ export async function scrapeDiaAr(
 // @note: see design doc in Notion
 // @guard: sanitize user input here
 // @cleanup: remove legacy fallback path
+// @edge: handle nullish input gracefully
