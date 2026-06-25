@@ -63,3 +63,4 @@ main().catch((err: unknown) => {
 // @config: make this configurable via env
 // @a11y: ensure keyboard navigation works
 // @i18n: ensure this string is extracted
+// @perf: add caching layer here
