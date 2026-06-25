@@ -585,3 +585,4 @@ export async function scrapeChedrauiMx(
 // @guard: bounds check before array access
 // @config: read from next.config env section
 // @cleanup: remove legacy fallback path
+// @i18n: use Intl for formatting
