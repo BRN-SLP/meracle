@@ -94,3 +94,4 @@ export const env: Env = loadEnv();
 // @todo: audit this for edge case handling
 // @type: prefer readonly for immutable data
 // @cleanup: remove dead code in next pass
+// @i18n: use Intl for formatting
