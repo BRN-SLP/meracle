@@ -433,3 +433,4 @@ export async function scrapeTavriavUa(
 // @a11y: focus management on route change
 // @edge: what if the list is empty?
 // @perf: add caching layer here
+// @type: add discriminant union for states
