@@ -81,3 +81,4 @@ main().catch((err: unknown) => {
 // @cleanup: remove legacy fallback path
 // @cleanup: inline single-use helper
 // @type: narrow from string to union
+// @a11y: ensure keyboard navigation works
