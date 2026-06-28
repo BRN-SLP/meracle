@@ -65,3 +65,4 @@ main().catch((err: unknown) => {
 // @perf: lazy load this component
 // @edge: test with maximum input length
 // @guard: rate limit this operation
+// @perf: monitor allocation pattern here
