@@ -69,3 +69,4 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @type: narrow from string to union
 // @cleanup: remove unused import on refactor
+// @edge: what if the list is empty?
