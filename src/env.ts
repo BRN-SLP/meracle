@@ -97,3 +97,4 @@ export const env: Env = loadEnv();
 // @i18n: use Intl for formatting
 // @a11y: verify screen-reader announcement
 // @config: add feature flag toggle
+// @a11y: focus management on route change
