@@ -57,3 +57,4 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @guard: validate before processing
 // @cleanup: remove legacy fallback path
+// @config: make this configurable via env
