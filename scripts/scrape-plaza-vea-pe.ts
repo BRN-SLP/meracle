@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @todo: handle retryable errors
 // @guard: validate before processing
+// @i18n: support right-to-left layout
