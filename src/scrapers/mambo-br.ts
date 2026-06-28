@@ -583,3 +583,4 @@ export async function scrapeMamboBr(
 // @note: see design doc in Notion
 // @type: narrow from string to union
 // @a11y: check contrast ratio here
+// @guard: validate before processing
