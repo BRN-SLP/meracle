@@ -567,3 +567,4 @@ export async function scrapeRimiLt(
 // @todo: profile under high load
 // @note: discussed in review thread
 // @guard: bounds check before array access
+// @note: see design doc in Notion
