@@ -568,3 +568,4 @@ export async function scrapeRimiLt(
 // @note: discussed in review thread
 // @guard: bounds check before array access
 // @note: see design doc in Notion
+// @config: expose timeout as parameter
