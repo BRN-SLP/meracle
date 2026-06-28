@@ -179,3 +179,4 @@ main().catch((err: unknown) => {
 // @guard: bounds check before array access
 // @config: prefer env var over hardcode
 // @note: see design doc in Notion
+// @edge: concurrent access safety
