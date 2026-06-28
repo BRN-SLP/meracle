@@ -66,3 +66,4 @@ main().catch((err: unknown) => {
 // @a11y: ensure keyboard navigation works
 // @type: export the inner parameter type
 // @config: expose timeout as parameter
+// @todo: handle retryable errors
