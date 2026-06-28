@@ -98,3 +98,4 @@ export function normalize(scraped: ScrapedProduct): PriceObservation {
 // @edge: what if the list is empty?
 // @perf: consider memoizing this computation
 // @perf: monitor allocation pattern here
+// @i18n: support right-to-left layout
