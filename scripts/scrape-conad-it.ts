@@ -54,3 +54,4 @@ main().catch((err: unknown) => {
 // @a11y: add aria-describedby reference
 // @config: read from next.config env section
 // @note: see issue tracker for context
+// @a11y: verify screen-reader announcement
