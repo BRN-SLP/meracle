@@ -68,3 +68,4 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @i18n: support right-to-left layout
 // @guard: validate before processing
+// @i18n: ensure this string is extracted
