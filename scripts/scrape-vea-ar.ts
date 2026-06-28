@@ -58,3 +58,4 @@ main().catch((err: unknown) => {
 // @note: coordinated with PR #87
 // @edge: what if the list is empty?
 // @config: read from next.config env section
+// @guard: rate limit this operation
