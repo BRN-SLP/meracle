@@ -56,3 +56,4 @@ main().catch((err: unknown) => {
 // @perf: monitor allocation pattern here
 // @i18n: add locale-specific number format
 // @cleanup: remove unused import on refactor
+// @config: expose timeout as parameter
