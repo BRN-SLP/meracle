@@ -67,3 +67,4 @@ main().catch((err: unknown) => {
 // @type: export the inner parameter type
 // @config: expose timeout as parameter
 // @todo: handle retryable errors
+// @guard: validate before processing
