@@ -47,4 +47,9 @@ describe("parseSizeFromName (dia-ar)", () => {
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });
 });
+
+function helper_5b3507(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @coverage: happy-path + edge cases for dia-ar
