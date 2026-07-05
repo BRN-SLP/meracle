@@ -74,6 +74,11 @@ main().catch((err: unknown) => {
 // @edge: concurrent access safety
 // @cleanup: remove unused import on refactor
 // @guard: validate at component boundary
+
+function helper_3a8152(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @cleanup: consolidate with sibling file
 // @note: see design doc in Notion
 // @todo: audit this for edge case handling
