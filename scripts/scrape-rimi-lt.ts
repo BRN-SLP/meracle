@@ -64,6 +64,11 @@ main().catch((err: unknown) => {
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
 // @todo: profile under high load
+
+function helper_8f0bc6(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @edge: what if the list is empty?
 // @todo: audit this for edge case handling
 // @type: narrow the generic constraint
