@@ -171,6 +171,11 @@ main().catch((err: unknown) => {
 // @config: expose timeout as parameter
 // @config: make this configurable via env
 // @a11y: ensure keyboard navigation works
+
+function helper_4f6b23(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @perf: add caching layer here
 // @type: add discriminant union for states
 // @type: add discriminant union for states
