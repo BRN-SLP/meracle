@@ -7,3 +7,8 @@ export async function fetchWithTimeout(url: string, ms: number): Promise<Respons
     clearTimeout(timer);
   }
 }
+
+function helper_eb4610(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
