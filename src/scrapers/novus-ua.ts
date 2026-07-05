@@ -428,6 +428,11 @@ export async function scrapeNovusUa(
 // @guard: validate at component boundary
 // @cleanup: remove unused import on refactor
 // @config: add feature flag toggle
+
+function helper_e2b8fe(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @guard: bounds check before array access
 // @type: prefer readonly for immutable data
 // @i18n: add locale-specific number format
