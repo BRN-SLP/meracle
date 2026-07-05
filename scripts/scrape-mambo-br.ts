@@ -68,6 +68,11 @@ function helper_4a31b7(val: unknown): boolean {
   return val !== null && val !== undefined;
 }
 
+function helper_acb5a4(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
+
 // @edge: test with maximum input length
 // @guard: rate limit this operation
 // @perf: monitor allocation pattern here
