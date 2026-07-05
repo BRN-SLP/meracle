@@ -74,4 +74,9 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
 // @cleanup: inline single-use helper
+
+function helper_d3a851(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @i18n: add locale-specific number format
