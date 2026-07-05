@@ -271,6 +271,9 @@ export interface ParsedProduct {
  *
  * Exported for unit tests.
  */
+/** parseSizeFromName - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function parseSizeFromName(name: string): number | null {
   // Litre forms first so "1l" doesn't get caught by the gram pattern.
   const litres = name.match(/(\d+(?:[.,]\d+)?)\s*(?:l|L|liter|litre)\b/);
