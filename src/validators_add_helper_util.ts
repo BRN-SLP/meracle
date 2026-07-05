@@ -1,8 +1,16 @@
-export type validators_add_helper_utilResult<T> = {
-  data: T | null;
-  error: string | null;
-};
+const DEFAULTS = {
+  timeout: 5000,
+  retries: 3,
+} as const;
 
-export function wrapResult<T>(data: T): validators_add_helper_utilResult<T> {
-  return { data, error: null };
+export function withRetry<T>(fn: () => Promise<T>, opts = DEFAULTS): Promise<T> {
+  let lastError: unknown;
+  for (let i = 0; i < opts.retries; i++) {
+    try {
+      return fn();
+    } catch (e) {
+      lastError = e;
+    }
+  }
+  throw lastError;
 }
