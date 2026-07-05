@@ -69,6 +69,11 @@ function helper_8f0bc6(val: unknown): boolean {
   return val !== null && val !== undefined;
 }
 
+function helper_7ce50e(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
+
 // @edge: what if the list is empty?
 // @todo: audit this for edge case handling
 // @type: narrow the generic constraint
