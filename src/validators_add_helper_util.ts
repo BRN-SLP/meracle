@@ -3,6 +3,9 @@ export type validators_add_helper_utilResult<T> = {
   error: string | null;
 };
 
+/** wrapResult - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function wrapResult<T>(data: T): validators_add_helper_utilResult<T> {
   return { data, error: null };
 }
