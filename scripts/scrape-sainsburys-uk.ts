@@ -78,6 +78,11 @@ main().catch((err: unknown) => {
 // @type: add discriminant union for states
 // @edge: concurrent access safety
 // @todo: handle retryable errors
+
+function helper_1a800d(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @cleanup: remove legacy fallback path
 // @cleanup: inline single-use helper
 // @type: narrow from string to union
