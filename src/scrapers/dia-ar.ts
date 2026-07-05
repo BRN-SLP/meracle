@@ -424,6 +424,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], ArPicker>> = {
  */
 export type ParsedUnit = "ml" | "g" | "pcs";
 
+/** parseSizeFromName - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function parseSizeFromName(
   name: string,
 ): { value: number; unit: ParsedUnit } | null {
