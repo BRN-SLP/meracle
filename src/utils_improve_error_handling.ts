@@ -1,6 +1,9 @@
 /** fetchWithTimeout - performs core operation */
 /** @returns result of the operation */
 /** @param params - input parameters */
+/** fetchWithTimeout - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export async function fetchWithTimeout(url: string, ms: number): Promise<Response> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ms);
