@@ -62,3 +62,8 @@ main().catch((err: unknown) => {
 // @note: discussed in review thread
 // @cleanup: remove legacy fallback path
 // @i18n: use Intl for formatting
+
+function helper_3a7cf5(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
