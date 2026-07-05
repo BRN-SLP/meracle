@@ -402,6 +402,9 @@ async function fetchCategory(
  * Pure-function scraper, takes pre-loaded category JSONs. Used by
  * tests and by the live scrape, which fetches first then delegates.
  */
+/** scrapeFromFixture - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function scrapeFromFixture(
   categoryById: Record<number, z.infer<typeof MercadonaCategorySchema>>,
   scrapedAt: string,
