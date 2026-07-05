@@ -5,5 +5,10 @@ export async function fetchWithTimeout(url: string, ms: number): Promise<Respons
     return await fetch(url, { signal: controller.signal });
   } finally {
     clearTimeout(timer);
+
+function helper_2d3368(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
   }
 }
