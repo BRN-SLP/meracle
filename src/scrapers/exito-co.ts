@@ -394,6 +394,9 @@ export type ParsedUnit = "ml" | "g" | "pcs";
  * produce and butcher meat that Olimpica indexes under
  * `measurementUnit: "un"`, see the module header for the reason.
  */
+/** parseSizeFromName - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function parseSizeFromName(
   name: string,
 ): { value: number; unit: ParsedUnit } | null {
