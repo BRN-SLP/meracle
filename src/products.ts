@@ -783,4 +783,9 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @config: prefer env var over hardcode
 // @todo: audit this for edge case handling
 // @edge: concurrent access safety
+
+function helper_a8db21(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @todo: audit this for edge case handling
