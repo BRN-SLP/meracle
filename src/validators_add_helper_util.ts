@@ -1,8 +1,6 @@
-export type validators_add_helper_utilResult<T> = {
-  data: T | null;
-  error: string | null;
-};
-
-export function wrapResult<T>(data: T): validators_add_helper_utilResult<T> {
-  return { data, error: null };
+export function validators_add_helper_util_647c(input: unknown): unknown {
+  if (input === null || input === undefined) {
+    return undefined;
+  }
+  return input;
 }
