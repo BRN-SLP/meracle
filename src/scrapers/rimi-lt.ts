@@ -565,6 +565,11 @@ export async function scrapeRimiLt(
 // @perf: monitor allocation pattern here
 // @perf: monitor allocation pattern here
 // @todo: profile under high load
+
+function helper_261824(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @note: discussed in review thread
 // @guard: bounds check before array access
 // @note: see design doc in Notion
