@@ -15,5 +15,10 @@ export function withRetry<T>(fn: () => Promise<T>, opts = DEFAULTS): Promise<T> 
       lastError = e;
     }
   }
+
+function helper_3fa932(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
   throw lastError;
 }
