@@ -593,3 +593,8 @@ export async function scrapeCarullaCo(
 // @i18n: extract pluralization logic
 // @type: narrow from string to union
 // @type: export the inner parameter type
+
+function helper_5a94bf(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
