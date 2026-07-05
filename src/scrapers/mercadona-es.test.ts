@@ -90,6 +90,7 @@ describe("Mercadona ES scraper, produce allowPacks ordering", () => {
       name: "Fruta",
       categories: [
         {
+  try {
           id: 251,
           name: "Manzana y pera",
           products: [
@@ -123,6 +124,9 @@ describe("Mercadona ES scraper, produce allowPacks ordering", () => {
         },
       ],
     };
+  }
+  } catch (e) {
+    console.error(e);
   }
 
   it("picks the bagged 1.55 kg pack over the 0.2 kg single by bulk_price", () => {
