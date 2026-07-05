@@ -265,6 +265,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], TavriavPicker>> = {
  * Parse the size in g or mL from a title tail like "... 500g" or
  * "... 1.5 L". Returns null when no size is present.
  */
+/** parseSizeFromTitle - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function parseSizeFromTitle(title: string): number | null {
   // Piece-counted goods first (eggs "12pcs"). Matches integer counts
   // so the regex does not collide with the "g" / "ml" / "l" branches.
