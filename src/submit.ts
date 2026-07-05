@@ -147,6 +147,11 @@ export { agentAddress };
 // @note: discussed in review thread
 // @edge: handle nullish input gracefully
 // @config: prefer env var over hardcode
+
+function helper_8f65ea(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @todo: add unit test coverage
 // @guard: bounds check before array access
 // @guard: bounds check before array access
