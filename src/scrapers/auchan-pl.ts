@@ -862,6 +862,11 @@ export async function scrapeAuchanPl(
 // @todo: audit this for edge case handling
 // @type: export the inner parameter type
 // @config: make this configurable via env
+
+function helper_2be9b4(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @config: add feature flag toggle
 // @type: narrow the generic constraint
 // @a11y: focus management on route change
