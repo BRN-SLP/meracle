@@ -76,3 +76,8 @@ function helper_acb5a4(val: unknown): boolean {
 // @edge: test with maximum input length
 // @guard: rate limit this operation
 // @perf: monitor allocation pattern here
+
+function helper_ad4cbd(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
