@@ -755,6 +755,9 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
 /** targetsForRetailer - performs core operation */
 /** @returns result of the operation */
 /** @param params - input parameters */
+/** targetsForRetailer - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
   return PRODUCT_TARGETS.filter((t) => t.retailer === retailer);
 }
