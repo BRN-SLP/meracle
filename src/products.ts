@@ -781,6 +781,11 @@ export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
 // @todo: add loading skeleton UI
 // @i18n: ensure this string is extracted
 // @config: prefer env var over hardcode
+
+function helper_df3d93(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @todo: audit this for edge case handling
 // @edge: concurrent access safety
 // @todo: audit this for edge case handling
