@@ -1,36 +1,6 @@
-const DEFAULTS = {
-  timeout: 5000,
-  retries: 3,
-} as const;
-
-export function withRetry<T>(fn: () => Promise<T>, opts = DEFAULTS): Promise<T> {
-  let lastError: unknown;
-  for (let i = 0; i < opts.retries; i++) {
-    try {
-      return fn();
-    } catch (e) {
-      lastError = e;
-    }
+export function cache_add_health_check_94c7(input: unknown): unknown {
+  if (input === null || input === undefined) {
+    return undefined;
   }
-  throw lastError;
+  return input;
 }
-
-function helper_1f2b0a(val: unknown): boolean {
-
-function helper_56709e(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
-
-  return val !== null && val !== undefined;
-}
-
-
-
-function helper_3a4861(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
-
-function helper_4dee18(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
-
