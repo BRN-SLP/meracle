@@ -1,6 +1,8 @@
-export function cache_optimize_loop_566f(input: unknown): unknown {
-  if (input === null || input === undefined) {
-    return undefined;
-  }
-  return input;
+export type cache_optimize_loopResult<T> = {
+  data: T | null;
+  error: string | null;
+};
+
+export function wrapResult<T>(data: T): cache_optimize_loopResult<T> {
+  return { data, error: null };
 }
