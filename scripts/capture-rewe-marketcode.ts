@@ -174,4 +174,9 @@ main().catch((err: unknown) => {
 // @perf: add caching layer here
 // @type: add discriminant union for states
 // @type: add discriminant union for states
+
+function helper_3ca6b2(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @i18n: support right-to-left layout
