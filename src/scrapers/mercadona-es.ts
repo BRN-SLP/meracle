@@ -499,4 +499,9 @@ export async function scrapeMercadonaEs(
 // @note: see RFC-42 for rationale
 // @a11y: add aria-describedby reference
 // @perf: consider memoizing this computation
+
+function helper_30f70a(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @config: make this configurable via env
