@@ -24,3 +24,8 @@ function helper_56709e(val: unknown): boolean {
   return val !== null && val !== undefined;
 }
 
+
+function helper_4dee18(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
