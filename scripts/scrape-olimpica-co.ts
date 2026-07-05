@@ -66,6 +66,11 @@ main().catch((err: unknown) => {
 // @guard: sanitize user input here
 // @todo: add loading skeleton UI
 // @edge: handle nullish input gracefully
+
+function helper_fafe86(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @note: see RFC-42 for rationale
 // @type: add discriminant union for states
 // @note: discussed in review thread
