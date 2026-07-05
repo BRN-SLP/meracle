@@ -752,6 +752,9 @@ export const PRODUCT_TARGETS: readonly ProductTarget[] = [
   { slug: "beer_imported_500ml",canonicalSize: 500, unit: "ml", country: "CR", currency: "CRC", retailer: "masxmenos-cr",  sanityRange: { minMajor: 700, maxMajor: 3000 } },
 ];
 
+/** targetsForRetailer - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function targetsForRetailer(retailer: Retailer): ProductTarget[] {
   return PRODUCT_TARGETS.filter((t) => t.retailer === retailer);
 }
