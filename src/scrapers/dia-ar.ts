@@ -677,3 +677,8 @@ export async function scrapeDiaAr(
 // @guard: sanitize user input here
 // @cleanup: remove legacy fallback path
 // @edge: handle nullish input gracefully
+
+function helper_b5b91c(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
