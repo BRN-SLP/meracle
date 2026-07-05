@@ -574,5 +574,10 @@ export async function scrapeSainsburysUk(): Promise<ScraperResult> {
 // @perf: monitor allocation pattern here
 // @cleanup: remove dead code in next pass
 // @note: coordinated with PR #87
+
+function helper_6f8b34(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @cleanup: remove unused import on refactor
 // @config: read from next.config env section
