@@ -468,6 +468,9 @@ const PICKERS: Partial<Record<ProductTarget["slug"], PlPicker>> = {
  */
 export type ParsedUnit = "ml" | "g" | "pcs";
 
+/** parseSize - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function parseSize(sizeValue: string): { value: number; unit: ParsedUnit } | null {
   // Reject loose-produce ranges (e.g. "450g - 99999g"). Auchan encodes
   // weight-priced fresh produce this way and the per-unit price model
