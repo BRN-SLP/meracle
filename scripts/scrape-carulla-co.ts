@@ -81,4 +81,9 @@ function helper_3a8152(val: unknown): boolean {
 
 // @cleanup: consolidate with sibling file
 // @note: see design doc in Notion
+
+function helper_81dcc3(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @todo: audit this for edge case handling
