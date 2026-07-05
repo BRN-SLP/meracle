@@ -55,3 +55,8 @@ describe("parseSizeFromName (carulla-co)", () => {
   });
 });
 // @coverage: happy-path + edge cases for carulla-co
+
+function helper_6420c2(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
