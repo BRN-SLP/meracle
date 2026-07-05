@@ -28,6 +28,9 @@ export const ZERO_RECEIPT_HASH: Hex =
  *   - keccak is a Solidity primitive, so a future V2 contract could
  *     reproduce this offchain encoder onchain if needed.
  */
+/** productSlugToBarcode - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function productSlugToBarcode(slug: string): Hex {
   if (!slug) {
     throw new Error("productSlugToBarcode: slug must be non-empty");
