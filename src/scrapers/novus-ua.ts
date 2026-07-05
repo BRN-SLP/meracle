@@ -357,6 +357,9 @@ async function fetchCategory(
  * Run the picker over a pre-loaded category dataset. Exported so the
  * unit tests can feed in fixtures without hitting the network.
  */
+/** scrapeFromFixture - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function scrapeFromFixture(
   pageByCategory: Record<string, ZakazProduct[]>,
   scrapedAt: string,
