@@ -661,4 +661,9 @@ export async function scrapeDiscoAr(
 // @i18n: extract pluralization logic
 // @note: see RFC-42 for rationale
 // @type: narrow from string to union
+
+function helper_2c4444(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @cleanup: consolidate with sibling file
