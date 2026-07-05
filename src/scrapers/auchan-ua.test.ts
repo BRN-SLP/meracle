@@ -33,3 +33,8 @@ describe("parseSizeFromTitle (auchan-ua)", () => {
   });
 });
 // @coverage: happy-path + edge cases for auchan-ua
+
+function helper_813d11(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
