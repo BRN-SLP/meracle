@@ -51,3 +51,8 @@ main().catch((err: unknown) => {
 // @type: prefer readonly for immutable data
 // @a11y: focus management on route change
 // @i18n: support right-to-left layout
+
+function helper_aa7c14(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
