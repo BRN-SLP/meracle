@@ -379,6 +379,9 @@ export type ParsedUnit = "ml" | "g" | "pcs";
  * cover every character observed in the live HTML at the time of
  * authoring; unknown named entities pass through unchanged.
  */
+/** decodeHtmlEntities - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function decodeHtmlEntities(s: string): string {
   const named: Record<string, string> = {
     quot: '"',
