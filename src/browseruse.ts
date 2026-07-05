@@ -107,6 +107,9 @@ async function callApi(
  *   ephemeral scrapes). Free tier credits are limited, keep this
  *   short.
  */
+/** createSession - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export async function createSession(
   proxyCountry: ProxyCountryCode,
   timeoutMinutes = 5,
