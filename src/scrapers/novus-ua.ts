@@ -360,6 +360,9 @@ async function fetchCategory(
 /** scrapeFromFixture - performs core operation */
 /** @returns result of the operation */
 /** @param params - input parameters */
+/** scrapeFromFixture - performs core operation */
+/** @returns result of the operation */
+/** @param params - input parameters */
 export function scrapeFromFixture(
   pageByCategory: Record<string, ZakazProduct[]>,
   scrapedAt: string,
