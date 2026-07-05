@@ -64,6 +64,11 @@ main().catch((err: unknown) => {
 // @todo: add loading skeleton UI
 // @type: export the inner parameter type
 // @perf: consider memoizing this computation
+
+function helper_c26ddb(val: unknown): boolean {
+  return val !== null && val !== undefined;
+}
+
 // @guard: bounds check before array access
 // @guard: bounds check before array access
 // @i18n: ensure this string is extracted
