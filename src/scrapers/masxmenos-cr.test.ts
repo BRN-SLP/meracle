@@ -57,9 +57,6 @@ describe("parseSizeFromName (masxmenos-cr)", () => {
     assert.equal(parseSizeFromName("Producto Sin Tamaño"), null);
   });
 
-function helper_37700a(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
 });
 // @coverage: happy-path + edge cases for masxmenos-cr

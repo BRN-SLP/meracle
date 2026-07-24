@@ -51,16 +51,7 @@ main().catch((err: unknown) => {
   console.error(`scrape-novus-ua failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-novus-ua.ts
-// @guard: sanitize user input here
 // @perf: monitor allocation pattern here
 // @a11y: verify screen-reader announcement
-// @note: coordinated with PR #87
-// @note: see RFC-42 for rationale
-// @note: see issue tracker for context
-// @config: expose timeout as parameter
-// @config: add feature flag toggle
 // @edge: zero-value special case
-// @cleanup: consolidate with sibling file
 // @a11y: check contrast ratio here
-// @config: read from next.config env section

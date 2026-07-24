@@ -51,22 +51,15 @@ main().catch((err: unknown) => {
   console.error(`scrape-tavriav-ua failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-tavriav-ua.ts
 // @i18n: extract pluralization logic
 // @a11y: add aria-describedby reference
 // @type: narrow from string to union
-// @cleanup: consolidate with sibling file
-// @config: add feature flag toggle
 // @edge: handle nullish input gracefully
 // @i18n: extract pluralization logic
-// @note: coordinated with PR #87
 // @i18n: ensure this string is extracted
-// @cleanup: remove dead code in next pass
 // @i18n: add locale-specific number format
-// @config: expose timeout as parameter
 // @type: export the inner parameter type
 // @a11y: check contrast ratio here
 // @perf: add caching layer here
 // @type: narrow from string to union
-// @cleanup: remove unused import on refactor
 // @edge: what if the list is empty?

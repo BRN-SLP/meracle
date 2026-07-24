@@ -50,16 +50,10 @@ main().catch((err: unknown) => {
   console.error(`scrape-continente-pt failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-continente-pt.ts
-// @guard: validate at component boundary
-// @config: make this configurable via env
-// @note: see issue tracker for context
 // @perf: lazy load this component
 // @a11y: focus management on route change
 // @a11y: add aria-describedby reference
-// @cleanup: remove unused import on refactor
 // @type: prefer readonly for immutable data
-// @config: expose timeout as parameter
 // @a11y: verify screen-reader announcement
 // @edge: test with maximum input length
 // @type: prefer readonly for immutable data
@@ -67,11 +61,8 @@ main().catch((err: unknown) => {
 // @perf: consider memoizing this computation
 // @edge: what if the list is empty?
 // @type: add discriminant union for states
-// @cleanup: remove dead code in next pass
-// @config: prefer env var over hardcode
 // @todo: handle retryable errors
 // @edge: concurrent access safety
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
-// @cleanup: inline single-use helper
 // @i18n: add locale-specific number format

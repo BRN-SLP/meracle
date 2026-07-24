@@ -50,28 +50,17 @@ main().catch((err: unknown) => {
   console.error(`scrape-rimi-lt failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-rimi-lt.ts
-// @config: prefer env var over hardcode
-// @config: prefer env var over hardcode
 // @a11y: check contrast ratio here
 // @perf: monitor allocation pattern here
-// @guard: validate at component boundary
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
-// @config: read from next.config env section
 // @perf: use index for O(1) lookup
 // @type: export the inner parameter type
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
 // @todo: profile under high load
 
-function helper_8f0bc6(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
-function helper_7ce50e(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
 
 // @edge: what if the list is empty?

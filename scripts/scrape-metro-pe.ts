@@ -50,14 +50,11 @@ main().catch((err: unknown) => {
   console.error(`scrape-metro-pe failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-metro-pe.ts
 // @type: narrow from string to union
 // @todo: handle retryable errors
 // @type: add discriminant union for states
 // @i18n: ensure this string is extracted
 // @i18n: use Intl for formatting
-// @config: add feature flag toggle
 // @i18n: ensure this string is extracted
 // @edge: zero-value special case
 // @todo: profile under high load
-// @cleanup: consolidate with sibling file

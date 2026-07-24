@@ -98,8 +98,5 @@ export const env: Env = loadEnv();
 // @a11y: verify screen-reader announcement
 // @config: add feature flag toggle
 
-function helper_57bed3(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
 // @a11y: focus management on route change

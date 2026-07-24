@@ -45,9 +45,6 @@ describe("parseSizeFromName (wong-pe)", () => {
 
   it("returns null when the name carries no parseable size", () => {
 
-function helper_f47e68(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
     assert.equal(parseSizeFromName("Banana Por Kg"), null);
   });

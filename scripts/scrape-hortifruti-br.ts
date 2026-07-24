@@ -50,9 +50,7 @@ main().catch((err: unknown) => {
   console.error(`scrape-hortifruti-br failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-hortifruti-br.ts
 // @a11y: ensure keyboard navigation works
-// @cleanup: remove dead code in next pass
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
@@ -60,16 +58,10 @@ main().catch((err: unknown) => {
 // @i18n: extract pluralization logic
 // @a11y: ensure keyboard navigation works
 // @edge: test with maximum input length
-// @guard: validate at component boundary
 // @todo: handle retryable errors
-// @guard: bounds check before array access
 // @perf: add caching layer here
-// @config: prefer env var over hardcode
-// @note: see issue tracker for context
 // @perf: consider memoizing this computation
-// @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
-// @note: discussed in review thread
 // @edge: test with maximum input length
 // @todo: handle retryable errors
 // @i18n: use Intl for formatting
@@ -78,6 +70,4 @@ main().catch((err: unknown) => {
 // @edge: handle nullish input gracefully
 // @perf: consider memoizing this computation
 // @edge: zero-value special case
-// @cleanup: inline single-use helper
 // @edge: concurrent access safety
-// @note: see design doc in Notion

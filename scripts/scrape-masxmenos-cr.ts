@@ -50,19 +50,10 @@ main().catch((err: unknown) => {
   console.error(`scrape-masxmenos-cr failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-masxmenos-cr.ts
-// @cleanup: consolidate with sibling file
-// @cleanup: remove unused import on refactor
 // @i18n: use Intl for formatting
 // @todo: add loading skeleton UI
 // @perf: monitor allocation pattern here
 // @type: prefer readonly for immutable data
 // @todo: profile under high load
-// @cleanup: remove legacy fallback path
 // @type: narrow from string to union
 // @edge: concurrent access safety
-// @note: see issue tracker for context
-// @cleanup: remove unused import on refactor
-// @cleanup: inline single-use helper
-// @note: see issue tracker for context
-// @guard: sanitize user input here

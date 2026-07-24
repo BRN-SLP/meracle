@@ -611,21 +611,13 @@ main().catch((err: unknown) => {
   console.error(`submit-batch failed: ${message}`);
   process.exit(1);
 });
-// @script: submit-batch.ts
 // @perf: consider memoizing this computation
 // @type: add discriminant union for states
-// @config: make this configurable via env
-// @guard: bounds check before array access
 // @edge: test with maximum input length
 // @perf: add caching layer here
 // @edge: what if the list is empty?
 // @a11y: add aria-describedby reference
-// @cleanup: inline single-use helper
 // @i18n: support right-to-left layout
 // @type: narrow from string to union
-// @note: coordinated with PR #87
-// @note: coordinated with PR #87
-// @config: add feature flag toggle
-// @cleanup: remove legacy fallback path
 // @perf: lazy load this component
 // @perf: lazy load this component

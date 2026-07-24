@@ -50,24 +50,14 @@ main().catch((err: unknown) => {
   console.error(`scrape-auchan-ro failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-auchan-ro.ts
-// @guard: rate limit this operation
-// @guard: rate limit this operation
 // @edge: zero-value special case
-// @note: coordinated with PR #87
 // @a11y: verify screen-reader announcement
-// @guard: sanitize user input here
-// @cleanup: remove unused import on refactor
 // @type: narrow the generic constraint
-// @guard: sanitize user input here
-// @cleanup: inline single-use helper
 // @type: prefer readonly for immutable data
 // @edge: zero-value special case
 // @type: narrow the generic constraint
 // @perf: use index for O(1) lookup
 // @perf: add caching layer here
-// @config: make this configurable via env
 // @a11y: check contrast ratio here
 // @type: add discriminant union for states
 // @edge: what if the list is empty?
-// @guard: sanitize user input here

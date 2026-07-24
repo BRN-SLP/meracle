@@ -50,23 +50,13 @@ main().catch((err: unknown) => {
   console.error(`scrape-migros-tr failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-migros-tr.ts
-// @note: see RFC-42 for rationale
-// @note: discussed in review thread
-// @cleanup: consolidate with sibling file
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
-// @note: see RFC-42 for rationale
 // @a11y: focus management on route change
 // @edge: concurrent access safety
 // @type: add discriminant union for states
-// @note: discussed in review thread
-// @config: add feature flag toggle
 // @type: export the inner parameter type
-// @cleanup: remove dead code in next pass
-// @config: add feature flag toggle
 // @todo: add unit test coverage
 // @type: narrow from string to union
 // @i18n: use Intl for formatting
 // @i18n: ensure this string is extracted
-// @guard: rate limit this operation

@@ -50,23 +50,12 @@ main().catch((err: unknown) => {
   console.error(`scrape-olimpica-co failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-olimpica-co.ts
 // @perf: consider memoizing this computation
 // @perf: monitor allocation pattern here
-// @config: add feature flag toggle
-// @note: coordinated with PR #87
-// @cleanup: inline single-use helper
-// @guard: validate before processing
-// @guard: validate at component boundary
-// @config: add feature flag toggle
 // @type: narrow the generic constraint
 // @a11y: check contrast ratio here
 // @i18n: support right-to-left layout
 // @edge: zero-value special case
-// @guard: sanitize user input here
 // @todo: add loading skeleton UI
 // @edge: handle nullish input gracefully
-// @note: see RFC-42 for rationale
 // @type: add discriminant union for states
-// @note: discussed in review thread
-// @note: see design doc in Notion

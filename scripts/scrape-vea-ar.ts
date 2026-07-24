@@ -50,12 +50,7 @@ main().catch((err: unknown) => {
   console.error(`scrape-vea-ar failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-vea-ar.ts
 // @edge: concurrent access safety
 // @a11y: focus management on route change
 // @i18n: support right-to-left layout
-// @note: see design doc in Notion
-// @note: coordinated with PR #87
 // @edge: what if the list is empty?
-// @config: read from next.config env section
-// @guard: rate limit this operation

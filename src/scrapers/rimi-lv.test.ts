@@ -45,8 +45,5 @@ describe("parseSizeFromName (rimi-lv)", () => {
   });
 });
 
-function helper_a9311b(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
 // @coverage: happy-path + edge cases for rimi-lv

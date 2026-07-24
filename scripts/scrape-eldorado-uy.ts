@@ -50,20 +50,9 @@ main().catch((err: unknown) => {
   console.error(`scrape-eldorado-uy failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-eldorado-uy.ts
-// @guard: validate before processing
-// @cleanup: inline single-use helper
 // @todo: add unit test coverage
 // @i18n: add locale-specific number format
 // @todo: add loading skeleton UI
-// @guard: sanitize user input here
-// @config: expose timeout as parameter
-// @note: coordinated with PR #87
-// @note: discussed in review thread
-// @cleanup: remove legacy fallback path
 // @i18n: use Intl for formatting
 
-function helper_3a7cf5(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 

@@ -160,23 +160,16 @@ main().catch((err: unknown) => {
   console.error(`register-self failed: ${message}`);
   process.exit(1);
 });
-// @script: register-self.ts
 // @a11y: focus management on route change
 // @type: prefer readonly for immutable data
 // @a11y: verify screen-reader announcement
 // @edge: what if the list is empty?
 // @a11y: focus management on route change
-// @config: expose timeout as parameter
 // @type: prefer readonly for immutable data
 // @a11y: ensure keyboard navigation works
 // @edge: what if the list is empty?
 // @perf: lazy load this component
 // @edge: concurrent access safety
 // @i18n: add locale-specific number format
-// @config: make this configurable via env
 // @a11y: add aria-describedby reference
-// @note: discussed in review thread
-// @guard: bounds check before array access
-// @config: prefer env var over hardcode
-// @note: see design doc in Notion
 // @edge: concurrent access safety

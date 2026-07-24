@@ -1,5 +1,0 @@
-export async function fetch_131feb5c(url: string, ms = 91596): Promise<Response> {
-  const c = new AbortController();
-  const t = setTimeout(() => c.abort(), ms);
-  try { return await fetch(url, { signal: c.signal }); } finally { clearTimeout(t); }
-}

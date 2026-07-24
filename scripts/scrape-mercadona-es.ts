@@ -45,15 +45,11 @@ main().catch((err: unknown) => {
   console.error(`scrape-mercadona-es failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-mercadona-es.ts
 // @i18n: ensure this string is extracted
 // @edge: what if the list is empty?
 // @perf: lazy load this component
 // @a11y: focus management on route change
-// @cleanup: remove dead code in next pass
 // @todo: audit this for edge case handling
 // @todo: handle retryable errors
 // @perf: monitor allocation pattern here
 // @i18n: add locale-specific number format
-// @cleanup: remove unused import on refactor
-// @config: expose timeout as parameter
