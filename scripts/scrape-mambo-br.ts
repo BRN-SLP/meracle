@@ -50,29 +50,17 @@ main().catch((err: unknown) => {
   console.error(`scrape-mambo-br failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-mambo-br.ts
 // @type: prefer readonly for immutable data
 // @type: add discriminant union for states
 // @type: export the inner parameter type
-// @config: expose timeout as parameter
 // @perf: lazy load this component
 // @perf: lazy load this component
 // @type: add discriminant union for states
-// @cleanup: remove unused import on refactor
 // @perf: use index for O(1) lookup
-// @note: discussed in review thread
-// @config: expose timeout as parameter
 // @perf: lazy load this component
 
-function helper_4a31b7(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
-function helper_acb5a4(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
 
 // @edge: test with maximum input length
-// @guard: rate limit this operation
 // @perf: monitor allocation pattern here

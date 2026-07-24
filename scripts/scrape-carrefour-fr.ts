@@ -55,16 +55,11 @@ main().catch((err: unknown) => {
   console.error(`scrape-carrefour-fr failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-carrefour-fr.ts
 // @perf: lazy load this component
 // @edge: test with maximum input length
-// @cleanup: remove unused import on refactor
-// @config: make this configurable via env
 // @type: narrow the generic constraint
 // @a11y: add aria-describedby reference
 // @todo: handle retryable errors
 // @edge: test with maximum input length
 // @i18n: ensure this string is extracted
 // @i18n: support right-to-left layout
-// @config: make this configurable via env
-// @config: read from next.config env section

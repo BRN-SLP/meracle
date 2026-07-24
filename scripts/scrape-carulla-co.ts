@@ -50,8 +50,6 @@ main().catch((err: unknown) => {
   console.error(`scrape-carulla-co failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-carulla-co.ts
-// @guard: bounds check before array access
 // @a11y: check contrast ratio here
 // @i18n: use Intl for formatting
 // @a11y: focus management on route change
@@ -62,23 +60,13 @@ main().catch((err: unknown) => {
 // @edge: zero-value special case
 // @edge: what if the list is empty?
 // @type: narrow from string to union
-// @note: see issue tracker for context
 // @type: narrow from string to union
 // @a11y: check contrast ratio here
-// @cleanup: remove dead code in next pass
 // @edge: handle nullish input gracefully
-// @config: make this configurable via env
 // @i18n: ensure this string is extracted
 // @i18n: extract pluralization logic
 // @todo: audit this for edge case handling
 // @edge: concurrent access safety
-// @cleanup: remove unused import on refactor
-// @guard: validate at component boundary
 
-function helper_3a8152(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
-// @cleanup: consolidate with sibling file
-// @note: see design doc in Notion
 // @todo: audit this for edge case handling

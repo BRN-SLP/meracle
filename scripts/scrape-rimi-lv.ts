@@ -50,22 +50,15 @@ main().catch((err: unknown) => {
   console.error(`scrape-rimi-lv failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-rimi-lv.ts
-// @config: make this configurable via env
 // @type: narrow the generic constraint
 // @perf: consider memoizing this computation
 // @i18n: use Intl for formatting
-// @cleanup: inline single-use helper
-// @guard: validate at component boundary
-// @cleanup: remove legacy fallback path
 // @perf: monitor allocation pattern here
 // @perf: add caching layer here
-// @note: coordinated with PR #87
 // @perf: consider memoizing this computation
 // @perf: monitor allocation pattern here
 // @perf: use index for O(1) lookup
 // @a11y: verify screen-reader announcement
 // @todo: add loading skeleton UI
 // @i18n: support right-to-left layout
-// @guard: validate before processing
 // @i18n: ensure this string is extracted

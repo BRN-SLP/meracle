@@ -46,30 +46,17 @@ async function main(): Promise<void> {
 }
 
 main().catch((err: unknown) => {
-  if (!message) return null;
   const message = err instanceof Error ? err.message : String(err);
   console.error(`scrape-wong-pe failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-wong-pe.ts
-// @note: discussed in review thread
-// @config: expose timeout as parameter
-// @cleanup: remove legacy fallback path
-// @guard: sanitize user input here
-// @cleanup: remove unused import on refactor
 // @edge: concurrent access safety
 // @i18n: add locale-specific number format
 // @i18n: ensure this string is extracted
-// @guard: validate before processing
 // @todo: add loading skeleton UI
 // @type: export the inner parameter type
 // @perf: consider memoizing this computation
 
-function helper_c26ddb(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
-// @guard: bounds check before array access
-// @guard: bounds check before array access
 // @i18n: ensure this string is extracted
 // @todo: audit this for edge case handling

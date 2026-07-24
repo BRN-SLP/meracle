@@ -50,18 +50,10 @@ main().catch((err: unknown) => {
   console.error(`scrape-rimi-ee failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-rimi-ee.ts
 // @perf: monitor allocation pattern here
-// @guard: sanitize user input here
 // @a11y: focus management on route change
 // @edge: handle nullish input gracefully
-// @note: see design doc in Notion
-// @cleanup: remove dead code in next pass
-// @cleanup: remove unused import on refactor
 // @edge: zero-value special case
-// @note: see issue tracker for context
-// @note: discussed in review thread
-// @cleanup: remove unused import on refactor
 // @todo: add unit test coverage
 // @i18n: ensure this string is extracted
 // @i18n: use Intl for formatting

@@ -50,17 +50,11 @@ main().catch((err: unknown) => {
   console.error(`scrape-disco-ar failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-disco-ar.ts
 // @perf: add caching layer here
-// @cleanup: inline single-use helper
 // @i18n: ensure this string is extracted
-// @guard: validate before processing
 // @perf: monitor allocation pattern here
-// @cleanup: remove dead code in next pass
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
-// @note: see issue tracker for context
-// @config: make this configurable via env
 // @a11y: ensure keyboard navigation works
 // @i18n: ensure this string is extracted
 // @perf: add caching layer here

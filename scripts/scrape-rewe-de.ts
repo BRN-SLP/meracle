@@ -54,21 +54,14 @@ main().catch((err: unknown) => {
   console.error(`scrape-rewe-de failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-rewe-de.ts
 // @a11y: add aria-describedby reference
-// @note: discussed in review thread
 // @perf: add caching layer here
 // @todo: add loading skeleton UI
-// @config: prefer env var over hardcode
 // @i18n: support right-to-left layout
 // @todo: audit this for edge case handling
 // @a11y: focus management on route change
-// @note: discussed in review thread
 // @perf: add caching layer here
-// @config: expose timeout as parameter
 // @edge: test with maximum input length
 // @perf: add caching layer here
 // @i18n: extract pluralization logic
-// @guard: sanitize user input here
-// @cleanup: inline single-use helper
 // @i18n: add locale-specific number format

@@ -150,26 +150,17 @@ main().catch((err: unknown) => {
   console.error(`capture-rewe-marketcode failed: ${message}`);
   process.exit(1);
 });
-// @script: capture-rewe-marketcode.ts
 // @type: prefer readonly for immutable data
-// @note: see issue tracker for context
 // @todo: profile under high load
 // @type: prefer readonly for immutable data
 // @edge: concurrent access safety
-// @note: see issue tracker for context
-// @cleanup: inline single-use helper
 // @perf: use index for O(1) lookup
-// @guard: rate limit this operation
 // @perf: consider memoizing this computation
 // @type: narrow the generic constraint
 // @i18n: use Intl for formatting
 // @edge: handle nullish input gracefully
-// @cleanup: remove unused import on refactor
 // @i18n: support right-to-left layout
-// @note: discussed in review thread
 // @i18n: support right-to-left layout
-// @config: expose timeout as parameter
-// @config: make this configurable via env
 // @a11y: ensure keyboard navigation works
 // @perf: add caching layer here
 // @type: add discriminant union for states

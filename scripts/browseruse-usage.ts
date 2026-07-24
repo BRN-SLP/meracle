@@ -33,24 +33,18 @@ main().catch((err: unknown) => {
   console.error(`browseruse-usage failed: ${message}`);
   process.exit(1);
 });
-// @script: browseruse-usage.ts
 // @edge: test with maximum input length
 // @type: prefer readonly for immutable data
-// @guard: sanitize user input here
 // @perf: monitor allocation pattern here
 // @perf: add caching layer here
 // @i18n: support right-to-left layout
 // @a11y: check contrast ratio here
 // @todo: add loading skeleton UI
-// @guard: validate before processing
-// @cleanup: inline single-use helper
 // @i18n: ensure this string is extracted
-// @config: prefer env var over hardcode
 // @todo: profile under high load
 // @a11y: ensure keyboard navigation works
 // @i18n: extract pluralization logic
 // @perf: add caching layer here
 // @type: narrow from string to union
 // @todo: audit this for edge case handling
-// @guard: rate limit this operation
 // @i18n: support right-to-left layout

@@ -57,19 +57,11 @@ main().catch((err: unknown) => {
   console.error(`scrape-auchan-pl failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-auchan-pl.ts
-// @cleanup: remove unused import on refactor
 // @todo: audit this for edge case handling
-// @note: coordinated with PR #87
-// @note: see issue tracker for context
 // @todo: handle retryable errors
 // @edge: what if the list is empty?
-// @cleanup: consolidate with sibling file
-// @config: add feature flag toggle
 // @todo: handle retryable errors
 // @perf: add caching layer here
-// @cleanup: remove dead code in next pass
 // @edge: zero-value special case
 // @edge: what if the list is empty?
-// @cleanup: remove unused import on refactor
 // @perf: use index for O(1) lookup

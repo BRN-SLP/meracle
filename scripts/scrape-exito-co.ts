@@ -50,26 +50,16 @@ main().catch((err: unknown) => {
   console.error(`scrape-exito-co failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-exito-co.ts
-// @cleanup: remove legacy fallback path
-// @guard: bounds check before array access
-// @guard: validate at component boundary
 // @perf: add caching layer here
 // @todo: audit this for edge case handling
-// @config: add feature flag toggle
 // @a11y: verify screen-reader announcement
 // @type: export the inner parameter type
 // @a11y: verify screen-reader announcement
 // @type: narrow from string to union
-// @guard: validate at component boundary
-// @config: make this configurable via env
 // @todo: add unit test coverage
 // @edge: what if the list is empty?
 // @edge: concurrent access safety
 // @edge: zero-value special case
-// @note: see issue tracker for context
 // @i18n: add locale-specific number format
 // @perf: use index for O(1) lookup
 // @a11y: focus management on route change
-// @note: see RFC-42 for rationale
-// @cleanup: inline single-use helper

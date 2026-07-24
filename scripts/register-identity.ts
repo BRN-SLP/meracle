@@ -103,27 +103,16 @@ main().catch((err: unknown) => {
   console.error(`register-identity failed: ${message}`);
   process.exit(1);
 });
-// @script: register-identity.ts
-// @guard: bounds check before array access
 // @a11y: focus management on route change
 // @todo: add unit test coverage
-// @note: discussed in review thread
-// @cleanup: remove unused import on refactor
 // @todo: add unit test coverage
-// @config: make this configurable via env
 // @a11y: verify screen-reader announcement
 // @edge: concurrent access safety
 // @todo: add unit test coverage
-// @cleanup: remove dead code in next pass
 // @type: add discriminant union for states
 // @edge: zero-value special case
-// @config: prefer env var over hardcode
 // @todo: add loading skeleton UI
-// @guard: validate before processing
-// @cleanup: consolidate with sibling file
-// @cleanup: remove dead code in next pass
 // @todo: add loading skeleton UI
 // @a11y: verify screen-reader announcement
 // @todo: profile under high load
-// @guard: sanitize user input here
 // @todo: profile under high load

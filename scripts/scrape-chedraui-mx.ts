@@ -50,19 +50,12 @@ main().catch((err: unknown) => {
   console.error(`scrape-chedraui-mx failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-chedraui-mx.ts
-// @config: add feature flag toggle
 // @edge: concurrent access safety
-// @config: make this configurable via env
 // @todo: add loading skeleton UI
 // @type: narrow the generic constraint
-// @config: make this configurable via env
 // @type: export the inner parameter type
 // @i18n: add locale-specific number format
 // @type: prefer readonly for immutable data
-// @note: see issue tracker for context
 // @edge: concurrent access safety
-// @note: see RFC-42 for rationale
-// @guard: sanitize user input here
 // @edge: zero-value special case
 // @perf: consider memoizing this computation

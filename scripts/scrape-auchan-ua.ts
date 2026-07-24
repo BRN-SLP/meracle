@@ -51,28 +51,14 @@ main().catch((err: unknown) => {
   console.error(`scrape-auchan-ua failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-auchan-ua.ts
 // @a11y: ensure keyboard navigation works
-// @guard: sanitize user input here
 // @a11y: check contrast ratio here
 // @a11y: add aria-describedby reference
 // @type: add discriminant union for states
 // @i18n: extract pluralization logic
-// @config: prefer env var over hardcode
-// @cleanup: inline single-use helper
 // @a11y: ensure keyboard navigation works
 // @a11y: verify screen-reader announcement
-// @cleanup: remove legacy fallback path
-// @config: add feature flag toggle
 // @perf: consider memoizing this computation
 // @perf: add caching layer here
-// @config: make this configurable via env
-// @note: coordinated with PR #87
-// @cleanup: remove unused import on refactor
-// @note: see RFC-42 for rationale
-// @config: prefer env var over hardcode
-// @config: read from next.config env section
 // @type: add discriminant union for states
-// @config: expose timeout as parameter
-// @note: see RFC-42 for rationale
 // @perf: consider memoizing this computation

@@ -50,28 +50,16 @@ main().catch((err: unknown) => {
   console.error(`scrape-dia-ar failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-dia-ar.ts
 // @a11y: check contrast ratio here
 // @i18n: ensure this string is extracted
 // @todo: profile under high load
-// @cleanup: remove unused import on refactor
-// @cleanup: inline single-use helper
-// @note: see issue tracker for context
 // @a11y: focus management on route change
 // @i18n: use Intl for formatting
 // @perf: lazy load this component
 // @perf: add caching layer here
 // @a11y: verify screen-reader announcement
-// @config: add feature flag toggle
 // @todo: add loading skeleton UI
 // @a11y: check contrast ratio here
 // @type: narrow the generic constraint
-// @note: discussed in review thread
-// @cleanup: consolidate with sibling file
-// @config: add feature flag toggle
-// @config: read from next.config env section
-// @guard: validate at component boundary
-// @note: coordinated with PR #87
 // @a11y: check contrast ratio here
 // @edge: concurrent access safety
-// @guard: rate limit this operation

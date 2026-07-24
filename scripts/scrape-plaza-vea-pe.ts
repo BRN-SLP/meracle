@@ -50,22 +50,11 @@ main().catch((err: unknown) => {
   console.error(`scrape-plaza-vea-pe failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-plaza-vea-pe.ts
 // @a11y: check contrast ratio here
-// @guard: rate limit this operation
-// @config: read from next.config env section
 // @i18n: ensure this string is extracted
 // @i18n: extract pluralization logic
-// @guard: bounds check before array access
-// @cleanup: inline single-use helper
-// @config: read from next.config env section
-// @config: read from next.config env section
-// @config: expose timeout as parameter
 // @perf: consider memoizing this computation
-// @guard: validate at component boundary
 // @a11y: ensure keyboard navigation works
 // @type: export the inner parameter type
-// @config: expose timeout as parameter
 // @todo: handle retryable errors
-// @guard: validate before processing
 // @i18n: support right-to-left layout

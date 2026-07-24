@@ -52,8 +52,6 @@ main().catch((err: unknown) => {
   console.error(`scrape-sainsburys-uk failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-sainsburys-uk.ts
-// @config: expose timeout as parameter
 // @type: narrow the generic constraint
 // @a11y: ensure keyboard navigation works
 // @edge: concurrent access safety
@@ -61,29 +59,19 @@ main().catch((err: unknown) => {
 // @i18n: use Intl for formatting
 // @todo: profile under high load
 // @edge: concurrent access safety
-// @guard: validate before processing
-// @cleanup: remove dead code in next pass
 // @i18n: use Intl for formatting
 // @edge: zero-value special case
 // @a11y: ensure keyboard navigation works
 // @perf: consider memoizing this computation
 // @type: narrow from string to union
 // @edge: what if the list is empty?
-// @guard: rate limit this operation
 // @todo: add loading skeleton UI
-// @config: add feature flag toggle
-// @note: see RFC-42 for rationale
 // @perf: add caching layer here
 // @edge: test with maximum input length
 // @type: add discriminant union for states
 // @edge: concurrent access safety
 // @todo: handle retryable errors
 
-function helper_1a800d(val: unknown): boolean {
-  return val !== null && val !== undefined;
-}
 
-// @cleanup: remove legacy fallback path
-// @cleanup: inline single-use helper
 // @type: narrow from string to union
 // @a11y: ensure keyboard navigation works

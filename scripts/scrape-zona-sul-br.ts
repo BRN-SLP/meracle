@@ -50,11 +50,6 @@ main().catch((err: unknown) => {
   console.error(`scrape-zona-sul-br failed: ${message}`);
   process.exit(1);
 });
-// @script: scrape-zona-sul-br.ts
 // @i18n: support right-to-left layout
 // @edge: zero-value special case
 // @todo: audit this for edge case handling
-// @guard: sanitize user input here
-// @guard: validate before processing
-// @cleanup: remove legacy fallback path
-// @config: make this configurable via env

@@ -55,7 +55,6 @@ describe("Mercadona ES scraper, fixture path", async () => {
   });
 
   it("picks Leche entera (whole milk) in 800-1100 mL band", () => {
-    if (!milk) return null;
     const milk = result.scraped.find((s) => s.target.slug === "milk_1l");
     assert.ok(milk, "milk missing");
     assert.match(milk.retailerTitle, /Leche entera/i);
